@@ -6,9 +6,6 @@ Welcome to the Konsume Github repository! Konsume is an AI-powered application d
 This repository is structured as follows:
 - `backend/`: This directory contains the backend code of the Konsume platform, including the API endpoints, database models, and business logic implemented in C# using the ASP.NET framework.
 - `frontend/`: Here, you will find the frontend code for the Konsume platform, implemented using JavaScript, TypeScript, Next.js, and Tailwind CSS. This directory also includes the HTML, CSS, and JavaScript files for the user interface.
-- `mobile/`: This directory contains the source code for the mobile application, implemented using Flutter for cross-platform development.
-- `models/`: This directory contains the integrations with the Gemini AI models used by Konsume to enhance the platform's capabilities. The models are crucial for providing personalized meal recommendations and other AI-driven features.
-- `docs/`: This directory contains the documentation for the project setup, development guidelines, and other supporting materials.
 
 ## Purpose
 The purpose of Konsume is to provide personalized meal recommendations based on users' health conditions and dietary goals. The app aims to help users make healthier food choices by:
