@@ -130,7 +130,7 @@ const Login = () => {
           Your personalized Nutrition journey awaits.
           <br /> Please log in to continue.
         </p>
-        <div className="imgg_container">
+        <div className="relative w-[83%] m-auto">
           <div className="signup_img"></div>
           {/* <div className="signup_container md:p-[50px]">
                         <form  className="signup_content grid md:grid-cols-2 grid-cols-1 md:gap-10 gap-2 md:gap-y-16 gap-y-7">
