@@ -72,7 +72,7 @@ const Signup = () => {
       <div className="md:p-10 p-2">
         <h1 className="md:text-3xl text-xl font-bold">Sign Up to Konsume</h1>
         <p className="md:text-xl text-sm">Please provide your information to create an account</p>
-        <div className="imgg_container">
+        <div className="relative w-[83%] m-auto">
           <div className="signup_img"></div>
           <div className="signup_container md:p-[50px]">
             {/* <form className="signup_content md:p-[20px] grid md:grid-cols-2 grid-cols-1 md:gap-10 gap-2 md:gap-y-16 gap-y-7">
