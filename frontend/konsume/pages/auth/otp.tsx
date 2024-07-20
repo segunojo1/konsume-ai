@@ -1,15 +1,15 @@
 import React from 'react';
-import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '../../ui/input-otp';
 import z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form';
-import { Button } from '../../ui/button';
 import { axiosKonsumeInstance } from '../../http/konsume';
 import { useSetupContext } from '../../context/SetupContext';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
+import { Button } from '@/components/ui/button';
 
 const FormSchema = z.object({
   pin: z.string().min(5, {

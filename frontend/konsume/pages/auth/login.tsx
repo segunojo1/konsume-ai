@@ -3,9 +3,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form';
-import { Input } from '../../ui/input';
-import { Button } from '../../ui/button';
+
 import google from '../../public/assets/google.png';
 import Image from 'next/image';
 import axios from 'axios';
@@ -15,6 +13,9 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useSetupContext } from '../../context/SetupContext';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 const formSchema = z.object({
   email: z.string().min(1, { message: 'Email is required' }),
