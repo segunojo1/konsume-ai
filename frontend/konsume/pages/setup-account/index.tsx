@@ -1,16 +1,11 @@
-import BioData from '../../components/setup-account/BioData';
-import Steps from '../../components/setup-account/Steps';
-import Welcome from '../../components/setup-account/Welcome';
-import Image from 'next/image';
+import Steps from '@/modules/setup-account/Steps';
+import Welcome from '@/modules/setup-account/Welcome';
 import React, { useContext, useEffect, useState } from 'react';
-import { Button } from '../../ui/button';
-import Form from '../../components/setup-account/Form';
-import SetupContext, { useSetupContext } from '../../context/SetupContext';
+import Form from '@/modules/setup-account/Form';
+import { useSetupContext } from '../../context/SetupContext';
 import { useRouter } from 'next/router';
 import { axiosKonsumeInstance } from '../../http/konsume';
-import { diettype } from '../../components/dashboard/diettype';
 import Cookies from 'js-cookie';
-import { Input } from '../../ui/input';
 import { toast } from 'react-toastify';
 
 const SetupAccount = () => {
