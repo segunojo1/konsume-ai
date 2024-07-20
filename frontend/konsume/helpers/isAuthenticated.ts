@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 const clearCookie = () => {
   Cookies.remove("ktn");
