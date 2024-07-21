@@ -25,7 +25,7 @@ import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
   age: z.string().min(1, { message: "Dob is required" }),
-  height: z.string().min(1, { message: "Height is required" }),
+  height: z.string().min(1, { message: "Nationality is required" }),
   gender: z.string().min(1, { message: "Gender is required" }),
   weight: z.string().min(1, { message: "Weight is required" }),
 });
@@ -101,11 +101,11 @@ const BioData = () => {
                 render={({ field }) => (
                   <FormItem className="">
                     <FormLabel className="text-sm md:text-xl font-medium !leading-10">
-                      Height - m
+                      Nationality
                     </FormLabel>
                     <FormControl className="">
                       <Input
-                        placeholder="Input your height"
+                        placeholder="Input your nationality"
                         {...field}
                         className="h-[48px] bg-[#D6FBC4] py-[5.5px] pr-[31.45px] pl-[14.8px] md:p-6 rounded-full outline-none"
                       />

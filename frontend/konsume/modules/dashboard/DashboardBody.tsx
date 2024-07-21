@@ -1,82 +1,103 @@
-import React, { useContext, useEffect, useState } from 'react';
-import star from '../../public/assets/star2.png';
-import star3 from '../../public/assets/star3.png';
-import star4 from '../../public/assets/star4.png';
-import star5 from '../../public/assets/star5.png';
-import scanner from '../../public/assets/scannerr.png';
-import progress from '../../public/assets/progresss.png';
-import gemini from '../../http/gemini';
-import { toast } from 'react-toastify';
+import React, { useContext, useEffect, useState } from "react";
+import star from "../../public/assets/star2.png";
+import star3 from "../../public/assets/star3.png";
+import star4 from "../../public/assets/star4.png";
+import star5 from "../../public/assets/star5.png";
+import scanner from "../../public/assets/scannerr.png";
+import progress from "../../public/assets/progresss.png";
+import gemini from "../../http/gemini";
+import { toast } from "react-toastify";
 // import VanillaTilt from 'vanilla-tilt'
-import SetupContext, { useSetupContext } from '../../context/SetupContext';
-import Image from 'next/image';
-import Link from 'next/link';
-import Cookies from 'js-cookie';
-import { LoaderCircle } from 'lucide-react';
-import { useRouter } from 'next/router';
+import SetupContext, { useSetupContext } from "../../context/SetupContext";
+import Image from "next/image";
+import Link from "next/link";
+import Cookies from "js-cookie";
+import { LoaderCircle } from "lucide-react";
+import { useRouter } from "next/router";
 
 const DashboardBody = () => {
-  const { name, age, weight, userGoal, possibleDiseases, diet } = useSetupContext();
+  const { name, age, weight, userGoal, possibleDiseases, diet } =
+    useSetupContext();
   // const stringdisease = userDiseases.join(, )
-  const qq = `My name is ${Cookies.get('name')} I am ${Cookies.get('age')} years old and ${Cookies.get(
-    'weight',
-  )}kg, I am working on ${Cookies.get(userGoal)}, my health conditons are ${Cookies.get(
-    'possibleDiseases',
-  )} and i am ${Cookies.get('diet')}. Please give me like 3 or more recommended food sources. Not more than 30 words`;
-  const qq2 = `My name is ${Cookies.get('name')} I am ${Cookies.get('age')} years old and ${Cookies.get(
-    'weight',
-  )}kg, I am working on ${Cookies.get('userGoal')}, my health conditons are ${Cookies.get(
-    'possibleDiseases',
+  const qq = `My name is ${Cookies.get("name")} I am ${Cookies.get(
+    "age"
+  )} years old and ${Cookies.get("weight")}kg, I am working on ${Cookies.get(
+    userGoal
+  )}, my health conditons are ${Cookies.get(
+    "possibleDiseases"
   )} and i am ${Cookies.get(
-    'diet',
+    "diet"
+  )}. Please give me like 3 or more recommended food sources. Not more than 30 words`;
+  const qq2 = `My name is ${Cookies.get("name")} I am ${Cookies.get(
+    "age"
+  )} years old and ${Cookies.get("weight")}kg, I am working on ${Cookies.get(
+    "userGoal"
+  )}, my health conditons are ${Cookies.get(
+    "possibleDiseases"
+  )} and i am ${Cookies.get(
+    "diet"
   )}. Please give me like 3 or more types of food i should avoid. Not more than 30 words`;
-  const proq = `My name is ${Cookies.get('name')} I am ${Cookies.get('age')} years old and ${Cookies.get(
-    'weight',
-  )}kg, I am working on ${Cookies.get('userGoal')}, my health conditons are ${Cookies.get(
-    'possibleDiseases',
+  const proq = `My name is ${Cookies.get("name")} I am ${Cookies.get(
+    "age"
+  )} years old and ${Cookies.get("weight")}kg, I am working on ${Cookies.get(
+    "userGoal"
+  )}, my health conditons are ${Cookies.get(
+    "possibleDiseases"
   )} and i am ${Cookies.get(
-    'diet',
+    "diet"
   )}. What is the recommended range of percent of protein i should eat, it must be exactly in this format i.e 30-45% do not include anything apart from the percentage`;
-  const carbq = `My name is ${Cookies.get('konsumeUsername')} I am ${Cookies.get('age')} years old and ${Cookies.get(
-    'weight',
-  )}kg, I am working on ${Cookies.get('userGoal')}, my health conditons are ${Cookies.get(
-    'possibleDiseases',
+  const carbq = `My name is ${Cookies.get(
+    "konsumeUsername"
+  )} I am ${Cookies.get("age")} years old and ${Cookies.get(
+    "weight"
+  )}kg, I am working on ${Cookies.get(
+    "userGoal"
+  )}, my health conditons are ${Cookies.get(
+    "possibleDiseases"
   )} and i am ${Cookies.get(
-    'diet',
+    "diet"
   )}. What is the recommended range of percent of fats i should eat, it must be exactly in this format i.e 30-45% do not include anything apart from the percentage. just recommend i know u ae not a doctor`;
-  const fatq = `My name is ${Cookies.get('name')} I am ${Cookies.get('age')} years old and ${Cookies.get(
-    'weight',
-  )}kg, I am working on ${Cookies.get('userGoal')}, my health conditons are ${Cookies.get(
-    'possibleDiseases',
+  const fatq = `My name is ${Cookies.get("name")} I am ${Cookies.get(
+    "age"
+  )} years old and ${Cookies.get("weight")}kg, I am working on ${Cookies.get(
+    "userGoal"
+  )}, my health conditons are ${Cookies.get(
+    "possibleDiseases"
   )} and i am ${Cookies.get(
-    'diet',
+    "diet"
   )}. What is the recommended range of percent of carbs i should eat, it must be exactly in this format i.e 30-45% do not include anything apart from the percentage`;
 
-  const breakfastQuery = `My name is ${Cookies.get('name')} I am ${Cookies.get('age')} years old and ${Cookies.get(
-    'weight',
-  )}kg, I am working on ${Cookies.get(userGoal)}, my health conditons are ${Cookies.get(
-    'possibleDiseases',
-  )} and i am ${Cookies.get(
-    'diet',
-  )}. Generate a random Nigerian breakfast meal fit for my health in this format e.g Rice and stew or amala don't tell me any other thing just give me the food name, no other thing said`;
-  const lunchQuery = `My name is ${Cookies.get('name')} I am ${Cookies.get('age')} years old and ${Cookies.get(
-    'weight',
-  )}kg, I am working on ${Cookies.get('userGoal')}, my health conditons are ${Cookies.get(
-    'possibleDiseases',
-  )} and i am ${Cookies.get(
-    'diet',
-  )}. Generate a random Nigerian lunch meal fit for my health in this format e.g jollof rice don't tell me any other thing just give me the food name, no other thing said`;
-  const dinnerQuery = `My name is ${Cookies.get('name')} I am ${Cookies.get('age')} years old and ${Cookies.get(
-    'weight',
-  )}kg, I am working on ${Cookies.get('userGoal')}, my health conditons are ${Cookies.get(
-    'possibleDiseases',
-  )} and i am ${Cookies.get(
-    'diet',
-  )}. Generate a random Nigerian dinner fit for my health in this format e.g amala and ewedu don't tell me any other thing just give me the food name, no other thing said`;
+  const breakfastQuery = `My name is ${Cookies.get("name")} I am ${Cookies.get(
+    "age"
+  )} years old and ${Cookies.get("weight")}kg, I am working on ${Cookies.get(
+    userGoal
+  )}, my health conditons are ${Cookies.get(
+    "possibleDiseases"
+  )} and i am ${Cookies.get("diet")}. Generate a random ${Cookies.get(
+    "height"
+  )} breakfast meal fit for my health in this format e.g Rice and stew or amala don't tell me any other thing just give me the food name, no other thing said`;
+  const lunchQuery = `My name is ${Cookies.get("name")} I am ${Cookies.get(
+    "age"
+  )} years old and ${Cookies.get("weight")}kg, I am working on ${Cookies.get(
+    "userGoal"
+  )}, my health conditons are ${Cookies.get(
+    "possibleDiseases"
+  )} and i am ${Cookies.get("diet")}. Generate a random ${Cookies.get(
+    "height"
+  )} lunch meal fit for my health in this format e.g jollof rice don't tell me any other thing just give me the food name, no other thing said`;
+  const dinnerQuery = `My name is ${Cookies.get("name")} I am ${Cookies.get(
+    "age"
+  )} years old and ${Cookies.get("weight")}kg, I am working on ${Cookies.get(
+    "userGoal"
+  )}, my health conditons are ${Cookies.get(
+    "possibleDiseases"
+  )} and i am ${Cookies.get("diet")}. Generate a random ${Cookies.get(
+    "height"
+  )} dinner fit for my health in this format e.g amala and ewedu don't tell me any other thing just give me the food name, no other thing said`;
 
-  const [breakfast, setBreakfast] = useState('');
-  const [lunch, setLunch] = useState('');
-  const [dinner, setDinner] = useState('');
+  const [breakfast, setBreakfast] = useState("");
+  const [lunch, setLunch] = useState("");
+  const [dinner, setDinner] = useState("");
 
   const [query, setQuery] = useState(qq);
   const [query2, setQuery2] = useState(qq2);
@@ -130,7 +151,7 @@ const DashboardBody = () => {
           retry(fn, retries - 1, delay * 2);
         }, delay);
       } else {
-        console.error('Max retries reached:', error);
+        console.error("Max retries reached:", error);
       }
     }
   };
@@ -138,13 +159,13 @@ const DashboardBody = () => {
   // API call functions
   const makeRequest = async () => {
     await retry(async () => {
-      console.log('hii');
-      const { data } = await gemini.post('/gemini-pro:generateContent', {
+      console.log("hii");
+      const { data } = await gemini.post("/gemini-pro:generateContent", {
         contents: [{ parts: [{ text: query }] }],
       });
       setAnswer(data.candidates[0].content.parts[0].text);
       console.log(data);
-      console.log('done');
+      console.log("done");
       console.log(query);
     });
   };
@@ -152,18 +173,22 @@ const DashboardBody = () => {
   const makeRequestAvoidFood = async () => {
     await retry(async () => {
       setLoading(true);
-      console.log('hii');
-      const { data } = await gemini.post('/gemini-pro:generateContent', {
+      console.log("hii");
+      const { data } = await gemini.post("/gemini-pro:generateContent", {
         contents: [{ parts: [{ text: query2 }] }],
       });
 
-      const protein = await gemini.post('/gemini-pro:generateContent', { contents: [{ parts: [{ text: query3 }] }] });
+      const protein = await gemini.post("/gemini-pro:generateContent", {
+        contents: [{ parts: [{ text: query3 }] }],
+      });
 
       setTimeout(async () => {
-        const carbs = await gemini.post('/gemini-pro:generateContent', {
+        const carbs = await gemini.post("/gemini-pro:generateContent", {
           contents: [{ parts: [{ text: query4 }] }],
         });
-        const fats = await gemini.post('/gemini-pro:generateContent', { contents: [{ parts: [{ text: query5 }] }] });
+        const fats = await gemini.post("/gemini-pro:generateContent", {
+          contents: [{ parts: [{ text: query5 }] }],
+        });
 
         setAnswer2(data.candidates[0].content.parts[0].text);
         setProteinPercent(protein?.data.candidates[0].content.parts[0].text);
@@ -173,22 +198,22 @@ const DashboardBody = () => {
       }, 2000);
 
       console.log(data);
-      console.log('done');
+      console.log("done");
       console.log(query2);
     });
   };
 
   const getRandomMeals = async () => {
     await retry(async () => {
-      const { data } = await gemini.post('/gemini-1.5-flash:generateContent', {
+      const { data } = await gemini.post("/gemini-1.5-flash:generateContent", {
         contents: [{ parts: [{ text: breakfastQuery }] }],
       });
 
-      const lun = await gemini.post('/gemini-1.5-flash:generateContent', {
+      const lun = await gemini.post("/gemini-1.5-flash:generateContent", {
         contents: [{ parts: [{ text: lunchQuery }] }],
       });
 
-      const din = await gemini.post('/gemini-1.5-flash:generateContent', {
+      const din = await gemini.post("/gemini-1.5-flash:generateContent", {
         contents: [{ parts: [{ text: dinnerQuery }] }],
       });
 
@@ -197,7 +222,7 @@ const DashboardBody = () => {
       setDinner(din.data.candidates[0].content.parts[0].text);
 
       console.log(data);
-      console.log('meals recipe');
+      console.log("meals recipe");
       console.log(breakfast);
       console.log(lunch);
       console.log(dinner);
@@ -206,7 +231,7 @@ const DashboardBody = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setBreakfast('Nutritious bean cake high in protein and fiber.');
+      setBreakfast("Nutritious bean cake high in protein and fiber.");
     }, 2000);
   }, []);
 
@@ -214,7 +239,7 @@ const DashboardBody = () => {
 
   const handleNavigate = (meal: string) => {
     router.push({
-      pathname: '/dashboard/meal-details',
+      pathname: "/dashboard/meal-details",
       query: { breakfast: encodeURIComponent(meal) },
     });
   };
@@ -238,11 +263,15 @@ const DashboardBody = () => {
             <div className="gap-2 flex flex-col ">
               <div className="justify-between flex bg-[#D2E1F9] p-3 rounded-lg">
                 <p className=" font-normal text-xs">Protein</p>
-                <p className=" font-bold text-xs text-[#FFC501]">{proteinPercent}</p>
+                <p className=" font-bold text-xs text-[#FFC501]">
+                  {proteinPercent}
+                </p>
               </div>
               <div className="justify-between flex bg-[#D2F9E8] p-3 rounded-lg">
                 <p className=" font-normal text-xs">Carbohydrates</p>
-                <p className=" font-bold text-xs text-[#FFC501]">{carbPercent}</p>
+                <p className=" font-bold text-xs text-[#FFC501]">
+                  {carbPercent}
+                </p>
               </div>
               <div className="justify-between flex bg-[#F7F9D2] p-3 rounded-lg">
                 <p className=" font-normal text-xs">Healthy Fats</p>
@@ -268,7 +297,9 @@ const DashboardBody = () => {
       <div className="grid grid-rows-2 gap-2 cursor-pointer font-jakarta">
         <div className="bg-[#D6FBC4] p-4 rounded-2xl js-tilt mealreco ">
           <div className="flex justify-between items-center mb-5">
-            <p className=" font-bold text-xs text-[#8C77EC]">Recommended Food Sources</p>
+            <p className=" font-bold text-xs text-[#8C77EC]">
+              Recommended Food Sources
+            </p>
             <Image src={star3} alt="star" />
           </div>
           {loading ? (
@@ -280,11 +311,14 @@ const DashboardBody = () => {
         <Link href="/scanner">
           <div className="bg-[#B3C7E4] p-4 rounded-2xl js-tilt h-full mealreco">
             <div className="flex justify-between items-center mb-5">
-              <p className=" font-bold text-xs text-[#0C2503]">Try Out Scanner</p>
+              <p className=" font-bold text-xs text-[#0C2503]">
+                Try Out Scanner
+              </p>
               <Image src={scanner} alt="scanner" />
             </div>
             <p className=" font-normal text-[#0C2503]">
-              Upload a food picture, and our AI analyzes it for nutritional info, allergens, and health goal alignment.
+              Upload a food picture, and our AI analyzes it for nutritional
+              info, allergens, and health goal alignment.
             </p>
           </div>
         </Link>
@@ -309,7 +343,9 @@ const DashboardBody = () => {
           >
             <div className="flex justify-between">
               <p className="text-[#0C2503] font-bold text-xs">Breakfast</p>
-              <p className="text-[#FFC501] font-medium text-[11px] leading-4 ">View Recipe and Details</p>
+              <p className="text-[#FFC501] font-medium text-[11px] leading-4 ">
+                View Recipe and Details
+              </p>
             </div>
             <div className="flex justify-between flex-col">
               <p className="text-[#1E5E08] font-bold text-sm">{breakfast}</p>
@@ -324,7 +360,9 @@ const DashboardBody = () => {
           >
             <div className="flex justify-between">
               <p className="text-[#0C2503] font-bold text-xs">Lunch</p>
-              <p className="text-[#FFC501] font-medium text-[11px] leading-4 font-jakarta">View Recipe and Details</p>
+              <p className="text-[#FFC501] font-medium text-[11px] leading-4 font-jakarta">
+                View Recipe and Details
+              </p>
             </div>
             <div className="flex justify-between flex-col">
               <p className="text-[#1E5E08] font-bold text-sm">{lunch}</p>
@@ -339,7 +377,9 @@ const DashboardBody = () => {
           >
             <div className="flex justify-between">
               <p className="text-[#0C2503] font-bold text-xs">Dinner</p>
-              <p className="text-[#FFC501] font-medium text-[11px] leading-4 font-jakarta">View Recipe and Details</p>
+              <p className="text-[#FFC501] font-medium text-[11px] leading-4 font-jakarta">
+                View Recipe and Details
+              </p>
             </div>
             <div className="flex justify-between flex-col">
               <p className="text-[#1E5E08] font-bold text-sm">{dinner}</p>

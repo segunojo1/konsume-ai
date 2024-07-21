@@ -1,12 +1,12 @@
-import Steps from '@/modules/setup-account/Steps';
-import Welcome from '@/modules/setup-account/Welcome';
-import React, { useContext, useEffect, useState } from 'react';
-import Form from '@/modules/setup-account/Form';
-import { useSetupContext } from '../../context/SetupContext';
-import { useRouter } from 'next/router';
-import { axiosKonsumeInstance } from '../../http/konsume';
-import Cookies from 'js-cookie';
-import { toast } from 'react-toastify';
+import Steps from "@/modules/setup-account/Steps";
+import Welcome from "@/modules/setup-account/Welcome";
+import React, { useContext, useEffect, useState } from "react";
+import Form from "@/modules/setup-account/Form";
+import { useSetupContext } from "../../context/SetupContext";
+import { useRouter } from "next/router";
+import { axiosKonsumeInstance } from "../../http/konsume";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 const SetupAccount = () => {
   const {
@@ -27,46 +27,46 @@ const SetupAccount = () => {
 
   useEffect(() => {
     setPossibleDiseases([]);
-    setUserGoal('');
-    Cookies.remove('possibleDiseases');
-    Cookies.remove('userGoal');
+    setUserGoal("");
+    Cookies.remove("possibleDiseases");
+    Cookies.remove("userGoal");
   }, []);
   const route = useRouter();
   const submitForm = async () => {
     try {
-      toast.info('Loading...');
+      toast.info("Loading...");
       const { data } = await axiosKonsumeInstance.post(
-        '/api/profile/create',
+        "/api/profile/create",
         {
           dateOfBirth: age,
           gender: gender,
-          height: height,
+          height: "2",
           weight: weight,
-          nationality: 'Nigerian',
-          bodyFat: '',
+          nationality: height,
+          bodyFat: "",
           dietType: diet,
-          snackPreference: '',
-          noOfMealPerDay: '',
+          snackPreference: "",
+          noOfMealPerDay: "",
           allergies: possibleDiseases,
           userGoals: [userGoal],
         },
         {
           headers: {
-            Authorization: `Bearer ${Cookies.get('ktn')}`,
+            Authorization: `Bearer ${Cookies.get("ktn")}`,
           },
           params: {
-            userId: Cookies.get('userid'),
+            userId: Cookies.get("userid"),
           },
-        },
+        }
       );
       console.log(data);
-      Cookies.set('age', age);
-      Cookies.set('gender', gender);
-      Cookies.set('height', weight);
-      Cookies.set('diet', diet);
-      Cookies.set('possibleDiseases', possibleDiseases);
-      Cookies.set('goal', userGoal);
-      route.push('/dashboard');
+      Cookies.set("age", age);
+      Cookies.set("gender", gender);
+      Cookies.set("height", height);
+      Cookies.set("diet", diet);
+      Cookies.set("possibleDiseases", possibleDiseases);
+      Cookies.set("goal", userGoal);
+      route.push("/dashboard");
     } catch (error: any) {
       console.error(error);
       toast.error(error?.response?.data?.error);

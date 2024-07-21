@@ -34,7 +34,7 @@ const Chat = () => {
           {
             parts: [
               {
-                text: `${userMessage} my goal is to ${userGoal} and i have some health conditions ${possibleDiseases}. Please provide a short and straightforward response based on my goal and health conditions.`,
+                text: `${userMessage} My goal is to ${userGoal}. I have some health conditions: ${possibleDiseases}. Please provide a short and straightforward response based on my goal and health conditions. Only answer questions related to food, eating, health, or goals. If a question is unrelated, please respond with "I am a food chatbot and can only answer questions about food, eating, and health."`,
               },
             ],
           },
