@@ -91,7 +91,7 @@ const ScannerBody = () => {
 
   const handleRecognize = async (): Promise<void> => {
     if (image) {
-      const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       const result: any = await model.generateContent([queryText, bitImage]);
 
       try {
