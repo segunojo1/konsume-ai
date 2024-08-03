@@ -11,20 +11,21 @@ const DashboardHead = () => {
   const { name, age, weight, userGoal, possibleDiseases } = useSetupContext();
   const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    // Ensure this only runs on the client
-    setIsClient(true);
-  }, []);
-  // const stringdisease = userDiseases.join(, )
-  const qq = `Hello, I was born ${Cookies.get(
+  const threeWordDietPrompt = `Hello, I was born ${Cookies.get(
     "age"
   )} , I am working on ${Cookies.get(
     "userGoal"
   )}, my health conditons are ${Cookies.get(
     "possibleDiseases"
   )}. Please generate a three word diet for me e.g High protein diet, just suggest a hypothetical name`;
-  const [query, setQuery] = useState(qq);
+  const [query, setQuery] = useState(threeWordDietPrompt);
   const [answer, setAnswer] = useState("");
+
+  useEffect(() => {
+    // Ensure this only runs on the client
+    setIsClient(!isClient);
+  }, []);
+ 
 
   useEffect(() => {
     makeRequest();

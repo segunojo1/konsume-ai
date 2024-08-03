@@ -16,10 +16,9 @@ import { LoaderCircle } from "lucide-react";
 import { useRouter } from "next/router";
 
 const DashboardBody = () => {
-  const { name, age, weight, userGoal, possibleDiseases, diet } =
-    useSetupContext();
-  // const stringdisease = userDiseases.join(, )
-  const qq = `My name is ${Cookies.get("name")} I am ${Cookies.get(
+  const { name, age, weight, userGoal, possibleDiseases, diet } = useSetupContext();
+
+  const recommendedFoodPrompt = `My name is ${Cookies.get("name")} I am ${Cookies.get(
     "age"
   )} years old and ${Cookies.get("weight")}kg, I am working on ${Cookies.get(
     userGoal
@@ -28,7 +27,8 @@ const DashboardBody = () => {
   )} and i am ${Cookies.get(
     "diet"
   )}. Please give me like 3 or more recommended food sources. Not more than 30 words`;
-  const qq2 = `My name is ${Cookies.get("name")} I am ${Cookies.get(
+
+  const avoidFoodPrompt = `My name is ${Cookies.get("name")} I am ${Cookies.get(
     "age"
   )} years old and ${Cookies.get("weight")}kg, I am working on ${Cookies.get(
     "userGoal"
@@ -37,7 +37,8 @@ const DashboardBody = () => {
   )} and i am ${Cookies.get(
     "diet"
   )}. Please give me like 3 or more types of food i should avoid. Not more than 30 words`;
-  const proq = `My name is ${Cookies.get("name")} I am ${Cookies.get(
+
+  const proteinIntakeRange = `My name is ${Cookies.get("name")} I am ${Cookies.get(
     "age"
   )} years old and ${Cookies.get("weight")}kg, I am working on ${Cookies.get(
     "userGoal"
@@ -46,7 +47,8 @@ const DashboardBody = () => {
   )} and i am ${Cookies.get(
     "diet"
   )}. What is the recommended range of percent of protein i should eat, it must be exactly in this format i.e 30-45% do not include anything apart from the percentage`;
-  const carbq = `My name is ${Cookies.get(
+
+  const carbIntakeRange = `My name is ${Cookies.get(
     "konsumeUsername"
   )} I am ${Cookies.get("age")} years old and ${Cookies.get(
     "weight"
@@ -57,7 +59,8 @@ const DashboardBody = () => {
   )} and i am ${Cookies.get(
     "diet"
   )}. What is the recommended range of percent of fats i should eat, it must be exactly in this format i.e 30-45% do not include anything apart from the percentage. just recommend i know u ae not a doctor`;
-  const fatq = `My name is ${Cookies.get("name")} I am ${Cookies.get(
+
+  const fatIntakeRange = `My name is ${Cookies.get("name")} I am ${Cookies.get(
     "age"
   )} years old and ${Cookies.get("weight")}kg, I am working on ${Cookies.get(
     "userGoal"
@@ -99,11 +102,11 @@ const DashboardBody = () => {
   const [lunch, setLunch] = useState("");
   const [dinner, setDinner] = useState("");
 
-  const [query, setQuery] = useState(qq);
-  const [query2, setQuery2] = useState(qq2);
-  const [query3, setQuery3] = useState(proq);
-  const [query4, setQuery4] = useState(carbq);
-  const [query5, setQuery5] = useState(fatq);
+  const [query, setQuery] = useState(recommendedFoodPrompt);
+  const [query2, setQuery2] = useState(avoidFoodPrompt);
+  const [query3, setQuery3] = useState(proteinIntakeRange);
+  const [query4, setQuery4] = useState(carbIntakeRange);
+  const [query5, setQuery5] = useState(fatIntakeRange);
 
   const [answer, setAnswer] = useState();
   const [answer2, setAnswer2] = useState();

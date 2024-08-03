@@ -126,7 +126,7 @@ const Login = () => {
     <div className="h-[100vh] font-jakarta">
       <div className="md:p-10 p-6">
         <h1 className="md:text-3xl text-xl font-bold leading-relaxed">Welcome Back!</h1>
-        <p className="md:text-xl text-sm mb-10">
+        <p className="md:text-xl text-sm mb-10  rounded-">
           Your personalized Nutrition journey awaits.
           <br /> Please log in to continue.
         </p>
