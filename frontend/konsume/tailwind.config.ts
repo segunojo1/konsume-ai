@@ -91,6 +91,9 @@ const config = {
         1000: "#151413"
       },
     },
+    fontFamily: {
+      playfair: "Playfair Display"
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
