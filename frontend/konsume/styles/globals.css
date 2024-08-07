@@ -117,9 +117,6 @@ input[type="number"] {
 .dash_img {
   background-image: url("/assets/dash_bg.png");
 }
-.font-jakarta {
-  font-family: "Plus Jakarta Sans", sans-serif;
-}
 .font-satoshi {
   font-family: "Satoshi", sans-serif;
 }

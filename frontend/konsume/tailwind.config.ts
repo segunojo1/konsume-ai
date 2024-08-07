@@ -92,9 +92,39 @@ const config = {
       },
     },
     fontFamily: {
-      playfair: "Playfair Display"
+      playfair: "Playfair Display",
+      satoshi: "Satoshi"
+    },
+    fontSize: {
+      "desktop-display1": ["144px", "120%"],
+      "desktop-display2": ["96px", "120%"],
+      "desktop-display3": ["64px", "120%"],
+      "desktop-heading1": ["56px", "120%"],
+      "desktop-heading2": ["48px", "120%"],
+      "desktop-heading3": ["40px", "120%"],
+      "desktop-heading4": ["32px", "120%"],
+      "desktop-hero": ["28px", "120%"],
+      "desktop-feature": ["24px", "120%"],
+      "desktop-highlight": ["18px", "120%"],
+      "desktop-content": ["16px", "120%"],
+      "desktop-caption": ["14px", "120%"],
+      "mobile-display1": ["44px", "120%"],
+      "mobile-display2": ["40px", "120%"],
+      "mobile-display3": ["32px", "120%"],
+      "mobile-heading1": ["28px", "120%"],
+      "mobile-heading2": ["24px", "120%"],
+      "mobile-heading3": ["20px", "120%"],
+      "mobile-heading4": ["18px", "120%"],
+      "mobile-feature": ["18px", "120%"],
+      "mobile-highlight": ["16px", "120%"],
+      "mobile-content": ["14px", "120%"],
+      "mobile-caption": ["12px", "120%"],
+      "mobile-footnote": ["10px", "120%"],
     },
     extend: {
+      boxShadow: {
+        shad: 'inset 0px 2.18px 2.18px -1.09px rgba(74, 74, 104, 0.10)'
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
