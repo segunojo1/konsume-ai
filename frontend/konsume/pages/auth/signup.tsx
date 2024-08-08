@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { gsap } from 'gsap'
+import OtpModal from '@/modules/OtpModal';
 
 const formSchema = z
   .object({
@@ -93,8 +94,19 @@ const Signup = () => {
   const handleSecondButtonClick = () => {
     animateTo(150);
   };
+
+  const section2Ref = useRef(null);
+
+  const scrollToSection = (sectionRef: any) => {
+    if (sectionRef.current) {
+      sectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
     <div className="font-satoshi gap-5 flex-col flex w-fit mx-auto pb-5 py-10 px-5">
+      <div className='absolute left-20 top-0 bottom-0 my-auto h-fit p-2 bg-primary-bg w-fit rounded-full shadow-[0_1px_4px_0_rgba(12,12,13,0.5)] cursor-pointer' onClick={() => scrollToSection(section2Ref)}>
+        <Image src='/assets/google.png' width={32} height={32} alt='google'/>
+      </div>
       <div className='flex flex-col items-center 2xl:gap-[36px] gap-3 max-w-[767px] '>
         <div className='flex items-center gap-4 relative w-fit mb-3'>
           <h1 className='2xl:text-desktop-heading2 lg:text-[42.67px]/[120%] text-mobile-heading1 font-bold from-[#000000] from-0% to-100% to-[#EEECEC] bg-gradient-to-b bg-clip-text text-[transparent] '>Thank you for </h1>
@@ -230,6 +242,7 @@ const Signup = () => {
               <Button
                 className=" mx-auto bg-gradient-to-r hover:from-[#ebd68a80] hover:via-[#f0aeae53] hover:to-[#9fe8728a] p-[10px] flex-[.7] border-2 w-[350px] border-[#D6FBC4] rounded-[30px] flex items-center gap-[10px] text-desktop-highlight font-bold"
                 type="submit"
+                ref={ section2Ref}
               >
                 <Image src="/assets/google.png" width={32} height={32} alt='google' />
                 Sign up with Google
@@ -239,6 +252,8 @@ const Signup = () => {
           </form>
         </Form>
       </div>
+
+      {/* <OtpModal /> */}
     </div>
   );
 };
