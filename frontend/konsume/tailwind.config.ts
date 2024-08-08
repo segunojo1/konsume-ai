@@ -5,6 +5,7 @@ const config = {
   content: [
     './pages/**/*.{ts,tsx}',
     './modules/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
 	],
@@ -123,7 +124,8 @@ const config = {
     },
     extend: {
       boxShadow: {
-        shad: 'inset 0px 2.18px 2.18px -1.09px rgba(74, 74, 104, 0.10)'
+        shad: 'inset 0px 2.18px 2.18px -1.09px rgba(74, 74, 104, 0.10)',
+        focusshad: '0px 0px 0px 4px rgba(75, 77, 237, 0.20)'
       },
       colors: {
         border: "hsl(var(--border))",
