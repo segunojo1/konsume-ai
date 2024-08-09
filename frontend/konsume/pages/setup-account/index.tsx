@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { axiosKonsumeInstance } from "../../http/konsume";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 const SetupAccount = () => {
   const {
@@ -73,11 +74,23 @@ const SetupAccount = () => {
     }
   };
   return (
-    <div className="w-10/12 m-auto">
-      <div className="md:p-10 p-1 font-satoshi">
-        <Welcome />
-        <Steps />
-        {/* <BioData /> */}
+    <div className=" m-auto 2xl:p-32 md:p-10 p-1 ">
+      <Image src="/bg.png" alt="bg" width={1583} height={300} className=" top-0 absolute -z-20 h-fit w-fit" />
+      <div className=" p-12 font-satoshi bg-[#ffffffb0] relative -z-10 backdrop-blur-lg">
+        <div className="flex gap-[10px] items-center">
+          <Image src="/arrowleft.svg" alt="back" width={17.5} height={100} className="m-[3px]" />
+          <p className="text-[14px]/[20px] font-bold">Back</p>
+        </div>
+        {/* <Steps /> */}
+        <div>
+          <div>
+            <div className="relative w-fit mx-auto">
+              <Image src='/curved_line.svg' alt='curved line' height={500} width={282} className='2xl:w-[282px] lg:w-[250px] w-[141.16px] absolute 2xl:top-5 xl:top-1 2xl:-right-[14px] xl:-right-[48px] -z-10' />
+              <h1 className="text-[55.02px]/[89.4px] font-bold from-[#000000] from-0% to-100% to-[#EEECEC] bg-gradient-to-b bg-clip-text text-[transparent] z-50">Welcome onboard Seyi! </h1>
+            </div>
+          </div>
+          <p className=" text-[20px] text-center">Let’s begin your personalised wellness Journey! To get started, please tell us a bit about yourself. Sign up for yourself <br />  and get personalized meal recommendations, progress tracking, and more.</p>
+        </div>
         <Form />
         {currentPage == 4 && (
           <button

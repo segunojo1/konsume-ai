@@ -253,7 +253,7 @@ const Signup = () => {
         </Form>
       </div>
 
-      {/* <OtpModal /> */}
+      <OtpModal />
     </div>
   );
 };

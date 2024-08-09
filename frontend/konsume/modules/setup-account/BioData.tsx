@@ -63,13 +63,9 @@ const BioData = () => {
     nextPage();
   }
   return (
-    <div className="mt-12">
+    <div className="mt-12 bg-[transparent] z-50">
       <div className="relative w-[83%] m-auto">
-        <h1 className=" font-bold text-4xl leading-[73px]">
-          Basic Information
-        </h1>
-        <div className="dash_img"></div>
-        <div className="signup_container md:p-[50px]">
+        <div className=" md:p-[50px]">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
@@ -81,14 +77,14 @@ const BioData = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm md:text-xl font-medium !leading-10">
-                      Date of birth
+                      Age
                     </FormLabel>
                     <FormControl>
                       <Input
-                        type="date"
+                        type="number"
                         placeholder="Input your age"
                         {...field}
-                        className="h-[48px] bg-[#D6FBC4] py-[5.5px] pr-[31.45px] pl-[14.8px] md:p-6 rounded-full outline-none"
+                        className="h-[48px] bg-[#D6FBC4] py-[5.5px] pr-[31.45px] pl-[14.8px] md:p-6 rounded-lg outline-none"
                       />
                     </FormControl>
                     <FormMessage />
@@ -107,7 +103,7 @@ const BioData = () => {
                       <Input
                         placeholder="Input your nationality"
                         {...field}
-                        className="h-[48px] bg-[#D6FBC4] py-[5.5px] pr-[31.45px] pl-[14.8px] md:p-6 rounded-full outline-none"
+                        className="h-[48px] bg-[#D6FBC4] py-[5.5px] pr-[31.45px] pl-[14.8px] md:p-6 outline-none"
                       />
                     </FormControl>
                     <FormMessage />
@@ -127,7 +123,7 @@ const BioData = () => {
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="h-[48px] bg-[#D6FBC4] py-[5.5px] pr-[31.45px] pl-[14.8px] w-full md:p-6 rounded-full outline-none">
+                        <SelectTrigger className="h-[48px] bg-[#D6FBC4] py-[5.5px] pr-[31.45px] pl-[14.8px] w-full md:p-6 outline-none">
                           <SelectValue placeholder="Select your gender" />
                         </SelectTrigger>
                       </FormControl>
@@ -156,7 +152,7 @@ const BioData = () => {
                       <Input
                         placeholder="Input your height"
                         {...field}
-                        className=" h-[48px] bg-[#D6FBC4] py-[5.5px] pr-[31.45px] pl-[14.8px] md:p-6 rounded-full outline-none"
+                        className=" h-[48px] bg-[#D6FBC4] py-[5.5px] pr-[31.45px] pl-[14.8px] md:p-6 outline-none"
                       />
                     </FormControl>
                     <FormMessage />
