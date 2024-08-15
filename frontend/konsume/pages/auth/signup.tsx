@@ -30,6 +30,7 @@ const formSchema = z
 const Signup = () => {
   const router = useRouter();
   const { userID, setUserID } = useSetupContext();
+  const [showOtp, setShowOtp] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,7 +57,7 @@ const Signup = () => {
       toast.success(data.message);
       Cookies.set('userid', data.value.id, { secure: true });
       setUserID(data.value.id);
-      router.push('/auth/otp');
+      setShowOtp((prev) => !prev)
     } catch (error: any) {
       handleError(error);
     }
@@ -252,8 +253,10 @@ const Signup = () => {
           </form>
         </Form>
       </div>
-
-      <OtpModal />
+      {
+        showOtp && <OtpModal />
+      }
+      {/* <OtpModal /> */}
     </div>
   );
 };

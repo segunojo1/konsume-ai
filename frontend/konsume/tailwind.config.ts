@@ -94,7 +94,8 @@ const config = {
     },
     fontFamily: {
       playfair: "Playfair Display",
-      satoshi: "Satoshi"
+      satoshi: "Satoshi",
+      worksans: "Work Sans"
     },
     fontSize: {
       "desktop-display1": ["144px", "120%"],

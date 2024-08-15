@@ -17,14 +17,14 @@ const GoalCheckbox: React.FC<GoalCheckboxProps> = ({ label, data }) => {
   return (
     <div className="">
       <div className="flex items-center me-4 gap-2">
-        <input
+        <Input
           id="inline-radio"
           type="radio"
           onChange={getValue}
           value={label}
           name="inline-radio-group"
           checked={userGoal === label}
-          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+          className=""
         />
         <label htmlFor="inline-radio" className="md:text-[25px] leading-8 text-[#0C2503] font-medium font-jakarta">
           {label}

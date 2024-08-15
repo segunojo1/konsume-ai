@@ -34,8 +34,8 @@ const BioData = () => {
     nextPage,
     age,
     setAge,
-    height,
-    setHeight,
+    nationality,
+    setNationality,
     weight,
     setWeight,
     gender,
@@ -46,7 +46,7 @@ const BioData = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       age: age,
-      nationality: height,
+      nationality: nationality,
       gender: gender,
       weight: weight,
     },
@@ -57,27 +57,27 @@ const BioData = () => {
     console.log(values);
     setAge(values.age);
     setWeight(values.weight);
-    setHeight(values.nationality);
+    setNationality(values.nationality);
     setGender(values.gender);
     localStorage.setItem("biodata", JSON.stringify(values));
     nextPage();
   }
   return (
-    <div className="mt-12 bg-[transparent] z-60 relative mx-auto max-w-[391px]">
+    <div className="mt-16 bg-[transparent] z-60 relative mx-auto max-w-[391px]">
       <div className="relative ">
         <div className="">
           
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className=" flex flex-col w-full  gap-2 md:gap-5 "
+              className=" flex flex-col w-full  gap-6 md:gap-5 "
             >
               <FormField
                 control={form.control}
                 name="age"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[16px]/[120%] ">
+                    <FormLabel className="text-[18px]/[120%] md:text-desktop-content">
                       Age
                     </FormLabel>
                     <FormControl>
@@ -97,7 +97,7 @@ const BioData = () => {
                 name="weight"
                 render={({ field }) => (
                   <FormItem className="">
-                    <FormLabel className="text-sm md:text-xl font-medium !leading-10">
+                    <FormLabel className="text-[18px]/[120%] md:text-[16px]">
                       Weight - kg
                     </FormLabel>
                     <FormControl className="">
@@ -117,7 +117,7 @@ const BioData = () => {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm md:text-xl font-medium !leading-10">
+                    <FormLabel className="text-[18px]/[21.6px] md:text-xl font-medium">
                       Gender
                     </FormLabel>
                     <Select
@@ -144,30 +144,10 @@ const BioData = () => {
               />
               <FormField
                 control={form.control}
-                name="weight"
-                render={({ field }) => (
-                  <FormItem className="">
-                    <FormLabel className="text-sm md:text-xl font-medium !leading-10">
-                      Body percentage - kg
-                    </FormLabel>
-                    <FormControl className="">
-                      <Input
-                        placeholder="Input your body percentage"
-                        {...field}
-                        type="number"
-                        className="h-[48px] pt-[11px] pb-[14px] px-[14px] md:p-6"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
                 name="nationality"
                 render={({ field }) => (
                   <FormItem className="">
-                    <FormLabel className="text-sm md:text-xl font-medium !leading-10">
+                    <FormLabel className="text-[18px]/[21.6px] md:text-desktop-content font-medium">
                       Nationality
                     </FormLabel>
                     <FormControl className="">
@@ -184,15 +164,9 @@ const BioData = () => {
               
               <Button
                 type="submit"
-                className=" right-0 left-0 -bottom-20 absolute w-[50px] h-[50px] border-[2.5px] border-[#FFC501] rounded-[40px] flex items-center justify-center mx-auto"
+                className="mt-16 flex items-center justify-center mx-auto p-2 w-full h-[2.9rem] text-primary-bg-100 bg-primarygtext"
               >
-                <Image
-                  alt="line"
-                  src={line}
-                  width="30"
-                  height="30"
-                  className=" rotate-180"
-                />
+                Continue
               </Button>
             </form>
           </Form>

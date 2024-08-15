@@ -8,6 +8,7 @@ import { axiosKonsumeInstance } from "../../http/konsume";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import Link from "next/link";
 
 const SetupAccount = () => {
   const {
@@ -18,7 +19,7 @@ const SetupAccount = () => {
     setPossibleDiseases,
     setUserGoal,
     age,
-    height,
+    nationality,
     gender,
     weight,
     diet,
@@ -43,7 +44,7 @@ const SetupAccount = () => {
           gender: gender,
           height: "2",
           weight: weight,
-          nationality: height,
+          nationality: nationality,
           bodyFat: "",
           dietType: diet,
           snackPreference: "",
@@ -74,24 +75,30 @@ const SetupAccount = () => {
     }
   };
   return (
-    <div className=" m-auto 2xl:p-32 md:py-14 md:pb-20 md:px-24 p-1 bg-base-white relative ">
-      <Image src="/bg.png" alt="bg" width={1407} height={377} className=" top-0 absolute   w-full left-0" />
-      <div className=" p-8 pb-28 font-satoshi bg-[#ffffffb0] relative z-10 backdrop-blur-lg ">
-        <div className="flex gap-[10px] items-center">
-          <Image src="/arrowleft.svg" alt="back" width={17.5} height={100} className="m-[3px]" />
-          <p className="text-[14px]/[20px] font-bold">Back</p>
-        </div>
+    <div className=" m-auto 2xl:p-32 md:py-20  md:px-32 py-20 px-4 md:bg-base-white bg-[white] relative ">
+      <Image src="/bg.png" alt="bg" width={1407} height={377} className=" top-0 absolute   w-full left-0 md:block hidden" />
+      <Image src="/bg-mobile.png" alt="bg mobile" height={58.49} width={1053.92} className="absolute w-full h-full right-0  -rotate-[150] block md:hidden"/>
+      <div className=" px-3 py-5 md:py-14 md:px-11 font-satoshi bg-[#ffffffb5] relative z-10 backdrop-blur-lg ">
+        <div className=" bg-[white] w-full h-full"></div>
+        <Link href="/auth/login" className="flex gap-[10px] items-center cursor-pointer">
+          <Image src="/backbtn.png" alt="back" width={48.3} height={100} className="m-[3px] mb-4" />
+        </Link>
         {/* <Steps /> */}
-        <div>
+        <div >
           <div>
             <div className="relative w-fit mx-auto">
-              <Image src='/curved_line.svg' alt='curved line' height={500} width={282} className='2xl:w-[282px] md:w-[250px] w-[141.16px] absolute 2xl:top-5 top-5 2xl:-right-[14px] -right-[30px] -z-10' />
-              <h1 className="text-[48.9px]/[79.5px] font-bold from-[#000000] from-0% to-100% to-[#EEECEC] bg-gradient-to-b bg-clip-text text-[transparent] z-50">Welcome onboard Seyi! </h1>
+              <Image src='/curved_line.svg' alt='curved line' height={500} width={282} className='2xl:w-[282px] lg:w-[250px] w-[123.16px] lg:h-auto h-[22px] absolute 2xl:top-5 bottom-0 md:top-auto top-0 my-auto 2xl:-right-[14px] right-0 -z-10' />
+              <h1 className="lg:text-[48.9px]/[79.5px] text-[28px]/[40px] font-bold from-[#000000] from-0% to-100% to-[#EEECEC] bg-gradient-to-b bg-clip-text text-[transparent] z-50">Welcome onboard Segun! </h1>
             </div>
           </div>
-          <p className=" text-[17.7px] text-center">Let’s begin your personalised wellness Journey! To get started, please tell us a bit about yourself. Sign up for yourself <br />  and get personalized meal recommendations, progress tracking, and more.</p>
+          <p className=" md:text-[17.7px] text-[16px] text-center mt-1">Let’s begin your personalised wellness Journey! To get started, please tell us a bit about yourself. Sign up for yourself
+            <span className="hidden md:inline">
+              <br />
+            </span>
+            and get personalized meal recommendations, progress tracking, and more.
+          </p>
         </div>
-        <div className='2xl:w-[473.93px] md:w-[271px] 2xl:h-[241.42px] md:h-[160px] rounded-[61469.42px] mx-auto bg-neutrals-100 fixed top-[180px] left-0 right-0 -z-10 blur-[170.6px]'></div>
+        <div className='2xl:w-[413.93px] w-[271px] 2xl:h-[201.42px] h-[160px] rounded-[61469.42px] mx-auto bg-neutrals-100/70 fixed top-[180px] left-0 right-0 -z-10 blur-[170.6px]'></div>
         <Form />
         {currentPage == 4 && (
           <button
