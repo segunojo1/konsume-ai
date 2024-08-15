@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -60,6 +61,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -116,9 +121,6 @@ input[type="number"] {
 }
 .dash_img {
   background-image: url("/assets/dash_bg.png");
-}
-.font-jakarta {
-  font-family: "Plus Jakarta Sans", sans-serif;
 }
 .font-satoshi {
   font-family: "Satoshi", sans-serif;

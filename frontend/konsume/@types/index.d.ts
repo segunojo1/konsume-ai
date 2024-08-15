@@ -933,14 +933,14 @@ export interface SetupContextType {
   setPossibleDiseases: any;
   name: string | undefined;
   setName: React.Dispatch<React.SetStateAction<string | undefined>>;
-  height: string;
+  nationality: string;
   age: string;
   gender: string;
   weight: string;
   setAge: React.Dispatch<React.SetStateAction<string>>;
   setGender: React.Dispatch<React.SetStateAction<string>>;
   setWeight: React.Dispatch<React.SetStateAction<string>>;
-  setHeight: React.Dispatch<React.SetStateAction<string>>;
+  setNationality: React.Dispatch<React.SetStateAction<string>>;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   nextPage(): void;
