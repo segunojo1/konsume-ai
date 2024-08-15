@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const SetupAccount = () => {
   const {
@@ -36,7 +37,14 @@ const SetupAccount = () => {
   const route = useRouter();
   const submitForm = async () => {
     try {
-      toast.info("Loading...");
+
+
+        if (diet !== '') {
+          toast.info("Loading...");
+        } else {
+          toast.error('Please select your diet');
+          return;
+        }
       const { data } = await axiosKonsumeInstance.post(
         "/api/profile/create",
         {
@@ -57,17 +65,16 @@ const SetupAccount = () => {
             Authorization: `Bearer ${Cookies.get("ktn")}`,
           },
           params: {
-            userId: Cookies.get("userid"),
+            userId: sessionStorage.getItem("userid"),
           },
         }
       );
       console.log(data);
-      Cookies.set("age", age);
-      Cookies.set("gender", gender);
-      Cookies.set("height", height);
-      Cookies.set("diet", diet);
-      Cookies.set("possibleDiseases", possibleDiseases);
-      Cookies.set("goal", userGoal);
+      sessionStorage.setItem("age", age);
+      sessionStorage.setItem("gender", gender);
+      sessionStorage.setItem("diet", diet);
+      sessionStorage.setItem("possibleDiseases", possibleDiseases);
+      sessionStorage.setItem("goal", userGoal);
       route.push("/dashboard");
     } catch (error: any) {
       console.error(error);
@@ -101,12 +108,13 @@ const SetupAccount = () => {
         <div className='2xl:w-[413.93px] w-[271px] 2xl:h-[201.42px] h-[160px] rounded-[61469.42px] mx-auto bg-neutrals-100/70 fixed top-[180px] left-0 right-0 -z-10 blur-[170.6px]'></div>
         <Form />
         {currentPage == 4 && (
-          <button
-            className=" mt-12 m-auto py-[7px] px-[84px] bg-[#8DCF38] rounded-[34.71px]  w-fit flex"
-            onClick={submitForm}
-          >
-            Continue
-          </button>
+          <Button
+          type="submit"
+          className="mt-16 flex items-center justify-center mx-auto p-2 w-full md:w-[400px] h-[2.9rem] text-primary-bg-100 bg-primarygtext"
+          onClick={submitForm}
+        >
+          Continue
+        </Button>
         )}
       </div>
     </div>

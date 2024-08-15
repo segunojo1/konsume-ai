@@ -9,12 +9,30 @@ const HealthCheckboxes: React.FC<HealthProps> = ({ label, specify }) => {
     const checkboxValue = e.target.value;
     const isChecked = e.target.checked;
 
-    // If checkbox is checked, add its value to the selectedCheckboxes array
-    if (isChecked) {
+    if (checkboxValue === "Other") {
+      if (isChecked) {
+        // If "Other" is checked, uncheck all others and set value to "headache"
+        setPossibleDiseases(["headache"]);
+      } else {
+        // If "Other" is unchecked, clear the selection
+        setPossibleDiseases([]);
+      }
+    } else if (checkboxValue === "None") {
+      if (isChecked) {
+        // If "none" is checked, uncheck all others and set value to "none"
+        setPossibleDiseases(["None"]);
+      } else {
+        // If "none" is unchecked, clear the selection
+        setPossibleDiseases([]);
+      }
+    } else if (isChecked) {
+      // If any other checkbox is checked, add its value to the array
       setPossibleDiseases((prevState: any) => [...prevState, checkboxValue]);
     } else {
-      // If checkbox is unchecked, remove its value from the selectedCheckboxes array
-      setPossibleDiseases((prevState: any) => prevState.filter((item: any) => item !== checkboxValue));
+      // If checkbox is unchecked, remove its value from the array
+      setPossibleDiseases((prevState: any) =>
+        prevState.filter((item: any) => item !== checkboxValue)
+      );
     }
 
     console.log(possibleDiseases);
@@ -24,21 +42,30 @@ const HealthCheckboxes: React.FC<HealthProps> = ({ label, specify }) => {
     console.log(possibleDiseases);
   }, [possibleDiseases]);
   return (
-    <label htmlFor="checkbox-in-form" className="flex p-3 cursor-pointer gap-2 rounded-md text-sm w-fit items-center">
-      <input
-        onChange={handleCheckbox}
-        checked={possibleDiseases.includes(label)}
-        type="checkbox"
-        value={label}
-        className="w-5 h-5 appearance-none cursor-pointer border border-[#FFC501] rounded-md checked:bg-no-repeat checked:bg-center checked:border-[#FFC501] checked:bg-[#FFC501]"
-        id="checkbox-in-form"
-      />
-      <span className=" md:text-[24px] leading-[31px] text-[#0C2503] ml-2 font-medium font-jakarta w-full">
-        {label}
-      </span>
+    <label htmlFor="checkbox-in-form" className="flex md:items-center flex-col md:flex-row md:gap-6 gap-4 cursor-pointer w-fit">
+      <div className='flex items-center md:gap-6 gap-4 cursor-pointer'>
+        <input
+          onChange={handleCheckbox}
+          checked={
+            label === "Other"
+              ? possibleDiseases.includes("headache")
+              : possibleDiseases.includes(label)
+          }
+          disabled={
+            label !== "Other" && label !== "None" && (possibleDiseases.includes("headache") || possibleDiseases.includes("None"))
+          }
+          type="checkbox"
+          value={label}
+          className="min-w-6 h-6 appearance-none cursor-pointer border bg-primary-bg-100 rounded-md checked:bg-center  "
+          id="checkbox-in-form"
+        />
+        <span className="md:text-[22.26px] text-[16px]  text-[#0C2503] font-medium">
+          {label}
+        </span>
+      </div>
       {specify == 'true' && (
         <Input
-          className=" rounded-[40px] border-[0.9px] border-[#FFC501] bg-[#D6FBC4] py-[2.7px] px-[28.3px] text-[#032902B2] font-normal leading-[23px]"
+          className=" xl:max-w-[348.9px] font-normal text-[17.44px]/[120%] text-[#8C8CA1] py-[13px] px-[17px] h-[40px]"
           placeholder="Specify"
         />
       )}

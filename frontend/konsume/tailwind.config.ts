@@ -95,7 +95,8 @@ const config = {
     fontFamily: {
       playfair: "Playfair Display",
       satoshi: "Satoshi",
-      worksans: "Work Sans"
+      worksans: "Work Sans",
+      jakarta: "Plus Jakarta Sans"
     },
     fontSize: {
       "desktop-display1": ["144px", "120%"],
