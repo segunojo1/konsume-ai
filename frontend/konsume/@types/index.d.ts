@@ -383,6 +383,8 @@ export interface MainLayoutProps {
 }
 
 export interface MainLayoutContextProps {
+  toggled: boolean;
+  setToggled: React.Dispatch<React.SetStateAction<boolean>>;
   activePage?: string;
   setActivePage: (page: string) => void;
 }

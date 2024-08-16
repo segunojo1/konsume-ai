@@ -95,7 +95,7 @@ const Chat = () => {
     <div>
       <Sidebar toggled={toggled} setToggled={setToggled} />
       <div
-        className={`${toggled ? "" : "md:ml-[280px]"} gap-5 flex flex-col px-5`}
+        className={`${toggled ? "" : "md:ml-[100px]"} gap-5 flex flex-col px-5`}
       >
         <DashboardNav toggled={toggled} setToggled={setToggled} />
         <ScannerHead />

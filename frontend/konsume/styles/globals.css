@@ -138,6 +138,55 @@ input[type="radio"]::before{
   box-shadow: inset 1em 1em var(--form-control-color);
   transform-origin: bottom left;
 }
+.scroll-button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+
+.first-text, .second-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  transition: transform 0.5s ease;
+}
+
+.second-text {
+  transform: translate(150%, -50%);
+}
+
+.scroll-button:hover .first-text {
+  transform: translate(-250%, -50%);
+}
+
+.scroll-button:hover .second-text {
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  position: relative;
+  height: 200%;
+  transition: transform 1s ease-in-out;
+}
+
+.content-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.scrolled-up {
+  transform: translateY(-115vh);
+}
+
 
 /* Custom focus style for radio button */
 input[type="radio"]:active::before {

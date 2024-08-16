@@ -42,7 +42,7 @@ const OtpModal = () => {
     }
 
     return (
-        <div className="fixed backdrop-blur-sm mx-auto w-fit right-0 left-0">
+        <div className="fixed backdrop-blur-sm mx-auto w-fit right-0 left-0 top-10">
             <div className="max-w-[700px] flex flex-col items-center gap-8 border-[3px] border-secondary-100 p-6 rounded-[32px]">
                 <div className='md:text-desktop-heading2 text-mobile-heading1 flex items-center gap-4 relative w-fit mb-3'>
                     <h1 className='font-bold '>Please enter </h1>

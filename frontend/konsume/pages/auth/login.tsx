@@ -68,7 +68,7 @@ const Login = () => {
       });
       Cookies.set('ktn', data.token);
       Cookies.set('konsumeUsername', data.value.fullName);
-      Cookies.set('userid', data.value.id);
+      sessionStorage.setItem('userid', data.value.id);
 
       toast.success(data.message);
       checkUser();
@@ -86,7 +86,7 @@ const Login = () => {
           Authorization: `Bearer ${Cookies.get('ktn')}`,
         },
         params: {
-          id: Cookies.get('userid'),
+          id: sessionStorage.getItem('userid'),
         },
       });
       console.log(resp);
@@ -102,7 +102,7 @@ const Login = () => {
         // setWeight(data?.value?.weight);
         // setDiet(data?.value?.dietType);
         // setAge(data?.value?.age);
-        const { data } = await axiosKonsumeInstance.get(`/api/profile/${Cookies.get('userid')}`, {
+        const { data } = await axiosKonsumeInstance.get(`/api/profile/${sessionStorage.getItem('userid')}`, {
           headers: {
             Authorization: `Bearer ${Cookies.get('ktn')}`,
           },
@@ -128,30 +128,22 @@ const Login = () => {
         <Image src='/assets/google.png' width={32} height={32} alt='google' />
       </div>
       <div className='flex flex-col items-center 2xl:gap-[36px] gap-3 max-w-[767px] '>
-        <div className='flex items-center gap-4 relative w-fit mb-3'>
+        <div className='flex items-center gap-4 relative w-fit'>
           <h1 className='2xl:text-desktop-heading2 lg:text-[42.67px]/[120%] text-mobile-heading1 font-bold from-[#000000] from-0% to-100% to-[#EEECEC] bg-gradient-to-b bg-clip-text text-[transparent] '>Thank you for </h1>
           <div className=' '>
             <Image src='/curved_line.svg' alt='curved line' height={500} width={282} className='2xl:w-[282px] lg:w-[250px] w-[141.16px] absolute 2xl:top-5 xl:top-1 2xl:-right-[14px] xl:-right-[48px] -z-10' />
             <h1 className=' 2xl:text-[55px]/[120%] lg:text-[42.67px]/[120%] text-mobile-heading1 italic font-bold from-[#000000] from-0% to-100% to-[#EEECEC] bg-gradient-to-b bg-clip-text text-[transparent] z-50'>Joining Us</h1>
           </div>
         </div>
-        <p className='lg:text-[21.33px]/[120%] 2xl:text-desktop-feature text-center'>Create your account to embark on a healthier, happier lifestyle, <br />
-        </p>
 
       </div>
       {/* <Image src='/assets/back-gradient.png' width={473.93} height={241.42} alt='gradient' className='rounded-[61469.42px] absolute'/> */}
-      <div className='2xl:w-[473.93px] lg:w-[401px] 2xl:h-[241.42px] lg:h-[214px] rounded-[61469.42px] mx-auto bg-neutrals-100 fixed top-[180px] left-0 right-0 -z-10 blur-[170.6px]'></div>
+      {/* <div className='2xl:w-[473.93px] lg:w-[401px] 2xl:h-[241.42px] lg:h-[214px] rounded-[61469.42px] mx-auto bg-neutrals-100 fixed top-[180px] left-0 right-0 -z-10 blur-[170.6px]'></div> */}
       <div className='max-w-[807px] mx-auto'>
-        <h3 className='lg:text-[16px]/[120%] 2xl:text-desktop-highlight  w-fit mx-auto'>Sign up for yourself and get personalized meal<br /> recommendations, progress tracking, and more.</h3>
-        <div className='font-bold text-desktop-content text-center mb-4 2xl:mb-11 mt-5'>
-          Dont have an account?{' '}
-          <Link href="/auth/signup" className="  text-secondary">
-            Sign up
-          </Link>{' '}
-        </div>
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className=" w-full flex flex-col items-center">
-            <div className=" grid lg:grid-cols-2 grid-cols-1 gap-y-7 gap-x-16 w-full items-end">
+            <div className=" flex flex-col gap-6 w-full ">
               <FormField
                 control={form.control}
                 name="email"
@@ -196,16 +188,21 @@ const Login = () => {
             </Button>
 
           </form>
-          <div className="flex flex-col justify-between gap-8 mt-8">
+          <div className="flex flex-col justify-between gap-4 mt-4">
             <p className='text-desktop-highlight font-bold mx-auto'>Or</p>
             <Button
-              className=" mx-auto bg-gradient-to-r hover:from-[#ebd68a80] hover:via-[#f0aeae53] hover:to-[#9fe8728a] p-[10px] flex-[.7] border-2 w-[350px] border-[#D6FBC4] rounded-[30px] flex items-center gap-[10px] text-desktop-highlight font-bold"
-
+              className=" mx-auto  p-[10px] flex-[.7] border-2 w-[350px] border-primary-bg-800 text-primarygtext rounded-[30px] flex items-center gap-[10px] text-desktop-highlight font-bold"
+              type="submit"
             >
               <Image src="/assets/google.png" width={32} height={32} alt='google' />
               Sign in with Google
             </Button>
-
+          </div>
+          <div className='font-bold text-desktop-content text-center mb-4 2xl:mb-11 mt-5'>
+            Dont have an account?{' '}
+            <Link href="/auth/signup" className="  text-secondary">
+              Sign up
+            </Link>{' '}
           </div>
         </Form>
       </div>

@@ -70,11 +70,11 @@ const SetupAccount = () => {
         }
       );
       console.log(data);
-      sessionStorage.setItem("age", age);
-      sessionStorage.setItem("gender", gender);
-      sessionStorage.setItem("diet", diet);
-      sessionStorage.setItem("possibleDiseases", possibleDiseases);
-      sessionStorage.setItem("goal", userGoal);
+      Cookies.set("age", age);
+      Cookies.set("gender", gender);
+      Cookies.set("diet", diet);
+      Cookies.set("possibleDiseases", possibleDiseases);
+      Cookies.set("goal", userGoal);
       route.push("/dashboard");
     } catch (error: any) {
       console.error(error);
