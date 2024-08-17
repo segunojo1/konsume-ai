@@ -127,7 +127,8 @@ const config = {
     extend: {
       boxShadow: {
         shad: 'inset 0px 2.18px 2.18px -1.09px rgba(74, 74, 104, 0.10)',
-        focusshad: '0px 0px 0px 4px rgba(75, 77, 237, 0.20)'
+        focusshad: '0px 0px 0px 4px rgba(75, 77, 237, 0.20)',
+        bordershad: 'inset 1px 0 0 0 #F2F3F4'
       },
       colors: {
         border: "hsl(var(--border))",

@@ -9,14 +9,12 @@ import TopBar from '@/modules/TopBar';
 
 function MainLayout({
   children,
-  activePage,
   className,
   showDashboardSidebar = true,
-  showFooter = true,
-  showTopbar,
+  activePage,
   includeMarginTop = true,
 }: MainLayoutProps) {
-  const { setActivePage, toggled, setToggled } = useContext(MainLayoutContext);
+  const {setActivePage, toggled, setToggled } = useContext(MainLayoutContext);
 
   useEffect(() => {
     setActivePage(activePage as string);
@@ -24,8 +22,8 @@ function MainLayout({
   }, []);
 
   return (
-    <div className={twMerge('w-full relative h-screen overflow-y-auto overflow-x-hidden', className)}>
-      {showTopbar && <TopBar />}
+    <div className={twMerge('w-full relative h-screen overflow-x-hidden', className)}>
+      <TopBar setToggled={setToggled}/>
 
       {showDashboardSidebar && <Sidebar toggled={toggled} setToggled={setToggled}/>}
       <div className={`w-full ${includeMarginTop ? 'mt-5' : ''}`}>{children}</div>

@@ -7,12 +7,15 @@ export default MainLayoutContext;
 export function MainLayoutContextProvider({ children }: { children: React.ReactNode }) {
   const [activePage, setActivePage] = useState('home');
   const [toggled, setToggled] = useState<boolean>(false);
+  const [userMessage, setUserMessage] =useState('');
 
   const contextValue: MainLayoutContextProps = {
     activePage,
     setActivePage,
     toggled, 
-    setToggled
+    setToggled,
+    userMessage,
+    setUserMessage
   };
 
   return <MainLayoutContext.Provider value={contextValue}>{children}</MainLayoutContext.Provider>;

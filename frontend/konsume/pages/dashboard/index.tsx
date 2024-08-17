@@ -10,6 +10,7 @@ import { axiosKonsumeInstance } from '../../http/konsume';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import MainLayoutContext from '@/context/LayoutContext';
+import MainLayout from '@/components/Layout/MainLayout';
 
 const Dashboard = () => {
   
@@ -45,13 +46,15 @@ const Dashboard = () => {
   }, [setPossibleDiseases, setUserGoal, setWeight, setDiet, setAge, router]);
   return (
     <div>
-      <Sidebar toggled={toggled} setToggled={setToggled} />
-      <div className={`${toggled ? '' : 'md:ml-[100px]'} gap-5 flex flex-col px-5`}>
-        <DashboardNav toggled={toggled} setToggled={setToggled} />
+      <MainLayout>
+
+      <div className={`${toggled ? '' : 'md:ml-[100px]'} gap-5 flex flex-col px-7`}>
+        {/* <DashboardNav toggled={toggled} setToggled={setToggled} /> */}
         <DashboardHead />
         <ChatWithFoodie />
         <DashboardBody />
       </div>
+      </MainLayout>
     </div>
   );
 };
