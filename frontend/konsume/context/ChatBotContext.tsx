@@ -12,7 +12,7 @@ export function ChatBotContextProvider({ children }: { children: React.ReactNode
   const [chatLog, setChatLog]: any = useState([]);
   const [isContentReplaced, setIsContentReplaced] = useState(false);
   const [loading, setIsLoading] = useState(false);
-  const containerRef = useRef(null);
+  const containerRef:any = useRef(null);
   const { userGoal, possibleDiseases } = useSetupContext();
 
   
@@ -108,8 +108,8 @@ export function ChatBotContextProvider({ children }: { children: React.ReactNode
     }
   };
   useEffect(() => {
-    const handleClick = () => {
-      sendMessage();
+    const handleClick = (e:any) => {
+      sendMessage(e);
     };
   
     if (userMessage) {

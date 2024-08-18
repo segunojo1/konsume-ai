@@ -46,7 +46,7 @@ const Signup = () => {
               <Image src="/personal.png" alt="personal account" width={460} height={48} />
               <div className='flex flex-col gap-5'>
                 {
-                  personalAccountFeatures.map(({ title, text }) => <ChooseAccount title={title} text={text} />)
+                  personalAccountFeatures.map(({ title, text }) => <ChooseAccount key={title} title={title} text={text} />)
                 }
               </div>
               <Link href='/auth/personal/signup' >
@@ -59,7 +59,7 @@ const Signup = () => {
               <Image src="/restaurant.png" alt="personal account" width={460} height={48} />
               <div className='flex flex-col gap-5'>
                 {
-                  restaurantAccountFeatures.map(({ title, text }) => <ChooseAccount title={title} text={text} />)
+                  restaurantAccountFeatures.map(({ title, text }) => <ChooseAccount key={title} title={title} text={text} />)
                 }
               </div>
               <Button
