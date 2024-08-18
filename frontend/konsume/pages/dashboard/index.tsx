@@ -23,7 +23,7 @@ const Dashboard = () => {
   useEffect(() => {
     const getUserDetails = async () => {
       try {
-        const { data } = await axiosKonsumeInstance.get(`/api/profile/${sessionStorage.getItem('userid')}`, {
+        const { data } = await axiosKonsumeInstance.get(`/api/profile/${Cookies.get('userid')}`, {
           headers: {
             Authorization: `Bearer ${Cookies.get('ktn')}`,
           },
@@ -46,9 +46,9 @@ const Dashboard = () => {
   }, [setPossibleDiseases, setUserGoal, setWeight, setDiet, setAge, router]);
   return (
     <div>
-      <MainLayout>
+      <MainLayout fixedTopbar={true}>
 
-      <div className={`${toggled ? '' : 'md:ml-[100px]'} gap-5 flex flex-col px-7`}>
+      <div className={`${toggled ? '' : 'md:ml-[100px]'} gap-5 flex flex-col px-7 mt-14`}>
         {/* <DashboardNav toggled={toggled} setToggled={setToggled} /> */}
         <DashboardHead />
         <ChatWithFoodie />

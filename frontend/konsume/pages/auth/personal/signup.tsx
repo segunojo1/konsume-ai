@@ -53,6 +53,7 @@ const signup = () => {
 
       toast.success(data.message);
       sessionStorage.setItem('userid', data.value.id);
+      sessionStorage.setItem("konsumeUsername", values.FirstName)
       setUserID(data.value.id);
       setShowOtp((prev) => !prev)
     } catch (error: any) {

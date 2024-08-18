@@ -56,7 +56,7 @@ const DashboardHead = () => {
       <div className="flex justify-between">
         <div className="flex flex-col gap-5 max-w-[450px]">
           <h1 className=" text-[#D6FBC4] leading-[57px] text-[42px] font-bold">
-            Hello {isClient ? Cookies.get("konsumeUsername") : "..."}
+            Hello {isClient ? sessionStorage.getItem("konsumeUsername") : "..."}
           </h1>
           <p className=" text-sm font-light text-[white]">
             Hello, {isClient ? textForUserGoal : "..."}

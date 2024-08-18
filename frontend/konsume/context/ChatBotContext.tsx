@@ -1,7 +1,8 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useRef, useState } from 'react';
 import { MainLayoutContextProps } from '../@types';
 import { toast } from 'react-toastify';
 import gemini from '@/http/gemini';
+import { useSetupContext } from './SetupContext';
 
 const ChatBotContext = createContext({} as any);
 export default ChatBotContext;
@@ -10,7 +11,42 @@ export function ChatBotContextProvider({ children }: { children: React.ReactNode
   const [userMessage, setUserMessage] =useState('');
   const [chatLog, setChatLog]: any = useState([]);
   const [isContentReplaced, setIsContentReplaced] = useState(false);
- 
+  const [loading, setIsLoading] = useState(false);
+  const containerRef = useRef(null);
+  const { userGoal, possibleDiseases } = useSetupContext();
+
+  
+  /*
+ * Install the Generative AI SDK
+ *
+ * $ npm install @google/generative-ai
+ */
+
+// const {
+//   GoogleGenerativeAI,
+//   HarmCategory,
+//   HarmBlockThreshold,
+// } = require("@google/generative-ai");
+
+// const apiKey = process.env.NEXT_PUBLIC_GEMINI_KEY;
+// const genAI = new GoogleGenerativeAI(apiKey);
+
+// const model = genAI.getGenerativeModel({
+//   model: "tunedModels/foodieai2-8unujji78ikd",
+// });
+
+// const generationConfig = {
+//   temperature: 0,
+//   topP: 0.95,
+//   topK: 64,
+//   maxOutputTokens: 8192,
+//   responseMimeType: "text/plain",
+// };
+
+// async function run() {
+  
+// }
+
   const sendMessage = async (e: any) => {
       console.log(userMessage);
     if (chatLog.length < 1) {
@@ -26,20 +62,32 @@ export function ChatBotContextProvider({ children }: { children: React.ReactNode
     console.log(userMessage);
     setUserMessage('')
     try {
+      setIsLoading(prev => !prev);
       const { data } = await gemini.post("/gemini-pro:generateContent", {
         contents: [
           {
             parts: [
               {
-                text: `${userMessage} `,
+                text: `${userMessage}, i wan to ${userGoal} and i suffer from ${possibleDiseases}`,
               },
             ],
           },
         ],
       });
+    //   const chatSession = model.startChat({
+    //     generationConfig,
+    //  // safetySettings: Adjust safety settings
+    //  // See https://ai.google.dev/gemini-api/docs/safety-settings
+    //     history: [
+    //     ],
+    //   });
+    
+    //   const result = await chatSession.sendMessage(`${userMessage}, i wan to ${userGoal} and i suffer from ${possibleDiseases}`);
+    //   console.log(result.response.text());
 
 
       const response = data.candidates[0].content.parts[0].text;
+      // const response = result.response.text()
       setChatLog((prevChatLog: any) => [
         ...prevChatLog,
         {
@@ -47,13 +95,17 @@ export function ChatBotContextProvider({ children }: { children: React.ReactNode
           message: `${response} `,
         },
       ]);
+      setIsLoading(false)
       
-      console.log(data.candidates[0]);
+      // console.log(data.candidates[0]);
       console.log(userMessage);
     } catch (error: any) {
       toast.error(error);
     }
     console.log(chatLog);
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
   };
   useEffect(() => {
     const handleClick = () => {
@@ -84,7 +136,10 @@ export function ChatBotContextProvider({ children }: { children: React.ReactNode
     setUserMessage,
     isContentReplaced, 
     setIsContentReplaced,
-    sendMessage
+    sendMessage,
+    loading,
+    setIsLoading,
+    containerRef
   };
 
   return <ChatBotContext.Provider value={contextValue}>{children}</ChatBotContext.Provider>;

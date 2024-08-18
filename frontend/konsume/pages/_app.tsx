@@ -17,13 +17,13 @@ export default function App({ Component, pageProps }: AppProps) {
   const AnyComponent = Component as any;
   return (
     <>
+    <SetupProvider>
     <ChatBotContextProvider>
     <MainLayoutContextProvider>
-    <SetupProvider>
       <AnyComponent {...pageProps} />
-    </SetupProvider>
     </MainLayoutContextProvider>
     </ChatBotContextProvider>
+    </SetupProvider>
     <ToastContainer />
     </>
   ) 

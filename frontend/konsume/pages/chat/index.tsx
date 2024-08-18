@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Sidebar from "@/modules/dashboard/Sidebar";
 import ScannerHead from "@/modules/scanner/ScannerHead";
 import DashboardNav from "@/modules/dashboard/DashboardNav";
@@ -18,8 +18,9 @@ import ChatBotContext from "@/context/ChatBotContext";
 
 const Chat = () => {
   const { toggled, setToggled } = useContext(MainLayoutContext);
-  const {userMessage, setUserMessage, chatLog, setChatLog, isContentReplaced, setIsContentReplaced, sendMessage} = useContext(ChatBotContext);
-  const { userGoal, possibleDiseases } = useSetupContext();
+  const {userMessage, setUserMessage, chatLog, setChatLog, isContentReplaced, setIsContentReplaced, sendMessage, loading, setIsLoading, containerRef} = useContext(ChatBotContext);
+  
+  
  
   
 
@@ -47,6 +48,9 @@ const Chat = () => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       sendMessage(event);
+      if (containerRef.current) {
+        containerRef.current.scrollTop = containerRef.current.scrollHeight;
+      }
     }
   };
 
@@ -76,7 +80,7 @@ const Chat = () => {
       <MainLayout activePage="chat" className="overflow-y-hidden">
         {/* <DashboardNav toggled={toggled} setToggled={setToggled} /> */}
         <div
-          className={`${toggled ? "" : "md:ml-[100px]"}  gap-5 flex flex-col font-satoshi h-full mr-7`}
+          className={`${toggled ? "" : "md:ml-[100px]"}  gap-5 flex flex-col font-satoshi h-full mr-7 mt-10`}
         >
           <Image src="/ellipsebg.svg" height={700} width={1274.12} alt="background" className=" max-h-fit absolute top-10 bottom-0 left-0 right-0 w-full h-full opacity-50 -z-[60]" />
           {/* <ScannerHead /> */}
@@ -90,7 +94,7 @@ const Chat = () => {
 
                     <div className="relative w-fit">
                       <Image src='/multipleline.svg' alt='multi line' height={141} width={153} className='  absolute bottom-0 top-0 my-auto right-0 -z-50' />
-                      <h1 className="md:text-desktop-heading1 text-[28px]/[40px] font-bold z-50">Hello, Segun </h1>
+                      <h1 className="md:text-desktop-heading1 text-[28px]/[40px] font-bold z-50">Hello, {sessionStorage.getItem('konsumeUsername')} </h1>
                     </div>
                     <p className=" text-desktop-highlight italic max-w-[450px]">Chat with our AI bot for personalized nutrition tips, recipes, and meal plans. Get instant, tailored advice to reach your health goals!</p>
                   </div>
@@ -132,7 +136,7 @@ const Chat = () => {
                 <div className="right-0 -top-5 absolute">
                   <Image src='/tryscanner.svg' alt='multi line' height={141} width={153} className=' ' />
                 </div>
-                <div className="text-white p-5 flex flex-col gap-2 overflow-y-scroll  h-[60vh] ">
+                <div className="text-white p-5 flex flex-col gap-2 overflow-y-auto  h-[60vh] pb-32 scroll-smooth " ref={containerRef}>
                   {chatLog.map((chat: any) => {
                     if (chat.user == "me") {
                       return (
@@ -156,6 +160,9 @@ const Chat = () => {
                       );
                     }
                   })}
+                  <div className={ `${loading ? "block " : "hidden"} loader2` }>
+                    <p> .</p>
+                  </div>
                 </div>
                 <form>
                   <div className="relative  w-full">

@@ -14,6 +14,7 @@ export interface MainLayoutProps {
   className?: React.ComponentProps<'div'>['className'];
   showDashboardSidebar?: boolean;
   showTopbar?: boolean;
+  fixedTopbar?: boolean;
   showFooter?: boolean;
   includeMarginTop?: boolean;
   activePage?: string;
@@ -380,6 +381,7 @@ export interface MainLayoutProps {
   showTopbar?: boolean;
   showFooter?: boolean;
   activePage?: string;
+  fixedTopbar?: boolean;
 }
 
 export interface MainLayoutContextProps {

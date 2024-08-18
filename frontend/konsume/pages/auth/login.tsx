@@ -67,9 +67,9 @@ const Login = () => {
         },
       });
       Cookies.set('ktn', data.token);
-      Cookies.set('konsumeUsername', data.value.fullName);
-      sessionStorage.setItem('userid', data.value.id);
-
+      // Cookies.set('konsumeUsername', data.value.fullName);
+      Cookies.set('userid', data.value.id);
+      sessionStorage.setItem('konsumeUsername', data.value.fullName)
       toast.success(data.message);
       checkUser();
 
@@ -86,7 +86,7 @@ const Login = () => {
           Authorization: `Bearer ${Cookies.get('ktn')}`,
         },
         params: {
-          id: sessionStorage.getItem('userid'),
+          id: Cookies.get('userid'),
         },
       });
       console.log(resp);
@@ -102,11 +102,13 @@ const Login = () => {
         // setWeight(data?.value?.weight);
         // setDiet(data?.value?.dietType);
         // setAge(data?.value?.age);
-        const { data } = await axiosKonsumeInstance.get(`/api/profile/${sessionStorage.getItem('userid')}`, {
+        const { data } = await axiosKonsumeInstance.get(`/api/profile/${Cookies.get('userid')}`, {
           headers: {
             Authorization: `Bearer ${Cookies.get('ktn')}`,
           },
         });
+        console.log(data);
+        
         Cookies.set('age', data?.value?.age);
         Cookies.set('gender', data?.value?.gender);
         Cookies.set('height', data?.value?.weight);

@@ -12,6 +12,7 @@ function MainLayout({
   className,
   showDashboardSidebar = true,
   activePage,
+  fixedTopbar = false,
   includeMarginTop = true,
 }: MainLayoutProps) {
   const {setActivePage, toggled, setToggled } = useContext(MainLayoutContext);
@@ -23,7 +24,7 @@ function MainLayout({
 
   return (
     <div className={twMerge('w-full relative h-screen overflow-x-hidden', className)}>
-      <TopBar setToggled={setToggled}/>
+      <TopBar setToggled={setToggled} className={fixedTopbar ? 'fixed' : ''}/>
 
       {showDashboardSidebar && <Sidebar toggled={toggled} setToggled={setToggled}/>}
       <div className={`w-full ${includeMarginTop ? 'mt-5' : ''}`}>{children}</div>
