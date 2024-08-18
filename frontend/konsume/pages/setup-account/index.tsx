@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import MainLayoutContext from "@/context/LayoutContext";
 
 const SetupAccount = () => {
   const {
@@ -27,6 +28,7 @@ const SetupAccount = () => {
     userID,
   } = useSetupContext();
   const [test, setTest] = useState(false);
+  const {name}:any = useContext(MainLayoutContext)
 
   useEffect(() => {
     setPossibleDiseases([]);
@@ -65,7 +67,7 @@ const SetupAccount = () => {
             Authorization: `Bearer ${Cookies.get("ktn")}`,
           },
           params: {
-            userId: sessionStorage.getItem("userid"),
+            userId: name,
           },
         }
       );
@@ -95,7 +97,7 @@ const SetupAccount = () => {
           <div>
             <div className="relative w-fit mx-auto">
               <Image src='/curved_line.svg' alt='curved line' height={500} width={282} className='2xl:w-[282px] lg:w-[250px] w-[123.16px] lg:h-auto h-[22px] absolute 2xl:top-5 bottom-0 md:top-auto top-0 my-auto 2xl:-right-[14px] right-0 -z-10' />
-              <h1 className="lg:text-[48.9px]/[79.5px] text-[28px]/[40px] font-bold from-[#000000] from-0% to-100% to-[#EEECEC] bg-gradient-to-b bg-clip-text text-[transparent] z-50">Welcome onboard {sessionStorage.getItem("konsumeUsername")}! </h1>
+              <h1 className="lg:text-[48.9px]/[79.5px] text-[28px]/[40px] font-bold from-[#000000] from-0% to-100% to-[#EEECEC] bg-gradient-to-b bg-clip-text text-[transparent] z-50">Welcome onboard {name ? name : "..."} ! </h1>
             </div>
           </div>
           <p className=" md:text-[17.7px] text-[16px] text-center mt-1">Let’s begin your personalised wellness Journey! To get started, please tell us a bit about yourself. Sign up for yourself
