@@ -24,9 +24,9 @@ const formSchema = z
     path: ['confirmPassword'],
     message: 'Passwords does not match',
   });
-const signup = () => {
+const Signup = () => {
 
-  const { userID, setUserID } = useSetupContext();
+  // const { userID, setUserID } = useSetupContext();
   const [showOtp, setShowOtp] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -54,7 +54,7 @@ const signup = () => {
       toast.success(data.message);
       sessionStorage.setItem('userid', data.value.id);
       sessionStorage.setItem("konsumeUsername", values.FirstName)
-      setUserID(data.value.id);
+      // setUserID(data.value.id);
       setShowOtp((prev) => !prev)
     } catch (error: any) {
       handleError(error);
@@ -193,4 +193,4 @@ const signup = () => {
   )
 }
 
-export default signup
+export default Signup
