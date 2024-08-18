@@ -12,7 +12,6 @@ import { Input } from "@/components/ui/input";
 import { useSetupContext } from "../../context/SetupContext";
 import MainLayout from "@/components/Layout/MainLayout";
 import ChatQuestion from "@/modules/chat/ChatQuestion";
-import { gsap } from "gsap"
 import MainLayoutContext from "@/context/LayoutContext";
 import ChatBotContext from "@/context/ChatBotContext";
 
