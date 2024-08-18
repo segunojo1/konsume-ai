@@ -1,3 +1,4 @@
+"use client"
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Sidebar from "@/modules/dashboard/Sidebar";
 import ScannerHead from "@/modules/scanner/ScannerHead";
