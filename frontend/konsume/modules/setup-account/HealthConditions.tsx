@@ -16,10 +16,10 @@ const HealthConditions = () => {
     }
   };
   return (
-    <div className="md:p-12 p-3 mt-6 md:flex-row flex-col goals  bg-[#BEFFA7] mx-auto">
+    <div className="font-jakarta md:py-14 md:px-10 py-9 px-3 md:mt-16 mt-10 rounded-[20px] mx-auto bg-primary-bg transition-opacity">
       <div>
         <div className="font-jakarta">
-          <h1 className="md:text-xl text-lg font-bold mt-4 mb-4 ">
+          <h1 className="md:text-[22px] text-[16px] font-bold mb-6">
             Do you have any of these health conditions - Select all that applies.
           </h1>
         </div>
@@ -35,12 +35,12 @@ const HealthConditions = () => {
           <HealthCheckboxes label="Nut allergies" specify="false" />
           <HealthCheckboxes label="Fish and Shellfish allergies (Shrimps, Tuna, Salmon, Crab, e.t.c)" specify="false" />
           <HealthCheckboxes label="Grain and Legume-Based Allergies (Wheat, Soy,  e.t.c)" specify="false" />
-          <HealthCheckboxes label="Other" specify="false" />
+          <HealthCheckboxes label="Other" specify="true" />
           <HealthCheckboxes label="None" specify="false" />
         </div>
       </div>
-      <p className=" font-medium text-xl md:text-4xl text-center mt-4 text-[#0C2503]">Keep going!</p>
-      <div className="flex gap-5 mx-auto w-fit mt-7">
+      <p className=" font-satoshi  text-xl md:text-[28px] font-bold text-center mt-20 text-[#0C2503]">Keep going!</p>
+      <div className="flex gap-5 mx-auto w-fit mt-3">
         <div
           className="w-[50px] h-[50px] border-[2.5px] border-[#FFC501] rounded-[40px] flex items-center justify-center"
           onClick={previousPage}

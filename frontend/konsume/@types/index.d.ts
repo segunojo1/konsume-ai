@@ -12,11 +12,12 @@ declare module 'nprogress';
 export interface MainLayoutProps {
   children?: React.ReactNode;
   className?: React.ComponentProps<'div'>['className'];
-  activePage: string;
   showDashboardSidebar?: boolean;
   showTopbar?: boolean;
+  fixedTopbar?: boolean;
   showFooter?: boolean;
   includeMarginTop?: boolean;
+  activePage?: string;
 }
 
 export interface ProductData {
@@ -376,15 +377,20 @@ declare module 'nprogress';
 export interface MainLayoutProps {
   children?: React.ReactNode;
   className?: React.ComponentProps<'div'>['className'];
-  activePage: string;
   showDashboardSidebar?: boolean;
   showTopbar?: boolean;
   showFooter?: boolean;
+  activePage?: string;
+  fixedTopbar?: boolean;
 }
 
 export interface MainLayoutContextProps {
+  toggled: boolean;
+  setToggled: React.Dispatch<React.SetStateAction<boolean>>;
   activePage?: string;
   setActivePage: (page: string) => void;
+  userMessage: string;
+  setUserMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export type ProductCardProps = {

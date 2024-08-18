@@ -59,8 +59,13 @@ const BioData = () => {
     setWeight(values.weight);
     setNationality(values.nationality);
     setGender(values.gender);
-    localStorage.setItem("biodata", JSON.stringify(values));
+    sessionStorage.setItem("age", values.age);
+    sessionStorage.setItem("weight", values.weight);
+    sessionStorage.setItem("nationality", values.nationality);
+    sessionStorage.setItem("gender", values.gender);
+    
     nextPage();
+    console.log(age);
   }
   return (
     <div className="mt-16 bg-[transparent] z-60 relative mx-auto max-w-[391px]">
@@ -78,12 +83,12 @@ const BioData = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-[18px]/[120%] md:text-desktop-content">
-                      Age
+                      Date Of Birth
                     </FormLabel>
                     <FormControl>
                       <Input
-                        type="number"
-                        placeholder="Input your age"
+                        type="date"
+                        placeholder="Input your dob"
                         {...field}
                         className="h-[48px] pt-[11px] pb-[14px] px-[14px] md:p-6 "
                       />

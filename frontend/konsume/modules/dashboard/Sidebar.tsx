@@ -1,10 +1,13 @@
 import React from "react";
 import SidebarItem from "./SidebarItem";
-import dashboard from "../../public/assets/dashboard.svg";
-import profile from "../../public/assets/profile.svg";
+import home from "../../public/home.svg";
+import logo from "../../public/logo.svg";
 import progress from "../../public/assets/progress.svg";
 import scanner from "../../public/assets/scanner.svg";
-import chat from "../../public/assets/chat.svg";
+import chat from "../../public/chat.svg";
+import profile from "../../public/profile.svg"
+import settings from "../../public/settings.svg"
+import logout from "../../public/logout.svg"
 import pill from "../../public/assets/pills-bottle.png";
 import konsum from "../../public/assets/konsume.png";
 import Image from "next/image";
@@ -14,13 +17,14 @@ import { PillBottle } from "lucide-react";
 const Sidebar: React.FC<DashboardNavProps> = ({ toggled }) => {
   return (
     <div
-      className={`h-full p-8 bg-[#DAFDC9] md:fixed left-0 min-w-[250px] top-0  ${
+      className={`h-full p-4 bg-[#DAFDC9] md:fixed left-0 min-w-[82px] top-0  ${
         toggled ? "left-0" : "md:left-0 left-[-300px]"
       } absolute z-50 transition-all`}
     >
-      <div className="h-full flex flex-col gap-4 items-start">
-        <h1 className=" font-bold text-3xl mb-4">Konsume</h1>
-        <SidebarItem href="dashboard" text="Dashboard" icon={dashboard} />
+      <div className="h-full relative mx-auto w-fit flex flex-col gap-1 items-start">
+        <Image src={logo} alt="logo" width={42} height={52} className="mx-auto"/>
+        <SidebarItem href="dashboard" text="Dashboard" icon={home} />
+        <SidebarItem href="profile" text="Dashboard" icon={profile} />
         <SidebarItem href="scanner" text="Scanner" icon={scanner} />
         <SidebarItem href="chat" text="Chat with Foodie AI" icon={chat} />
         <SidebarItem
@@ -28,7 +32,11 @@ const Sidebar: React.FC<DashboardNavProps> = ({ toggled }) => {
           text="Coming Features"
           icon={progress}
         />
-        <SidebarItem href="auth/login" text="Logout" icon={profile} />
+         <SidebarItem href="settings" text="Settings" icon={settings} />
+         <div className="absolute bottom-0">
+
+        <SidebarItem href="auth/login" text="Logout" icon={logout} />
+         </div>
       </div>
     </div>
   );
