@@ -49,7 +49,7 @@ const Signup = () => {
                   personalAccountFeatures.map(({ title, text }) => <ChooseAccount key={title} title={title} text={text} />)
                 }
               </div>
-              <Link href='/auth/personal/signup' >
+              <Link href='/auth/personal' >
                 <Button className='scroll-button overflow-hidden flex justify-end py-4 w-full rounded-[8px] border-2 border-primarygtext text-[#032902] text-desktop-highlight font-bold'>
                   <span className='first-text'> Start Your Personalized Journey!</span> <span className='second-text'>Get Started</span>
                 </Button>
