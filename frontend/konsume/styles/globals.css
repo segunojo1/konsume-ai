@@ -256,6 +256,58 @@ input[type="checkbox"]:checked::before {
   accent-color: green;
 }
 
+/* ProgressBar.css */
+/* ProgressLines.css */
+.progress-lines-container2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 55px;
+ 
+}
+
+.progress-line2 {
+  margin: 0 3px; /* Gap between the lines */
+  transition: flex 0.4s ease; /* Smooth transition */
+  
+}
+
+.progress-line2:first-child {
+  margin-left: 0; /* No left margin for the first line */
+}
+
+.progress-line2:last-child {
+  margin-right: 0; /* No right margin for the last line */
+}
+
+
+/* ProgressLines.css */
+.progress-lines-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  height: 300px; /* Adjust this height as needed */
+  /* margin: 20px 0; */
+}
+
+.progress-line {
+  width: 8px; /* Width of each line */ /* Default height of each line */
+  margin: 5px 0; /* Gap between the lines */
+  transition: height 0.4s ease; /* Smooth transition */
+  border-radius: 10px;
+}
+
+.progress-line:first-child {
+  margin-top: 0; /* No top margin for the first line */
+}
+
+.progress-line:last-child {
+  margin-bottom: 0; /* No bottom margin for the last line */
+}
+
+
+
 /* .goals {
   border-radius: 20px;
   padding: 3rem;

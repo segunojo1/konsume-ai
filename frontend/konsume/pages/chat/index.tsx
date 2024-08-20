@@ -102,7 +102,7 @@ const Chat = () => {
                     <Image src='/tryscanner.svg' alt='multi line' height={141} width={153} className='backdrop-blur-sm bg-white md:block hidden' />
                   </div>
                 </div>
-                <div className="flex  gap-4 max-w-[1000px] flex-wrap items-center justify-center">
+                <div className="flex  gap-4 max-w-[1000px] flex-wrap items-center mx-auto justify-center">
                   <ChatQuestion isContentReplaced={isContentReplaced} setIsContentReplaced={setIsContentReplaced} sendMessage={sendMessage} img="/chatlogo.svg" text="Generate the recipe for the perfect Jollof Rice." />
                   <ChatQuestion isContentReplaced={isContentReplaced} setIsContentReplaced={setIsContentReplaced} sendMessage={sendMessage} img="/chatlogo.svg" text="Provide The nutrition Info for Egusi Soup." />
                   <ChatQuestion isContentReplaced={isContentReplaced} setIsContentReplaced={setIsContentReplaced} sendMessage={sendMessage} img="/chatlogo.svg" text="Show me workout plans for weight loss." />

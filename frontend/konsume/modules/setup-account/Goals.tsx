@@ -5,9 +5,10 @@ import Image from 'next/image';
 import { useSetupContext } from '../../context/SetupContext';
 import { toast } from 'react-toastify';
 import { dashboardhero } from '../dashboard/dashboardhero';
+import MultiStepProgressBar from '../MultiStepProgressBar';
 
 const Goals = () => {
-  const { nextPage, previousPage, userGoal } = useSetupContext();
+  const { nextPage, previousPage, userGoal, currentPage } = useSetupContext();
   const [test, setTest] = useState(false);
   const checkForm = () => {
     if (userGoal) {
@@ -18,7 +19,7 @@ const Goals = () => {
   };
 
   return (
-    <div className="font-jakarta md:py-14 md:px-10 py-9 px-3 md:mt-16 mt-10 rounded-[20px] mx-auto bg-primary-bg transition-opacity">
+    <div className="font-jakarta md:py-14 md:px-10 py-9 px-3 md:mt-16 mt-10 rounded-[20px] mx-auto bg-primary-bg relative transition-opacity">
       <div>
         <div className="">
           <h1 className="md:text-[22px] text-[16px] font-bold mb-6">

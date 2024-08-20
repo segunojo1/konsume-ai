@@ -4,11 +4,12 @@ import line from '../../public/assets/line.png';
 import { useSetupContext } from '../../context/SetupContext';
 import { diettype } from '../dashboard/diettype';
 import DietCheckbox from './DietCheckbox';
+import MultiStepProgressBar from '../MultiStepProgressBar';
 
 const DietType = () => {
-  const { previousPage } = useSetupContext();
+  const { previousPage, currentPage } = useSetupContext();
   return (
-    <div className="font-jakarta md:py-14 md:px-10 py-9 px-3 md:mt-16 mt-10 rounded-[20px] mx-auto bg-primary-bg transition-opacity">
+    <div className="font-jakarta md:py-14 md:px-10 py-9 px-3 md:mt-16 mt-10 rounded-[20px] mx-auto bg-primary-bg relative transition-opacity">
 <div>
   <div className="">
     <h1 className="md:text-[22px] text-[16px] font-bold mb-6">
@@ -20,6 +21,8 @@ const DietType = () => {
             <DietCheckbox key={title} label={title} data={title} />
           ))}
   </div>
+  {/* <MultiStepProgressBar currentStep={currentPage}/> */}
+
 </div>
 <p className=" font-satoshi  text-xl md:text-[28px] font-bold text-center mt-20 text-[#0C2503]">Last lap!</p>
 <div className="flex gap-5 mx-auto w-fit mt-3">

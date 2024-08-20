@@ -11,6 +11,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import MainLayoutContext from "@/context/LayoutContext";
+import ProgressBar from "@/modules/ProgressBar";
+import MultiStepProgressBar from "@/modules/MultiStepProgressBar";
+import withHigherAuth from "@/helpers/withHigherAuth";
 
 const SetupAccount = () => {
   const {
@@ -83,6 +86,7 @@ const SetupAccount = () => {
       toast.error(error?.response?.data?.error);
     }
   };
+  const totalSteps = 5
   return (
     <div className=" m-auto 2xl:p-32 md:py-20  md:px-32 py-20 px-4 md:bg-base-white bg-[white] relative ">
       <Image src="/bg.png" alt="bg" width={1407} height={377} className=" top-0 absolute   w-full left-0 md:block hidden" />
@@ -93,12 +97,13 @@ const SetupAccount = () => {
           <Image src="/backbtn.png" alt="back" width={48.3} height={100} className="m-[3px] mb-4" />
         </Link>
         {/* <Steps /> */}
-        <div >
-          <div>
+        <div className="relative">
+          <div className="flex items-center">
             <div className="relative w-fit mx-auto">
               <Image src='/curved_line.svg' alt='curved line' height={500} width={282} className='2xl:w-[282px] lg:w-[250px] w-[123.16px] lg:h-auto h-[22px] absolute 2xl:top-5 bottom-0 md:top-auto top-0 my-auto 2xl:-right-[14px] right-0 -z-10' />
               <h1 className="lg:text-[48.9px]/[79.5px] text-[28px]/[40px] font-bold from-[#000000] from-0% to-100% to-[#EEECEC] bg-gradient-to-b bg-clip-text text-[transparent] z-50">Welcome onboard {name ? name : "..."} ! </h1>
             </div>
+            <ProgressBar currentStep={currentPage} totalSteps={totalSteps} />
           </div>
           <p className=" md:text-[17.7px] text-[16px] text-center mt-1">Let’s begin your personalised wellness Journey! To get started, please tell us a bit about yourself. Sign up for yourself
             <span className="hidden md:inline">
@@ -108,6 +113,8 @@ const SetupAccount = () => {
           </p>
         </div>
         <div className='2xl:w-[413.93px] w-[271px] 2xl:h-[201.42px] h-[160px] rounded-[61469.42px] mx-auto bg-neutrals-100/70 fixed top-[180px] left-0 right-0 -z-10 blur-[170.6px]'></div>
+        <MultiStepProgressBar currentStep={currentPage}/>
+
         <Form />
         {currentPage == 4 && (
           <Button
@@ -123,4 +130,4 @@ const SetupAccount = () => {
   );
 };
 
-export default SetupAccount;
+export default withHigherAuth(SetupAccount);

@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import MultiStepProgressBar from "../MultiStepProgressBar";
 
 const formSchema = z.object({
   age: z.string().min(1, { message: "Dob is required" }),
@@ -39,6 +40,7 @@ const BioData = () => {
     weight,
     setWeight,
     gender,
+    currentPage,
     setGender,
   } = useSetupContext();
   const checkForm = () => {};
@@ -68,10 +70,9 @@ const BioData = () => {
     console.log(age);
   }
   return (
-    <div className="mt-16 bg-[transparent] z-60 relative mx-auto max-w-[391px]">
-      <div className="relative ">
-        <div className="">
-          
+    <div className="mt-16 bg-[transparent] z-60 mx-auto max-w-[391px]">
+      <div className=" ">
+        <div className="flex justify-between">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
