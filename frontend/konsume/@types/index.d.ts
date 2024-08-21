@@ -18,6 +18,8 @@ export interface MainLayoutProps {
   showFooter?: boolean;
   includeMarginTop?: boolean;
   activePage?: string;
+  topBarText?: string;
+  topBarIcon?: string;
 }
 
 export interface ProductData {
@@ -382,6 +384,8 @@ export interface MainLayoutProps {
   showFooter?: boolean;
   activePage?: string;
   fixedTopbar?: boolean;
+  topBarText?: string;
+  topBarIcon?: string;
 }
 
 export interface MainLayoutContextProps {

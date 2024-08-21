@@ -280,7 +280,69 @@ input[type="checkbox"]:checked::before {
   margin-right: 0; /* No right margin for the last line */
 }
 
+.googleTranslateWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+#google_translate_element {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  height: 40px;
+  max-width: fit-content !important;
+}
+
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+.goog-te-gadget {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: 14px !important;
+  color: #333 !important;
+  width: fit-content !important;
+}
+
+.goog-te-gadget .goog-te-combo option {
+  cursor: pointer !important;
+  padding: 2rem !important;
+  font-size: 20px !important;
+  color: #333 !important;
+}
+
+.goog-te-gadget-icon {
+  display: none !important;
+}
+#google_translate_element{
+  padding: 0 !important;
+  max-height: 45px;
+  overflow: hidden;
+}
+.goog-te-combo {
+  color: #333 !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  padding: .5rem !important;
+}
+
+.VIpgJd-ZVi9od-l4eHX-hSRGPd, .VIpgJd-ZVi9od-ORHb-OEVmcd {
+  display: none;
+}
+/* .goog-te-gadget:nth-child(2) {
+  display: none;
+  font-size: 122px;
+} */
 /* ProgressLines.css */
 .progress-lines-container {
   display: flex;

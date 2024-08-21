@@ -77,10 +77,10 @@ const Chat = () => {
 
   return (
     <div className="">
-      <MainLayout activePage="chat" className="overflow-y-hidden">
+      <MainLayout activePage="chat" className="overflow-y-hidden" includeMarginTop={false}>
         {/* <DashboardNav toggled={toggled} setToggled={setToggled} /> */}
         <div
-          className={`${toggled ? "" : "md:ml-[100px]"}  gap-5 flex flex-col font-satoshi h-full mr-7 mt-10`}
+          className="mt-5"
         >
           <Image src="/ellipsebg.svg" height={700} width={1274.12} alt="background" className=" max-h-fit absolute top-10 bottom-0 left-0 right-0 w-full h-full opacity-50 -z-[60]" />
           {/* <ScannerHead /> */}

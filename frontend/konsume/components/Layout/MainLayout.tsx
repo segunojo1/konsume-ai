@@ -14,6 +14,8 @@ function MainLayout({
   activePage,
   fixedTopbar = false,
   includeMarginTop = true,
+  topBarText = 'Chat with AI',
+  topBarIcon = 'chatlogo'
 }: MainLayoutProps) {
   const {setActivePage, toggled, setToggled } = useContext(MainLayoutContext);
 
@@ -24,10 +26,12 @@ function MainLayout({
 
   return (
     <div className={twMerge('w-full relative h-screen overflow-x-hidden', className)}>
-      <TopBar setToggled={setToggled} className={fixedTopbar ? 'fixed' : ''}/>
+      <TopBar setToggled={setToggled} className={fixedTopbar ? 'fixed' : ''} topBarText={topBarText} topBarIcon={topBarIcon}/>
 
       {showDashboardSidebar && <Sidebar toggled={toggled} setToggled={setToggled}/>}
-      <div className={`w-full ${includeMarginTop ? 'mt-5' : ''}`}>{children}</div>
+      <div className={`${toggled ? "" : "md:ml-[100px]"} gap-5 flex flex-col px-5 `}>
+      <div className={`w-full ${includeMarginTop ? 'mt-24 ' : ''}`}>{children}</div>
+      </div>
     </div>
   );
 }

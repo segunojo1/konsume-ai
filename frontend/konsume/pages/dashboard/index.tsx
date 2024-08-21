@@ -48,7 +48,7 @@ const Dashboard = () => {
     <div>
       <MainLayout fixedTopbar={true}>
 
-      <div className={`${toggled ? '' : 'md:ml-[100px]'} gap-5 flex flex-col px-7 mt-14`}>
+      <div className="">
         {/* <DashboardNav toggled={toggled} setToggled={setToggled} /> */}
         <DashboardHead />
         <ChatWithFoodie />

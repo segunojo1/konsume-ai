@@ -14,9 +14,9 @@ const Scanner = () => {
   const {name}:any = useContext(MainLayoutContext);
   return (
     <div className="font-satoshi">
-      <MainLayout fixedTopbar={true}>
+      <MainLayout fixedTopbar={true} includeMarginTop={true}>
       <div
-        className={`${toggled ? "" : "md:ml-[100px]"} gap-5 flex flex-col px-5 mt-24`}
+        className=""
       >
         <DashboardNav toggled={toggled} setToggled={setToggled} />
         {/* <DashboardBody /> */}
