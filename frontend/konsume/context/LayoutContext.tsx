@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { MainLayoutContextProps } from '../@types';
+import Cookies from 'js-cookie';
 
 const MainLayoutContext = createContext<MainLayoutContextProps>({} as any);
 export default MainLayoutContext;
@@ -8,11 +9,11 @@ export function MainLayoutContextProvider({ children }: { children: React.ReactN
   const [activePage, setActivePage] = useState('home');
   const [toggled, setToggled] = useState<boolean>(false);
   const [userMessage, setUserMessage] =useState('');
-  const [name, setName] = useState<string | null>(null);
+  const [name, setName] = useState<string | undefined>(undefined);
 
   useEffect(() => {
 
-    const username = sessionStorage.getItem('konsumeUsername')
+    const username = Cookies.get('konsumeUsername')
     setName(username)
     }, [])
 

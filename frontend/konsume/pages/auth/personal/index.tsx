@@ -11,6 +11,8 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { z } from 'zod';
+import Cookies from 'js-cookie';
+
 
 const formSchema = z
   .object({
@@ -52,8 +54,8 @@ const Signup = () => {
       });
 
       toast.success(data.message);
-      sessionStorage.setItem('userid', data.value.id);
-      sessionStorage.setItem("konsumeUsername", values.FirstName)
+      Cookies.set('userid', data.value.id);
+      Cookies.set("konsumeUsername", values.FirstName)
       // setUserID(data.value.id);
       setShowOtp((prev) => !prev)
     } catch (error: any) {

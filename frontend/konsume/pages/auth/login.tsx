@@ -69,7 +69,7 @@ const Login = () => {
       Cookies.set('ktn', data.token);
       // Cookies.set('konsumeUsername', data.value.fullName);
       Cookies.set('userid', data.value.id);
-      sessionStorage.setItem('konsumeUsername', data.value.fullName)
+      Cookies.set('konsumeUsername', data.value.fullName)
       toast.success(data.message);
       checkUser();
 

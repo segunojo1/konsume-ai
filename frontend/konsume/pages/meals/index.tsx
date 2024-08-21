@@ -1,6 +1,7 @@
 import MainLayout from '@/components/Layout/MainLayout'
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import SearchBar from '@/components/ui/SearchBar';
 import MainLayoutContext from '@/context/LayoutContext';
 import FilterMeal from '@/modules/meals/FilterMeal';
 import MealCard from '@/modules/meals/MealCard';
@@ -29,10 +30,7 @@ const Meals = () => {
             <p className=" text-desktop-content text-primarygtext italic max-w-[450px]">Here are your personalized meal recommendations, tailored just for you based on your health, dietary goals and preferences. <b>Bon Appétit!</b></p>
           </div>
 
-          <div className='relative h-fit w-fit  self-start justify-end'>
-            <Image src='/searchplaceholder.svg' alt='search' height={22} width={22} className='absolute bottom-0 top-0 left-5 my-auto' />
-            <Input className=' bg-base-white text-desktop-content border-[1.5px] rounded-[10px] border-[#030a0088] pl-16 pr-5 md:min-w-[419px] w-full ' placeholder='Search for Meals, Snacks and Drinks' />
-          </div>
+          <SearchBar />
         </div>
         <div className='flex justify-between mt-10'>
           <Button className='bg-primarygtext  flex px-3 py-2 gap-3  '>
@@ -48,7 +46,7 @@ const Meals = () => {
         onChangeMeal={handleMealChange}/>
             <FilterMeal text='Dinner' src='/dinner.svg' isActive={activeMeal === 'Dinner'}
         onChangeMeal={handleMealChange}/>
-        <FilterMeal text='Snack' src='/snack.svg' isActive={activeMeal === 'Dinner'}
+        <FilterMeal text='Snack' src='/snack.svg' isActive={activeMeal === 'Snack'}
         onChangeMeal={handleMealChange}/>
           </div>
           <Button className='border-2 border-[#0C2503] flex px-3 py-2 gap-3 rounded-lg  '>

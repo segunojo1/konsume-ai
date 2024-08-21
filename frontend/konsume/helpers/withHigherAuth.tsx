@@ -33,8 +33,9 @@ const withHigherAuth = <P extends {}>(
               id: Cookies.get('userid'),
             },
           });
-
-          if (response.status == 200) {
+          console.log(response);
+          
+          if (response.data?.value == true) {
             router.push('/dashboard');
           }
         } catch (error) {

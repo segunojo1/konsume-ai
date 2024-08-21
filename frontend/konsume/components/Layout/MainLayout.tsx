@@ -30,7 +30,7 @@ function MainLayout({
 
       {showDashboardSidebar && <Sidebar toggled={toggled} setToggled={setToggled}/>}
       <div className={`${toggled ? "" : "md:ml-[100px]"} gap-5 flex flex-col px-5 `}>
-      <div className={`w-full ${includeMarginTop ? 'mt-24 ' : ''}`}>{children}</div>
+      <div className={`w-full ${includeMarginTop ? 'mt-28 ' : ''}`}>{children}</div>
       </div>
     </div>
   );

@@ -70,7 +70,7 @@ const SetupAccount = () => {
             Authorization: `Bearer ${Cookies.get("ktn")}`,
           },
           params: {
-            userId: name,
+            userId: Cookies.get('userid'),
           },
         }
       );

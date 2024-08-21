@@ -3,6 +3,7 @@ import { MainLayoutContextProps } from '../@types';
 import { toast } from 'react-toastify';
 import gemini from '@/http/gemini';
 import { useSetupContext } from './SetupContext';
+import { axiosKonsumeInstance } from '@/http/konsume';
 
 const ChatBotContext = createContext({} as any);
 export default ChatBotContext;
@@ -63,17 +64,22 @@ export function ChatBotContextProvider({ children }: { children: React.ReactNode
     setUserMessage('')
     try {
       setIsLoading(prev => !prev);
-      const { data } = await gemini.post("/gemini-pro:generateContent", {
-        contents: [
-          {
-            parts: [
-              {
-                text: `${userMessage}, i wan to ${userGoal} and i suffer from ${possibleDiseases}`,
-              },
-            ],
-          },
-        ],
+      const { data } = await axiosKonsumeInstance.post("/api/ChatBot/ChatBot", {
+        // contents: [
+        //   {
+        //     parts: [
+        //       {
+        //         text: `${userMessage}, i wan to ${userGoal} and i suffer from ${possibleDiseases}`,
+        //       },
+        //     ],
+        //   },
+        // ],
+        params: {
+          request: userMessage
+        }
       });
+      console.log(data);
+      
     //   const chatSession = model.startChat({
     //     generationConfig,
     //  // safetySettings: Adjust safety settings
