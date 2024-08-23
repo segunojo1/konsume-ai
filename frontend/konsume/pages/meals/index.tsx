@@ -3,19 +3,23 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import SearchBar from '@/components/ui/SearchBar';
 import MainLayoutContext from '@/context/LayoutContext';
+import gemini from '@/http/gemini';
 import FilterMeal from '@/modules/meals/FilterMeal';
 import MealCard from '@/modules/meals/MealCard';
 import Image from 'next/image'
 import React, { useContext, useState } from 'react'
+import Cookies from 'js-cookie';
 
 const Meals = () => {
   const { name, toggled }: any = useContext(MainLayoutContext);
-
+  const [fetchingMeals, setFetchingMeals] = useState(false)
   const [activeMeal, setActiveMeal] = useState<string>('All');
 
   const handleMealChange = (meal: string) => {
     setActiveMeal(meal);
   };
+  
+
   return (
     <div>
       <MainLayout fixedTopbar={true} topBarText='Search with AI' topBarIcon='search' includeMarginTop={true}>
@@ -67,14 +71,13 @@ const Meals = () => {
 
         </div>
         <div className='grid grid-cols-4 gap-4'>
-          <MealCard />
-          <MealCard />
-          <MealCard />
-          <MealCard />
-          <MealCard />
-          <MealCard />
-          <MealCard />
-          <MealCard />
+          
+          <MealCard query={`Generate a random meal a ${Cookies.get('diet')} can eat for breakfast. meal name must be short e.g jollof rice`} />
+          <MealCard query={`Generate a random meal a ${Cookies.get('diet')} can eat for dinner. meal name must be short e.g jollof rice`} />
+          <MealCard query={`Generate a random meal a ${Cookies.get('diet')} can eat for lunch. meal name must be short e.g jollof rice`} />
+          <MealCard query={`Generate a random meal a ${Cookies.get('diet')} can eat for a snack. meal name must be short e.g jollof rice`} />
+          <MealCard query={`Generate a random meal a ${Cookies.get('diet')} can eatas brunch. meal name must be short e.g jollof rice`} />
+          <MealCard query={`Generate a random meal a ${Cookies.get('diet')} can eat for dinner. meal name must be short e.g jollof rice`} />
         </div>
 
       </MainLayout>

@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import gemini from '@/http/gemini';
 import { useSetupContext } from './SetupContext';
 import { axiosKonsumeInstance } from '@/http/konsume';
+import Cookies from 'js-cookie';
 
 const ChatBotContext = createContext({} as any);
 export default ChatBotContext;
@@ -64,17 +65,9 @@ export function ChatBotContextProvider({ children }: { children: React.ReactNode
     setUserMessage('')
     try {
       setIsLoading(prev => !prev);
-      const { data } = await axiosKonsumeInstance.post("/api/ChatBot/ChatBot", {
-        // contents: [
-        //   {
-        //     parts: [
-        //       {
-        //         text: `${userMessage}, i wan to ${userGoal} and i suffer from ${possibleDiseases}`,
-        //       },
-        //     ],
-        //   },
-        // ],
+      const {data} = await axiosKonsumeInstance.post("/api/ChatBot/ChatBot", null, {
         params: {
+          profileId: Cookies.get("userid"),
           request: userMessage
         }
       });
@@ -92,13 +85,12 @@ export function ChatBotContextProvider({ children }: { children: React.ReactNode
     //   console.log(result.response.text());
 
 
-      const response = data.candidates[0].content.parts[0].text;
       // const response = result.response.text()
       setChatLog((prevChatLog: any) => [
         ...prevChatLog,
         {
           user: "chat",
-          message: `${response} `,
+          message: `${data} `,
         },
       ]);
       setIsLoading(false)

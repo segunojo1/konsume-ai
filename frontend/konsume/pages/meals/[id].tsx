@@ -5,6 +5,7 @@ import SearchBar from '@/components/ui/SearchBar';
 import MainLayoutContext from '@/context/LayoutContext';
 import FilterMeal from '@/modules/meals/FilterMeal';
 import MealCard from '@/modules/meals/MealCard';
+import MealInfo from '@/modules/meals/MealInfo';
 import Image from 'next/image'
 import React, { useContext, useState } from 'react'
 
@@ -62,9 +63,9 @@ const Meal = () => {
         </div>
 
         <div className='grid grid-cols-3 gap-4'>
-          <MealCard />
-          <MealCard />
-          <MealCard />
+          <MealInfo />
+          <MealInfo />
+          <MealInfo /> 
         </div>
 
       </MainLayout>
