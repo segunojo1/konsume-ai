@@ -65,11 +65,8 @@ namespace KONSUME.Core.Application.Services
                     Weight = profile.Weight,
                     UserGoals = profile.UserGoals,
                     Allergies = profile.Allergies,
-                    BodyFat = profile.BodyFat,
                     Nationality = profile.Nationality,
                     DietType = profile.DietType,
-                    NoOfMealPerDay = profile.NoOfMealPerDay,
-                    SnackPreference = profile.SnackPreference,
                 };
             }).ToList();
 
@@ -151,11 +148,10 @@ namespace KONSUME.Core.Application.Services
                     Weight = profile.Weight,
                     UserGoals = profile.UserGoals,
                     Allergies = profile.Allergies,
-                    BodyFat = profile.BodyFat,
                     Nationality = profile.Nationality,
                     DietType = profile.DietType,
-                    NoOfMealPerDay = profile.NoOfMealPerDay,
-                    SnackPreference = profile.SnackPreference,
+                     UserId = profile.UserId,
+                    
                 }
             };
         }
@@ -227,11 +223,8 @@ namespace KONSUME.Core.Application.Services
             profile.Weight = request.Weight;
             profile.UserGoals = request.UserGoals;
             profile.Allergies = request.Allergies;
-            profile.BodyFat = request.BodyFat;
             profile.Nationality = request.Nationality;
             profile.DietType = request.DietType;
-            profile.NoOfMealPerDay = request.NoOfMealPerDay;
-            profile.SnackPreference = request.SnackPreference;
             profile.UserId = user.Id;
             profile.User = user;
             profile.DateCreated = DateTime.UtcNow;
@@ -272,11 +265,8 @@ namespace KONSUME.Core.Application.Services
                     Weight = profile.Weight,
                     UserGoals = profile.UserGoals,
                     Allergies = profile.Allergies,
-                    BodyFat = profile.BodyFat,
                     Nationality = profile.Nationality,
                     DietType = profile.DietType,
-                    NoOfMealPerDay = profile.NoOfMealPerDay,
-                    SnackPreference = profile.SnackPreference,
                 }
             };
         }
@@ -341,11 +331,8 @@ namespace KONSUME.Core.Application.Services
             profile.Weight = request.Weight;
             profile.UserGoals = request.UserGoals;
             profile.Allergies = request.Allergies;
-            profile.BodyFat = request.BodyFat;
             profile.Nationality = request.Nationality;
             profile.DietType = request.DietType;
-            profile.NoOfMealPerDay = request.NoOfMealPerDay;
-            profile.SnackPreference = request.SnackPreference;
             profile.UserId = user.Id;
             profile.User = user;
             profile.ModifiedBy = loginUserId;

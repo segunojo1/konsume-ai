@@ -5,8 +5,8 @@ namespace KONSUME.Core.Application.Interfaces.Services
 {
     public interface IUserInteractionService
     {
-        Task<UserInteraction> SaveUserInteractionAsync(string question, string response);
-        Task<List<UserInteraction>> GetUserInteractionsAsync();
+        Task<UserInteraction> SaveUserInteractionAsync(int id,string question, string response);
+        Task<List<UserInteraction>> GetUserInteractionsAsync(int id);
     }
 
 }

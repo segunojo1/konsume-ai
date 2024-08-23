@@ -9,4 +9,5 @@ namespace KONSUME.Core.Application.Interfaces.Services
         Task<BaseResponse> SendNotificationToUserAsync(Profile profile);
         Task<bool> SendEmailAsync(MailRecieverDto model, MailRequests request);
     }
+
 }

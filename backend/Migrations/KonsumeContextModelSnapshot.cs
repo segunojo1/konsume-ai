@@ -22,7 +22,31 @@ namespace KONSUME.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("DaticianProj.Core.Domain.Entities.Profile", b =>
+            modelBuilder.Entity("KONSUME.Core.Domain.Entities.MealRecommendation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DateSeed")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Meals")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MealRecommendations");
+                });
+
+            modelBuilder.Entity("KONSUME.Core.Domain.Entities.Profile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,9 +56,6 @@ namespace KONSUME.Migrations
 
                     b.Property<string>("AllergiesSerialized")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("BodyFat")
                         .HasColumnType("text");
 
                     b.Property<string>("CreatedBy")
@@ -72,12 +93,6 @@ namespace KONSUME.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("NoOfMealPerDay")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SnackPreference")
-                        .HasColumnType("text");
-
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
@@ -97,7 +112,7 @@ namespace KONSUME.Migrations
                             Id = 1,
                             AllergiesSerialized = "[]",
                             CreatedBy = "1",
-                            DateCreated = new DateTime(2024, 6, 23, 23, 1, 17, 309, DateTimeKind.Utc).AddTicks(9142),
+                            DateCreated = new DateTime(2024, 8, 23, 11, 28, 38, 327, DateTimeKind.Utc).AddTicks(5852),
                             DateOfBirth = new DateTime(2008, 3, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Gender = 2,
                             GoalsSerialized = "[]",
@@ -109,7 +124,7 @@ namespace KONSUME.Migrations
                         });
                 });
 
-            modelBuilder.Entity("DaticianProj.Core.Domain.Entities.Role", b =>
+            modelBuilder.Entity("KONSUME.Core.Domain.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -148,7 +163,7 @@ namespace KONSUME.Migrations
                         {
                             Id = 1,
                             CreatedBy = "1",
-                            DateCreated = new DateTime(2024, 6, 23, 23, 1, 17, 221, DateTimeKind.Utc).AddTicks(3123),
+                            DateCreated = new DateTime(2024, 8, 23, 11, 28, 38, 252, DateTimeKind.Utc).AddTicks(7425),
                             IsDeleted = false,
                             Name = "Admin"
                         },
@@ -156,13 +171,13 @@ namespace KONSUME.Migrations
                         {
                             Id = 2,
                             CreatedBy = "1",
-                            DateCreated = new DateTime(2024, 6, 23, 23, 1, 17, 221, DateTimeKind.Utc).AddTicks(3141),
+                            DateCreated = new DateTime(2024, 8, 23, 11, 28, 38, 252, DateTimeKind.Utc).AddTicks(7435),
                             IsDeleted = false,
                             Name = "Patient"
                         });
                 });
 
-            modelBuilder.Entity("DaticianProj.Core.Domain.Entities.User", b =>
+            modelBuilder.Entity("KONSUME.Core.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -215,17 +230,17 @@ namespace KONSUME.Migrations
                         {
                             Id = 1,
                             CreatedBy = "1",
-                            DateCreated = new DateTime(2024, 6, 23, 23, 1, 17, 221, DateTimeKind.Utc).AddTicks(3407),
+                            DateCreated = new DateTime(2024, 8, 23, 11, 28, 38, 252, DateTimeKind.Utc).AddTicks(7588),
                             Email = "oyebohm@gmail.com",
                             FirstName = "Hasbiy",
                             IsDeleted = false,
                             LastName = "Oyebo",
-                            Password = "$2a$10$rHOMkUO/gJC2449VWtzjeea4K9RFQLijYNawY8lw6m73LrBHk6I9e",
+                            Password = "$2a$10$Tjg7xuIPiLJlKT2oYLLMQemAQiBOMPe4UYDrlSob2HKrVDGk0I/mO",
                             RoleId = 1
                         });
                 });
 
-            modelBuilder.Entity("DaticianProj.Core.Domain.Entities.UserInteraction", b =>
+            modelBuilder.Entity("KONSUME.Core.Domain.Entities.UserInteraction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -256,12 +271,17 @@ namespace KONSUME.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserInteractions");
                 });
 
-            modelBuilder.Entity("Project.Models.Entities.VerificationCode", b =>
+            modelBuilder.Entity("KONSUME.Models.Entities.VerificationCode", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -300,20 +320,20 @@ namespace KONSUME.Migrations
                     b.ToTable("VerificationCodes");
                 });
 
-            modelBuilder.Entity("DaticianProj.Core.Domain.Entities.Profile", b =>
+            modelBuilder.Entity("KONSUME.Core.Domain.Entities.Profile", b =>
                 {
-                    b.HasOne("DaticianProj.Core.Domain.Entities.User", "User")
+                    b.HasOne("KONSUME.Core.Domain.Entities.User", "User")
                         .WithOne("Profile")
-                        .HasForeignKey("DaticianProj.Core.Domain.Entities.Profile", "UserId")
+                        .HasForeignKey("KONSUME.Core.Domain.Entities.Profile", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DaticianProj.Core.Domain.Entities.User", b =>
+            modelBuilder.Entity("KONSUME.Core.Domain.Entities.User", b =>
                 {
-                    b.HasOne("DaticianProj.Core.Domain.Entities.Role", "Role")
+                    b.HasOne("KONSUME.Core.Domain.Entities.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -322,9 +342,20 @@ namespace KONSUME.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("Project.Models.Entities.VerificationCode", b =>
+            modelBuilder.Entity("KONSUME.Core.Domain.Entities.UserInteraction", b =>
                 {
-                    b.HasOne("DaticianProj.Core.Domain.Entities.User", "User")
+                    b.HasOne("KONSUME.Core.Domain.Entities.User", "User")
+                        .WithMany("UserInteractions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("KONSUME.Models.Entities.VerificationCode", b =>
+                {
+                    b.HasOne("KONSUME.Core.Domain.Entities.User", "User")
                         .WithMany("VerificationCodes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -333,15 +364,17 @@ namespace KONSUME.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DaticianProj.Core.Domain.Entities.Role", b =>
+            modelBuilder.Entity("KONSUME.Core.Domain.Entities.Role", b =>
                 {
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("DaticianProj.Core.Domain.Entities.User", b =>
+            modelBuilder.Entity("KONSUME.Core.Domain.Entities.User", b =>
                 {
                     b.Navigation("Profile")
                         .IsRequired();
+
+                    b.Navigation("UserInteractions");
 
                     b.Navigation("VerificationCodes");
                 });

@@ -1,9 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\HomePC\\source\\repos\\konsume-web\\backend\\konsume\\",
+  "WorkspaceRootPath": "C:\\Users\\HomePC\\konsume-web\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|c:\\users\\homepc\\source\\repos\\konsume-web\\backend\\konsume\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|c:\\users\\homepc\\konsume-web\\backend\\core\\application\\services\\profileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|solutionrelative:core\\application\\services\\profileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|c:\\users\\homepc\\konsume-web\\backend\\controllers\\chatbotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|solutionrelative:controllers\\chatbotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|c:\\users\\homepc\\konsume-web\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -19,15 +27,39 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\HomePC\\source\\repos\\konsume-web\\backend\\konsume\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\HomePC\\source\\repos\\konsume-web\\backend\\konsume\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAACoAAAAAAAAAAAAAACsAAAABAAAA",
+              "Title": "ProfileService.cs",
+              "DocumentMoniker": "C:\\Users\\HomePC\\konsume-web\\backend\\Core\\Application\\Services\\ProfileService.cs",
+              "RelativeDocumentMoniker": "Core\\Application\\Services\\ProfileService.cs",
+              "ToolTip": "C:\\Users\\HomePC\\konsume-web\\backend\\Core\\Application\\Services\\ProfileService.cs",
+              "RelativeToolTip": "Core\\Application\\Services\\ProfileService.cs",
+              "ViewState": "AQIAAO4AAAAAAAAAAAAjwAEBAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-03T08:04:05.696Z",
+              "WhenOpened": "2024-08-23T11:26:54.341Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\HomePC\\konsume-web\\backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\HomePC\\konsume-web\\backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAGYAAAAAAAAAAAAAAGgAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-22T18:22:52.64Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChatBotController.cs",
+              "DocumentMoniker": "C:\\Users\\HomePC\\konsume-web\\backend\\Controllers\\ChatBotController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ChatBotController.cs",
+              "ToolTip": "C:\\Users\\HomePC\\konsume-web\\backend\\Controllers\\ChatBotController.cs",
+              "RelativeToolTip": "Controllers\\ChatBotController.cs",
+              "ViewState": "AQIAAKcAAAAAAAAAAAAYwLkAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-22T17:30:56.735Z"
             }
           ]
         }

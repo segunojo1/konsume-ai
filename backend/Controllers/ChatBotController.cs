@@ -1,0 +1,190 @@
+﻿using KONSUME.Core.Application.Interfaces.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using OpenAI_API;
+using OpenAI_API.Chat;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace DaticianProj.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ChatBotController : ControllerBase
+    {
+        private readonly IConfiguration _configuration;
+        private readonly IUserInteractionService _userInteractionService;
+        private readonly IUserService _userService;
+        private readonly IProfileService _profileService;
+        private readonly IMealRecommendationService _mealRecommendationService;
+        // Ensure that there are no duplicate definitions
+        public ChatBotController(IConfiguration configuration, IUserInteractionService userInteractionService, IUserService userService, IProfileService profileService, IMealRecommendationService mealRecommendationService)
+        {
+            _configuration = configuration;
+            _userInteractionService = userInteractionService;
+            _userService = userService;
+            _profileService = profileService;
+            _mealRecommendationService = mealRecommendationService;
+        }
+
+        [HttpPost("ChatBot")]
+        public async Task<IActionResult> GetAIResponse(int profileId, string request)
+        {
+            string apiKey = _configuration["OpenAI:APIKey"];
+
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                return StatusCode(500, "API Key is missing.");
+            }
+
+            var profileResponse = await _profileService.GetProfile(profileId);
+            if (profileResponse == null || !profileResponse.IsSuccessful)
+            {
+                return BadRequest("User profile not found.");
+            }
+
+            var profile = profileResponse.Value;
+
+            string profileInfo = $"Age: {(profile.DateOfBirth != null ? CalculateAge(profile.DateOfBirth) : "Not provided")}, " +
+                     $"Nationality: {profile.Nationality ?? "Not provided"}, " +
+                     $"Diet Type: {profile.DietType ?? "Not provided"}, " +
+                     $"Allergies: {(profile.Allergies?.Any() == true ? string.Join(", ", profile.Allergies) : "None")}, " +
+                     $"Goals: {(profile.UserGoals?.Any() == true ? string.Join(", ", profile.UserGoals) : "None")}, " +
+                     $"Weight: {profile.Weight}, Height: {profile.Height}.";
+
+
+
+            try
+            {
+                var openai = new OpenAIAPI(apiKey);
+                var chatRequest = new ChatRequest
+                {
+                    Model = "ft:gpt-3.5-turbo-0613:personal:foodieai:9z5MVezI",
+                    Messages = new[]
+                    {
+                new ChatMessage(ChatMessageRole.System, "FoodieAI is a food and health chatbot."),
+                new ChatMessage(ChatMessageRole.User, $"User Profile: {profileInfo}. Request: {request}")
+            }
+                };
+
+                var result = await openai.Chat.CreateChatCompletionAsync(chatRequest);
+                string aiResponse = result.Choices.Count > 0 ? result.Choices[0].Message.Content + " #FoodieAI🥙🍴👨‍⚕️" : "No response from AI.";
+
+                await _userInteractionService.SaveUserInteractionAsync(profile.UserId, request, aiResponse);
+                return Ok(aiResponse);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+
+
+
+        private int CalculateAge(DateTime dateOfBirth)
+        {
+            var today = DateTime.Today;
+            var age = today.Year - dateOfBirth.Year;
+            if (dateOfBirth.Date > today.AddYears(-age)) age--;
+            return age;
+        }
+
+        [HttpGet("PreviousInteractions")]
+        public async Task<IActionResult> GetPreviousInteractions(int id)
+        {
+            try
+            {
+                var interactions = await _userInteractionService.GetUserInteractionsAsync(id);
+                if (interactions == null || !interactions.Any())
+                {
+                    return Ok(null);
+                }
+                return Ok(interactions);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An unexpected error occurred. Please try again later.");
+            }
+        }
+
+
+        [HttpGet("GenerateMeals")]
+        public async Task<IActionResult> GenerateMeals(int profileId)
+        {
+            string apiKey = _configuration["OpenAI:APIKey"];
+
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                return StatusCode(500, "API Key is missing.");
+            }
+
+            var profileResponse = await _profileService.GetProfile(profileId);
+            if (profileResponse == null || !profileResponse.IsSuccessful)
+            {
+                return BadRequest("User profile not found.");
+            }
+
+            var profile = profileResponse.Value;
+
+            // Generate a daily unique seed or identifier based on date
+            string dateSeed = DateTime.UtcNow.ToString("yyyyMMdd");
+
+            // Build the prompt for meal recommendations
+            string profileInfo = $"Age: {(profile.DateOfBirth != null ? CalculateAge(profile.DateOfBirth) : "Not provided")}, " +
+                                 $"Nationality: {profile.Nationality ?? "Not provided"}, " +
+                                 $"Diet Type: {profile.DietType ?? "Not provided"}, " +
+                                 $"Allergies: {(profile.Allergies?.Any() == true ? string.Join(", ", profile.Allergies) : "None")}, " +
+                                 $"Goals: {(profile.UserGoals?.Any() == true ? string.Join(", ", profile.UserGoals) : "None")}, " +
+                                 $"Weight: {profile.Weight}, Height: {profile.Height}.";
+
+            var prompt = $"Based on the following user profile: {profileInfo}. Please generate meal recommendations for breakfast, lunch, and dinner. The recommendations should be different each day but consistent throughout the day. Use a unique seed or identifier for today: {dateSeed}. Return the recommendations in the format: Breakfast, Lunch, Dinner.";
+
+            try
+            {
+                var openai = new OpenAIAPI(apiKey);
+                var chatRequest = new ChatRequest
+                {
+                    Model = "ft:gpt-3.5-turbo-0613:personal:foodieai:9z5MVezI", // Correct model name
+                    Messages = new[]
+                    {
+                new ChatMessage(ChatMessageRole.System, "FoodieAI is a food and health chatbot."),
+                new ChatMessage(ChatMessageRole.User, prompt)
+            }
+                };
+
+                var result = await openai.Chat.CreateChatCompletionAsync(chatRequest);
+                string aiResponse = result.Choices.Count > 0 ? result.Choices[0].Message.Content : "No response from AI.";
+
+                // Split the AI response into breakfast, lunch, and dinner using the keywords
+                var meals = aiResponse.Split(new[] { "Breakfast:", "Lunch:", "Dinner:" }, StringSplitOptions.None)
+                                      .Select(m => m.Trim())
+                                      .Where(m => !string.IsNullOrEmpty(m)) // Remove any empty strings
+                                      .ToArray();
+
+                // Ensure we have 3 meal parts (breakfast, lunch, dinner)
+                if (meals.Length == 4)
+                {
+                    // The 0th index is just an empty string after "Breakfast:". Discard it.
+                    meals = meals.Skip(1).ToArray();
+                }
+
+                if (meals.Length != 3)
+                {
+                    return StatusCode(500, "Unexpected response format from AI.");
+                }
+
+                // Store or cache the daily meal recommendations
+                await _mealRecommendationService.SaveDailyRecommendationsAsync(profileId, dateSeed, aiResponse);
+
+                return Ok(new { Meals = meals });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+    }
+}
+
+
+

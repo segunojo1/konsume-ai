@@ -7,6 +7,7 @@ using KONSUME.Models;
 using MailKit.Net.Smtp;
 using KONSUME.Core.Domain.Entities;
 using System.Text;
+using Google;
 
 namespace KONSUME.Core.Application.Services
 {
@@ -129,5 +130,6 @@ namespace KONSUME.Core.Application.Services
         }
 
     }
+
 
 }
