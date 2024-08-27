@@ -59,12 +59,12 @@ namespace DaticianProj.Controllers
                 var openai = new OpenAIAPI(apiKey);
                 var chatRequest = new ChatRequest
                 {
-                    Model = "ft:gpt-3.5-turbo-0613:personal:foodieai:9z5MVezI",
+                    Model = "ft:gpt-3.5-turbo-0613:personal:foodieai:9zrEI7Ix",
                     Messages = new[]
                     {
-                new ChatMessage(ChatMessageRole.System, "FoodieAI is a food and health chatbot."),
-                new ChatMessage(ChatMessageRole.User, $"User Profile: {profileInfo}. Request: {request}")
-            }
+                        new ChatMessage(ChatMessageRole.System, "FoodieAI is a food and health chatbot."),
+                        new ChatMessage(ChatMessageRole.User, $"User Profile: {profileInfo}. Request: {request}")
+                    }
                 };
 
                 var result = await openai.Chat.CreateChatCompletionAsync(chatRequest);
@@ -108,6 +108,9 @@ namespace DaticianProj.Controllers
         }
 
 
+
+
+
         [HttpGet("GenerateMeals")]
         public async Task<IActionResult> GenerateMeals(int profileId)
         {
@@ -126,63 +129,66 @@ namespace DaticianProj.Controllers
 
             var profile = profileResponse.Value;
 
-            // Generate a daily unique seed or identifier based on date
+            // Generate a daily unique seed or identifier based on the current date
             string dateSeed = DateTime.UtcNow.ToString("yyyyMMdd");
 
-            // Build the prompt for meal recommendations
-            string profileInfo = $"Age: {(profile.DateOfBirth != null ? CalculateAge(profile.DateOfBirth) : "Not provided")}, " +
-                                 $"Nationality: {profile.Nationality ?? "Not provided"}, " +
-                                 $"Diet Type: {profile.DietType ?? "Not provided"}, " +
-                                 $"Allergies: {(profile.Allergies?.Any() == true ? string.Join(", ", profile.Allergies) : "None")}, " +
-                                 $"Goals: {(profile.UserGoals?.Any() == true ? string.Join(", ", profile.UserGoals) : "None")}, " +
-                                 $"Weight: {profile.Weight}, Height: {profile.Height}.";
-
-            var prompt = $"Based on the following user profile: {profileInfo}. Please generate meal recommendations for breakfast, lunch, and dinner. The recommendations should be different each day but consistent throughout the day. Use a unique seed or identifier for today: {dateSeed}. Return the recommendations in the format: Breakfast, Lunch, Dinner.";
+            // Create a prompt based on the user's goals, allergies, and nationality
+            var prompt = $"I want to {profile.UserGoals} and I have {profile.Allergies} generate 15 {profile.Nationality} meals for breakfast, lunch, dinner, or snacks suitable for me" +
+                $" , considering that I follow a {profile.DietType ?? "general"} diet and I am {CalculateAge(profile.DateOfBirth)} years old.";
 
             try
             {
                 var openai = new OpenAIAPI(apiKey);
                 var chatRequest = new ChatRequest
                 {
-                    Model = "ft:gpt-3.5-turbo-0613:personal:foodieai:9z5MVezI", // Correct model name
+                    Model = "ft:gpt-3.5-turbo-0613:personal:foodieai:A0W1EPi5", // Correct model name
                     Messages = new[]
                     {
-                new ChatMessage(ChatMessageRole.System, "FoodieAI is a food and health chatbot."),
-                new ChatMessage(ChatMessageRole.User, prompt)
-            }
+                        new ChatMessage(ChatMessageRole.System, "FoodieAI is a food and health chatbot."),
+                        new ChatMessage(ChatMessageRole.User, prompt)
+                    }
                 };
 
                 var result = await openai.Chat.CreateChatCompletionAsync(chatRequest);
                 string aiResponse = result.Choices.Count > 0 ? result.Choices[0].Message.Content : "No response from AI.";
 
-                // Split the AI response into breakfast, lunch, and dinner using the keywords
-                var meals = aiResponse.Split(new[] { "Breakfast:", "Lunch:", "Dinner:" }, StringSplitOptions.None)
-                                      .Select(m => m.Trim())
-                                      .Where(m => !string.IsNullOrEmpty(m)) // Remove any empty strings
-                                      .ToArray();
+                // Print the raw AI response for debugging purposes
+                Console.WriteLine("Raw AI Response: ");
+                Console.WriteLine(aiResponse);
 
-                // Ensure we have 3 meal parts (breakfast, lunch, dinner)
-                if (meals.Length == 4)
+                // Split the meals by '$' to get individual meal entries
+                string[] meals = aiResponse.Split('$', StringSplitOptions.RemoveEmptyEntries);
+
+                // Create a list to hold structured meal objects
+                var mealList = new List<object>();
+
+                // Iterate through the meals and split each meal into components
+                foreach (var meal in meals)
                 {
-                    // The 0th index is just an empty string after "Breakfast:". Discard it.
-                    meals = meals.Skip(1).ToArray();
+                    // Split each meal into its name, course type, and explanation
+                    var mealParts = meal.Split('=', StringSplitOptions.RemoveEmptyEntries);
+
+                    if (mealParts.Length == 3)
+                    {
+                        mealList.Add(new
+                        {
+                            Name = mealParts[0].Trim(),
+                            Course = mealParts[1].Trim(),
+                            Description = mealParts[2].Trim()
+                        });
+                    }
                 }
 
-                if (meals.Length != 3)
-                {
-                    return StatusCode(500, "Unexpected response format from AI.");
-                }
-
-                // Store or cache the daily meal recommendations
-                await _mealRecommendationService.SaveDailyRecommendationsAsync(profileId, dateSeed, aiResponse);
-
-                return Ok(new { Meals = meals });
+                // Return the structured meal list as a response
+                return Ok(mealList);
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
+
+
     }
 }
 

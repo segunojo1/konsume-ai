@@ -252,7 +252,7 @@ namespace KONSUME.Core.Application.Services
 
             return new BaseResponse<ProfileResponse>
             {
-                Message = "Check Your Mail And Complete Your Registration",
+                Message = "Welcome Onboard, Check Your Mail",
                 IsSuccessful = true,
                 Value = new ProfileResponse
                 {
@@ -274,84 +274,117 @@ namespace KONSUME.Core.Application.Services
 
         public async Task<BaseResponse> UpdateProfile(int id, ProfileRequest request)
         {
-            var profile = await _profileRepository.GetAsync(id);
-            var user = await _userRepository.GetAsync(profile.User.Email);
-            if (profile == null)
+            try
             {
+                var profile = await _profileRepository.GetAsync(id);
+                if (profile == null)
+                {
+                    return new BaseResponse
+                    {
+                        Message = "Profile does not exist.",
+                        IsSuccessful = false
+                    };
+                }
+
+                var user = await _userRepository.GetAsync(profile.User.Email);
+                if (user == null)
+                {
+                    return new BaseResponse
+                    {
+                        Message = "User associated with the profile does not exist.",
+                        IsSuccessful = false
+                    };
+                }
+
+                var formerRole = await _roleRepository.GetAsync(user.RoleId);
+                if (formerRole == null)
+                {
+                    return new BaseResponse
+                    {
+                        Message = "Former role does not exist.",
+                        IsSuccessful = false
+                    };
+                }
+
+                formerRole.Users.Remove(user);
+                _roleRepository.Update(formerRole);
+
+                var exists = await _profileRepository.ExistsAsync(profile.User.Email, id);
+                if (exists)
+                {
+                    return new BaseResponse
+                    {
+                        Message = "Email already exists!",
+                        IsSuccessful = false
+                    };
+                }
+
+                var role = await _roleRepository.GetAsync(r => r.Name.ToLower() == "patient");
+                if (role == null)
+                {
+                    return new BaseResponse
+                    {
+                        Message = "Role does not exist.",
+                        IsSuccessful = false
+                    };
+                }
+
+                var loginUserId = _httpContext.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+                if (loginUserId == null)
+                {
+                    return new BaseResponse
+                    {
+                        Message = "User not logged in.",
+                        IsSuccessful = false
+                    };
+                }
+
+                profile.DateOfBirth = DateTime.SpecifyKind(request.DateOfBirth, DateTimeKind.Utc);
+                profile.Gender = string.Equals(request.Gender, "Male", StringComparison.OrdinalIgnoreCase)
+                    ? Domain.Enum.Gender.Male
+                    : Domain.Enum.Gender.Female;
+                profile.Height = request.Height;
+                profile.Weight = request.Weight;
+                profile.UserGoals = request.UserGoals;
+                profile.Allergies = request.Allergies;
+                profile.Nationality = request.Nationality;
+                profile.DietType = request.DietType;
+                profile.UserId = user.Id;
+                profile.User = user;
+                profile.ModifiedBy = loginUserId;
+                profile.DateModified = DateTime.UtcNow;
+                profile.IsDeleted = false;
+                profile.CreatedBy = "1"; // Adjust this if needed
+
+                role.Users.Add(user);
+                _roleRepository.Update(role);
+                _userRepository.Update(user);
+                _profileRepository.Update(profile);
+                await _emailService.SendProfileUpdateNotificationAsync(profile);
+
+                await _unitOfWork.SaveAsync();
+
                 return new BaseResponse
                 {
-                    Message = "profile does not exist",
+                    Message = "User updated successfully.",
+                    IsSuccessful = true
+                };
+            }
+            catch (Exception ex)
+            {
+                // Log detailed information
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+
+                return new BaseResponse
+                {
+                    Message = $"An error occurred: {ex.Message}",
                     IsSuccessful = false
                 };
             }
-
-            var formerRole = await _roleRepository.GetAsync(user.RoleId);
-            formerRole.Users.Remove(user);
-            _roleRepository.Update(formerRole);
-
-            var exists = await _profileRepository.ExistsAsync(profile.User.Email, id);
-            if (exists)
-            {
-                return new BaseResponse
-                {
-                    Message = "Email already exists!!!",
-                    IsSuccessful = false
-                };
-            }
-
-            var role = await _roleRepository.GetAsync(r => r.Name.ToLower() == "patient");
-            if (role == null)
-            {
-                return new BaseResponse
-                {
-                    Message = $"Role with id '{role.Id}' does not exists",
-                    IsSuccessful = false
-                };
-            }
-
-            var loginUserId = _httpContext.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email).Value;
-            profile.DateOfBirth = DateTime.SpecifyKind(request.DateOfBirth, DateTimeKind.Utc);
-            if (string.Equals(request.Gender, "Male", StringComparison.OrdinalIgnoreCase))
-            {
-                profile.Gender = Domain.Enum.Gender.Male;
-            }
-            else if (string.Equals(request.Gender, "Female", StringComparison.OrdinalIgnoreCase))
-            {
-                profile.Gender = Domain.Enum.Gender.Female;
-            }
-            else
-            {
-                return new BaseResponse
-                {
-                    Message = "Invalid value for Gender. Please provide 'Male' or 'Female'.",
-                    IsSuccessful = false
-                };
-            }
-            profile.Height = request.Height;
-            profile.Weight = request.Weight;
-            profile.UserGoals = request.UserGoals;
-            profile.Allergies = request.Allergies;
-            profile.Nationality = request.Nationality;
-            profile.DietType = request.DietType;
-            profile.UserId = user.Id;
-            profile.User = user;
-            profile.ModifiedBy = loginUserId;
-            profile.DateModified = DateTime.UtcNow;
-            profile.IsDeleted = false;
-            profile.CreatedBy = "1";
-
-            role.Users.Add(user);
-
-            _roleRepository.Update(role);
-            _userRepository.Update(user);
-            await _unitOfWork.SaveAsync();
-
-            return new BaseResponse
-            {
-                Message = "User updated successfully",
-                IsSuccessful = true
-            };
         }
+
+
     }
 }
 

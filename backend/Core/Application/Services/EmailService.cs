@@ -21,6 +21,40 @@ namespace KONSUME.Core.Application.Services
             _emailConfiguration = emailConfiguration.Value;
         }
 
+        public async Task<BaseResponse> SendProfileUpdateNotificationAsync(Profile profile)
+        {
+            var mailRecieverRequestDto = new MailRecieverDto
+            {
+                Email = profile.User.Email,
+                Name = profile.User.FirstName + " " + profile.User.LastName,
+            };
+
+            string emailBody = $"<p>Hello {profile.User.FirstName},</p>\r\n" +
+                                $"<p>Your profile has been successfully updated on Konsume!</p>\r\n" +
+                                $"<p>We wanted to let you know that we have received and processed your recent changes. Our AI-driven platform is now even better equipped to " +
+                                $"provide you with personalized meal plans and recommendations tailored to your updated profile.</p>\r\n" +
+                                $"<p>If you have any further changes or need assistance, feel free to <a href='reachkonsume@gmail.com'>contact our support team</a>.</p>\r\n" +
+                                $"<p>Thank you for being a part of Konsume!</p>\r\n" +
+                                $"<p>Best regards,<br/>Hasbiy from Konsume</p>\r\n" +
+                                $"<img src=\"https://drive.google.com/uc?export=view&id=1KH6x4h7J0PCGE7yDiJj4YUBDYPHPBd3B\" alt=\"Konsume Logo\" " +
+                                $"style=\"display: block; margin: 0 auto;\">\r\n";
+
+            var mailRequest = new MailRequests
+            {
+                Body = emailBody,
+                Title = "Profile Update Confirmation",
+                HtmlContent = emailBody
+            };
+
+            await SendEmailAsync(mailRecieverRequestDto, mailRequest);
+
+            return new BaseResponse
+            {
+                Message = "Profile update notification sent successfully",
+                IsSuccessful = true,
+            };
+        }
+
 
 
         public async Task<BaseResponse> SendNotificationToUserAsync(Profile profile)
@@ -39,7 +73,7 @@ namespace KONSUME.Core.Application.Services
                                 $"<p>No more endless searching for meal ideas! With Konsume, you'll get customized meal and snack recommendations that fit your" +
                                 $" goals. Plus, our cool image recognition feature lets you snap a photo of your food, and our AI will analyze its nutritional" +
                                 $" content. Simple, right?</p>\r\n" +
-                                $"<p>Ready to get started? <a href='your-dashboard-url'>Log in to your dashboard</a> and begin your personalized nutrition " +
+                                $"<p>Ready to get started? <a href='https://konsume-web-yzto.vercel.app/'>Log in to your dashboard</a> and begin your personalized nutrition " +
                                 $"journey today.</p>\r\n" +
                                 $"<p>Best regards,<br/>Hasbiy from Konsume</p>\r\n" +
                                 $"<img src=\"https://drive.google.com/uc?export=view&id=1KH6x4h7J0PCGE7yDiJj4YUBDYPHPBd3B\" alt=\"Konsume Logo\" " +
@@ -128,6 +162,9 @@ namespace KONSUME.Core.Application.Services
                 throw new Exception("There was an error while sending email");
             }
         }
+
+
+       
 
     }
 
