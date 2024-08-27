@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { SidebarProps } from '../../@types';
+import { SidebarProps } from '../@types';
 import Cookies from 'js-cookie';
 
 const SidebarItem: React.FC<SidebarProps> = ({ icon, text, href }) => {

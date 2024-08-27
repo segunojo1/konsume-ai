@@ -1,6 +1,6 @@
 "use client"
 import React, { useContext, useEffect, useRef, useState } from "react";
-import Sidebar from "@/modules/dashboard/Sidebar";
+import Sidebar from "@/modules/Sidebar";
 import ScannerHead from "@/modules/scanner/ScannerHead";
 import DashboardNav from "@/modules/dashboard/DashboardNav";
 import withAuth from "../../helpers/withAuth";

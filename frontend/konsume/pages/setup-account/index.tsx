@@ -109,7 +109,7 @@ const SetupAccount = () => {
             </div>
             <ProgressBar currentStep={currentPage} totalSteps={totalSteps} />
           </div>
-          <p className=" md:text-[17.7px] text-[16px] text-center mt-1">Let’s begin your personalised wellness Journey! To get started, please tell us a bit about yourself. Sign up for yourself
+          <p className=" md:text-[17.7px] text-[16px] text-center mt-1">Let&apos;s begin your personalised wellness Journey! To get started, please tell us a bit about yourself. Sign up for yourself
             <span className="hidden md:inline">
               <br />
             </span>

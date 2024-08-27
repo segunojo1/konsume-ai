@@ -22,7 +22,7 @@ const formSchema = z.object({
 });
 
 export const SignupForm = () => {
-  const [showOtp, setShowOtp] = useState(true);
+  const [showOtp, setShowOtp] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

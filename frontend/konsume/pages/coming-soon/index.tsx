@@ -1,5 +1,5 @@
 import DashboardNav from "@/modules/dashboard/DashboardNav";
-import Sidebar from "@/modules/dashboard/Sidebar";
+import Sidebar from "@/modules/Sidebar";
 import React, { useState } from "react";
 import { useSetupContext } from "../../context/SetupContext";
 import withAuth from "../../helpers/withAuth";

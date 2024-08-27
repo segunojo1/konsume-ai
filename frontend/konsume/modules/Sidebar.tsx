@@ -1,18 +1,15 @@
 import React from "react";
 import SidebarItem from "./SidebarItem";
-import home from "../../public/home.svg";
-import logo from "../../public/logo.svg";
-import progress from "../../public/assets/progress.svg";
-import scanner from "../../public/assets/scanner.svg";
-import chat from "../../public/chat.svg";
-import profile from "../../public/profile.svg"
-import settings from "../../public/settings.svg"
-import logout from "../../public/logout.svg"
-import pill from "../../public/assets/pills-bottle.png";
-import konsum from "../../public/assets/konsume.png";
+import home from "../public/home.svg";
+import logo from "../public/logo.svg";
+import progress from "../public/assets/progress.svg";
+import scanner from "../public/assets/scanner.svg";
+import chat from "../public/chat.svg";
+import profile from "../public/profile.svg"
+import settings from "../public/settings.svg"
+import logout from "../public/logout.svg"
 import Image from "next/image";
-import { DashboardNavProps } from "../../@types";
-import { PillBottle } from "lucide-react";
+import { DashboardNavProps } from "../@types";
 
 const Sidebar: React.FC<DashboardNavProps> = ({ toggled }) => {
   return (

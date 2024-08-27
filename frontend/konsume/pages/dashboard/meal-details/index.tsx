@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import star4 from '../../../public/assets/star4.png';
 import gemini from '../../../http/gemini';
-import Sidebar from '@/modules/dashboard/Sidebar';
+import Sidebar from '@/modules/Sidebar';
 import DashboardNav from '@/modules/dashboard/DashboardNav';
 import { useSetupContext } from '../../../context/SetupContext';
 import MealHead from '@/modules/dashboard/meal-details/MealHead';

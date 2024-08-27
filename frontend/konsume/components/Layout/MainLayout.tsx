@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 
 import { MainLayoutProps } from '../../@types';
 import MainLayoutContext from '../../context/LayoutContext';
-import Sidebar from '@/modules/dashboard/Sidebar';
+import Sidebar from '@/modules/Sidebar';
 import TopBar from '@/modules/TopBar';
 
 function MainLayout({

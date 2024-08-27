@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import Sidebar from "@/modules/dashboard/Sidebar";
+import Sidebar from "@/modules/Sidebar";
 import ScannerHead from "@/modules/scanner/ScannerHead";
 import ScannerBody from "@/modules/scanner/ScannerBody";
 import DashboardNav from "@/modules/dashboard/DashboardNav";
