@@ -67,7 +67,7 @@ export function ChatBotContextProvider({ children }: { children: React.ReactNode
       setIsLoading(prev => !prev);
       const {data} = await axiosKonsumeInstance.post("/api/ChatBot/ChatBot", null, {
         params: {
-          profileId: Cookies.get("userid"),
+          profileId: 2,
           request: userMessage
         }
       });

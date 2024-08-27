@@ -10,6 +10,7 @@ import MealHead from '@/modules/dashboard/meal-details/MealHead';
 import { useRouter } from 'next/router';
 import withAuth from '../../../helpers/withAuth';
 import { parseBoldText } from '../../../helpers/parseBoldText';
+import MainLayout from '@/components/Layout/MainLayout';
 
 const MealDetails = () => {
   const router = useRouter();
@@ -55,13 +56,12 @@ const MealDetails = () => {
 
   return (
     <div>
-      <Sidebar toggled={toggled} setToggled={setToggled} />
-      <div className={`${toggled ? '' : 'md:ml-[280px]'} gap-5 flex flex-col px-5`}>
-        <DashboardNav toggled={toggled} setToggled={setToggled} />
+      
+      <MainLayout fixedTopbar={true}>
         <MealHead />
         {/* <ChatWithFoodie /> */}
 
-        <div className="flex md:flex-row flex-col  gap-2 font-jakarta">
+        <div className="flex md:flex-row flex-col  gap-2 font-satoshi mt-6">
           <div className="bg-[#D6FBC4] p-4 rounded-2xl js-tilt mealreco">
             <div className="flex justify-between items-center mb-5">
               <p className=" font-bold text-xs">Health and Goal Impact</p>
@@ -113,7 +113,7 @@ const MealDetails = () => {
             )}
           </div>
         </div>
-      </div>
+      </MainLayout>
     </div>
   );
 };

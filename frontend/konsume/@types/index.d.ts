@@ -388,6 +388,16 @@ export interface MainLayoutProps {
   topBarIcon?: string;
 }
 
+export interface Mealprops {
+  name: string;
+  description: string;
+}
+
+export interface LoginFormProps {
+  form: ReturnType<typeof useForm<FormData>>;
+  onSubmit: SubmitHandler<FormData>;
+}
+
 export interface MainLayoutContextProps {
   toggled: boolean;
   setToggled: React.Dispatch<React.SetStateAction<boolean>>;

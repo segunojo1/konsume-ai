@@ -16,9 +16,8 @@ const Dashboard = () => {
   
   const { userGoal, name, userID, setPossibleDiseases, setUserGoal, setWeight, setDiet, setAge, setNationality } =
     useSetupContext();
-    const {toggled, setToggled} = useContext(MainLayoutContext);
   console.log(userGoal);
-
+  
   const router = useRouter();
   useEffect(() => {
     const getUserDetails = async () => {
@@ -45,13 +44,13 @@ const Dashboard = () => {
     getUserDetails();
   }, [setPossibleDiseases, setUserGoal, setWeight, setDiet, setAge, router]);
   return (
-    <div>
-      <MainLayout fixedTopbar={true}>
+    <div className='bg-base-white'>
+      <MainLayout fixedTopbar={true} topBarText='Dashboard' topBarIcon='dashborad'>
 
-      <div className="">
+      <div className="font-satoshi pb-10">
         {/* <DashboardNav toggled={toggled} setToggled={setToggled} /> */}
         <DashboardHead />
-        <ChatWithFoodie />
+        {/* <ChatWithFoodie /> */}
         <DashboardBody />
       </div>
       </MainLayout>

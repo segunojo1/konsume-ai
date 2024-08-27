@@ -63,9 +63,118 @@ const Meal = () => {
         </div>
 
         <div className='grid grid-cols-3 gap-4'>
-          <MealInfo />
-          <MealInfo />
-          <MealInfo /> 
+          <MealInfo title='Nutritional Information' text='Nutritional Information (Approximate, per 100 grams):
+Calories: 130-150 kcal
+Protein: 8-10 grams
+Fat: 6-8 grams
+Saturated Fat: 1-2 grams (if using palm oil)
+Carbohydrates: 15-18 grams
+Dietary Fiber: 4-5 grams
+Sugars: 1-2 grams
+Sodium: 200-400 mg (depending on the amount of seasoning or salt used)
+Cholesterol: 0 mg (if no animal products are added)
+Nutritional Benefits:
+High in Protein:
+
+Beans are an excellent source of plant-based protein, which is essential for muscle building and repair.
+Rich in Fiber:
+
+Moi Moi contains dietary fiber from the beans, which aids in digestion, helps maintain healthy blood sugar levels, and can support weight management.
+Good Source of Vitamins and Minerals:
+
+Beans are rich in essential vitamins and minerals such as folate, iron, potassium, and magnesium.
+Low in Cholesterol:
+
+Since Moi Moi is made from plant-based ingredients, it is naturally free of cholesterol, making it heart-healthy.
+Customizable:
+
+The nutritional content can be adjusted by varying the ingredients. For example, using less oil or adding more vegetables can make it healthier.'/>
+          <MealInfo title='Recipe' text='Moi Moi Recipe
+Ingredients:
+2 cups of peeled brown or black-eyed beans
+1 medium onion (chopped)
+1-2 red bell peppers (tatashe) or 1 large red bell pepper (chopped)
+1-2 scotch bonnet peppers (ata rodo) (adjust to taste)
+1/4 cup of vegetable oil or palm oil (optional)
+2 tablespoons of ground crayfish (optional)
+1 tablespoon of ground smoked fish (optional)
+1 tablespoon of seasoning powder or bouillon cubes (Maggi or Knorr)
+Salt to taste
+2-3 cups of warm water or stock (depending on the consistency you want)
+Boiled eggs (optional, sliced or whole)
+Sardines or corned beef (optional)
+Banana leaves, aluminum foil, or small containers for wrapping/steaming
+Instructions:
+Prepare the Beans:
+
+Soak the beans in water for about 30 minutes to soften the skin.
+Peel the beans by rubbing them between your hands to remove the skins. You can also use a blender to make peeling easier by pulsing the soaked beans in water for a few seconds. The skins will float to the top when you add water and can be drained off.
+Blend the Ingredients:
+
+In a blender, add the peeled beans, chopped onions, red bell peppers, and scotch bonnets. Blend until you get a smooth, thick paste. You may need to add some water or stock to help the blending process.
+Mix the Batter:
+
+Pour the blended mixture into a large bowl. Add the oil, ground crayfish, smoked fish, seasoning powder, and salt. Stir well to combine all the ingredients. Gradually add warm water or stock until you reach your desired consistency. The batter should be thick but still pourable.
+Prepare the Steaming Containers:
+
+If youre using banana leaves, cut them into rectangular shapes, soften them over a flame, and fold them into a cup shape. You can also use aluminum foil, ramekins, or small plastic containers.
+Grease the insides of the containers with a little oil to prevent sticking.
+Fill the Containers:
+
+Pour the Moi Moi batter into the prepared containers. If you want to add boiled eggs, sardines, or corned beef, place them in the middle of the batter.
+Steam the Moi Moi:
+
+Place the filled containers in a large pot or steamer. Add enough water to the pot to steam the Moi Moi, but make sure the water doesn’t touch the batter. Cover the pot with a lid.
+Steam for about 45 minutes to 1 hour on medium heat. Check occasionally and add more water to the pot if needed.
+Check for Doneness:
+
+The Moi Moi is done when its firm to the touch and a toothpick inserted into the center comes out clean.
+Serve:
+
+Allow the Moi Moi to cool slightly before removing it from the containers. Serve warm with rice, bread, pap, or enjoy it on its own.'/>
+          <MealInfo title='Recipe' text='Moi Moi Recipe
+Ingredients:
+2 cups of peeled brown or black-eyed beans
+1 medium onion (chopped)
+1-2 red bell peppers (tatashe) or 1 large red bell pepper (chopped)
+1-2 scotch bonnet peppers (ata rodo) (adjust to taste)
+1/4 cup of vegetable oil or palm oil (optional)
+2 tablespoons of ground crayfish (optional)
+1 tablespoon of ground smoked fish (optional)
+1 tablespoon of seasoning powder or bouillon cubes (Maggi or Knorr)
+Salt to taste
+2-3 cups of warm water or stock (depending on the consistency you want)
+Boiled eggs (optional, sliced or whole)
+Sardines or corned beef (optional)
+Banana leaves, aluminum foil, or small containers for wrapping/steaming
+Instructions:
+Prepare the Beans:
+
+Soak the beans in water for about 30 minutes to soften the skin.
+Peel the beans by rubbing them between your hands to remove the skins. You can also use a blender to make peeling easier by pulsing the soaked beans in water for a few seconds. The skins will float to the top when you add water and can be drained off.
+Blend the Ingredients:
+
+In a blender, add the peeled beans, chopped onions, red bell peppers, and scotch bonnets. Blend until you get a smooth, thick paste. You may need to add some water or stock to help the blending process.
+Mix the Batter:
+
+Pour the blended mixture into a large bowl. Add the oil, ground crayfish, smoked fish, seasoning powder, and salt. Stir well to combine all the ingredients. Gradually add warm water or stock until you reach your desired consistency. The batter should be thick but still pourable.
+Prepare the Steaming Containers:
+
+If youre using banana leaves, cut them into rectangular shapes, soften them over a flame, and fold them into a cup shape. You can also use aluminum foil, ramekins, or small plastic containers.
+Grease the insides of the containers with a little oil to prevent sticking.
+Fill the Containers:
+
+Pour the Moi Moi batter into the prepared containers. If you want to add boiled eggs, sardines, or corned beef, place them in the middle of the batter.
+Steam the Moi Moi:
+
+Place the filled containers in a large pot or steamer. Add enough water to the pot to steam the Moi Moi, but make sure the water doesn’t touch the batter. Cover the pot with a lid.
+Steam for about 45 minutes to 1 hour on medium heat. Check occasionally and add more water to the pot if needed.
+Check for Doneness:
+
+The Moi Moi is done when its firm to the touch and a toothpick inserted into the center comes out clean.
+Serve:
+
+Allow the Moi Moi to cool slightly before removing it from the containers. Serve warm with rice, bread, pap, or enjoy it on its own.'/> 
         </div>
 
       </MainLayout>

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import star from "../../public/assets/star2.png";
-import star3 from "../../public/assets/star3.png";
-import star4 from "../../public/assets/star4.png";
+import star from "../../public/meal.svg";
+import tea from "../../public/teacup.svg";
+import progress1 from "../../public/progress1.svg";
 import star5 from "../../public/assets/star5.png";
-import scanner from "../../public/assets/scannerr.png";
+import scanner from "../../public/restaurant.svg";
 import progress from "../../public/assets/progresss.png";
 import gemini from "../../http/gemini";
 import { toast } from "react-toastify";
@@ -14,6 +14,8 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { LoaderCircle } from "lucide-react";
 import { useRouter } from "next/router";
+import { Button } from "@/components/ui/button";
+import DashboardQuickIcon from "./DashboardQuickIcon";
 
 const DashboardBody = () => {
   const { name, age, weight, userGoal, possibleDiseases, diet } = useSetupContext();
@@ -244,146 +246,141 @@ const DashboardBody = () => {
   // const element = document.querySelectorAll(".js-tilt");
   // VanillaTilt.init(element);
   return (
-    <div className="grid md:grid-cols-3 grid-cols-1 gap-3 px-5">
-      <div className="grid grid-rows-2 gap-2 font-jakarta">
-        <div className="bg-[#8C77EC] p-5 gap-2 flex flex-col rounded-2xl js-tilt mealreco">
-          <div className="flex justify-between items-center">
-            <p className=" font-bold text-xs text-white">
-              Foods to Consume <br />
-              (Percentage of Daily Intake)
-            </p>
-            <Image src={star} alt="star" />
-          </div>
-          {loading ? (
-            <LoaderCircle className="my-auto animate-spin mx-auto" />
-          ) : (
-            <div className="gap-2 flex flex-col ">
-              <div className="justify-between flex bg-[#D2E1F9] p-3 rounded-lg">
-                <p className=" font-normal text-xs">Protein</p>
-                <p className=" font-bold text-xs text-[#FFC501]">
-                  {proteinPercent}
-                </p>
-              </div>
-              <div className="justify-between flex bg-[#D2F9E8] p-3 rounded-lg">
-                <p className=" font-normal text-xs">Carbohydrates</p>
-                <p className=" font-bold text-xs text-[#FFC501]">
-                  {carbPercent}
-                </p>
-              </div>
-              <div className="justify-between flex bg-[#F7F9D2] p-3 rounded-lg">
-                <p className=" font-normal text-xs">Healthy Fats</p>
-                <p className=" font-bold text-xs text-[#FFC501]">{fats}</p>
-              </div>
+    <div className="flex ">
+      <div className="flex md:flex-col flex-row justify-between px-5 flex-[.7] text-primarygtext">
+        <div className="flex gap-2 text-primarygtext">
+          <div className=" flex-[.5] bg-secondary-100 p-5 gap-2 flex flex-col rounded-2xl js-tilt mealreco relative">
+            <div className="flex justify-between items-center">
+              <p className=" font-bold text-xs text-white">
+                Today&apos;s Spotlighted Meal
+              </p>
+              <Image src={star} alt="star" />
             </div>
-          )}
+            {loading ? (
+              <LoaderCircle className="my-auto animate-spin mx-auto" />
+            ) : (
+              <div className="gap-2 flex flex-col ">
+                  <p className=" text-[15px] font-bold">{breakfast}</p>
+                <p className='text-color8-700 font-medium text-[11.2px] mb-14'>Nutritious bean cake high in protein and
+                  fiber.
+                </p>
+                <Button className=" bg-base-white text-[#8C77EC] font-bold text-[12px]/[120%] right-0 absolute bottom-0 rounded-[8.8px] py-[11px] px-[32.5px] flex items-center justify-center">
+                  View Recipe and Details
+                </Button>
+              </div>
+            )}
+          </div>
+
+          <div className="flex-[.5] flex flex-col justify-between bg-primary-bg-100 p-4 rounded-2xl js-tilt mealreco">
+            <div className="flex justify-between items-center">
+              <p className=" font-bold text-xs">Progress Tracker</p>
+              <Image src={progress1} alt="progress" />
+            </div>
+            <Button className=" bg-[#fafafa86] mx-auto mt-10 text-primarygtext font-medium text-xs rounded-lg py-[11px] px-[32.5px] flex items-center justify-center">
+              <Image src="/icon5.svg" height={27.6} width={27.6} alt="icon" />
+              <p className=" text-mobile-caption font-bold">Setup Progress Tracker</p>
+            </Button>
+          </div>
         </div>
 
-        <div className="bg-[#FF004D] p-4 rounded-2xl js-tilt mealreco">
-          <div className="flex justify-between items-center mb-5">
-            <p className=" font-bold text-xs">Food to avoid</p>
-            <Image src={star4} alt="star" />
-          </div>
-          {loading ? (
-            <LoaderCircle className="my-auto animate-spin mx-auto" />
-          ) : (
-            <ul className=" text-xs font-medium">{answer2}</ul>
-          )}
+        <div className="flex  justify-between">
+          <DashboardQuickIcon text="Chat with FoodieAI" img="/icon4.svg" link="chat" />
+          <DashboardQuickIcon text="Open AI scanner" img="/icon4.svg" link="scanner" />
+          <DashboardQuickIcon text="Recommended meals" img="/icon4.svg" link="meals" />
+          <DashboardQuickIcon text="Resturants" img="/icon4.svg" link="restaurants" />
         </div>
-      </div>
 
-      <div className="grid grid-rows-2 gap-2 cursor-pointer font-jakarta">
-        <div className="bg-[#D6FBC4] p-4 rounded-2xl js-tilt mealreco ">
-          <div className="flex justify-between items-center mb-5">
-            <p className=" font-bold text-xs text-[#8C77EC]">
-              Recommended Food Sources
-            </p>
-            <Image src={star3} alt="star" />
-          </div>
-          {loading ? (
-            <LoaderCircle className="my-auto animate-spin mx-auto" />
-          ) : (
-            <ul className=" text-xs font-medium text-[#286711]">{answer}</ul>
-          )}
-        </div>
-        <Link href="/scanner">
-          <div className="bg-[#B3C7E4] p-4 rounded-2xl js-tilt h-full mealreco">
+        <div className="flex gap-2 cursor-pointer font-jakarta">
+          <div className="bg-[#D6FBC4] p-4 rounded-2xl js-tilt mealreco flex-[.5] ">
             <div className="flex justify-between items-center mb-5">
-              <p className=" font-bold text-xs text-[#0C2503]">
-                Try Out Scanner
+              <p className=" font-bold text-xs ">
+                Restaurant Track
               </p>
-              <Image src={scanner} alt="scanner" />
+              <Image src={scanner} alt="restaurant" />
             </div>
-            <p className=" font-normal text-[#0C2503]">
-              Upload a food picture, and our AI analyzes it for nutritional
-              info, allergens, and health goal alignment.
-            </p>
           </div>
-        </Link>
+
+          <div className="bg-primary-bg p-4 rounded-2xl js-tilt h-full mealreco flex-[.5]">
+            <div className="flex justify-between items-center mb-5">
+              <p className=" font-bold ">
+                Daily Nutritional Tea
+              </p>
+              <Image src={tea} alt="tea" />
+            </div>
+            <div className="flex flex-col gap-3">
+              <h1 className=" text-desktop-caption font-bold">"Did You Know"</h1>
+              <p className=" italic text-[12px]/[20px]"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna pellentesque torto, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna pellentesque tortorLorem ipsum dolor sit amet, consectetur adipiscing elit. Urna pellentesque.</p>
+            </div>
+          </div>
+        </div>
+
+
       </div>
 
-      <div className="grid grid-rows-1 gap-2">
-        <div className="bg-[#767EE1] p-5 gap-2 flex flex-col rounded-2xl js-tilt mealreco">
-          <div className="flex justify-between items-center">
-            <p className=" font-bold text-xs text-white font-jakarta">
-              Today&apos;s Meal <br />
-              Recommendation
+
+      <div className="bg-color8 p-5 gap-2 flex flex-col rounded-2xl js-tilt  flex-[.4]">
+        <div className="flex justify-between items-center">
+          <p className=" font-bold text-xs text-white">
+            Today&apos;s Spotlighted Meal
+          </p>
+          <Image src="/breakfast.svg" alt="food" width={33} height={33} />
+        </div>
+
+        <Button className=" bg-primarygtext text-primary-bg-100 font-medium text-[12px] rounded-lg py-[11px] px-[32.5px] flex items-center justify-center">
+          Open in Timetable
+        </Button>
+        <div
+          onClick={() => handleNavigate(breakfast)}
+          className="justify-between flex flex-col min-h-[130px] bg-primary-bg-100 px-3 pt-3 relative rounded-lg opacity-70"
+        >
+          <div className="flex justify-between">
+            <p className="text-primarygtext font-bold text-mobile-caption">Breakfast</p>
+          </div>
+          <div className="flex justify-between flex-col mb-14">
+            <p className="text-[#1E5E08] font-bold text-[15px]">{breakfast}</p>
+            <p className='text-color8-700 font-medium text-[11.2px]'>Nutritious bean cake high in protein and
+              fiber.
             </p>
-            <Image src={star5} alt="star" />
           </div>
+          <Button className=" bg-base-white text-[#8C77EC] font-bold text-[12px]/[120%] right-0 absolute bottom-0 rounded-[8.8px] py-[11px] px-[32.5px] flex items-center justify-center">
+            View Recipe and Details
+          </Button>
+        </div>
 
-          <div className=" bg-[#FFFFFF] opacity-70 text-[#8C77EC] font-medium text-xs rounded-lg py-[9.5px] px-[32.5px] flex items-center justify-center">
-            Click on each meal for more info
+        <div
+          onClick={() => handleNavigate(lunch)}
+          className="justify-between flex flex-col min-h-[130px] bg-primary-bg-100 px-3 pt-3 relative rounded-lg opacity-70"
+        >
+          <div className="flex justify-between">
+            <p className="text-primarygtext font-bold text-mobile-caption">Lunch</p>
           </div>
-          <div
-            onClick={() => handleNavigate(breakfast)}
-            className="justify-between flex flex-col min-h-[117px] bg-[#D2F9E8] p-3 rounded-lg opacity-70"
-          >
-            <div className="flex justify-between">
-              <p className="text-[#0C2503] font-bold text-xs">Breakfast</p>
-              <p className="text-[#FFC501] font-medium text-[11px] leading-4 ">
-                View Recipe and Details
-              </p>
-            </div>
-            <div className="flex justify-between flex-col">
-              <p className="text-[#1E5E08] font-bold text-sm">{breakfast}</p>
-              {/* <p className='text-[#0C2503] font-medium text-[10px] leading-3'>Nutritious bean cake high in protein and
-                fiber.</p> */}
-            </div>
+          <div className="flex justify-between flex-col mb-14">
+            <p className="text-[#1E5E08] font-bold text-[15px]">{lunch}</p>
+            <p className='text-color8-700 font-medium text-[11.2px]'>Nutritious bean cake high in protein and
+              fiber.
+            </p>
           </div>
+          <Button className=" bg-base-white text-[#8C77EC] font-bold text-[12px]/[120%] right-0 absolute bottom-0 rounded-[8.8px] py-[11px] px-[32.5px] flex items-center justify-center">
+            View Recipe and Details
+          </Button>
+        </div>
 
-          <div
-            onClick={() => handleNavigate(lunch)}
-            className="justify-between flex flex-col min-h-[117px] bg-[#D2F9E8] p-3 rounded-lg opacity-70"
-          >
-            <div className="flex justify-between">
-              <p className="text-[#0C2503] font-bold text-xs">Lunch</p>
-              <p className="text-[#FFC501] font-medium text-[11px] leading-4 font-jakarta">
-                View Recipe and Details
-              </p>
-            </div>
-            <div className="flex justify-between flex-col">
-              <p className="text-[#1E5E08] font-bold text-sm">{lunch}</p>
-              {/* <p className='text-[#0C2503] font-medium text-[10px] leading-3'>Nutritious bean cake high in protein and
-                fiber.</p> */}
-            </div>
+        <div
+          onClick={() => handleNavigate(dinner)}
+          className="justify-between flex flex-col min-h-[130px] bg-primary-bg-100 px-3 pt-3 relative rounded-lg opacity-70"
+        >
+          <div className="flex justify-between">
+            <p className="text-primarygtext font-bold text-mobile-caption">Lunch</p>
           </div>
-
-          <div
-            onClick={() => handleNavigate(dinner)}
-            className="justify-between flex flex-col min-h-[117px] bg-[#D2F9E8] p-3 rounded-lg opacity-70"
-          >
-            <div className="flex justify-between">
-              <p className="text-[#0C2503] font-bold text-xs">Dinner</p>
-              <p className="text-[#FFC501] font-medium text-[11px] leading-4 font-jakarta">
-                View Recipe and Details
-              </p>
-            </div>
-            <div className="flex justify-between flex-col">
-              <p className="text-[#1E5E08] font-bold text-sm">{dinner}</p>
-              {/* <p className='text-[#0C2503] font-medium text-[10px] leading-3'>Nutritious bean cake high in protein and
-                fiber.</p> */}
-            </div>
+          <div className="flex justify-between flex-col mb-14">
+            <p className="text-[#1E5E08] font-bold text-[15px]">{dinner}</p>
+            <p className='text-color8-700 font-medium text-[11.2px]'>Nutritious bean cake high in protein and
+              fiber.
+            </p>
           </div>
+          <Button className=" bg-base-white text-[#8C77EC] font-bold text-[12px]/[120%] right-0 absolute bottom-0 rounded-[8.8px] py-[11px] px-[32.5px] flex items-center justify-center">
+            View Recipe and Details
+          </Button>
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ import { useRouter } from "next/router"
 import { useForm } from "react-hook-form"
 import { toast } from "react-toastify"
 import { z } from "zod"
+import Cookies from "js-cookie";
 
 const FormSchema = z.object({
     pin: z.string().min(5, {
@@ -31,7 +32,7 @@ const OtpModal = () => {
         toast.success(`${data.pin} done`)
         try {
             toast.info('Verifying code...');
-            const resp = await axiosKonsumeInstance.get(`/api/VerificationCode/VerifyCode/${data.pin}/${userID}`);
+            const resp = await axiosKonsumeInstance.get(`/api/VerificationCode/VerifyCode/${data.pin}/${Cookies.get("userid")}`);
             console.log(resp);
             toast.success(resp.data.message);
             route.push('/auth/login');

@@ -1,48 +1,81 @@
 import gemini from '@/http/gemini';
 import { tree } from 'next/dist/build/templates/app-page';
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import axios from 'axios';
+import Link from 'next/link';
+import MealsContext from '@/context/MealsContext';
 
-const MealCard = ({query}:any) => {
-  const [answer, setAnswer] = useState("");
-  const [loading, setIsLoading] = useState(false);
-  
-  const debounce = (fn: Function | any, delay: number) => {
-    let timer: NodeJS.Timeout;
-    return function (...args: any[]) {
+const debounce = (fn: Function | any, delay: number) => {
+  let timer: NodeJS.Timeout;
+  return function (...args: any[]) {
       clearTimeout(timer);
       timer = setTimeout(() => fn(...args), delay);
-    };
   };
+};
+const MealCard = ({query, meal}:any) => {
+  const [answer, setAnswer] = useState<string | null>(null);
+    const [foodDesc, setFoodDesc] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading2, setIsLoading2] = useState(false);
+    const [imageUrl, setImageUrl] = useState<null | string>(null);
+    const {setRecommendedMeals, recommendedMeals} = useContext(MealsContext);
 
-const generateMealCards = async () => {
+
+   
+
+const options:any = {
+  method: 'POST',
+  url: 'https://openjourney1.p.rapidapi.com/models/stabilityai/stable-diffusion-xl-base-1.0',
+  headers: {
+    'x-rapidapi-key': '69f9940100msh53805ec922ce8b3p1fd451jsnd7939c9125fd',
+    'x-rapidapi-host': 'openjourney1.p.rapidapi.com',
+    'Content-Type': 'application/json'
+  },
+  data: {
+    inputs: meal?.name
+  },
+  responseType: 'blob'
+};
+const genImage = async  () => {
   try {
-    setIsLoading(true)
-    const { data } = await gemini.post("/gemini-pro:generateContent", {
-      contents: [{ parts: [{ text: query }] }],
-    });
-    console.log(data);
-    setAnswer(data.candidates[0].content.parts[0].text);
-    setIsLoading(false)
+    const { data: blob } = await axios.request(options);
+    console.log(blob);
+    
+    // Create a URL from the blob
+    const imageUrl = URL.createObjectURL(blob);
+
+    // Set the image URL to state or wherever needed
+    setImageUrl(imageUrl);
   } catch (error) {
-    console.error("Error generating meal content:", error);
+    console.error(error);
   }
-} // Throttle time, e.g., 2000ms = 2 seconds
+}
+useEffect(() => {
+  genImage()
+}, [recommendedMeals])
 
-// Use throttledGenerateMealCards(query) instead of calling the function directly
 
-  useEffect(() => {
-    const debounceMakeRequest = debounce( generateMealCards, 2000);
-    debounceMakeRequest();
-  }, [])
+    // Trigger the description generation once `answer` is updated
+  //   useEffect(() => {
+  //     if (answer) {
+  //       genImage()
+  //         generateMealDesc();
+  //     }
+  // }, [answer]); // Dependency on `answer` ensures this effect runs after `answer` is updated
 
+    // useEffect(() => {
+    //     generateMealCards();
+    // }, [query]);
   return (
     <div className='shadow-bordershad border-2 border-[black] rounded'>
-        <Image src='/fruits.jpeg' height={96} width={260} alt='food' className='w-full h-[130px] object-cover'/>
+      <Link href={`/meals/${answer}`}>
+        <Image src={imageUrl ? imageUrl : '/placeholder1.jpeg'} loading='lazy' height={96} width={260} alt='food' className='w-full h-[130px] object-cover'/>
         <div className=' p-3'>
-        <h1 className=' text-desktop-content font-bold'>{loading ? 'loading...' : answer}</h1>
-        <p className=' text-desktop-content'>A popular dish containing some ingredients like ...</p>
+        <h1 className=' text-desktop-content font-bold'>{isLoading ? 'loading...' : meal?.name}</h1>
+        <p className=' text-desktop-content'>{isLoading2 ? 'loading...' : meal?.description}</p>
         </div>
+        </Link>
     </div>
   )
 }

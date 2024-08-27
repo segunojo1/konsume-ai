@@ -7,17 +7,47 @@ import gemini from '@/http/gemini';
 import FilterMeal from '@/modules/meals/FilterMeal';
 import MealCard from '@/modules/meals/MealCard';
 import Image from 'next/image'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie';
+import { axiosKonsumeInstance } from '@/http/konsume';
+import MealsContext from '@/context/MealsContext';
+import { Mealprops } from '@/@types';
 
 const Meals = () => {
   const { name, toggled }: any = useContext(MainLayoutContext);
   const [fetchingMeals, setFetchingMeals] = useState(false)
   const [activeMeal, setActiveMeal] = useState<string>('All');
+  const {recommendedMeals, setRecommendedMeals} = useContext(MealsContext);
 
+  const getMeals = async () => {
+    try {
+      const { data } = await axiosKonsumeInstance.get('/api/ChatBot/GenerateMeals', {
+        params: {
+          profileId: 7,
+        },
+      });
+      setRecommendedMeals(data.$values);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   const handleMealChange = (meal: string) => {
     setActiveMeal(meal);
   };
+  
+  const [user, setUser] = useState<string | undefined>();
+  const dataFetchedRef = useRef(false); // Ref to track if data has been fetched
+  
+  useEffect(() => {
+    setUser(Cookies.get('konsumeUsername'));
+  
+    if (!dataFetchedRef.current) {
+      getMeals();
+      dataFetchedRef.current = true; // Set to true after fetching data
+    }
+  }, []);
   
 
   return (
@@ -29,7 +59,7 @@ const Meals = () => {
 
             <div className="relative w-fit">
               <Image src='/multipleline.svg' alt='multi line' height={141} width={98} className='  absolute bottom-0 top-0 my-auto right-0 -z-50' />
-              <h1 className="md:text-desktop-heading4 text-[28px]/[40px] font-bold z-50">Hello, {name ? name : "..."} </h1>
+              <h1 className="md:text-desktop-heading4 text-[28px]/[40px] font-bold z-50">Hello, {user ? user : ".."}</h1>
             </div>
             <p className=" text-desktop-content text-primarygtext italic max-w-[450px]">Here are your personalized meal recommendations, tailored just for you based on your health, dietary goals and preferences. <b>Bon Appétit!</b></p>
           </div>
@@ -71,13 +101,18 @@ const Meals = () => {
 
         </div>
         <div className='grid grid-cols-4 gap-4'>
+          {
+            setRecommendedMeals && recommendedMeals.map((meal: Mealprops) => (
+              <MealCard query={``} meal={meal}/>
+            ))
+          }
           
-          <MealCard query={`Generate a random meal a ${Cookies.get('diet')} can eat for breakfast. meal name must be short e.g jollof rice`} />
-          <MealCard query={`Generate a random meal a ${Cookies.get('diet')} can eat for dinner. meal name must be short e.g jollof rice`} />
-          <MealCard query={`Generate a random meal a ${Cookies.get('diet')} can eat for lunch. meal name must be short e.g jollof rice`} />
-          <MealCard query={`Generate a random meal a ${Cookies.get('diet')} can eat for a snack. meal name must be short e.g jollof rice`} />
-          <MealCard query={`Generate a random meal a ${Cookies.get('diet')} can eatas brunch. meal name must be short e.g jollof rice`} />
-          <MealCard query={`Generate a random meal a ${Cookies.get('diet')} can eat for dinner. meal name must be short e.g jollof rice`} />
+          <MealCard query={`Generate the name of a random meal a ${Cookies.get('diet')} can eat for breakfast. meal name must be short i have ${Cookies.get('possibleDiseases')} and i want to ${Cookies.get('userGoal')}e.g jollof rice `} />
+          <MealCard query={`Generate the name of a random meal a ${Cookies.get('diet')} can eat for dinner. meal name must be short i have ${Cookies.get('possibleDiseases')} and i want to ${Cookies.get('userGoal')}e.g jollof rice `} />
+          <MealCard query={`Generate the name of a random meal a ${Cookies.get('diet')} can eat for lunch. meal name must be short i have ${Cookies.get('possibleDiseases')} and i want to ${Cookies.get('userGoal')}e.g jollof rice `} />
+          <MealCard query={`Generate the name of a random meal a ${Cookies.get('diet')} can eat for a snack. meal name must be short i have ${Cookies.get('possibleDiseases')} and i want to ${Cookies.get('userGoal')}e.g jollof rice `} />
+          <MealCard query={`Generate the name of a random meal a ${Cookies.get('diet')} can eatas brunch. meal name must be short i have ${Cookies.get('possibleDiseases')} and i want to ${Cookies.get('userGoal')}e.g jollof rice `} />
+          <MealCard query={`Generate the name of a random meal a ${Cookies.get('diet')} can eat for dinner. meal name must be short i have ${Cookies.get('possibleDiseases')} and i want to ${Cookies.get('userGoal')}e.g jollof rice `} />
         </div>
 
       </MainLayout>

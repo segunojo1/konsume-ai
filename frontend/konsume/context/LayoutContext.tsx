@@ -9,7 +9,7 @@ export function MainLayoutContextProvider({ children }: { children: React.ReactN
   const [activePage, setActivePage] = useState('home');
   const [toggled, setToggled] = useState<boolean>(false);
   const [userMessage, setUserMessage] =useState('');
-  const [name, setName] = useState<string | undefined>(undefined);
+  const [name, setName] = useState<string | undefined>(Cookies.get('konsumeUsername'));
 
   useEffect(() => {
 
