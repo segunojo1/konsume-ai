@@ -19,6 +19,7 @@ namespace KONSUME.Infrastructure.Context
         public DbSet<Profile> Profiles => Set<Profile>();
         public DbSet<UserInteraction> UserInteractions => Set<UserInteraction>();
         public DbSet<VerificationCode> VerificationCodes => Set<VerificationCode>();
+        public DbSet<MealRecommendation> MealRecommendations => Set<MealRecommendation>();
 
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)

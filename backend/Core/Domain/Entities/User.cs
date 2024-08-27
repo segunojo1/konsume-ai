@@ -19,5 +19,6 @@ namespace KONSUME.Core.Domain.Entities
         [JsonInclude]
         public Role Role { get; set; }
         public ICollection<VerificationCode> VerificationCodes { get; set; } = new HashSet<VerificationCode>();
+        public ICollection<UserInteraction> UserInteractions { get; set; } = new HashSet<UserInteraction>();
     }
 }

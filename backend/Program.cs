@@ -44,7 +44,8 @@ builder.Services.AddCors(cors =>
 {
     cors.AddPolicy("konsume", pol =>
     {
-        pol.WithOrigins("https://konsume-v2.vercel.app")
+        pol.WithOrigins("https://konsume-v2.vercel.app", "https://konsume-web-yzto.vercel.app/",
+            "https://localhost:3000", "http://localhost:3000", "https://4rcrtt-3000.csb.app")
            .AllowAnyHeader()
            .AllowAnyMethod()
            .AllowCredentials();
@@ -101,6 +102,7 @@ builder.Services.AddTransient<IProfileService, ProfileService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IUserInteractionService, UserInteractionService>();
 builder.Services.AddScoped<IVerificationCodeService, VerificationCodeService>();
+builder.Services.AddScoped<IMealRecommendationService, MealRecommendationService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddAuthentication(options =>
