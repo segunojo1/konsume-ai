@@ -7,7 +7,7 @@ const SetupContext = createContext<SetupContextType | undefined>(undefined);
 export const SetupProvider: React.FC<SetupProviderProps> = ({ children }) => {
   const [userGoal, setUserGoal] = useState<string>('');
   const [possibleDiseases, setPossibleDiseases] = useState([]);
-  const [height, setHeight] = useState<string>('');
+  const [nationality, setNationality] = useState<string>('');
   const [age, setAge] = useState<string>('');
   const [gender, setGender] = useState<string>('');
   const [weight, setWeight] = useState<string>('');
@@ -31,14 +31,14 @@ export const SetupProvider: React.FC<SetupProviderProps> = ({ children }) => {
         setPossibleDiseases,
         name,
         setName,
-        height,
+        nationality,
         age,
         gender,
         weight,
         setAge,
         setGender,
         setWeight,
-        setHeight,
+        setNationality,
         currentPage,
         setCurrentPage,
         nextPage,

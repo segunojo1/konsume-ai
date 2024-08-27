@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -60,6 +60,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -117,9 +121,6 @@ input[type="number"] {
 .dash_img {
   background-image: url("/assets/dash_bg.png");
 }
-.font-jakarta {
-  font-family: "Plus Jakarta Sans", sans-serif;
-}
 .font-satoshi {
   font-family: "Satoshi", sans-serif;
 }
@@ -127,28 +128,139 @@ input[type="radio"]:focus {
   outline: none; /* Remove default focus outline */
   position: relative;
 }
+input[type="radio"]::before{
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  transform-origin: bottom left;
+}
+.scroll-button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+
+.first-text, .second-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  transition: transform 0.5s ease;
+}
+
+.second-text {
+  transform: translate(150%, -50%);
+}
+
+.scroll-button:hover .first-text {
+  transform: translate(-250%, -50%);
+}
+
+.scroll-button:hover .second-text {
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  position: relative;
+  height: 200%;
+  transition: transform 1s ease-in-out;
+}
+
+.content-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.scrolled-up {
+  transform: translateY(-115vh);
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  --_c:no-repeat radial-gradient(farthest-side,#25b09b 92%,#0000);
+  background: 
+    var(--_c) top,
+    var(--_c) left,
+    var(--_c) right,
+    var(--_c) bottom;
+  background-size: 12px 12px;
+  animation: l7 1s infinite;
+}
+@keyframes l7 {to{transform: rotate(.5turn)}}
+
+
+/* HTML: <div class="loader"></div> */
+.loader2 {
+  width: 60px;
+  left: 0;
+  aspect-ratio: 4;
+  --_g: no-repeat radial-gradient(circle closest-side,#000 90%,#0000);
+  background: 
+    var(--_g) 0%   50%,
+    var(--_g) 50%  50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100%/3) 100%;
+  animation: l7 1s infinite linear;
+}
+@keyframes l7 {
+    33%{background-size:calc(100%/3) 0%  ,calc(100%/3) 100%,calc(100%/3) 100%}
+    50%{background-size:calc(100%/3) 100%,calc(100%/3) 0%  ,calc(100%/3) 100%}
+    66%{background-size:calc(100%/3) 100%,calc(100%/3) 100%,calc(100%/3) 0%  }
+}
 
 /* Custom focus style for radio button */
-input[type="radio"]:focus::before {
+input[type="radio"]:active::before {
   content: "";
   position: absolute;
   top: -2px;
   left: -2px;
   right: -2px;
   bottom: -2px;
-  border: 2px solid #007bff;
+  border: 2px solid green;
   border-radius: 50%;
   /* width: fit-content; */
 }
+input[type="checkbox"], input[type="radio"] {
+  box-shadow: inset 0 2px 2px -1px rgba(74, 74, 104, 0.1);
+  display: grid;
+  
+}
+input[type="checkbox"]::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  transform-origin: bottom left;
+  background-image: url("../public/On.png");
+  background-position: center;
+}
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+  accent-color: green;
+}
 
-.goals {
-  background-image: url("/assets/noisetexture.png");
-  background-size: cover;
-  background-repeat: repeat;
+/* .goals {
   border-radius: 20px;
   padding: 3rem;
   width: fit-content;
-}
+} */
 .nav {
   left: 0;
 }

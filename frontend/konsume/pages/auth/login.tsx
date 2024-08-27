@@ -67,9 +67,9 @@ const Login = () => {
         },
       });
       Cookies.set('ktn', data.token);
-      Cookies.set('konsumeUsername', data.value.fullName);
+      // Cookies.set('konsumeUsername', data.value.fullName);
       Cookies.set('userid', data.value.id);
-
+      sessionStorage.setItem('konsumeUsername', data.value.fullName)
       toast.success(data.message);
       checkUser();
 
@@ -107,6 +107,8 @@ const Login = () => {
             Authorization: `Bearer ${Cookies.get('ktn')}`,
           },
         });
+        console.log(data);
+        
         Cookies.set('age', data?.value?.age);
         Cookies.set('gender', data?.value?.gender);
         Cookies.set('height', data?.value?.weight);
@@ -123,87 +125,88 @@ const Login = () => {
     }
   };
   return (
-    <div className="h-[100vh] font-jakarta">
-      <div className="md:p-10 p-6">
-        <h1 className="md:text-3xl text-xl font-bold leading-relaxed">Welcome Back!</h1>
-        <p className="md:text-xl text-sm mb-10  rounded-">
-          Your personalized Nutrition journey awaits.
-          <br /> Please log in to continue.
-        </p>
-        <div className="relative w-[83%] m-auto">
-          <div className="signup_img"></div>
-          {/* <div className="signup_container md:p-[50px]">
-                        <form  className="signup_content grid md:grid-cols-2 grid-cols-1 md:gap-10 gap-2 md:gap-y-16 gap-y-7">
-                            <div className="grid ">
-                                <label htmlFor="email" className=" text-sm md:text-xl font-bold">Email</label>
-                                <input type="text" placeholder="Email Address" id="email" className=" bg-[#D6FBC4] p-3 md:p-6 rounded-full outline-none"/>
-                            </div>
-                            <div className="grid ">
-                                <label htmlFor="password" className=" text-sm md:text-xl font-bold">Password</label>
-                                <input type="password" placeholder="Password" id="password" className=" bg-[#D6FBC4] p-3 md:p-6 rounded-full outline-none"/>
-                            </div>
-                        </form>
-                        <button type="submit" className="py-[7px] px-[84px] bg-[#8DCF38] rounded-[34.71px] mx-auto w-fit flex">Login</button>
-                    </div> */}
-          {/* input */}
-          <div className="signup_container md:p-[50px]">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="">
-                <div className="signup_content grid md:grid-cols-2 grid-cols-1 md:gap-6 gap-2 md:gap-y-10 gap-y-7">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-sm md:text-xl font-medium !leading-10">Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Input your email"
-                            {...field}
-                            className="h-[48px] bg-[#D6FBC4] py-[5.5px] pr-[31.45px] pl-[14.8px] md:p-6 rounded-full outline-none"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem className="">
-                        <FormLabel className="text-sm md:text-xl font-medium !leading-10">Password</FormLabel>
-                        <FormControl className="">
-                          <Input
-                            placeholder="Input your password"
-                            type="password"
-                            {...field}
-                            className="h-[48px] bg-[#D6FBC4] py-[5.5px] pr-[31.45px] pl-[14.8px] md:p-6 rounded-full outline-none"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="flex flex-col justify-between gap-10 mt-8 ">
-                  <Button
-                    className="mx-auto bg-[#8DCF384D] p-[10px] flex-[.7] border-2 w-full border-[#D6FBC4] rounded-[30px] flex items-center gap-[10px]"
-                    type="submit"
-                  >
-                    Login
-                  </Button>
-                  <div>
-                    Don&apos;t have an account?{' '}
-                    <Link href="/auth/signup" className="font-semibold underline">
-                      Signup
-                    </Link>{' '}
-                  </div>
-                </div>
-              </form>
-            </Form>
+    <div className="font-satoshi gap-5 flex-col flex w-fit mx-auto pb-5 py-10 px-5">
+      <div className='absolute left-20 top-0 bottom-0 my-auto h-fit p-2 bg-primary-bg w-fit rounded-full shadow-[0_1px_4px_0_rgba(12,12,13,0.5)] cursor-pointer' >
+        <Image src='/assets/google.png' width={32} height={32} alt='google' />
+      </div>
+      <div className='flex flex-col items-center 2xl:gap-[36px] gap-3 max-w-[767px] '>
+        <div className='flex items-center gap-4 relative w-fit'>
+          <h1 className='2xl:text-desktop-heading2 lg:text-[42.67px]/[120%] text-mobile-heading1 font-bold from-[#000000] from-0% to-100% to-[#EEECEC] bg-gradient-to-b bg-clip-text text-[transparent] '>Thank you for </h1>
+          <div className=' '>
+            <Image src='/curved_line.svg' alt='curved line' height={500} width={282} className='2xl:w-[282px] lg:w-[250px] w-[141.16px] absolute 2xl:top-5 xl:top-1 2xl:-right-[14px] xl:-right-[48px] -z-10' />
+            <h1 className=' 2xl:text-[55px]/[120%] lg:text-[42.67px]/[120%] text-mobile-heading1 italic font-bold from-[#000000] from-0% to-100% to-[#EEECEC] bg-gradient-to-b bg-clip-text text-[transparent] z-50'>Joining Us</h1>
           </div>
         </div>
+
+      </div>
+      {/* <Image src='/assets/back-gradient.png' width={473.93} height={241.42} alt='gradient' className='rounded-[61469.42px] absolute'/> */}
+      {/* <div className='2xl:w-[473.93px] lg:w-[401px] 2xl:h-[241.42px] lg:h-[214px] rounded-[61469.42px] mx-auto bg-neutrals-100 fixed top-[180px] left-0 right-0 -z-10 blur-[170.6px]'></div> */}
+      <div className='max-w-[807px] mx-auto'>
+
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className=" w-full flex flex-col items-center">
+            <div className=" flex flex-col gap-6 w-full ">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem className='flex flex-col gap-2'>
+                    <FormLabel className="text-[19.63px]/[120%] font-bold">Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Input your email"
+                        {...field}
+                        className="xl:max-w-[348.9px] font-normal text-[17.44px]/[120%] text-[#8C8CA1] py-[13px] px-[17px] "
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col gap-2">
+                    <FormLabel className="text-[19.63px]/[120%] font-bold">Password</FormLabel>
+                    <FormControl className="">
+                      <Input
+                        placeholder="Input your password"
+                        type="password"
+                        {...field}
+                        className="xl:max-w-[348.9px] font-normal text-[17.44px]/[120%] text-[#8C8CA1] py-[13px] px-[17px]"
+                      />
+                    </FormControl>
+                    <FormMessage className='block' />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <Button
+              className=" mt-8 mx-auto bg-[#8DCF384D] p-[10px] border-2 w-[348.9px] h-fit border-[#D6FBC4] rounded-[30px] text-desktop-highlight font-bold min-h-[52px]"
+              type="submit"
+            >
+              Continue
+            </Button>
+
+          </form>
+          <div className="flex flex-col justify-between gap-4 mt-4">
+            <p className='text-desktop-highlight font-bold mx-auto'>Or</p>
+            <Button
+              className=" mx-auto  p-[10px] flex-[.7] border-2 w-[350px] border-primary-bg-800 text-primarygtext rounded-[30px] flex items-center gap-[10px] text-desktop-highlight font-bold"
+              type="submit"
+            >
+              <Image src="/assets/google.png" width={32} height={32} alt='google' />
+              Sign in with Google
+            </Button>
+          </div>
+          <div className='font-bold text-desktop-content text-center mb-4 2xl:mb-11 mt-5'>
+            Dont have an account?{' '}
+            <Link href="/auth/signup" className="  text-secondary">
+              Sign up
+            </Link>{' '}
+          </div>
+        </Form>
       </div>
     </div>
   );

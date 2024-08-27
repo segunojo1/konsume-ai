@@ -26,6 +26,7 @@ export const diettype = [
   {
     title: 'Other',
     text: "Best of luck in managing your stress levels! We're here to support you. We've curated personalized recommendations on nutrition to help you combat stress and promote overall well-being.",
+    data: "Other"
   },
   {
     title: 'None',

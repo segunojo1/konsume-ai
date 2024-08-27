@@ -2,18 +2,21 @@ import DashboardBody from '@/modules/dashboard/DashboardBody';
 import DashboardHead from '@/modules/dashboard/DashboardHead';
 import DashboardNav from '@/modules/dashboard/DashboardNav';
 import Sidebar from '@/modules/dashboard/Sidebar';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useSetupContext } from '../../context/SetupContext';
 import withAuth from '../../helpers/withAuth';
 import ChatWithFoodie from '@/modules/dashboard/ChatWithFoodie';
 import { axiosKonsumeInstance } from '../../http/konsume';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
+import MainLayoutContext from '@/context/LayoutContext';
+import MainLayout from '@/components/Layout/MainLayout';
 
 const Dashboard = () => {
-  const [toggled, setToggled] = useState<boolean>(false);
-  const { userGoal, name, userID, setPossibleDiseases, setUserGoal, setWeight, setDiet, setAge, setHeight } =
+  
+  const { userGoal, name, userID, setPossibleDiseases, setUserGoal, setWeight, setDiet, setAge, setNationality } =
     useSetupContext();
+    const {toggled, setToggled} = useContext(MainLayoutContext);
   console.log(userGoal);
 
   const router = useRouter();
@@ -31,7 +34,7 @@ const Dashboard = () => {
           setWeight(data?.value?.weight);
           setDiet(data?.value?.dietType);
           setAge(data?.value?.age);
-          setHeight(data?.value?.height);
+          setNationality(data?.value?.nationality);
         }, 1000);
         console.log(data);
       } catch (error) {
@@ -43,13 +46,15 @@ const Dashboard = () => {
   }, [setPossibleDiseases, setUserGoal, setWeight, setDiet, setAge, router]);
   return (
     <div>
-      <Sidebar toggled={toggled} setToggled={setToggled} />
-      <div className={`${toggled ? '' : 'md:ml-[280px]'} gap-5 flex flex-col px-5`}>
-        <DashboardNav toggled={toggled} setToggled={setToggled} />
+      <MainLayout fixedTopbar={true}>
+
+      <div className={`${toggled ? '' : 'md:ml-[100px]'} gap-5 flex flex-col px-7 mt-14`}>
+        {/* <DashboardNav toggled={toggled} setToggled={setToggled} /> */}
         <DashboardHead />
         <ChatWithFoodie />
         <DashboardBody />
       </div>
+      </MainLayout>
     </div>
   );
 };

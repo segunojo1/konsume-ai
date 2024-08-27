@@ -5,6 +5,7 @@ const config = {
   content: [
     './pages/**/*.{ts,tsx}',
     './modules/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
 	],
@@ -92,9 +93,43 @@ const config = {
       },
     },
     fontFamily: {
-      playfair: "Playfair Display"
+      playfair: "Playfair Display",
+      satoshi: "Satoshi",
+      worksans: "Work Sans",
+      jakarta: "Plus Jakarta Sans"
+    },
+    fontSize: {
+      "desktop-display1": ["144px", "120%"],
+      "desktop-display2": ["96px", "120%"],
+      "desktop-display3": ["64px", "120%"],
+      "desktop-heading1": ["56px", "120%"],
+      "desktop-heading2": ["48px", "120%"],
+      "desktop-heading3": ["40px", "120%"],
+      "desktop-heading4": ["32px", "120%"],
+      "desktop-hero": ["28px", "120%"],
+      "desktop-feature": ["24px", "120%"],
+      "desktop-highlight": ["18px", "120%"],
+      "desktop-content": ["16px", "120%"],
+      "desktop-caption": ["14px", "120%"],
+      "mobile-display1": ["44px", "120%"],
+      "mobile-display2": ["40px", "120%"],
+      "mobile-display3": ["32px", "120%"],
+      "mobile-heading1": ["28px", "120%"],
+      "mobile-heading2": ["24px", "120%"],
+      "mobile-heading3": ["20px", "120%"],
+      "mobile-heading4": ["18px", "120%"],
+      "mobile-feature": ["18px", "120%"],
+      "mobile-highlight": ["16px", "120%"],
+      "mobile-content": ["14px", "120%"],
+      "mobile-caption": ["12px", "120%"],
+      "mobile-footnote": ["10px", "120%"],
     },
     extend: {
+      boxShadow: {
+        shad: 'inset 0px 2.18px 2.18px -1.09px rgba(74, 74, 104, 0.10)',
+        focusshad: '0px 0px 0px 4px rgba(75, 77, 237, 0.20)',
+        bordershad: 'inset 1px 0 0 0 #F2F3F4'
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -129,6 +164,10 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "caret-blink": {
+          "0%,70%,100%": { opacity: "1" },
+          "20%,50%": { opacity: "0" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -141,6 +180,7 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "caret-blink": "caret-blink 1.25s ease-out infinite"
       },
     },
   },

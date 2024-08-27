@@ -18,36 +18,21 @@ const Goals = () => {
   };
 
   return (
-    <div className="md:p-12 p-3 goals mx-auto bg-[#BEFFA7] transition-opacity">
+    <div className="font-jakarta md:py-14 md:px-10 py-9 px-3 md:mt-16 mt-10 rounded-[20px] mx-auto bg-primary-bg transition-opacity">
       <div>
-        <div className="font-jakarta">
-          <h1 className="md:text-2xl font-medium mb-6 leading-8">
+        <div className="">
+          <h1 className="md:text-[22px] text-[16px] font-bold mb-6">
             What are your health and wellness goals? (Check all that apply)
           </h1>
-          {/* <p className="mb-4">Tell us what your goals for signing up are.</p> */}
         </div>
-        <div className="flex flex-col md:gap-3 gap-1">
+        <div className="flex flex-col md:gap-5 gap-4">
           {dashboardhero.map(({ title }) => (
             <GoalCheckbox key={title} label={title} data={title} />
           ))}
-          {/* <GoalCheckbox label="Gain Weight" data="gain_Weight" />
-                    <GoalCheckbox label="Maintain Weight" data="maintain_Weight" />
-                    <GoalCheckbox label="Start a fitness journey" data="fitness" />
-                    <GoalCheckbox label="Improve Muscle tone" data="muscle_tone" />
-                    <GoalCheckbox label="Boost Energy Levels" data="boost_energy_level" />
-                    <GoalCheckbox label="Manage Stress" data="manage_stress" />
-                    <GoalCheckbox label="Improve Cardiovascular Health" data="cardio_health" />
-                    <GoalCheckbox label="Just to Eat Healthy" data="eat_healthy" /> */}
         </div>
       </div>
-      <p className=" font-medium  text-xl md:text-4xl text-center mt-4 text-[#0C2503]">Just a little more info!</p>
-      <div className="flex gap-5 mx-auto w-fit mt-7">
-        <div
-          className="w-[50px] h-[50px] border-[2.5px] border-[#FFC501] rounded-[40px] flex items-center justify-center"
-          onClick={previousPage}
-        >
-          <Image alt="line" src={line} width="30" height="30" className="" />
-        </div>
+      <p className=" font-satoshi  text-xl md:text-[28px] font-bold text-center mt-20 text-[#0C2503]">Just a little more info!</p>
+      <div className="flex gap-5 mx-auto w-fit mt-3">
         <div
           className="w-[50px] h-[50px] border-[2.5px] border-[#FFC501] rounded-[40px] flex items-center justify-center"
           onClick={checkForm}

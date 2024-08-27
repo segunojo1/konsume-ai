@@ -26,7 +26,7 @@ const DashboardBody = () => {
     "possibleDiseases"
   )} and i am ${Cookies.get(
     "diet"
-  )}. Please give me like 3 or more recommended food sources. Not more than 30 words`;
+  )}. Please give me like 3  recommended food sources.`;
 
   const avoidFoodPrompt = `My name is ${Cookies.get("name")} I am ${Cookies.get(
     "age"
@@ -76,27 +76,21 @@ const DashboardBody = () => {
     userGoal
   )}, my health conditons are ${Cookies.get(
     "possibleDiseases"
-  )} and i am ${Cookies.get("diet")}. Generate a random ${Cookies.get(
-    "height"
-  )} breakfast meal fit for my health in this format e.g Rice and stew or amala don't tell me any other thing just give me the food name, no other thing said`;
+  )} and i am ${Cookies.get("diet")}. Generate a random Nigerian breakfast meal fit for my health in this format e.g Rice and stew or amala don't tell me any other thing just give me the food name, no other thing said`;
   const lunchQuery = `My name is ${Cookies.get("name")} I am ${Cookies.get(
     "age"
   )} years old and ${Cookies.get("weight")}kg, I am working on ${Cookies.get(
     "userGoal"
   )}, my health conditons are ${Cookies.get(
     "possibleDiseases"
-  )} and i am ${Cookies.get("diet")}. Generate a random ${Cookies.get(
-    "height"
-  )} lunch meal fit for my health in this format e.g jollof rice don't tell me any other thing just give me the food name, no other thing said`;
+  )} and i am ${Cookies.get("diet")}. Generate a random Nigerian lunch meal fit for my health in this format e.g jollof rice don't tell me any other thing just give me the food name, no other thing said`;
   const dinnerQuery = `My name is ${Cookies.get("name")} I am ${Cookies.get(
     "age"
   )} years old and ${Cookies.get("weight")}kg, I am working on ${Cookies.get(
     "userGoal"
   )}, my health conditons are ${Cookies.get(
     "possibleDiseases"
-  )} and i am ${Cookies.get("diet")}. Generate a random ${Cookies.get(
-    "height"
-  )} dinner fit for my health in this format e.g amala and ewedu don't tell me any other thing just give me the food name, no other thing said`;
+  )} and i am ${Cookies.get("diet")}. Generate a random Nigerian dinner fit for my health in this format e.g amala and ewedu don't tell me any other thing just give me the food name, no other thing said`;
 
   const [breakfast, setBreakfast] = useState("");
   const [lunch, setLunch] = useState("");
