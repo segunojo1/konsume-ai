@@ -26,7 +26,14 @@ const ChatInput: React.FC<ChatInputProps> = ({
           className="shadow-inner focus:bg- rounded-[40px] px-5"
         />
         <button type="submit" className="absolute right-5 my-auto top-0 bottom-0">
-          <Image alt="kons" src="/arrowup.svg" width={} height={} className="md:w-[43px] w-[30px]" onClick={sendMessage} />
+          <Image
+            alt="kons"
+            src="/arrowup.svg"
+            width={43} // You need to specify width here
+            height={43} // You need to specify height here
+            className="md:w-[43px] w-[30px]"
+            onClick={sendMessage}
+          />
         </button>
       </div>
     </form>

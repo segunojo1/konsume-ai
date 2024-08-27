@@ -10,6 +10,7 @@ import { MainLayoutContextProvider } from "@/context/LayoutContext";
 import { ChatBotContextProvider } from "@/context/ChatBotContext";
 import { MealsContextProvider } from "@/context/MealsContext";
 import { DashboardContextProvider } from "@/context/DashboardContext";
+import { ScannerContextProvider } from "@/context/ScannerContext";
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
@@ -22,11 +23,13 @@ export default function App({ Component, pageProps }: AppProps) {
       <SetupProvider>
         <DashboardContextProvider>
           <MealsContextProvider>
+            <ScannerContextProvider>
             <ChatBotContextProvider>
               <MainLayoutContextProvider>
                 <AnyComponent {...pageProps} />
               </MainLayoutContextProvider>
             </ChatBotContextProvider>
+            </ScannerContextProvider>
           </MealsContextProvider>
         </DashboardContextProvider>
       </SetupProvider>
