@@ -1,25 +1,18 @@
 "use client"
 import React, { useContext, useEffect, useRef, useState } from "react";
-import Sidebar from "@/modules/Sidebar";
-import ScannerHead from "@/modules/scanner/ScannerHead";
-import DashboardNav from "@/modules/dashboard/DashboardNav";
 import withAuth from "../../helpers/withAuth";
 import kons from "../../public/arrowup.svg";
 import Image from "next/image";
-import gemini from "../../http/gemini";
-import { toast } from "react-toastify";
-import { parseBoldText } from "../../helpers/parseBoldText";
 import { Input } from "@/components/ui/input";
-import { useSetupContext } from "../../context/SetupContext";
 import MainLayout from "@/components/Layout/MainLayout";
 import ChatQuestion from "@/modules/chat/ChatQuestion";
 import MainLayoutContext from "@/context/LayoutContext";
 import ChatBotContext from "@/context/ChatBotContext";
 import Cookies from "js-cookie";
+import { renderTextWithBold } from "@/helpers/renderTextWithBold";
 
 const Chat = () => {
-  const { toggled, setToggled } = useContext(MainLayoutContext);
-  const {userMessage, setUserMessage, chatLog, isContentReplaced, setIsContentReplaced, sendMessage, loading, setIsLoading, containerRef} = useContext(ChatBotContext);
+  const {userMessage, setUserMessage, chatLog, isContentReplaced, setIsContentReplaced, sendMessage, loading, containerRef} = useContext(ChatBotContext);
   
   
  const {name}:any = useContext(MainLayoutContext);
@@ -57,26 +50,6 @@ const Chat = () => {
       }
     }
   };
-
-  const renderTextWithBold = (text: any) => {
-    const parts = parseBoldText(text);
-
-    return parts.map((part, index) => {
-      if (typeof part === "string") {
-        return part;
-      } else {
-        return (
-          <React.Fragment key={index}>
-            <br />
-            {part}
-            <br />
-          </React.Fragment>
-        );
-      }
-    });
-  };
- 
-
 
 
   return (
@@ -194,60 +167,6 @@ const Chat = () => {
             )
           }
 
-          {/* <div className="font-jakarta bg-[#8C77EC] dashboardhead p-8">
-          <div className="text-white p-5 flex flex-col gap-2 overflow-y-scroll h-[70vh] ">
-            {chatLog.map((chat) => {
-              if (chat.user == "me") {
-                return (
-                  <p
-                    className="p-1 w-fit rounded-lg rounded-br-none ml-auto"
-                    key={chat.message}
-                  >
-                    {chat.message}
-                  </p>
-                );
-              } else {
-                return (
-                  <div
-                    className="flex items-start justify-start gap-4"
-                    key={chat.message}
-                  >
-                    <Image
-                      src={kons}
-                      alt="logo"
-                      className="w-[50px] h-[44px]"
-                    />
-                    <p className="p-1 w-fit text-[#D6FBC4] rounded-lg rounded-bl-none">
-                      {renderTextWithBold(chat.message)}
-                    </p>
-                  </div>
-                );
-              }
-            })}
-          </div>
-          <form>
-            <div className="relative  w-full">
-              <Input
-                value={userMessage ?? ""}
-                onChange={handleMessage}
-                onKeyDown={handleEnter}
-                placeholder="What are some good post-workout snacks?"
-                className=" px-5 text-[#0C250380] font-medium leading-[47.69px] bg-[#FFFFFF] border-[3.5px] border-[#D7F2CD] rounded-[46.5px]"
-              />
-              <button
-                type="submit"
-                className="absolute right-5 my-auto top-0 bottom-0"
-              >
-                <Image
-                  alt="kons"
-                  src={kons}
-                  className="md:w-[43px] w-[30px]"
-                  onClick={sendMessage}
-                />
-              </button>
-            </div>
-          </form>
-        </div> */}
         </div>
       </MainLayout>
     </div>
