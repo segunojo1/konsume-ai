@@ -21,7 +21,6 @@ const MealCard = ({query, meal}:any) => {
     const [imageUrl, setImageUrl] = useState<null | string>(null);
     const {setRecommendedMeals, recommendedMeals} = useContext(MealsContext);
 
-
    
 
 const options:any = {

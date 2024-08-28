@@ -10,35 +10,16 @@ import { axiosKonsumeInstance } from '@/http/konsume';
 import MealsContext from '@/context/MealsContext';
 import MainLayoutContext from '@/context/LayoutContext';
 import { Mealprops } from '@/@types';
+import { retry } from '@/helpers/retryapi';
 
 const Meals: React.FC = () => {
-  const { name }: any = useContext(MainLayoutContext);
-  const { recommendedMeals, setRecommendedMeals }:any = useContext(MealsContext);
-  const [fetchingMeals, setFetchingMeals] = useState(false);
   const [activeMeal, setActiveMeal] = useState<string>('All');
-  const [user, setUser] = useState<string | undefined>();
-  const dataFetchedRef = useRef(false);
+  const { recommendedMeals, user }:any = useContext(MealsContext);
+  
 
-  useEffect(() => {
-    setUser(Cookies.get('konsumeUsername'));
-
-    if (!dataFetchedRef.current) {
-      const getMeals = async () => {
-        try {
-          const { data } = await axiosKonsumeInstance.get('/api/ChatBot/GenerateMeals', {
-            params: { profileId: Cookies.get('userid') },
-          });
-          setRecommendedMeals(data.$values);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      getMeals();
-      dataFetchedRef.current = true;
-    }
-  }, [setRecommendedMeals]);
-
-  const handleMealChange = (meal: string) => setActiveMeal(meal);
+  const handleMealChange = (meal: string) => {
+    setActiveMeal(meal);
+  };
 
   return (
     <MainLayout fixedTopbar={true} topBarText='Search with AI' topBarIcon='search' includeMarginTop={true}>
