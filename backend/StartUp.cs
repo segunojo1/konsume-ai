@@ -97,6 +97,7 @@ namespace KONSUME
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IProfileService, ProfileService>();
+            services.AddScoped<IMealRecommendationService, MealRecommendationService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUserInteractionService, UserInteractionService>();
             services.AddScoped<IVerificationCodeService, VerificationCodeService>();

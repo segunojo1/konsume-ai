@@ -16,6 +16,7 @@ C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\K4os.Hash.xxHa
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\MailKit.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.Google.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Relational.dll
@@ -34,6 +35,7 @@ C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\NCrontab.Signe
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Newtonsoft.Json.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Npgsql.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\OpenAI_API.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
