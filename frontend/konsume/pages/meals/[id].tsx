@@ -31,32 +31,32 @@ const Meal = () => {
             <p className=" text-desktop-content text-primarygtext italic max-w-[450px]">A healthy, protein-rich Nigerian delicacy perfect for breakfast. <b>Bon Appétit!</b></p>
             <div className='flex items-center gap-2'>
 
-            <p className=' text-desktop-highlight font-medium'>Calories per serving: 350 kcal </p><Image src="/breakfast.svg" alt='' width={27.6} height={27.6}/>
+              <p className=' text-desktop-highlight font-medium'>Calories per serving: 350 kcal </p><Image src="/breakfast.svg" alt='' width={27.6} height={27.6} />
             </div>
           </div>
 
           <div className="gap-2 flex flex-col md:min-w-[303px] font-bold">
-              <div className="justify-between flex bg-primary-bg-400 p-3 rounded-lg">
-                <p className="">Protein</p>
-                <p className="text-[#FFC501]">
-                  30-40%
-                </p>
-              </div>
-              <div className="justify-between flex bg-secondary-100 p-3 rounded-lg">
-                <p className=" ">Carbohydrates</p>
-                <p className=" text-[#FFC501]">
-                  30-40
-                </p>
-              </div>
-              <div className="justify-between flex bg-primary-bg-main p-3 rounded-lg">
-                <p className="">Healthy Fats</p>
-                <p className=" text-[#FFC501]">40-50</p>
-              </div>
+            <div className="justify-between flex bg-primary-bg-400 p-3 rounded-lg">
+              <p className="">Protein</p>
+              <p className="text-[#FFC501]">
+                30-40%
+              </p>
             </div>
+            <div className="justify-between flex bg-secondary-100 p-3 rounded-lg">
+              <p className=" ">Carbohydrates</p>
+              <p className=" text-[#FFC501]">
+                30-40
+              </p>
+            </div>
+            <div className="justify-between flex bg-primary-bg-main p-3 rounded-lg">
+              <p className="">Healthy Fats</p>
+              <p className=" text-[#FFC501]">40-50</p>
+            </div>
+          </div>
         </div>
         <div className='flex gap-20 items-center mt-10 mb-16'>
           <Button className='bg-primarygtext  flex px-3 py-2 gap-3  '>
-            <Image alt='logo' width={27.6} height={27.6} src='/timetablelogo.svg'/><p className=' text-primary-bg text-desktop-content font-bold font-satoshi'>Add to My Timetable</p>
+            <Image alt='logo' width={27.6} height={27.6} src='/timetablelogo.svg' /><p className=' text-primary-bg text-desktop-content font-bold font-satoshi'>Add to My Timetable</p>
           </Button>
 
           <SearchBar />
@@ -174,7 +174,7 @@ Check for Doneness:
 The Moi Moi is done when its firm to the touch and a toothpick inserted into the center comes out clean.
 Serve:
 
-Allow the Moi Moi to cool slightly before removing it from the containers. Serve warm with rice, bread, pap, or enjoy it on its own.'/> 
+Allow the Moi Moi to cool slightly before removing it from the containers. Serve warm with rice, bread, pap, or enjoy it on its own.'/>
         </div>
 
       </MainLayout>

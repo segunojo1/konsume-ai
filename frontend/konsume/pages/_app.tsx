@@ -11,6 +11,7 @@ import { ChatBotContextProvider } from "@/context/ChatBotContext";
 import { MealsContextProvider } from "@/context/MealsContext";
 import { DashboardContextProvider } from "@/context/DashboardContext";
 import { ScannerContextProvider } from "@/context/ScannerContext";
+import { TimetableProvider } from "@/context/TimetableContext";
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
@@ -20,19 +21,22 @@ export default function App({ Component, pageProps }: AppProps) {
   const AnyComponent = Component as any;
   return (
     <>
-      <SetupProvider>
-        <DashboardContextProvider>
-          <MealsContextProvider>
-            <ScannerContextProvider>
-            <ChatBotContextProvider>
-              <MainLayoutContextProvider>
-                <AnyComponent {...pageProps} />
-              </MainLayoutContextProvider>
-            </ChatBotContextProvider>
-            </ScannerContextProvider>
-          </MealsContextProvider>
-        </DashboardContextProvider>
-      </SetupProvider>
+      <TimetableProvider>
+
+        <SetupProvider>
+          <DashboardContextProvider>
+            <MealsContextProvider>
+              <ScannerContextProvider>
+                <ChatBotContextProvider>
+                  <MainLayoutContextProvider>
+                    <AnyComponent {...pageProps} />
+                  </MainLayoutContextProvider>
+                </ChatBotContextProvider>
+              </ScannerContextProvider>
+            </MealsContextProvider>
+          </DashboardContextProvider>
+        </SetupProvider>
+      </TimetableProvider>
       <ToastContainer />
     </>
   )
