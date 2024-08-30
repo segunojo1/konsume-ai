@@ -83,28 +83,34 @@ export function DashboardContextProvider({ children }: { children: React.ReactNo
 
 
       const getRandomMeals = async () => {
-        setLoading(true)
-          const { data } = await gemini.post("/gemini-1.5-flash:generateContent", {
-            contents: [{ parts: [{ text: breakfastQuery }] }],
-          });
-    
-          const lun = await gemini.post("/gemini-1.5-flash:generateContent", {
-            contents: [{ parts: [{ text: lunchQuery }] }],
-          });
-    
-          const din = await gemini.post("/gemini-1.5-flash:generateContent", {
-            contents: [{ parts: [{ text: dinnerQuery }] }],
-          });
-    
-          setBreakfast(data.candidates[0].content.parts[0].text);
-          setLunch(lun.data.candidates[0].content.parts[0].text);
-          setDinner(din.data.candidates[0].content.parts[0].text);
-          setLoading(false);
-          console.log(data);
-          console.log("meals recipe");
-          console.log(breakfast);
-          console.log(lunch);
-          console.log(dinner);
+        try {
+          
+          setLoading(true)
+            const { data } = await gemini.post("/gemini-1.5-flash:generateContent", {
+              contents: [{ parts: [{ text: breakfastQuery }] }],
+            });
+      
+            const lun = await gemini.post("/gemini-1.5-flash:generateContent", {
+              contents: [{ parts: [{ text: lunchQuery }] }],
+            });
+      
+            const din = await gemini.post("/gemini-1.5-flash:generateContent", {
+              contents: [{ parts: [{ text: dinnerQuery }] }],
+            });
+      
+            setBreakfast(data.candidates[0].content.parts[0].text);
+            setLunch(lun.data.candidates[0].content.parts[0].text);
+            setDinner(din.data.candidates[0].content.parts[0].text);
+            setLoading(false);
+            console.log(data);
+            console.log("meals recipe");
+            console.log(breakfast);
+            console.log(lunch);
+            console.log(dinner);
+        } catch (error) {
+          console.log(error);
+          
+        }
       };
   useEffect(() => {
 
