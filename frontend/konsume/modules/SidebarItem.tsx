@@ -1,14 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useContext } from 'react';
 import { SidebarProps } from '../@types';
 import Cookies from 'js-cookie';
+import MealsContext from '@/context/MealsContext';
 
 const SidebarItem: React.FC<SidebarProps> = ({ icon, text, href }) => {
+  const { setRecommendedMeals }:any = useContext(MealsContext);
   const handleClick = () => {
     if (href == 'auth/login') {
       Cookies.remove('ktn');
       Cookies.remove('userid');
+      localStorage.removeItem('recommendedMeals');
+      localStorage.removeItem('lastFetchDate');
     }
   };
   return (

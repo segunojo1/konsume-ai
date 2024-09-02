@@ -78,7 +78,7 @@ const Login = () => {
         
         Cookies.set('age', data?.value?.age);
         Cookies.set('gender', data?.value?.gender);
-        Cookies.set('height', data?.value?.weight);
+        Cookies.set('weight', data?.value?.weight);
         Cookies.set('diet', data?.value?.dietType);
         Cookies.set('possibleDiseases', data?.value?.allergies.$values);
         Cookies.set('goal', data?.value?.userGoals.$values);

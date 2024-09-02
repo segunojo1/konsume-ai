@@ -63,14 +63,14 @@ export function DashboardContextProvider({ children }: { children: React.ReactNo
       )}, my health conditons are ${Cookies.get(
         "possibleDiseases"
       )} and i am ${Cookies.get("diet")}. Generate a random Nigerian dinner fit for my health in this format e.g amala and ewedu don't tell me any other thing just give me the food name, no other thing said`;
+      const [query3, setQuery3] = useState(proteinIntakeRange);
+      const [query4, setQuery4] = useState(carbIntakeRange);
+      const [query5, setQuery5] = useState(fatIntakeRange);
     
       const [breakfast, setBreakfast] = useState("");
       const [lunch, setLunch] = useState("");
       const [dinner, setDinner] = useState("");
     
-      const [query3, setQuery3] = useState(proteinIntakeRange);
-      const [query4, setQuery4] = useState(carbIntakeRange);
-      const [query5, setQuery5] = useState(fatIntakeRange);
     
       const [answer, setAnswer] = useState();
       const [answer2, setAnswer2] = useState();
