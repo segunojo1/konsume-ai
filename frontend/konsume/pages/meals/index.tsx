@@ -14,15 +14,20 @@ import { retry } from '@/helpers/retryapi';
 
 const Meals: React.FC = () => {
   const [activeMeal, setActiveMeal] = useState<string>('All');
-  const { recommendedMeals, user }:any = useContext(MealsContext);
+  const {setRecommendedMeals, recommendedMeals, user,tempMeals, setTempMeals }:any = useContext(MealsContext);
   
+  // useEffect(() => {
+  //  if (!localStorage.getItem('recommendedMeals')) {
+  //    setRecommendedMeals([]);
+  //  }
+  // }, [])
 
   const handleMealChange = (meal: string) => {
     setActiveMeal(meal);
   };
 
   return (
-    <MainLayout fixedTopbar={true} topBarText='Search with AI' topBarIcon='search' includeMarginTop={true}>
+    <MainLayout fixedTopbar={true} topBarText='Search with AI' topBarIcon='search' includeMarginTop={true} className='flex-col h-screen'>
       <div className='flex justify-between w-full font-satoshi'>
         <div className="flex flex-col gap-7">
           <div className="relative w-fit">
@@ -42,7 +47,7 @@ const Meals: React.FC = () => {
           <p className='text-primary-bg text-desktop-content font-bold'>Set up My Timetable</p>
         </Button>
         <div className='flex items-center gap-3'>
-          {['All', 'Breakfast', 'Lunch', 'Dinner', 'Snack'].map((meal) => (
+          {['All', 'Breakfast', 'Lunch', 'Dinner', 'Snacks'].map((meal) => (
             <FilterMeal 
               key={meal}
               text={meal} 
@@ -69,12 +74,20 @@ const Meals: React.FC = () => {
           </div>
         </div>
       </div>
+{/* {
+  tempMeals.length > 0 ? ( */}
 
       <div className='grid grid-cols-4 gap-4'>
-        {recommendedMeals?.map((meal: Mealprops) => (
+        {tempMeals?.map((meal: Mealprops) => (
           <MealCard key={meal.name} query="" meal={meal} />
         ))}
       </div>
+  {/* // ) : (
+  //   <div>
+  //     <h1>No meals to show for now.</h1>
+  //   </div>
+  // ) */}
+{/* } */}
     </MainLayout>
   );
 };
