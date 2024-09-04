@@ -16,7 +16,9 @@ const Card = ({ children, className }: CardProps) => {
 };
 const Container = ({ children, className }: ContainerProps) => {
   return (
-    <div className={cn(" rounded-[20px] bg-secondary-100 p-5", className)}>
+    <div
+      className={cn(" rounded-[20px] bg-secondary-100 p-5 relative", className)}
+    >
       {children}
     </div>
   );

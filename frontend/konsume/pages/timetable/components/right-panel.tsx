@@ -3,38 +3,94 @@ import Cookies from "js-cookie";
 import { Card } from "./card";
 import { Calendar } from "@/components/ui/calendar";
 import { DateRange } from "react-day-picker";
-import { addDays } from "date-fns";
 
-type Props = {};
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { AnimatePresence, motion } from "framer-motion";
+import { NutritionalInfoBox } from "./nutritional-info-box";
+import { colors, nutritionalInfo } from "../data";
+import { getRandomColor } from "../utils";
 
-export const RightPanel = (props: Props) => {
-  const [user, setUser] = useState("");
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(),
-    to: addDays(new Date(), 7),
-  });
+type Props = {
+  date: DateRange | undefined;
+  setDate: React.Dispatch<React.SetStateAction<DateRange | undefined>>;
+};
+
+export const RightPanel = ({ date, setDate }: Props) => {
+  const [firstName, setFirstName] = useState("");
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
     const user = Cookies.get("konsumeUsername")!;
     const [firstName] = user.split(" ");
-    setUser(firstName);
+    setFirstName(firstName);
   }, []);
 
   return (
-    <aside>
-      <section>
-        <h1 className=" text-desktop-heading4 font-bold">Hello, {user}!</h1>
+    <motion.aside
+      className=" space-y-11 w-[336px] overflow-hidden "
+      animate={{
+        width: open ? "336px" : "30px",
+        display: open ? "block" : "none",
+      }}
+    >
+      <section className="relative">
+        <h1 className=" text-desktop-heading4 font-bold">
+          Hello, {firstName}!
+        </h1>
+        <Button className="absolute right-0" onClick={() => setOpen(!open)}>
+          <Image src="/dock-left.svg" alt="" width={37} height={37} />
+        </Button>
       </section>
-      <div>
+      <div className=" space-y-4">
         <Card.Container>
-          <Calendar
-            mode="range"
-            selected={date}
-            onSelect={setDate}
-            className=""
-          />
+          <Calendar mode="range" selected={date} onSelect={setDate} />
+        </Card.Container>
+        <Card.Container>
+          <div className="space-y-6">
+            <div className="flex justify-between gap-4 ">
+              <h2 className="text-desktop-caption font-bold max-w-[125px]">
+                Today’s Spotlighted Meal
+              </h2>
+              <Image src="/spotlight-icon.svg" alt="" width={37} height={37} />
+            </div>
+            <div className="pb-11">
+              <h3 className="text-[15px] font-bold ">
+                Jollof Rice, Plantain and Chicken
+              </h3>
+              <p className="text-[11px]">
+                A popular Nigerian dish containing some ingredients sha like
+                shdfhffb dhfbf ffjff jfd gjfg gjggg ggggjgg...
+              </p>
+            </div>
+            <Button className="bg-base-white text-secondary absolute right-0 bottom-0">
+              View Recipe and Details
+            </Button>
+          </div>
+        </Card.Container>
+        <Card.Container>
+          <div className="space-y-6">
+            <h2 className="text-desktop-caption font-bold max-w-[125px]">
+              Nutritional Info
+            </h2>
+            <div className="space-y-1 max-w-[196px] mx-auto">
+              {nutritionalInfo &&
+                nutritionalInfo.map(({ name, value, unit }, index) => {
+                  const bg = getRandomColor();
+                  return (
+                    <NutritionalInfoBox
+                      key={index}
+                      bg={bg}
+                      name={name}
+                      value={value}
+                      unit={unit}
+                    />
+                  );
+                })}
+            </div>
+          </div>
         </Card.Container>
       </div>
-    </aside>
+    </motion.aside>
   );
 };

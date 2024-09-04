@@ -28,9 +28,9 @@ function Calendar({
           "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
         ),
         nav_button_previous:
-          "bsolute right-4 p-2 rounded-[100%] bg-[#393939] duration-150 opacity-100 hover:opacity-50 hover:bg-[#393939]/80 w-[28px] h-[22px]",
+          "bsolute right-4 !rounded-[100%] bg-[#393939] duration-150 !opacity-100 hover:!opacity-80 hover:bg-[#393939]/80 !w-[28px] !h-[28px]",
         nav_button_next:
-          "abolute right-1 rounded-[100%] bg-[#393939] opacity-100 duration-150 hover:opacity-50 hover:bg-[#393939]/80 w-[28px] h-[22px]",
+          "abolute right-1 !rounded-[100%] bg-[#393939] duration-150 !opacity-100 hover:!opacity-80 hover:bg-[#393939]/80 !w-[28px] !h-[28px]",
         table: "w-full border-collapse space-y-1",
         head_row: "flex",
         head_cell:
