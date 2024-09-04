@@ -12,6 +12,7 @@ import { MealsContextProvider } from "@/context/MealsContext";
 import { DashboardContextProvider } from "@/context/DashboardContext";
 import { ScannerContextProvider } from "@/context/ScannerContext";
 import { TimetableProvider } from "@/context/TimetableContext";
+import { BlogContextProvider } from "@/context/BlogContext";
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
@@ -21,8 +22,8 @@ export default function App({ Component, pageProps }: AppProps) {
   const AnyComponent = Component as any;
   return (
     <>
+    <BlogContextProvider>
       <TimetableProvider>
-
         <SetupProvider>
           <DashboardContextProvider>
             <MealsContextProvider>
@@ -37,6 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </DashboardContextProvider>
         </SetupProvider>
       </TimetableProvider>
+      </BlogContextProvider>
       <ToastContainer />
     </>
   )

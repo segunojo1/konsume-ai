@@ -23,12 +23,22 @@ const MealCard = ({ meal }: any) => {
     responseType: 'blob',
   };
 
+  const blobToBase64 = (blob: Blob): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
+
   const fetchImage = debounce(async (mealName: string) => {
     try {
       const { data: blob } = await axios.request(options);
-      const imageUrl = URL.createObjectURL(blob);
-      localStorage.setItem(`mealImage_${mealName}`, imageUrl);
-      setImageUrl(imageUrl);
+      const base64Image = await blobToBase64(blob);
+      // const imageUrl = URL.createObjectURL(blob);
+      localStorage.setItem(`mealImage_${mealName}`, base64Image);
+      setImageUrl(base64Image);
     } catch (error) {
       console.error('Error fetching image:', error);
     }
