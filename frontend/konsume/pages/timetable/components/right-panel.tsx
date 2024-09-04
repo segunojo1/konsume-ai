@@ -14,11 +14,12 @@ import { getRandomColor } from "../utils";
 type Props = {
   date: DateRange | undefined;
   setDate: React.Dispatch<React.SetStateAction<DateRange | undefined>>;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  open: boolean;
 };
 
-export const RightPanel = ({ date, setDate }: Props) => {
+export const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
   const [firstName, setFirstName] = useState("");
-  const [open, setOpen] = useState(true);
 
   useEffect(() => {
     const user = Cookies.get("konsumeUsername")!;

@@ -17,12 +17,16 @@ import { formatDateToDDMMYY } from "@/lib/date";
 import { DailyMealsDatatype } from "@/@types/timetable";
 import { setMeals } from "@/redux/features/timetable/timetable.slice";
 import Marquee from "@/components/ui/marquee";
-import { WeekContent } from "./week-content";
 import { MealsInfoCard } from "./meals-info-card";
+import Image from "next/image";
 
-type Props = { date: DateRange | undefined };
+type Props = {
+  date: DateRange | undefined;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-export function MainPanel({ date }: Props) {
+export function MainPanel({ date, open, setOpen }: Props) {
   const [weekOffset, setWeekOffset] = useState(0);
   const { dailyMeals } = useAppSelector((state) => state.timetable);
   const dispatch = useAppDispatch();
@@ -125,7 +129,7 @@ export function MainPanel({ date }: Props) {
       title: "Week",
       value: "week",
       content: (
-        <div className="relative w-full space-y-16 overflow-hidden">
+        <div className="relative w-full space">
           <div className="flex gap-2 absolute right-0 -top-12">
             <Button
               onClick={handleWeeksPrevious}
@@ -193,13 +197,22 @@ export function MainPanel({ date }: Props) {
 
   return (
     <div className="flex-[3] px-7 container">
-      <div className="flex flex-col items-center justify-center w-full">
+      <div className="flex flex-col items-center justify-center w-full relative">
         <Tabs
           key={
             weekOffset || (date?.from?.toISOString() && date?.to?.toISOString())
           }
           tabs={tabs}
         />
+        {!open && (
+          <Button
+            onClick={() => setOpen(!open)}
+            className="text-[14px]  font-bold flex items-center gap-4 absolute top-14 left-0"
+          >
+            <Image src="/calendar.svg" alt="" width={32} height={32} />
+            Open Side Menu
+          </Button>
+        )}
       </div>
     </div>
   );
