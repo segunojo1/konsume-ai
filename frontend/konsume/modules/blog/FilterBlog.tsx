@@ -2,9 +2,8 @@ import MealsContext from '@/context/MealsContext';
 import Image from 'next/image'
 import React, { useContext, useState } from 'react'
 
-const FilterMeal = ({ text, src, isActive, onChangeMeal }: any) => {
-  const [activeMeal, setActiveMeal] = useState('All');
-  const { recommendedMeals, setRecommendedMeals, tempMeals, setTempMeals }: any = useContext(MealsContext);
+const FilterBlog = ({ text, src, isActive, onChangeMeal }: any) => {
+  const { recommendedMeals, setTempMeals }: any = useContext(MealsContext);
   
   const handleClick = () => {
     onChangeMeal(text);
@@ -29,4 +28,4 @@ const FilterMeal = ({ text, src, isActive, onChangeMeal }: any) => {
   )
 }
 
-export default FilterMeal
+export default FilterBlog
