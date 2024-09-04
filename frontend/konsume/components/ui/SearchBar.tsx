@@ -3,8 +3,13 @@ import React, { useState } from 'react'
 import { Input } from './input'
 import { useRouter } from 'next/router';
 
+interface SearchbarProps {
+    placeholder?: string;
+    img?: string;
+  }
+
 const SearchBar = (
-    {placeholder, img}
+    {placeholder, img}:SearchbarProps
 ) => {
     const [searchQuery, setSearchQuery] = useState('');
     const router = useRouter();
