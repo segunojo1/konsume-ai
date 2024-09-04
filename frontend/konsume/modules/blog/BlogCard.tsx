@@ -7,7 +7,7 @@ const BlogCard = ({ blog}: any) => {
             <div
                 className="justify-between flex flex-col min-h-[130px] bg-primary-bg px-3 pt-3 relative rounded-lg "
             >
-                <Image src={`${blog.category}.svg`} width={39} height={32} alt='expand' className='absolute -top-4 -left-4' />
+                <Image src={`${blog.category}.svg`} width={39} height={32} alt='expand' className='absolute -top-4 -right-4' />
                 <div className="flex justify-between">
                     <p className="text-secondary-500 font-bold text-mobile-caption ">{blog.category}</p>
                 </div>

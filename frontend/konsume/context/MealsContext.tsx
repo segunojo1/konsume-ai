@@ -13,7 +13,11 @@ export function MealsContextProvider({ children }: { children: React.ReactNode }
     const [tempMeals, setTempMeals] = useState(recommendedMeals);
 
     const dataFetchedRef = useRef(false);
+    useEffect(() => {
 
+        const username = Cookies.get('konsumeUsername')
+        setUser(username)
+        }, [])
 useEffect(() => {
     console.log('hi');
     
