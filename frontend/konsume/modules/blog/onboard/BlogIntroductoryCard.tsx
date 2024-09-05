@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const BlogIntroductoryCard = () => {
@@ -16,6 +17,7 @@ const BlogIntroductoryCard = () => {
             <p className='text-desktop-content'><b>Curated Content:</b> We&apos;ve uploaded a selection of blogs that match your specific needs, whether you’re aiming to boost nutrition, achieve fitness goals, or explore new meals. Dive into these handpicked articles and discover insights that resonate with your journey.</p>
             <p className='text-desktop-content'><b>Personalized AI Blogs:</b> Looking for something specific? Our AI-powered feature lets you generate nutrition-based blogs tailored to your interests. Simply input your topic, whether it's nutrition, meals, or goals, and let our AI create a custom article for you!</p>
             <p className='text-desktop-content'><b>Reading Streaks:</b> Stay consistent and get rewarded! Keep your reading streak alive by exploring new blogs daily. Your streak grows with each read, offering rewards and recognition. Missing a day will decrease your streak, so stay engaged and keep learning!</p>
+            <Link href='/blogs'>
             <Button
                 type="submit"
                 className=" flex items-center justify-center mx-auto p-2 w-full md:w-[400px] h-[2.9rem] text-primary-bg-100 bg-primarygtext"
@@ -23,6 +25,8 @@ const BlogIntroductoryCard = () => {
             >
                 Let&apos;s Get Started
             </Button>
+            
+            </Link>
         </div>
     )
 }

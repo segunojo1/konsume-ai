@@ -5,12 +5,15 @@ import FilterBlog from '@/modules/blog/FilterBlog'
 import BlogIntroductoryCard from '@/modules/blog/onboard/BlogIntroductoryCard'
 import BlogOnboardHead from '@/modules/blog/onboard/BlogOnboardHead'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { BlogItems } from './blogitems'
 import BlogCard from '@/modules/blog/BlogCard'
+import BlogContext from '@/context/BlogContext'
+import { BlogProps } from '@/@types'
 
 const Blogs = () => {
     const [activeBlog, setActiveBlog] = useState<string>('All');
+    const {tempBlogs} = useContext(BlogContext);
     // useEffect(() => {
     //  if (!localStorage.getItem('recommendedMeals')) {
     //    setRecommendedMeals([]);
@@ -45,9 +48,9 @@ const Blogs = () => {
                         <p className='text-primarygtext text-desktop-content font-bold'>View Bookmarked blogs</p>
                     </Button> */}
                 </div>
-                <div className='grid grid-cols-4 gap-4 mt-6'>
-                    {BlogItems?.map((blog: any) => (
-                        <BlogCard key={blog.name} query="" blog={blog} />
+                <div className='grid lg:grid-cols-3 grid-cols-1 gap-4 mt-6 mx-auto lg:mx-0 w-fit lg:w-full'>
+                    {tempBlogs?.map((blog: BlogProps) => (
+                        <BlogCard key={blog.id} id={blog.id} title={blog.title} text={blog.text} />
                     ))}
                 </div>
             </div>

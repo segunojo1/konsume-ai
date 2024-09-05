@@ -77,7 +77,7 @@ const Meals: React.FC = () => {
 {/* {
   tempMeals.length > 0 ? ( */}
 
-      <div className='grid grid-cols-4 gap-4'>
+      <div className='grid lg:grid-cols-3 grid-cols-1 gap-4 mx-auto lg:mx-0 '>
         {tempMeals?.map((meal: Mealprops) => (
           <MealCard key={meal.name} query="" meal={meal} />
         ))}

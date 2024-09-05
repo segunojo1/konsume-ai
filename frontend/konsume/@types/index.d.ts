@@ -389,8 +389,15 @@ export interface MainLayoutProps {
 }
 
 export interface Mealprops {
+  course: string;
   name: string;
   description: string;
+}
+
+export interface BlogProps {
+  id: number;
+  title: string;
+  text: string;
 }
 
 export interface LoginFormProps {
