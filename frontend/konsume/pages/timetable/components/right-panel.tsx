@@ -31,7 +31,7 @@ export const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
     <motion.aside
       className=" space-y-11 w-[336px] overflow-hidden "
       animate={{
-        width: open ? "336px" : "30px",
+        width: open ? "273px" : "30px",
         display: open ? "block" : "none",
       }}
     >
@@ -43,7 +43,7 @@ export const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
           <Image src="/dock-left.svg" alt="" width={37} height={37} />
         </Button>
       </section>
-      <div className=" space-y-4">
+      <div className=" space-y-4 font-satoshi">
         <Card.Container>
           <Calendar mode="range" selected={date} onSelect={setDate} />
         </Card.Container>

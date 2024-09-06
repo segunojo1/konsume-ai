@@ -20,7 +20,7 @@ export default function SidebarDemo() {
       topBarText="Timetable"
       topBarIcon="dashborad"
     >
-      <main className="flex">
+      <main className="flex font-satoshi">
         <RightPanel
           date={date}
           setDate={setDate}

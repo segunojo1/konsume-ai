@@ -43,7 +43,7 @@ export const MealsInfoCard = ({
         />
         <Dialog open={isOpen}>
           <DialogTrigger onClick={() => setIsOpen(true)} asChild>
-            <CardItem className=" cursor-pointer text-desktop-caption gap-3  flex items-center px-0">
+            <CardItem className=" cursor-pointer text-desktop-caption gap-3   flex items-center px-0">
               <CardItem
                 rotateZ="30"
                 className="  w-max rounded-[3.8px] bg-neutrals-100 p-[4px] -rotate-[8deg]"
@@ -57,9 +57,9 @@ export const MealsInfoCard = ({
           </DialogTrigger>
           <DialogContent
             closeIcon={false}
-            className="max-w-[363px] px-[49px] shadow-meal-card-modal !rounded-[32px] space-y-8 "
+            className="font-satoshi max-w-[363px] 2xl:px-[49px] px-9 shadow-meal-card-modal !rounded-[32px] 2xl:space-y-8 space-y-2 "
           >
-            <div className="space-y-7">
+            <div className="2xl:space-y-7 space-y-3">
               <MealBriefDetail
                 bg={secondaryColor}
                 name={mealType}
@@ -85,7 +85,7 @@ export const MealsInfoCard = ({
                   ))}
               </div>
             </div>
-            <div className="bg-base-white p-[10px] rounded-sm shadow-meal-card-modal-last-item space-y-10">
+            <div className="bg-base-white p-[10px] rounded-sm shadow-meal-card-modal-last-item 2xl:space-y-10 space-y-4">
               <div className="flex gap-4">
                 <div className="py-[10px] px-[24px] space-y-[10px] bg-primary-bg rounded-[5px]">
                   <p className="text-[10px] font-bold ">Cook Time</p>
