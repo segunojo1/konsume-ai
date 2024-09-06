@@ -81,45 +81,23 @@ export function MainPanel({ date, open, setOpen }: Props) {
       content: (
         <div className="space-y-16 overflow-hidden">
           <div className=" flex gap-[18px] w-full justify-between flex-wrap ">
-            {days.length > 7 ? (
-              <Marquee pauseOnHover className="[--duration:40s] max-w-[1000px]">
-                {days.map((day, index) => {
-                  const date = formatDateToDDMMYY(day);
-                  return (
-                    <Button
-                      key={index}
-                      className="rounded-lg px-[7px] py-[14px] bg-base-black text-base-white gap-2 flex flex-col items-center w-[103px] h-auto"
-                      onClick={() => filterMealsByDay(dailyMeals, date)}
-                    >
-                      <p className="text-desktop-caption font-bold">
-                        {format(day, "EEEE")}
-                      </p>
-                      <p className="text-desktop-feature font-bold">
-                        {format(day, "dd")}
-                      </p>
-                    </Button>
-                  );
-                })}
-              </Marquee>
-            ) : (
-              days.map((day, index) => {
-                const date = formatDateToDDMMYY(day);
-                return (
-                  <Button
-                    key={index}
-                    className="rounded-lg px-[7px] py-[14px] bg-base-black text-base-white gap-2 flex flex-col items-center w-[103px] h-auto"
-                    onClick={() => filterMealsByDay(dailyMeals, date)}
-                  >
-                    <p className="text-desktop-caption font-bold">
-                      {format(day, "EEEE")}
-                    </p>
-                    <p className="text-desktop-feature font-bold">
-                      {format(day, "dd")}
-                    </p>
-                  </Button>
-                );
-              })
-            )}
+            {days.map((day, index) => {
+              const date = formatDateToDDMMYY(day);
+              return (
+                <Button
+                  key={index}
+                  className="rounded-lg px-[7px] py-[14px] bg-base-black text-base-white gap-2 flex flex-col items-center w-[103px] h-auto"
+                  onClick={() => filterMealsByDay(dailyMeals, date)}
+                >
+                  <p className="text-desktop-caption font-bold">
+                    {format(day, "EEEE")}
+                  </p>
+                  <p className="text-desktop-feature font-bold">
+                    {format(day, "dd")}
+                  </p>
+                </Button>
+              );
+            })}
           </div>
           <DayContent />
         </div>

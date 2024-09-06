@@ -11,7 +11,7 @@ export default function SidebarDemo() {
   const [open, setOpen] = useState(true);
   const [date, setDate] = useState<DateRange | undefined>({
     from: new Date(),
-    to: addDays(new Date(), 7),
+    to: addDays(new Date(), 6),
   });
 
   return (
