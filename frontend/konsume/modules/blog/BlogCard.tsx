@@ -1,8 +1,9 @@
 import { BlogProps } from '@/@types'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
-const BlogCard = ({ id, title, text}: BlogProps) => {
+const BlogCard = ({title }: BlogProps) => {
     return (
         <div className='flex flex-col items-start gap-4 py-6 px-3 shadow-sm rounded-[34px] hover:shadow-lg lg:w-full w-fit mx-auto'>
             <div
@@ -19,10 +20,12 @@ const BlogCard = ({ id, title, text}: BlogProps) => {
                     </p> */}
                 </div>
             </div>
-            <div className='flex gap-5 items-center'>
-                <Image src='/expand_meal.svg' width={39} height={32} alt='expand' className='hover:rotate-12 cursor-pointer' />
-                <p className='font-bold text-[14px]/[120%]'>Open Blog</p>
-            </div>
+            <Link href={`/blogs/${encodeURIComponent(title as string)}`} passHref>
+                <div className='flex gap-5 items-center'>
+                    <Image src='/expand_meal.svg' width={39} height={32} alt='expand' className='hover:rotate-12 cursor-pointer' />
+                    <p className='font-bold text-[14px]/[120%]'>Open Blog</p>
+                </div>
+            </Link>
         </div>
     )
 }
