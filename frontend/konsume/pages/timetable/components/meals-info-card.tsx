@@ -33,7 +33,7 @@ export const MealsInfoCard = ({
     <CardContainer className="inter-var w-full">
       <div
         style={{ backgroundColor: primaryColor }}
-        className="max-w-[265px] w-full [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d] rounded-[30px] shadow-meal-card px-2 py-6 space-y-[30px]"
+        className="lg:min-w-[245px] max-w-[260px] w-full [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d] rounded-[30px] shadow-meal-card px-2 py-6 space-y-[30px]"
       >
         <MealBriefDetail
           bg={secondaryColor}
@@ -46,7 +46,7 @@ export const MealsInfoCard = ({
             <CardItem className=" cursor-pointer text-desktop-caption gap-3   flex items-center px-0">
               <CardItem
                 rotateZ="30"
-                className="  w-max rounded-[3.8px] bg-neutrals-100 p-[4px] -rotate-[8deg]"
+                className="  w-max roundsetIsOpen(!isOpen)setIsOpen(!isOpen)ed-[3.8px] bg-neutrals-100 p-[4px] -rotate-[8deg]"
               >
                 <ArrowUpRight className="rotate-[14deg]" />
               </CardItem>

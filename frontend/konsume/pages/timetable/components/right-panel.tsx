@@ -29,7 +29,7 @@ export const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
 
   return (
     <motion.aside
-      className=" space-y-11 w-[336px] overflow-hidden "
+      className=" space-y-11 w-[273px] overflow-hidden "
       animate={{
         width: open ? "273px" : "30px",
         display: open ? "block" : "none",
