@@ -14,6 +14,9 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
     const [name, setName] = useState<string | undefined>();
     const [blogs, setBlogs] = useState([]);
     const [tempBlogs, setTempBlogs] = useState(blogs);
+    const [showModal, setShowModal] = useState(false);
+    const [bookmarkedBlogs, setBookmarkedBlogs] = useState([]);
+    const [tempBookmarks, setTempBookmarks] = useState(bookmarkedBlogs);
 
     const dataFetchedRef = useRef(false);
     useEffect(() => {
@@ -78,7 +81,14 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
         setUserMessage,
         name,
         tempBlogs,
-        blogs
+        blogs,
+        setTempBlogs,
+        showModal, 
+        setShowModal,
+        bookmarkedBlogs, 
+        setBookmarkedBlogs,
+        tempBookmarks, 
+        setTempBookmarks
     };
 
     return <BlogContext.Provider value={contextValue}>{children}</BlogContext.Provider>;

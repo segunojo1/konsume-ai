@@ -398,6 +398,7 @@ export interface BlogProps {
   id?: number;
   title?: string;
   text: string;
+  category?: string;
 }
 
 export interface LoginFormProps {

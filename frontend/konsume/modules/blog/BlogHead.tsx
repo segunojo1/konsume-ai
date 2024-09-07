@@ -1,10 +1,15 @@
+import { Button } from '@/components/ui/button'
 import SearchBlog from '@/components/ui/SearchBlog'
 import BlogContext from '@/context/BlogContext'
 import Image from 'next/image'
-import React, { useContext } from 'react'
+import { useRouter } from 'next/router'
+import React, { useContext, useState } from 'react'
+import GenerateBlogModal from './GenerateBlogModal'
 
 const BlogHead = () => {
-    const {name} = useContext(BlogContext)
+    const {name} = useContext(BlogContext);
+    const router = useRouter();
+    const {showModal, setShowModal} = useContext(BlogContext);
   return (
     <div>
         <div className='flex justify-between w-full font-satoshi'>
@@ -17,7 +22,12 @@ const BlogHead = () => {
           We've curated some blogs just for you, tailored to your goals and preferences.  Dive in to explore articles that match your needs, or feel free to <b>generate any nutrition-based blog using our AI!</b>          
           </p>
         </div>
-        <SearchBlog />
+        <Button className='flex items-center border rounded' onClick={() => setShowModal(true)}>
+          Generate Blog with AI
+          <Image src="/ai.svg" className='' width={23} height={40} alt=''/>
+        </Button>
+        {showModal && <GenerateBlogModal />}
+        
       </div>
     </div>
   )

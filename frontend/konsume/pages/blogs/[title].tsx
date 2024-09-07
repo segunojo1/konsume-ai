@@ -1,7 +1,9 @@
 // pages/blog/[title].tsx
 
+import { BlogProps } from '@/@types'
 import MainLayout from '@/components/Layout/MainLayout'
-import MainBlogText from '@/modules/blog/mainBlogText'
+import { axiosKonsumeInstance } from '@/http/konsume'
+import MainBlogText from '@/modules/blog/MainBlogText'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -9,19 +11,43 @@ import React, { useEffect, useState } from 'react'
 const BlogDetail = () => {
     const router = useRouter()
     const { title } = router.query
-    const [blog, setBlog] = useState<any>(null)
+    const [blog, setBlog] = useState<BlogProps>();
 
     useEffect(() => {
-        if (title) {
-            // Fetch the blog data based on the title (you could use an API or local data source)
-            const blogs = JSON.parse(localStorage.getItem('blogs') || '[]'); // Fetching from localStorage for simplicity
-            const selectedBlog = blogs.find((blog: any) => blog.title === title);
-
+        const fetchBlogData = async () => {
+          if (title) {
+            // First, check localStorage
+            const blogs = JSON.parse(localStorage.getItem('blogs') || '[]');
+            const selectedBlog = blogs.find((blog: any) => 
+                typeof title === 'string' && blog.title.toLowerCase() === title.toLowerCase()
+              );    
             if (selectedBlog) {
-                setBlog(selectedBlog);
+              // Blog found in localStorage
+              setBlog(selectedBlog);
+            } else {
+              // Blog not found in localStorage, fetch from API
+              try {
+                const { data } = await axiosKonsumeInstance.get('/api/Blog/GenerateBlog', {
+                  params: { title },
+                });
+    
+                if (data) {
+                  // Set blog data from API
+                  setBlog(data);
+    
+                  // Optionally store it in localStorage for future access
+                  const updatedBlogs = [...blogs, data];
+                  localStorage.setItem('blogs', JSON.stringify(updatedBlogs));
+                }
+              } catch (error) {
+                console.error('Error fetching blog from API:', error);
+              }
             }
-        }
-    }, [title])
+          }
+        };
+    
+        fetchBlogData();
+      }, [title]);
 
     if (!blog) {
         return <p>Loading...</p>
@@ -29,9 +55,9 @@ const BlogDetail = () => {
 
     return (
         <MainLayout topBarIcon='blog' topBarText='Blogs' fixedTopbar={true} className='relative '>
-            <Image alt='logo' width={31} height={31} src='/backbtn.png' className='absolute' />
-            <div className='font-satoshi mt-7' >
-                <div className='flex justify-center gap-6'>
+            <Image alt='logo' width={31} height={31} src='/backbtn.png' className='absolute cursor-pointer' onClick={() => router.back()}/>
+            <div className='font-satoshi mt-7 gap-8 flex flex-col' >
+                <div className='flex justify-center max-w-[975px] w-full relative mx-auto'>
                     <div className='relative'>
                         <Image
                             src="/curved_line.svg"
@@ -42,9 +68,9 @@ const BlogDetail = () => {
                         />
                         <h1 className='text-desktop-heading4 font-bold z-50 '>{blog.title}</h1>
                     </div>
-                    <Image alt='logo' width={40} height={40} src='/blogplaceholder.svg' />
+                    <Image alt='logo' width={40} height={40} src='/blogplaceholder.svg' className='absolute right-0'/>
                 </div>
-                <MainBlogText text={blog.text}/>
+                <MainBlogText text={blog.text} category={blog.category} title={blog.title} />
             </div>
         </MainLayout>
     )
