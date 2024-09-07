@@ -1,26 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { useSetupContext } from "../../context/SetupContext";
-import { dashboardhero } from "./dashboardhero";
-import Cookies from "js-cookie";
+"use client"
+import React, { useContext, useEffect } from "react";
 import SearchBar from "@/components/ui/SearchBar";
+import { useSetupContext } from "@/context/SetupContext";
 
 const DashboardHead = () => {
-  const { userGoal } = useSetupContext();
-  const [user, setUser] = useState<string | undefined>();
+  const {name} = useSetupContext();
+  const firstName = name?.split(" ");
 
   useEffect(() => {
-    setUser(Cookies.get('konsumeUsername'))
-  }, [])
+    
+  }, [ ])
 
-  const textForUserGoal = dashboardhero
-    .filter(({ title }) => title == userGoal)
-    .map(({ text }) => text);
+  // const textForUserGoal = dashboardhero
+  //   .filter(({ title }) => title == userGoal)
+  //   .map(({ text }) => text);
 
   return (
     <div className="font-satoshi mb-9 ">
       <div className='flex justify-between w-full '>
         <div className="relative w-fit">
-          <h1 className="md:text-desktop-heading4 text-[28px]/[40px] font-bold z-[999] relative">Hello, {user ? user : ".."}</h1>
+          <h1 className="md:text-desktop-heading4 text-[28px]/[40px] font-bold z-[999] relative">Hello, {firstName ? firstName[0] : ".."}</h1>
         </div>      
         <SearchBar />
       </div>

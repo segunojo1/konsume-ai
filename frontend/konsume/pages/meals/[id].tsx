@@ -12,10 +12,12 @@ import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import { renderTextWithBold } from '@/helpers/renderTextWithBold';
+import MealsContext from '@/context/MealsContext';
 
 const Meal = () => {
   const router = useRouter();
   let { id } = router.query;
+  const {generatingMeal, setGeneratingMeal} = useContext(MealsContext);
 
   const mealPrompt = `Generate a very short description of the meal ${id}. Strictly not more than 20 words`
 const caloriePrompt = `What is the range of number of calories per serving of the meal ${id}. it doesnt have to be exact just give a range, your response should strictly just be the number of kcal e.g 350-400`;
@@ -45,6 +47,7 @@ const healthImpactPrompt = `What is the impact of the meal ${id} on me if i have
       if (!id) return;
   
       try {
+        setGeneratingMeal(true);
         // First batch of requests
         const mealResponses = await Promise.all([
           gemini.post("/gemini-1.5-flash:generateContent", {
@@ -105,6 +108,9 @@ const healthImpactPrompt = `What is the impact of the meal ${id} on me if i have
         setHealthImpact(healthResponse.data.candidates[0].content.parts[0].text);
       } catch (error) {
         console.error(error);
+        router.back();
+      }finally{
+        setGeneratingMeal(false)
       }
     };
   
@@ -167,7 +173,10 @@ const healthImpactPrompt = `What is the impact of the meal ${id} on me if i have
           <MealInfo title='Recipe' text={recipe ? renderTextWithBold(recipe) : ''}/>
           <MealInfo title='Health Impact' text={healthImpact ? renderTextWithBold(healthImpact) : ''}/>
         </div>
-
+        <div className={`z-50 fixed backdrop-blur-md ${generatingMeal ? 'flex' : 'hidden'}  justify-center items-center top-0 left-0 bottom-0 right-0`}>
+                <div className='loader2'></div>
+                <h1 className='font-bold bg-base-white rounded-full'>Generating Meal...</h1>
+            </div>
       </MainLayout>
     </div>
   )

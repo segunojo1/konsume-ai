@@ -6,6 +6,7 @@ import progress from "../public/assets/progress.svg";
 import scanner from "../public/assets/scanner.svg";
 import chat from "../public/chat.svg";
 import profile from "../public/profile.svg"
+import blogs from "../public/blog.svg"
 import settings from "../public/settings.svg"
 import logout from "../public/logout.svg"
 import Image from "next/image";
@@ -24,6 +25,7 @@ const Sidebar: React.FC<DashboardNavProps> = ({ toggled }) => {
         <SidebarItem href="profile" text="Dashboard" icon={profile} />
         <SidebarItem href="scanner" text="Scanner" icon={scanner} />
         <SidebarItem href="chat" text="Chat with Foodie AI" icon={chat} />
+        <SidebarItem href="blogs" text="Blogs" icon={blogs} />
         <SidebarItem
           href="coming-soon"
           text="Coming Features"

@@ -32,7 +32,7 @@ const Meals: React.FC = () => {
         <div className="flex flex-col gap-7">
           <div className="relative w-fit">
             <Image src='/multipleline.svg' alt='multi line' height={141} width={98} className='absolute bottom-0 top-0 my-auto right-0 -z-50' />
-            <h1 className="md:text-desktop-heading4 text-[28px]/[40px] font-bold z-50">Hello, {user || ".."}</h1>
+            <h1 className="md:text-desktop-heading4 text-[28px]/[40px] font-bold z-50">Hello, {user ? user : ".." }</h1>
           </div>
           <p className="text-desktop-content text-primarygtext italic max-w-[450px]">
             Here are your personalized meal recommendations, tailored just for you based on your health, dietary goals and preferences. <b>Bon Appétit!</b>
