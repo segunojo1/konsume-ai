@@ -1,16 +1,12 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Image from 'next/image';
-import Cookies from 'js-cookie';
 import MainLayout from '@/components/Layout/MainLayout';
 import { Button } from '@/components/ui/button';
 import SearchBar from '@/components/ui/SearchBar';
 import FilterMeal from '@/modules/meals/FilterMeal';
 import MealCard from '@/modules/meals/MealCard';
-import { axiosKonsumeInstance } from '@/http/konsume';
 import MealsContext from '@/context/MealsContext';
-import MainLayoutContext from '@/context/LayoutContext';
 import { Mealprops } from '@/@types';
-import { retry } from '@/helpers/retryapi';
 
 const Meals: React.FC = () => {
   const [activeMeal, setActiveMeal] = useState<string>('All');

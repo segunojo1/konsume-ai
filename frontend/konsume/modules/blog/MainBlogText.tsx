@@ -4,8 +4,15 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
-const MainBlogText = ({text, category, title}: BlogProps) => {
+interface Blog {
+    text: string;
+    category: string | undefined;
+    titlee: string | undefined;
+}
+const MainBlogText = ({text, category, titlee}: Blog) => {
+    const router = useRouter();
     const [bookmarked, setBookmarked] = useState(false);
 
     //function to format blog text to headers
@@ -36,46 +43,42 @@ const MainBlogText = ({text, category, title}: BlogProps) => {
 
 useEffect(() => {
     const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]'); 
-
+    console.log(bookmarks);
+    
     // Check if the text passed as a prop exists in the array
-    const isBookmarked = bookmarks.some((message: string) => message === text);
+    const isBookmarked = bookmarks.some((bookmark: { title: string }) => bookmark.title.trim().toLowerCase() === titlee?.trim().toLowerCase());
     if (isBookmarked) {
         setBookmarked(true);
         console.log('in bookmarks');
     }else{
         console.log('not in bookmarks');
-        
     }
-}, [])
+}, [router.query, titlee])
 
 //add to bookmarks
 const bookMarkBlog = async () => {
     try {
-        const {data} = await toast.promise(
-            axiosKonsumeInstance.post('/api/Bookmark', {
-                        "profileId": Cookies.get('userid'),
-                        "message": text,
-                        "title": title,
-                        "category": category,
-                        "url": "no url"
-                }),
-            {
-              pending: 'Adding to bookmarks',
-              success: 'Added to bookmarks 👌',
-              error: 'Failed to add to bookmarks 🤯'
-            }
-        );
-        setBookmarked(true);
-        console.log(data);
+        if (bookmarked) {
+            toast.info("Already bookmarked")
+        } else{
+            const {data} = await toast.promise(
+                axiosKonsumeInstance.post('/api/Bookmark', {
+                            "profileId": Cookies.get('userid'),
+                            "message": text,
+                            "title": titlee,
+                            "category": category,
+                            "url": "no url"
+                    }),
+                {
+                  pending: 'Adding to bookmarks',
+                  success: 'Added to bookmarks 👌',
+                  error: 'Failed to add to bookmarks 🤯'
+                }
+            );
+            setBookmarked(true);
+            console.log(data);
+        }
         
-        // const {data} = await axiosKonsumeInstance.post('/api/Bookmark', {
-        //         "profileId": Cookies.get('userid'),
-        //         "message": text,
-        //         "title": title,
-        //         "category": category,
-        //         "url": "no url"
-        // })
-        // console.log(data);
         
     } catch (error) {
         console.log(error);
@@ -102,7 +105,7 @@ const bookMarkBlog = async () => {
                 </div>
                 <div className='flex items-center gap-4'>
                     <Image
-                        src={`${bookmarked ? "/meals" : "/bookmark"}.svg`}
+                        src={`${bookmarked ? "/bookmarkfill" : "/bookmark"}.svg`}
                         alt="bookmark"
                         height={30}
                         width={22}

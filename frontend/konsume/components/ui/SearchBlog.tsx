@@ -38,22 +38,22 @@ const SearchBlog = () => {
         }
     };
     return (
-        <div className='relative h-fit w-fit  self-start justify-end'>
+        <div className='relative h-fit w-full  self-start justify-end'>
             <Input
                 type='text'
                 value={searchQuery}
                 onChange={handleInputChange}
-                className=' bg-base-white text-desktop-content border-[1.5px] rounded-[10px] border-[#030a0088] pl-16 pr-5 md:min-w-[464px] w-full '
+                className=' bg-base-white text-desktop-content border-[1.5px] rounded-[10px] border-[#030a0088]  w-full '
                 placeholder="What do you want to read? Generate with AI"
             />
             <Button
                 type="submit"
-                className="mt-12 flex items-center justify-center mx-auto p-2 w-full md:w-[400px] h-[2.9rem] text-primary-bg-100 bg-primarygtext"
+                className="mt-12 flex items-center justify-center mx-auto p-2 w-full  h-[2.9rem] text-primary-bg-100 bg-primarygtext"
                 onClick={generateBlog}
             >
                 Generate
             </Button>
-            <div className={`z-50 fixed backdrop-blur-md ${generatingBlog ? 'flex' : 'hidden'}  justify-center items-center top-0 left-0 bottom-0 right-0`}>
+            <div className={`z-50 fixed backdrop-blur-md bg-base-white ${generatingBlog ? 'flex' : 'hidden'}  justify-center items-center top-0 left-0 bottom-0 right-0`}>
                 <div className='loader2'></div>
                 <h1 className='font-bold bg-base-white rounded-full'>Generating Blog...</h1>
             </div>

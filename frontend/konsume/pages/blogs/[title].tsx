@@ -55,7 +55,9 @@ const BlogDetail = () => {
 
     return (
         <MainLayout topBarIcon='blog' topBarText='Blogs' fixedTopbar={true} className='relative '>
-            <Image alt='logo' width={31} height={31} src='/backbtn.png' className='absolute cursor-pointer' onClick={() => router.back()}/>
+          <div className='shadow-inner absolute cursor-pointer rounded-full hover:shadow-md'>
+            <Image alt='logo' width={31} height={31} src='/backbtn.png' className=' ' onClick={() => router.back()}/>
+          </div>
             <div className='font-satoshi mt-7 gap-8 flex flex-col' >
                 <div className='flex justify-center max-w-[975px] w-full relative mx-auto'>
                     <div className='relative'>
@@ -70,7 +72,7 @@ const BlogDetail = () => {
                     </div>
                     <Image alt='logo' width={40} height={40} src='/blogplaceholder.svg' className='absolute right-0'/>
                 </div>
-                <MainBlogText text={blog.text} category={blog.category} title={blog.title} />
+                <MainBlogText text={blog.text} category={blog.category} titlee={blog.title} />
             </div>
         </MainLayout>
     )
