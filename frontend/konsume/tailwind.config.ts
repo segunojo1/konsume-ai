@@ -1,14 +1,14 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './modules/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./modules/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -21,26 +21,26 @@ const config = {
     colors: {
       "base-white": "#FAFAFA",
       "base-black": "#0A0B0A",
-      "primarygtext": "#0C2503",
-      "primarytext": "#030A00",
-      "success": {
+      primarygtext: "#0C2503",
+      primarytext: "#030A00",
+      success: {
         DEAFULT: "#8DCF38",
         100: "#D9EFBD",
         200: "#B3DF7A",
-        300: "#639424"
+        300: "#639424",
       },
       "primary-bg": {
         DEFAULT: "#EDFAE7",
         100: "#D6FBC4",
-        "main": "#EDFAE7",
+        main: "#EDFAE7",
         300: "#A1FF7F",
         400: "#D6FBC4",
         500: "66FF30",
         600: "#49FF08",
         700: "#3AE000",
-        800: "#30B800"
+        800: "#30B800",
       },
-      "secondary": {
+      secondary: {
         DEFAULT: "#8C77EC",
         100: "#E8E4FB",
         200: "#D1C9F7",
@@ -51,21 +51,21 @@ const config = {
         700: "#3C1CCB",
         800: "#3117A7",
         900: "#261283",
-        1000: "#1C0D5F"
+        1000: "#1C0D5F",
       },
-      "warning": {
+      warning: {
         DEFAULT: "#F4C790",
         100: "#F4C790",
         200: "#EDA145",
-        300: "#CC7914"
+        300: "#CC7914",
       },
-      "error": {
+      error: {
         DEFAULT: "#FF0000",
         100: "#FFAAAA",
         200: "#FF5555",
-        300: "#B30000"
+        300: "#B30000",
       },
-      "color8": {
+      color8: {
         DEFAULT: "#FFFFFF",
         100: "#FFFFFF",
         200: "#E9E9E9",
@@ -76,9 +76,9 @@ const config = {
         700: "#7B7B7B",
         800: "#656565",
         900: "#4F4F4F",
-        1000: "#393939"
+        1000: "#393939",
       },
-      "neutrals": {
+      neutrals: {
         DEFAULT: "#FFFFFF",
         100: "#FFC400",
         200: "#D6FBC4",
@@ -89,14 +89,14 @@ const config = {
         700: "#5A5555",
         800: "#433F3E",
         900: "#2B2928",
-        1000: "#151413"
+        1000: "#151413",
       },
     },
     fontFamily: {
       playfair: "Playfair Display",
       satoshi: "Satoshi",
       worksans: "Work Sans",
-      jakarta: "Plus Jakarta Sans"
+      jakarta: "Plus Jakarta Sans",
     },
     fontSize: {
       "desktop-display1": ["144px", "120%"],
@@ -126,17 +126,25 @@ const config = {
     },
     extend: {
       boxShadow: {
-        shad: 'inset 0px 2.18px 2.18px -1.09px rgba(74, 74, 104, 0.10)',
-        focusshad: '0px 0px 0px 4px rgba(75, 77, 237, 0.20)',
-        bordershad: 'inset 1px 0 0 0 #F2F3F4'
+        shad: "inset 0px 2.18px 2.18px -1.09px rgba(74, 74, 104, 0.10)",
+        focusshad: "0px 0px 0px 4px rgba(75, 77, 237, 0.20)",
+        bordershad: "inset 1px 0 0 0 #F2F3F4",
+        "meal-card": "0px 3.673px 3.673px 0px rgba(0, 0, 0, 0.03)",
+        "meal-card-item": "0px 4.104px 4.104px 0px rgba(0, 0, 0, 0.03)",
+        "meal-card-modal": " 0px 3.889px 3.889px 0px rgba(0, 0, 0, 0.03)",
+        "meal-card-modal-last-item":
+          "0px 2.823px 2.823px 0px rgba(0, 0, 0, 0.03)",
       },
       colors: {
+        gridAutoRows: {
+          "1fr": "1fr",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        
+
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
@@ -176,15 +184,25 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - var(--gap)))" },
+        },
+        "marquee-vertical": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(calc(-100% - var(--gap)))" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "caret-blink": "caret-blink 1.25s ease-out infinite"
+        "caret-blink": "caret-blink 1.25s ease-out infinite",
+        marquee: "marquee var(--duration) linear infinite",
+        "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;
