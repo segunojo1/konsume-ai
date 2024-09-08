@@ -1,10 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\HomePC\\source\\repos\\konsume-web\\backend\\konsume\\",
+  "WorkspaceRootPath": "C:\\Users\\HomePC\\konsume-web\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|c:\\users\\homepc\\source\\repos\\konsume-web\\backend\\konsume\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|c:\\users\\homepc\\konsume-web\\backend\\controllers\\chatbotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|solutionrelative:controllers\\chatbotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|c:\\users\\homepc\\konsume-web\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|c:\\users\\homepc\\konsume-web\\backend\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|solutionrelative:controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,15 +27,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\HomePC\\source\\repos\\konsume-web\\backend\\konsume\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\HomePC\\source\\repos\\konsume-web\\backend\\konsume\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAACoAAAAAAAAAAAAAACsAAAABAAAA",
+              "Title": "ChatBotController.cs",
+              "DocumentMoniker": "C:\\Users\\HomePC\\konsume-web\\backend\\Controllers\\ChatBotController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ChatBotController.cs",
+              "ToolTip": "C:\\Users\\HomePC\\konsume-web\\backend\\Controllers\\ChatBotController.cs",
+              "RelativeToolTip": "Controllers\\ChatBotController.cs",
+              "ViewState": "AQIAAIoAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-03T08:04:05.696Z",
+              "WhenOpened": "2024-08-27T15:00:31.061Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\HomePC\\konsume-web\\backend\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\HomePC\\konsume-web\\backend\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-08-27T14:53:24.333Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProfileController.cs",
+              "DocumentMoniker": "C:\\Users\\HomePC\\konsume-web\\backend\\Controllers\\ProfileController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProfileController.cs",
+              "ToolTip": "C:\\Users\\HomePC\\konsume-web\\backend\\Controllers\\ProfileController.cs",
+              "RelativeToolTip": "Controllers\\ProfileController.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-27T10:50:00.888Z"
             }
           ]
         }
