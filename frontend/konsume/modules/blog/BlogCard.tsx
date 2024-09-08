@@ -14,7 +14,7 @@ const BlogCard = ({title, category }: BlogProps) => {
             <div
                 className="justify-between flex flex-col min-h-[130px] bg-primary-bg px-3 pt-3 relative -z-10 rounded-lg w-full "
             >
-                <Image src={`${category}.svg`} width={39} height={32} alt='expand' className='absolute -top-4 -left-4' />
+                <Image src={`/${category}.svg`} width={39} height={32} alt='expand' className='absolute -top-4 -left-4' />
                 <div className="flex justify-between">
                     <p className="text-secondary-500 font-bold text-mobile-caption ">{capitalizeFirstLetter(category)}</p>
                 </div>

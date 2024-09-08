@@ -2,10 +2,11 @@
 import React, { useContext, useEffect } from "react";
 import SearchBar from "@/components/ui/SearchBar";
 import { useSetupContext } from "@/context/SetupContext";
+import MealsContext from "@/context/MealsContext";
 
 const DashboardHead = () => {
-  const {name} = useSetupContext();
-  const firstName = name?.split(" ");
+  const {user} = useContext(MealsContext);
+  const firstName = user?.split(" ");
 
   useEffect(() => {
     

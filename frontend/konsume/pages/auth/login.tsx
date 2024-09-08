@@ -39,15 +39,19 @@ const Login = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // Handle form submission and login
     try {
-      toast.info('Signing you in, please wait...');
-      const { data } = await axiosKonsumeInstance.post('/api/auth/login', values, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const {data} = await toast.promise(
+        axiosKonsumeInstance.post('/api/auth/login', values, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        }),
+        {
+          pending: 'Processing...',
+          success: `Welcome back ${Cookies.get('konsumeUsername')} 👌`,
+          error: 'Failed to login 🤯'
+        })
       // Set user-specific cookies after successful login
       Cookies.set('ktn', data.token);
       Cookies.set('userid', data.value.id);
       Cookies.set('konsumeUsername', data.value.fullName);
-      toast.success(data.message);
       checkUser();
     } catch (error: any) {
       toast.error(error?.response?.data);

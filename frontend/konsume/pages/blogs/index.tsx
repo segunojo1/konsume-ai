@@ -15,32 +15,14 @@ import { axiosKonsumeInstance } from '@/http/konsume'
 import Link from 'next/link'
 
 const Blogs = () => {
-    const [activeBlog, setActiveBlog] = useState<string>('All');
-    const {blogs, setTempBlogs, tempBlogs, bookmarkedBlogs, setBookmarkedBlogs, setTempBookmarks } = useContext(BlogContext);
+    
+    const {blogs, setTempBlogs, tempBlogs, setActiveBlog, activeBlog } = useContext(BlogContext);
     const handleBlogChange = (blog: string) => {
         setActiveBlog(blog);
     };
 
     //get bookmarks
-    useEffect(() => {
-        const getBookmarks = async () => {
-            try {
-                
-                const {data} = await axiosKonsumeInstance.get(`/api/Bookmark/${Cookies.get("userid")}`)
-                console.log(data);
-                if (data?.value?.$values) {
-                    console.log(data?.value?.$values);
-                    // Store the array in localStorage
-                    localStorage.setItem('bookmarks', JSON.stringify(data.value.$values));
-                    setBookmarkedBlogs(data?.value?.$values);
-                    setTempBookmarks(data?.value?.$values);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        getBookmarks()
-    }, [])
+    
     return (
         <MainLayout topBarIcon='blog' topBarText='Blogs' fixedTopbar={true} className=' '>
             <div className='  gap-5 mb-6 font-satoshi'>
@@ -70,11 +52,18 @@ const Blogs = () => {
                     </Button>
                     </Link>
                 </div>
-                <div className='grid lg:grid-cols-3 grid-cols-1 gap-4 mt-6 mx-auto lg:mx-0 w-fit lg:w-full'>
-                    {tempBlogs?.map((blog: BlogProps) => (
-                        <BlogCard key={blog.id} title={blog.title} text={blog.text} category={blog.category} />
-                    ))}
-                </div>
+                {tempBlogs.length > 0 ? (
+                    <div className='grid lg:grid-cols-3 grid-cols-1 gap-4 mt-6 mx-auto lg:mx-0 w-fit lg:w-full'>
+                        {
+                            tempBlogs?.map((blog: BlogProps) => (
+                                <BlogCard key={blog.id} title={blog.title} text={blog.text} category={blog.category} />
+                            ))
+                        }
+                    </div>
+                ) : (
+                    <p className='mx-auto w-fit'>Ouch, no blogs to show.😥</p>
+                )
+                }
                 
             </div>
         </MainLayout>

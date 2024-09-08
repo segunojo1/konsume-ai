@@ -9,6 +9,7 @@ export default BlogContext;
 
 export function BlogContextProvider({ children }: { children: React.ReactNode }) {
     const [activePage, setActivePage] = useState('home');
+    const [activeBlog, setActiveBlog] = useState<string>('All');
     const [toggled, setToggled] = useState<boolean>(false);
     const [userMessage, setUserMessage] = useState('');
     const [name, setName] = useState<string | undefined>();
@@ -72,6 +73,33 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
         }
     }, [setBlogs, blogs]);
 
+    useEffect(() => {
+        const getBookmarks = async () => {
+            try {
+                
+                const {data} = await axiosKonsumeInstance.get(`/api/Bookmark/${Cookies.get("userid")}`)
+                console.log(data);
+                if (data?.value?.$values) {
+                    console.log(data?.value?.$values);
+                    // Store the array in localStorage
+                    localStorage.setItem('bookmarks', JSON.stringify(data.value.$values));
+                    setBookmarkedBlogs(data?.value?.$values);
+                    setTempBookmarks(data?.value?.$values);
+                }
+                if (data?.value?.$values <= 0) {
+                    
+                }
+            } catch (error) {
+                console.log(error);
+            }finally{
+                const cachedBlogs = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+                setBookmarkedBlogs(cachedBlogs);
+                setTempBookmarks(cachedBlogs)
+            }
+        }
+        getBookmarks()
+    }, [])
+
     const contextValue: any = {
         activePage,
         setActivePage,
@@ -88,7 +116,8 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
         bookmarkedBlogs, 
         setBookmarkedBlogs,
         tempBookmarks, 
-        setTempBookmarks
+        setTempBookmarks,
+        activeBlog, setActiveBlog
     };
 
     return <BlogContext.Provider value={contextValue}>{children}</BlogContext.Provider>;

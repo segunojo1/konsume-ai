@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import Image from "next/image";
 import Cookies from "js-cookie";
+import MealsContext from "@/context/MealsContext";
 
 const ChatHeader = () => {
-  const user = Cookies.get("konsumeUsername");
+  const {user} = useContext(MealsContext)
   const firstName = user?.split(" ");
   return (
     <div className="flex justify-between md:p-0 p-6">
