@@ -10,16 +10,24 @@ export default MealsContext;
 export function MealsContextProvider({ children }: { children: React.ReactNode }) {
     const [recommendedMeals, setRecommendedMeals] = useState([]);
     const [user, setUser] = useState<string | undefined>();
+    const [tempMeals, setTempMeals] = useState(recommendedMeals);
 
     const dataFetchedRef = useRef(false);
+    useEffect(() => {
 
+        const username = Cookies.get('konsumeUsername')
+        setUser(username)
+        }, [])
 useEffect(() => {
+    console.log('hi');
+    
     const fetchMeals = async () => {
         try {
             const { data } = await axiosKonsumeInstance.get('/api/ChatBot/GenerateMeals', {
                 params: { profileId: Cookies.get('userid') },
             });
             setRecommendedMeals(data.$values);
+            setTempMeals(data.$values)
 
             if (data.$values.length < 2) {
                 console.log('Retrying due to insufficient meal data...');
@@ -43,6 +51,7 @@ useEffect(() => {
         } else {
             const cachedMeals = JSON.parse(localStorage.getItem('recommendedMeals') || '[]');
             setRecommendedMeals(cachedMeals);
+            setTempMeals(cachedMeals)
         }
 
         setMidnightTimer(fetchMeals);
@@ -52,7 +61,7 @@ useEffect(() => {
         checkAndFetchMeals();
         dataFetchedRef.current = true;
     }
-}, [setRecommendedMeals]);
+}, [setRecommendedMeals, recommendedMeals]);
 
 // Set a timer to fetch new data at the next 12:00 AM
 const setMidnightTimer = (fetchMeals: any) => {
@@ -71,7 +80,7 @@ const setMidnightTimer = (fetchMeals: any) => {
 
 
   const contextValue: any = {
-    recommendedMeals, setRecommendedMeals, dataFetchedRef, setMidnightTimer, user, setUser
+    recommendedMeals, setRecommendedMeals, dataFetchedRef, setMidnightTimer, user, setUser, tempMeals, setTempMeals
   };
 
   return <MealsContext.Provider value={contextValue}>{children}</MealsContext.Provider>;

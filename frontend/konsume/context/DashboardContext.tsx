@@ -63,14 +63,14 @@ export function DashboardContextProvider({ children }: { children: React.ReactNo
       )}, my health conditons are ${Cookies.get(
         "possibleDiseases"
       )} and i am ${Cookies.get("diet")}. Generate a random Nigerian dinner fit for my health in this format e.g amala and ewedu don't tell me any other thing just give me the food name, no other thing said`;
+      const [query3, setQuery3] = useState(proteinIntakeRange);
+      const [query4, setQuery4] = useState(carbIntakeRange);
+      const [query5, setQuery5] = useState(fatIntakeRange);
     
       const [breakfast, setBreakfast] = useState("");
       const [lunch, setLunch] = useState("");
       const [dinner, setDinner] = useState("");
     
-      const [query3, setQuery3] = useState(proteinIntakeRange);
-      const [query4, setQuery4] = useState(carbIntakeRange);
-      const [query5, setQuery5] = useState(fatIntakeRange);
     
       const [answer, setAnswer] = useState();
       const [answer2, setAnswer2] = useState();
@@ -83,28 +83,34 @@ export function DashboardContextProvider({ children }: { children: React.ReactNo
 
 
       const getRandomMeals = async () => {
-        setLoading(true)
-          const { data } = await gemini.post("/gemini-1.5-flash:generateContent", {
-            contents: [{ parts: [{ text: breakfastQuery }] }],
-          });
-    
-          const lun = await gemini.post("/gemini-1.5-flash:generateContent", {
-            contents: [{ parts: [{ text: lunchQuery }] }],
-          });
-    
-          const din = await gemini.post("/gemini-1.5-flash:generateContent", {
-            contents: [{ parts: [{ text: dinnerQuery }] }],
-          });
-    
-          setBreakfast(data.candidates[0].content.parts[0].text);
-          setLunch(lun.data.candidates[0].content.parts[0].text);
-          setDinner(din.data.candidates[0].content.parts[0].text);
-          setLoading(false);
-          console.log(data);
-          console.log("meals recipe");
-          console.log(breakfast);
-          console.log(lunch);
-          console.log(dinner);
+        try {
+          
+          setLoading(true)
+            const { data } = await gemini.post("/gemini-1.5-flash:generateContent", {
+              contents: [{ parts: [{ text: breakfastQuery }] }],
+            });
+      
+            const lun = await gemini.post("/gemini-1.5-flash:generateContent", {
+              contents: [{ parts: [{ text: lunchQuery }] }],
+            });
+      
+            const din = await gemini.post("/gemini-1.5-flash:generateContent", {
+              contents: [{ parts: [{ text: dinnerQuery }] }],
+            });
+      
+            setBreakfast(data.candidates[0].content.parts[0].text);
+            setLunch(lun.data.candidates[0].content.parts[0].text);
+            setDinner(din.data.candidates[0].content.parts[0].text);
+            setLoading(false);
+            console.log(data);
+            console.log("meals recipe");
+            console.log(breakfast);
+            console.log(lunch);
+            console.log(dinner);
+        } catch (error) {
+          console.log(error);
+          
+        }
       };
   useEffect(() => {
 

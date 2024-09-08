@@ -13,6 +13,7 @@ import { DashboardContextProvider } from "@/context/DashboardContext";
 import { ScannerContextProvider } from "@/context/ScannerContext";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
+import { BlogContextProvider } from "@/context/BlogContext";
 
 Router.events.on("routeChangeStart", nProgress.start);
 Router.events.on("routeChangeError", nProgress.done);
@@ -23,19 +24,21 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Provider store={store}>
-        <SetupProvider>
-          <DashboardContextProvider>
-            <MealsContextProvider>
-              <ScannerContextProvider>
-                <ChatBotContextProvider>
-                  <MainLayoutContextProvider>
-                    <AnyComponent {...pageProps} />
-                  </MainLayoutContextProvider>
-                </ChatBotContextProvider>
-              </ScannerContextProvider>
-            </MealsContextProvider>
-          </DashboardContextProvider>
-        </SetupProvider>
+        <BlogContextProvider>
+          <SetupProvider>
+            <DashboardContextProvider>
+              <MealsContextProvider>
+                <ScannerContextProvider>
+                  <ChatBotContextProvider>
+                    <MainLayoutContextProvider>
+                      <AnyComponent {...pageProps} />
+                    </MainLayoutContextProvider>
+                  </ChatBotContextProvider>
+                </ScannerContextProvider>
+              </MealsContextProvider>
+            </DashboardContextProvider>
+          </SetupProvider>
+        </BlogContextProvider>
         <ToastContainer />
       </Provider>
     </>
