@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { Card } from "./card";
 import { Calendar } from "@/components/ui/calendar";
 import { DateRange } from "react-day-picker";
-
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
-import { NutritionalInfoBox } from "./nutritional-info-box";
 import { colors, nutritionalInfo } from "../data";
 import { getRandomColor } from "../utils";
+import Card from "./card";
+import NutritionalInfoBox from "./nutritional-info-box";
 
 type Props = {
   date: DateRange | undefined;

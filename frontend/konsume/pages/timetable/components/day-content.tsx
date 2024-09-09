@@ -1,10 +1,10 @@
 import React from "react";
-import { MealsInfoCard } from "./meals-info-card";
 import Image from "next/image";
 import { MealDatatype } from "@/@types/timetable";
 import { useAppSelector } from "@/redux/hooks";
+import MealsInfoCard from "./meals-info-card";
 
-export const DayContent = () => {
+const DayContent = () => {
   const { meals } = useAppSelector((state) => state.timetable);
 
   const filterMealsDataByLabel = (
@@ -41,3 +41,4 @@ export const DayContent = () => {
     </div>
   );
 };
+export default DayContent
