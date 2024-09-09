@@ -1,4 +1,4 @@
-import { colors, mealsInfoCardColors } from "./data";
+import { colors, mealsInfoCardColors } from "../../helpers/timetable/data";
 
 const getRandomColor = (excludeColor?: string) => {
   const filteredColors = excludeColor
