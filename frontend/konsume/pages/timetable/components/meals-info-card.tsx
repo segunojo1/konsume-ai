@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ArrowDownRight, ArrowUpRight, Clock } from "lucide-react";
 import Image from "next/image";
-import { getColorsByMealType, getRandomColor } from "../utils";
+import getRandomColor, { getColorsByMealType } from "../utils";
 import { MealDatatype } from "@/@types/timetable";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import NutritionalInfoBox from "./nutritional-info-box";

@@ -5,10 +5,10 @@ import { DateRange } from "react-day-picker";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
-import { colors, nutritionalInfo } from "../data";
-import { getRandomColor } from "../utils";
+import nutritionalInfo, { colors } from "../data";
 import Card from "./card";
 import NutritionalInfoBox from "./nutritional-info-box";
+import getRandomColor from "../utils";
 
 type Props = {
   date: DateRange | undefined;
