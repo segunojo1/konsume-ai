@@ -1,17 +1,12 @@
+import React, { useContext } from 'react'
 import MainLayout from '@/components/Layout/MainLayout'
 import { Button } from '@/components/ui/button'
 import BlogHead from '@/modules/blog/BlogHead'
 import FilterBlog from '@/modules/blog/FilterBlog'
-import BlogIntroductoryCard from '@/modules/blog/onboard/BlogIntroductoryCard'
-import BlogOnboardHead from '@/modules/blog/onboard/BlogOnboardHead'
 import Image from 'next/image'
-import React, { useContext, useEffect, useState } from 'react'
-import { BlogItems } from './blogitems'
 import BlogCard from '@/modules/blog/BlogCard'
 import BlogContext from '@/context/BlogContext'
 import { BlogProps } from '@/@types'
-import Cookies from 'js-cookie'
-import { axiosKonsumeInstance } from '@/http/konsume'
 import Link from 'next/link'
 
 const Blogs = () => {
