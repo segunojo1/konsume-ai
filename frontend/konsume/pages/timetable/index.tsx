@@ -5,7 +5,7 @@ import { RightPanel } from "./components/right-panel";
 import React, { useState } from "react";
 import { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
-import { MainPanel } from "./components/main-panel";
+import MainPanel from "./components/main-panel";
 
 export default function SidebarDemo() {
   const [open, setOpen] = useState(true);
