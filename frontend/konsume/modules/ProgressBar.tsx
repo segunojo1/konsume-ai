@@ -1,6 +1,10 @@
 import React from 'react'
 
-const ProgressBar = ({ currentStep, totalSteps }) => {
+interface progressBarProps {
+  currentStep: number;
+  totalSteps: number
+}
+const ProgressBar = ({ currentStep, totalSteps }: progressBarProps) => {
     const progressPercentage = (currentStep / totalSteps) * 100;
     return (
         <div className='flex items-center gap-2'>

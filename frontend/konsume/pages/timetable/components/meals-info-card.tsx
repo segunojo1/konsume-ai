@@ -10,7 +10,7 @@ import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 
 type Props = {
   data: MealDatatype;
-  className: string;
+  className?: string;
 };
 
 export const MealsInfoCard = ({

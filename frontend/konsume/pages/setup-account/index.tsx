@@ -17,7 +17,6 @@ import withHigherAuth from "@/helpers/withHigherAuth";
 
 const SetupAccount = () => {
   const {
-    nextPage,
     currentPage,
     userGoal,
     possibleDiseases,
@@ -27,8 +26,7 @@ const SetupAccount = () => {
     nationality,
     gender,
     weight,
-    diet,
-    userID,
+    diet
   } = useSetupContext();
   const [test, setTest] = useState(false);
   const {name}:any = useContext(MainLayoutContext)
