@@ -74,6 +74,7 @@ export interface BlogProps {
   title?: string;
   text: string;
   category?: string;
+  showHeading?: boolean;
 }
 
 export interface LoginFormProps {

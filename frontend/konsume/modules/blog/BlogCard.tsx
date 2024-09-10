@@ -3,14 +3,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const BlogCard = ({title, category }: BlogProps) => {
+const BlogCard = ({title, category, showHeading }: BlogProps) => {
     const capitalizeFirstLetter = (str: string | undefined): string | undefined => {
         if (!str) return str; // Return the string as is if it's empty or undefined
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     };
     
     return (
-        <div className='flex flex-col items-start gap-4 py-6 px-3 shadow-sm rounded-[34px] hover:shadow-lg lg:w-full w-fit mx-auto'>
+        <div className=' flex flex-col items-start gap-4 py-6 px-3 shadow-md rounded-[34px] hover:shadow-lg lg:w-full w-fit mx-auto md:min-w-fit min-w-full'>
+            {showHeading && (
+                <p className='mx-auto w-fit font-bold text-[12px]'>Today&apos;s Spotlighted Blog</p>
+            )}
             <div
                 className="justify-between flex flex-col min-h-[130px] bg-primary-bg px-3 pt-3 relative -z-10 rounded-lg w-full "
             >

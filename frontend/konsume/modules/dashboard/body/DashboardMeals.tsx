@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 
 interface DashboardMealsProps {
   breakfast: string;
@@ -10,9 +11,10 @@ interface DashboardMealsProps {
   dinner: string;
   loading: boolean;
   onNavigate: (meal: string) => void;
+  className ?: string;
 }
 
-const DashboardMeals: React.FC<DashboardMealsProps> = ({ breakfast, lunch, dinner, loading, onNavigate }) => {
+const DashboardMeals: React.FC<DashboardMealsProps> = ({ breakfast, lunch, dinner, loading, onNavigate, className }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -48,7 +50,7 @@ const DashboardMeals: React.FC<DashboardMealsProps> = ({ breakfast, lunch, dinne
   );
 
   return (
-    <div className="bg-color8 p-5 gap-2 flex flex-col rounded-2xl js-tilt flex-[.4]">
+    <div className={twMerge("bg-color8 p-5 gap-2 flex flex-col rounded-2xl js-tilt flex-[.4]", className)}>
       <div className="flex justify-between items-center">
         <p className="font-bold text-xs text-white">Today&apos;s Spotlighted Meal</p>
         <Image src="/breakfast.svg" alt="food" width={33} height={33} />
