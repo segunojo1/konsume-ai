@@ -25,7 +25,7 @@ function MainLayout({
   }, []);
 
   return (
-    <div className={twMerge('w-full relative bg-[#fafafa]', className)}>
+    <div className={twMerge('w-full relative bg-[#fafafa] z-20', className)}>
       <TopBar setToggled={setToggled} className={fixedTopbar ? 'fixed' : ''} topBarText={topBarText} topBarIcon={topBarIcon} />
 
       {showDashboardSidebar && <Sidebar toggled={toggled} setToggled={setToggled} />}

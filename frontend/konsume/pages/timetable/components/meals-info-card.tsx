@@ -3,17 +3,17 @@ import React, { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ArrowDownRight, ArrowUpRight, Clock } from "lucide-react";
 import Image from "next/image";
-import { NutritionalInfoBox } from "./nutritional-info-box";
-import { getColorsByMealType, getRandomColor } from "../utils";
+import getRandomColor, { getColorsByMealType } from "../utils";
 import { MealDatatype } from "@/@types/timetable";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
+import NutritionalInfoBox from "./nutritional-info-box";
 
 type Props = {
   data: MealDatatype;
-  className: string;
+  className?: string;
 };
 
-export const MealsInfoCard = ({
+const MealsInfoCard = ({
   className,
   data: {
     label,
@@ -170,3 +170,5 @@ const TagInfo = ({ bg, name }: { bg: string; name: string }) => (
     {name}
   </div>
 );
+
+export default MealsInfoCard

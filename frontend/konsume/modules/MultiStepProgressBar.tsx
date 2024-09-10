@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
-const MultiStepProgressBar = ({currentStep}) => {
+interface MultiStepProgressBarProps {
+  currentStep: number;
+}
+
+const MultiStepProgressBar = ({currentStep}:MultiStepProgressBarProps) => {
   const totalSteps = 4;
 
 

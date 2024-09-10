@@ -11,14 +11,14 @@ import {
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { DayContent } from "./day-content";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { formatDateToDDMMYY } from "@/lib/date";
 import { DailyMealsDatatype } from "@/@types/timetable";
 import { setMeals } from "@/redux/features/timetable/timetable.slice";
 import Marquee from "@/components/ui/marquee";
-import { MealsInfoCard } from "./meals-info-card";
 import Image from "next/image";
+import MealsInfoCard from "./meals-info-card";
+import DayContent from "./day-content";
 
 type Props = {
   date: DateRange | undefined;
@@ -26,7 +26,7 @@ type Props = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export function MainPanel({ date, open, setOpen }: Props) {
+function MainPanel({ date, open, setOpen }: Props) {
   const [weekOffset, setWeekOffset] = useState(0);
   const { dailyMeals } = useAppSelector((state) => state.timetable);
   const dispatch = useAppDispatch();
@@ -195,3 +195,4 @@ export function MainPanel({ date, open, setOpen }: Props) {
     </div>
   );
 }
+export default MainPanel

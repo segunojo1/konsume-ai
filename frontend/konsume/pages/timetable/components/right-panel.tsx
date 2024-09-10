@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { Card } from "./card";
 import { Calendar } from "@/components/ui/calendar";
 import { DateRange } from "react-day-picker";
-
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
-import { NutritionalInfoBox } from "./nutritional-info-box";
-import { colors, nutritionalInfo } from "../data";
-import { getRandomColor } from "../utils";
+import nutritionalInfo, { colors } from "../../../helpers/timetable/data";
+import Card from "./card";
+import NutritionalInfoBox from "./nutritional-info-box";
+import getRandomColor from "../utils";
 
 type Props = {
   date: DateRange | undefined;
@@ -18,7 +17,7 @@ type Props = {
   open: boolean;
 };
 
-export const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
+const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
   const [firstName, setFirstName] = useState("");
 
   useEffect(() => {
@@ -51,7 +50,7 @@ export const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
           <div className="space-y-6">
             <div className="flex justify-between gap-4 ">
               <h2 className="text-desktop-caption font-bold max-w-[125px]">
-                Today’s Spotlighted Meal
+                Today&apos;s Spotlighted Meal
               </h2>
               <Image src="/spotlight-icon.svg" alt="" width={37} height={37} />
             </div>
@@ -95,3 +94,4 @@ export const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
     </motion.aside>
   );
 };
+export default RightPanel

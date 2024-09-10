@@ -5,17 +5,24 @@ import Link from 'next/link';
 import MealsContext from '@/context/MealsContext';
 import { debounce } from '@/helpers/debounce';
 
-const MealCard = ({ meal }: any) => {
+interface MealCardProps {
+  meal: {
+    name: string;
+    description: string;
+    course: string;
+  }
+}
+const MealCard = ({ meal }: MealCardProps) => {
   const API_KEY = process.env.NEXT_PUBLIC_RAPID_KEY;
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const {recommendedMeals}: any = useContext(MealsContext);
+  const { recommendedMeals }: any = useContext(MealsContext);
   const options: any = {
     method: 'POST',
     url: 'https://openjourney1.p.rapidapi.com/models/stabilityai/stable-diffusion-xl-base-1.0',
     headers: {
       'x-rapidapi-key': API_KEY,
-    'x-rapidapi-host': 'openjourney1.p.rapidapi.com',
-    'Content-Type': 'application/json'
+      'x-rapidapi-host': 'openjourney1.p.rapidapi.com',
+      'Content-Type': 'application/json'
     },
     data: {
       inputs: meal?.name,
@@ -54,25 +61,41 @@ const MealCard = ({ meal }: any) => {
   }, [recommendedMeals]);
 
   return (
-    <div className='shadow-bordershad border-2 border-[black] rounded'>
-      <Link href={`/meals/${meal?.name}`}>
-        <Image
-          src={imageUrl || '/placeholder1.jpeg'}
-          loading='lazy'
-          height={96}
-          width={260}
-          alt='food'
-          className='w-full h-[130px] object-cover'
-        />
-        <div className='p-3'>
-          <h1 className='text-desktop-content font-bold'>
-            {meal?.name}
-          </h1>
-          <p className='text-desktop-content'>{meal?.description}</p>
+    <div className=' flex flex-col items-start gap-4 py-6 px-3 shadow-sm rounded-[34px] hover:shadow-lg font-satoshi lg:w-full w-fit'>
+      <div
+        className="justify-between [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d] flex flex-col gap-2 min-h-[130px] bg-primary-bg px-3 pt-3 relative rounded-lg w-full "
+      >
+        <Image src={`${meal.course}.svg`} width={39} height={32} alt='expand' className='absolute -top-4 -right-4' />
+        <div className="flex justify-between">
+          <p className="text-secondary-500 font-bold text-mobile-caption ">{meal.course}</p>
         </div>
+        <div className='w-[100px] h-[62px] flex items-stretch'>
+          <Image
+            src={imageUrl || '/placeholder1.jpeg'}
+            loading='lazy'
+            height={62}
+            width={100}
+            alt='food'
+            className='w-full object-cover'
+          />
+        </div>
+
+
+        <div className="flex justify-between flex-col mb-14">
+          <p className="text-primarygtext font-bold text-[15px]">{meal.name}</p>
+          <p className="text-color8-700 font-medium text-[11.2px] max-w-[240px]">
+            {meal.description}
+          </p>
+        </div>
+      </div>
+      <Link href={`/meals/${meal.name}`} className='flex gap-5 items-center cursor-pointer'>
+        <Image src='/expand_meal.svg' width={39} height={32} alt='expand' className='hover:rotate-12 cursor-pointer' />
+        <p className='font-bold text-[14px]/[120%]'>Open Meal</p>
       </Link>
     </div>
   );
 };
+
+
 
 export default MealCard;

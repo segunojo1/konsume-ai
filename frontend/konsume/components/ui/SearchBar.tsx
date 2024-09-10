@@ -1,7 +1,8 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Input } from './input'
 import { useRouter } from 'next/router';
+import MealsContext from '@/context/MealsContext';
 
 interface SearchbarProps {
     placeholder?: string;
@@ -12,6 +13,7 @@ const SearchBar = (
     {placeholder, img}:SearchbarProps
 ) => {
     const [searchQuery, setSearchQuery] = useState('');
+    const {generatingMeal, setGeneratingMeal} = useContext(MealsContext);
     const router = useRouter();
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

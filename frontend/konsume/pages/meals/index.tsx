@@ -1,16 +1,12 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Image from 'next/image';
-import Cookies from 'js-cookie';
 import MainLayout from '@/components/Layout/MainLayout';
 import { Button } from '@/components/ui/button';
 import SearchBar from '@/components/ui/SearchBar';
 import FilterMeal from '@/modules/meals/FilterMeal';
 import MealCard from '@/modules/meals/MealCard';
-import { axiosKonsumeInstance } from '@/http/konsume';
 import MealsContext from '@/context/MealsContext';
-import MainLayoutContext from '@/context/LayoutContext';
 import { Mealprops } from '@/@types';
-import { retry } from '@/helpers/retryapi';
 
 const Meals: React.FC = () => {
   const [activeMeal, setActiveMeal] = useState<string>('All');
@@ -32,7 +28,7 @@ const Meals: React.FC = () => {
         <div className="flex flex-col gap-7">
           <div className="relative w-fit">
             <Image src='/multipleline.svg' alt='multi line' height={141} width={98} className='absolute bottom-0 top-0 my-auto right-0 -z-50' />
-            <h1 className="md:text-desktop-heading4 text-[28px]/[40px] font-bold z-50">Hello, {user || ".."}</h1>
+            <h1 className="md:text-desktop-heading4 text-[28px]/[40px] font-bold z-50">Hello, {user ? user : ".." }</h1>
           </div>
           <p className="text-desktop-content text-primarygtext italic max-w-[450px]">
             Here are your personalized meal recommendations, tailored just for you based on your health, dietary goals and preferences. <b>Bon Appétit!</b>
@@ -77,9 +73,9 @@ const Meals: React.FC = () => {
 {/* {
   tempMeals.length > 0 ? ( */}
 
-      <div className='grid grid-cols-4 gap-4'>
+      <div className='grid lg:grid-cols-3 grid-cols-1 gap-4 mx-auto lg:mx-0 '>
         {tempMeals?.map((meal: Mealprops) => (
-          <MealCard key={meal.name} query="" meal={meal} />
+          <MealCard key={meal.name} meal={meal} />
         ))}
       </div>
   {/* // ) : (

@@ -4,7 +4,7 @@ import {
   NutritionalInfoItem,
 } from "@/@types/timetable";
 
-export const nutritionalInfo: NutritionalInfoItem[] = [
+const nutritionalInfo: NutritionalInfoItem[] = [
   {
     name: "Calories",
     value: "200",
@@ -135,3 +135,4 @@ export const mealsInfoCardColors = [
 ];
 
 export const colors = ["#D6FBC4", "#D3D3D3", "#FFFFFF", "#EDFAE7"];
+export default nutritionalInfo

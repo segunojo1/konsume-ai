@@ -26,4 +26,4 @@ const Container = ({ children, className }: ContainerProps) => {
 
 Card.Container = Container;
 
-export { Card };
+export default Card;

@@ -1,3 +1,4 @@
+"use client"
 import React, { useContext, useEffect } from 'react';
 import { useSetupContext } from '../../context/SetupContext';
 import withAuth from '../../helpers/withAuth';

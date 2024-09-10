@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import Image from "next/image";
-import MainLayoutContext from "@/context/LayoutContext";
 import Cookies from "js-cookie";
+import MealsContext from "@/context/MealsContext";
 
 const ChatHeader = () => {
-  const { name }: any = useContext(MainLayoutContext);
-  const user = Cookies.get("konsumeUsername");
-
+  const {user} = useContext(MealsContext)
+  const firstName = user?.split(" ");
   return (
     <div className="flex justify-between md:p-0 p-6">
       <div className="flex flex-col gap-7">
@@ -19,7 +18,7 @@ const ChatHeader = () => {
             className="absolute bottom-0 top-0 my-auto right-0 -z-50"
           />
           <h1 className="md:text-desktop-heading1 text-[28px]/[40px] font-bold z-50">
-            Hello, {user ? user : ".."}
+            Hello, {firstName ? firstName[0] : ".."}
           </h1>
         </div>
         <p className="text-desktop-highlight italic max-w-[450px]">

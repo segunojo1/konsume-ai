@@ -1,3 +1,4 @@
+"use client"
 import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import DashboardContext from "@/context/DashboardContext";
@@ -7,6 +8,7 @@ import DashboardQuickActions from "./body/DashboardQuickActions";
 import DashboardMeals from "./body/DashboardMeals";
 import DashboardProgressTracker from "./body/DashboardProgressTracker";
 import DashboardHighlights from "./body/DashboardHighlights";
+import { Button } from "@/components/ui/button";
 
 const DashboardBody = () => {
   const { breakfast, lunch, dinner, loading, getRandomMeals } = useContext(DashboardContext);
@@ -33,15 +35,23 @@ const DashboardBody = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="flex md:flex-col flex-row justify-between px-5 flex-[.7] text-primarygtext">
-        <div className="flex gap-2 text-primarygtext">
+    <div className="flex md:flex-row flex-col">
+      <div className="flex flex-col justify-between px-5 flex-[.7] text-primarygtext">
+        <div className="flex flex-col md:flex-row gap-2 text-primarygtext">
           <SpotlightedMealCard meal={breakfast} loading={loading} />
-          <DashboardProgressTracker />
+          <div className="md:flex w-full flex-[.5] hidden">
+            <DashboardProgressTracker />
+          </div>
+          <Button className="md:hidden bg-primarygtext mb-3 text-primary-bg-100 font-medium text-[12px] rounded-lg py-[11px] px-[32.5px] flex items-center justify-center">
+            Open Today&apos;s Timetable
+          </Button>
         </div>
-
-        <DashboardQuickActions />
-        <DashboardHighlights />
+        <div className="md:block hidden">
+          <DashboardQuickActions />
+        </div>
+        <div className="md:flex ">
+        <DashboardHighlights loading={loading} />
+        </div>
       </div>
       <DashboardMeals
         breakfast={breakfast}

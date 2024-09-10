@@ -7,7 +7,7 @@ type Props = {
   unit: string;
 };
 
-export const NutritionalInfoBox = ({ bg, name, value, unit }: Props) => {
+const NutritionalInfoBox = ({ bg, name, value, unit }: Props) => {
   return (
     <div
       style={{ backgroundColor: bg }}
@@ -21,3 +21,4 @@ export const NutritionalInfoBox = ({ bg, name, value, unit }: Props) => {
     </div>
   );
 };
+export default NutritionalInfoBox
