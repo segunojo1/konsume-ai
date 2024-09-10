@@ -7,12 +7,13 @@ import dashboard from "@/pages/dashboard";
 import DashboardContext from "@/context/DashboardContext";
 import { LoaderCircle } from "lucide-react";
 import DashboardProgressTracker from "./DashboardProgressTracker";
+import BlogCard from "@/modules/blog/BlogCard";
 
 interface DashboardHighlightsProp {
   loading: boolean;
 }
-const DashboardHighlights = ({loading}: DashboardHighlightsProp) => {
-  const {nutritionTea} = useContext(DashboardContext);
+const DashboardHighlights = ({ loading }: DashboardHighlightsProp) => {
+  const { nutritionTea } = useContext(DashboardContext);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -20,16 +21,19 @@ const DashboardHighlights = ({loading}: DashboardHighlightsProp) => {
     setIsMounted(true);
   }, []);
   return (
-    <div className="flex md:overflow-visible overflow-scroll flex-row gap-2 cursor-pointer font-jakarta">
+    <div className="flex md:overflow-visible overflow-scroll flex-row gap-2 justify-between cursor-pointer font-jakarta">
       <div className="bg-[#D6FBC4] p-4 rounded-2xl js-tilt mealreco md:min-w-fit min-w-full md:flex-[.5]">
         <div className="flex justify-between items-center mb-5">
           <p className="font-bold text-xs">Restaurant Track</p>
           <Image src={scanner} alt="restaurant" />
         </div>
       </div>
+      {/* <div className="md:flex-[.5] md:min-w-fit min-w-full">
+      <BlogCard category="nutrition" title="Eating Healthy" text="djjkdjsjksjks" showHeading/>
+      </div> */}
 
       <div className="flex md:hidden">
-      <DashboardProgressTracker />
+        <DashboardProgressTracker />
       </div>
 
       <div className="bg-primary-bg p-4 rounded-2xl js-tilt h-full mealreco md:flex-[.5] daily-tea">
@@ -40,12 +44,12 @@ const DashboardHighlights = ({loading}: DashboardHighlightsProp) => {
         <div className="flex flex-col gap-3">
           <h1 className="text-desktop-caption font-bold">"Did You Know"</h1>
           {loading ? (
-        <LoaderCircle className="my-auto animate-spin mx-auto" />
-      ) : (
-          <p className="italic text-[12px]/[20px]">
-            {isMounted ? nutritionTea : ".." }
-          </p>
-      )}
+            <LoaderCircle className="my-auto animate-spin mx-auto" />
+          ) : (
+            <p className="italic text-[12px]/[20px]">
+              {isMounted ? nutritionTea : ".."}
+            </p>
+          )}
         </div>
       </div>
     </div>
