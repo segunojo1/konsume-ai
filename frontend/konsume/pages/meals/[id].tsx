@@ -115,7 +115,11 @@ const healthImpactPrompt = `What is the impact of the meal ${id} on me if i have
     };
   
     if (id) {
-      getMealDetailsWithDelay();
+      setGeneratingMeal(true);
+      setTimeout(() => {
+
+        getMealDetailsWithDelay();
+      }, 2000)
     }
   }, [id]);
   

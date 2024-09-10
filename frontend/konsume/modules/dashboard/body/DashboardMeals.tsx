@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
@@ -12,6 +13,12 @@ interface DashboardMealsProps {
 }
 
 const DashboardMeals: React.FC<DashboardMealsProps> = ({ breakfast, lunch, dinner, loading, onNavigate }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    // Set to true once the component is mounted
+    setIsMounted(true);
+  }, []);
   const renderMealCard = (meal: string, label: string) => (
     <div
       onClick={() => onNavigate(meal)}
@@ -24,7 +31,11 @@ const DashboardMeals: React.FC<DashboardMealsProps> = ({ breakfast, lunch, dinne
         <LoaderCircle className="my-auto animate-spin mx-auto" />
       ) : (
         <div className="flex justify-between flex-col mb-14">
-          <p className="text-[#1E5E08] font-bold text-[15px]">{meal}</p>
+          <div>{isMounted ? (
+            <p className="text-[#1E5E08] font-bold text-[15px]">{meal ? meal : "No meal available"}</p>
+          ) : (
+            <p>...</p>
+          )}</div>
           <p className="text-color8-700 font-medium text-[11.2px]">
             Nutritious bean cake high in protein and fiber.
           </p>

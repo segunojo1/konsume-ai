@@ -16,8 +16,8 @@ import SignUpLink from '@/modules/auth/login/SignupLink';
 
 // Schema for form validation using zod
 const formSchema = z.object({
-  email: z.string().min(1, { message: 'Email is required' }),
-  password: z.string().min(1, { message: 'Password is required' }),
+  email: z.string().email({ message: "Invalid email address" }),
+  password: z.string().min(6, { message: 'Password must be at least 6 characters long.' }),
 });
 
 const Login = () => {
