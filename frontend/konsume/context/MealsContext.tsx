@@ -35,7 +35,9 @@ export function MealsContextProvider({ children }: { children: React.ReactNode }
                     await retry(fetchMeals);
                 } else {
                     console.log('Meals fetched successfully:', data.$values);
+                    if(typeof window !== 'undefined'){
                     localStorage.setItem('recommendedMeals', JSON.stringify(data.$values));
+                    }
                 }
             } catch (error) {
                 console.error('Fetch Meals Error:', error);
@@ -43,6 +45,7 @@ export function MealsContextProvider({ children }: { children: React.ReactNode }
         };
 
         const checkAndFetchMeals = async () => {
+            if(typeof window !== 'undefined'){
             const lastFetchDate = localStorage.getItem('lastFetchDate');
             const today = new Date().toISOString().split('T')[0];
 
@@ -54,6 +57,7 @@ export function MealsContextProvider({ children }: { children: React.ReactNode }
                 setRecommendedMeals(cachedMeals);
                 setTempMeals(cachedMeals)
             }
+        }
 
             setMidnightTimer(fetchMeals);
         };
@@ -74,7 +78,9 @@ export function MealsContextProvider({ children }: { children: React.ReactNode }
 
         setTimeout(() => {
             fetchMeals();
+            if(typeof window !== 'undefined'){
             localStorage.setItem('lastFetchDate', new Date().toISOString().split('T')[0]);
+            }
             setMidnightTimer(fetchMeals); // Set the timer again for the next day
         }, timeUntilMidnight);
     };

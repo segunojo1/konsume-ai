@@ -1,5 +1,4 @@
-"use client"
-import { createContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, useEffect, useRef, useState } from 'react';
 import { MainLayoutContextProps } from '../@types';
 import Cookies from 'js-cookie';
 import { useSetupContext } from './SetupContext';
@@ -111,10 +110,12 @@ export function DashboardContextProvider({ children }: { children: React.ReactNo
 
 
       console.log('nutrition fact fetched successfully:', nutritiontea.data.candidates[0].content.parts[0].text);
-      localStorage.setItem('breakfast', JSON.stringify(data.candidates[0].content.parts[0].text));
-      localStorage.setItem('lunch', JSON.stringify(lun.data.candidates[0].content.parts[0].text));
-      localStorage.setItem('dinner', JSON.stringify(din.data.candidates[0].content.parts[0].text));
-      localStorage.setItem('nutritiontea', JSON.stringify(nutritiontea.data.candidates[0].content.parts[0].text));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('breakfast', JSON.stringify(data.candidates[0].content.parts[0].text));
+        localStorage.setItem('lunch', JSON.stringify(lun.data.candidates[0].content.parts[0].text));
+        localStorage.setItem('dinner', JSON.stringify(din.data.candidates[0].content.parts[0].text));
+        localStorage.setItem('nutritiontea', JSON.stringify(nutritiontea.data.candidates[0].content.parts[0].text));
+      }
 
     } catch (error) {
       console.error('Fetch Meals Error:', error);
@@ -130,27 +131,31 @@ export function DashboardContextProvider({ children }: { children: React.ReactNo
 
     setTimeout(() => {
       fetchMeals();
-      localStorage.setItem('lastFetchDate', new Date().toISOString().split('T')[0]);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('lastFetchDate', new Date().toISOString().split('T')[0]);
+      }
       setMidnightTimer(fetchMeals); // Set the timer again for the next day
     }, timeUntilMidnight);
   }
   const getRandomMeals = async () => {
-    const lastFetchDate = localStorage.getItem('lastDashboardFetchDate');
-    const today = new Date().toISOString().split('T')[0];
+    if (typeof window !== 'undefined') {
+      const lastFetchDate = localStorage.getItem('lastDashboardFetchDate');
+      const today = new Date().toISOString().split('T')[0];
 
-    if (lastFetchDate !== today) {
-      await fetchMeals();
-      localStorage.setItem('lastDashboardFetchDate', today);
-    } else {
-      const cachedBreakfast = JSON.parse(localStorage.getItem('breakfast') || '[]');
-      const cachedLunch = JSON.parse(localStorage.getItem('lunch') || '[]');
-      const cachedDinner = JSON.parse(localStorage.getItem('dinner') || '[]');
-      const cachedNutrition = JSON.parse(localStorage.getItem('nutritiontea') || '[]');
+      if (lastFetchDate !== today) {
+        await fetchMeals();
+        localStorage.setItem('lastDashboardFetchDate', today);
+      } else {
+        const cachedBreakfast = JSON.parse(localStorage.getItem('breakfast') || '[]');
+        const cachedLunch = JSON.parse(localStorage.getItem('lunch') || '[]');
+        const cachedDinner = JSON.parse(localStorage.getItem('dinner') || '[]');
+        const cachedNutrition = JSON.parse(localStorage.getItem('nutritiontea') || '[]');
+        setBreakfast(cachedBreakfast);
+        setLunch(cachedLunch);
+        setDinner(cachedDinner);
+        setNutritionTea(cachedNutrition)
 
-      setBreakfast(cachedBreakfast);
-      setLunch(cachedLunch);
-      setDinner(cachedDinner);
-      setNutritionTea(cachedNutrition)
+      }
     }
 
     setMidnightTimer(fetchMeals);

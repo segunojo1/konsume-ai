@@ -44,15 +44,20 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
                     await retry(fetchBlogs);
                 } else {
                     console.log('Blogs fetched successfully:', data.content);
+                    if(typeof window !== 'undefined'){
                     localStorage.setItem('blogs', JSON.stringify(data.content));
+                    }
                 }
             } catch (error) {
+                if(typeof window !== 'undefined'){
                 localStorage.removeItem('lastFetchBlogsDate');
+                }
                 console.error('Fetch blog Error:', error);
             }
         };
 
         const checkAndFetchBlogs = async () => {
+            if(typeof window !== 'undefined'){
             const lastFetchDate = localStorage.getItem('lastFetchBlogsDate');
             const today = new Date().toISOString().split('T')[0];
 
@@ -64,6 +69,7 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
                 setBlogs(cachedBlogs);
                 setTempBlogs(cachedBlogs)
             }
+        }
 
         };
 
@@ -82,7 +88,9 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
                 if (data?.value?.$values) {
                     console.log(data?.value?.$values);
                     // Store the array in localStorage
+                    if(typeof window !== 'undefined'){
                     localStorage.setItem('bookmarks', JSON.stringify(data.value.$values));
+                    }
                     setBookmarkedBlogs(data?.value?.$values);
                     setTempBookmarks(data?.value?.$values);
                 }
@@ -92,9 +100,11 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
             } catch (error) {
                 console.log(error);
             }finally{
+                if(typeof window !== 'undefined'){
                 const cachedBlogs = JSON.parse(localStorage.getItem('bookmarks') || '[]');
                 setBookmarkedBlogs(cachedBlogs);
                 setTempBookmarks(cachedBlogs)
+                }
             }
         }
         getBookmarks()
