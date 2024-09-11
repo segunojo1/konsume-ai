@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import MealsContext from '@/context/MealsContext';
 import { debounce } from '@/helpers/debounce';
+import { retry } from '@/helpers/retryapi';
 
 interface MealCardProps {
   meal: {
@@ -48,6 +49,7 @@ const MealCard = ({ meal }: MealCardProps) => {
       setImageUrl(base64Image);
     } catch (error) {
       console.error('Error fetching image:', error);
+      retry(fetchImage);
     }
   }, 2000); // Debounce requests to prevent overwhelming the API
 
