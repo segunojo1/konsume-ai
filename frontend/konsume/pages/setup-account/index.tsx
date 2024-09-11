@@ -14,6 +14,7 @@ import MainLayoutContext from "@/context/LayoutContext";
 import ProgressBar from "@/modules/ProgressBar";
 import MultiStepProgressBar from "@/modules/MultiStepProgressBar";
 import withHigherAuth from "@/helpers/withHigherAuth";
+import BlogContext from "@/context/BlogContext";
 
 const SetupAccount = () => {
   const {
@@ -29,11 +30,12 @@ const SetupAccount = () => {
     diet
   } = useSetupContext();
   const [test, setTest] = useState(false);
-  const {name}:any = useContext(MainLayoutContext)
+  // const { name } = useContext(BlogContext);
   const [user, setUser] = useState<string | undefined>();
-
+  let firstName = user?.split(" ");
   useEffect(() => {
     setUser(Cookies.get("konsumeUsername"))
+    firstName = user?.split(" ");
   }, [])
   useEffect(() => {
     setPossibleDiseases([]);
@@ -103,7 +105,7 @@ const SetupAccount = () => {
           <div className="flex items-center">
             <div className="relative w-fit mx-auto">
               <Image src='/curved_line.svg' alt='curved line' height={500} width={282} className='2xl:w-[282px] lg:w-[250px] w-[123.16px] lg:h-auto h-[22px] absolute 2xl:top-5 bottom-0 md:top-auto top-0 my-auto 2xl:-right-[14px] right-0 -z-10' />
-              <h1 className="lg:text-[48.9px]/[79.5px] text-[28px]/[40px] font-bold from-[#000000] from-0% to-100% to-[#EEECEC] bg-gradient-to-b bg-clip-text text-[transparent] z-50">Welcome onboard {user ? user : ""} ! </h1>
+              <h1 className="lg:text-[48.9px]/[79.5px] text-[28px]/[40px] font-bold from-[#000000] from-0% to-100% to-[#EEECEC] bg-gradient-to-b bg-clip-text text-[transparent] z-50">Welcome onboard { firstName ? firstName[0] : ""} ! </h1>
             </div>
             <ProgressBar currentStep={currentPage} totalSteps={totalSteps} />
           </div>
