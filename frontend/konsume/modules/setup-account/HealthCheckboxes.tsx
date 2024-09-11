@@ -3,7 +3,7 @@ import { useSetupContext } from '../../context/SetupContext';
 import { Input } from '@/components/ui/input';
 import { HealthProps } from '../../@types';
 import Image from 'next/image';
-import on from '../../public/avatar.svg'
+import on from '../../public/checked.svg'
 
 const HealthCheckboxes: React.FC<HealthProps> = ({ label, specify }) => {
   const { possibleDiseases, setPossibleDiseases } = useSetupContext();
@@ -59,9 +59,9 @@ const HealthCheckboxes: React.FC<HealthProps> = ({ label, specify }) => {
           type="checkbox"
           value={label}
           style={
-            {
-              backgroundImage: `url(${on.src})`,
-            }
+            possibleDiseases.includes(label) || (label === "Other" && possibleDiseases.includes("headache"))
+              ? { backgroundImage: `url(${on.src})` }
+              : {}
           }
           className={`min-w-6 h-6 appearance-none cursor-pointer border bg-primary-bg-100 rounded-md checked:bg-center `}
           id="checkbox-in-form"
@@ -69,7 +69,7 @@ const HealthCheckboxes: React.FC<HealthProps> = ({ label, specify }) => {
         <span className="md:text-[22.26px] text-[16px]  text-[#0C2503] font-medium">
           {label}
         </span>
-        <Image width={50} height={50} src='/on.png' alt='on'/>
+        {/* <Image width={50} height={50} src='/on.png' alt='on'/> */}
       </div>
       {specify == 'true' && (
         <Input
