@@ -144,10 +144,7 @@ function MainPanel({ date, open, setOpen }: Props) {
                   key={index}
                   className="flex flex-col  flex-1 gap-10 items-center"
                 >
-                  <div
-                    key={index}
-                    className="rounded-lg px-[7px] py-[14px] bg-base-black text-base-white gap-2 flex flex-col items-center w-[103px]"
-                  >
+                  <div className="rounded-lg px-[7px] py-[14px] bg-base-black text-base-white gap-2 flex flex-col items-center w-[103px]">
                     <p className="text-desktop-caption font-bold">
                       {format(week, "EEEE")}
                     </p>
@@ -156,13 +153,15 @@ function MainPanel({ date, open, setOpen }: Props) {
                     </p>
                   </div>
                   <div className="border-[#D1C9F7] border-r px-5 w-full space-y-8 ">
-                    {filteredMeals.map((meal, index) => (
-                      <MealsInfoCard
-                        key={index}
-                        data={meal}
-                        className="w-full"
-                      />
-                    ))}
+                    {filteredMeals?.map((meal, index) =>
+                      meal ? (
+                        <MealsInfoCard
+                          key={meal.label}
+                          data={meal}
+                          className="w-full"
+                        />
+                      ) : null
+                    )}
                   </div>
                 </div>
               );
@@ -195,4 +194,4 @@ function MainPanel({ date, open, setOpen }: Props) {
     </div>
   );
 }
-export default MainPanel
+export default MainPanel;

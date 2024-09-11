@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { MealDatatype } from "@/@types/timetable";
+import type { MealDatatype } from "@/@types/timetable";
 import { useAppSelector } from "@/redux/hooks";
 import MealsInfoCard from "./meals-info-card";
 

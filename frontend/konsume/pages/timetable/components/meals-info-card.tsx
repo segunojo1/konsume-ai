@@ -4,9 +4,10 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ArrowDownRight, ArrowUpRight, Clock } from "lucide-react";
 import Image from "next/image";
 import getRandomColor, { getColorsByMealType } from "../utils";
-import { MealDatatype } from "@/@types/timetable";
+import type { MealDatatype } from "@/@types/timetable";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import NutritionalInfoBox from "./nutritional-info-box";
+import { cn } from "@/lib/utils";
 
 type Props = {
   data: MealDatatype;
@@ -25,12 +26,13 @@ const MealsInfoCard = ({
     caloriesPerServing,
     nutritionalInfo,
   },
+  data,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { primaryColor, secondaryColor } = getColorsByMealType(label);
 
-  return (
-    <CardContainer className="inter-var w-full">
+  return data ? (
+    <CardContainer className={cn("inter-var w-full", className)}>
       <div
         style={{ backgroundColor: primaryColor }}
         className="lg:min-w-[245px] max-w-[260px] w-full [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d] rounded-[30px] shadow-meal-card px-2 py-6 space-y-[30px]"
@@ -79,10 +81,9 @@ const MealsInfoCard = ({
                 <Image src="/shop-icon.svg" alt="" width={28} height={21} />
               </div>
               <div className="flex flex-wrap gap-[6px] max-w-[184px]">
-                {tags &&
-                  tags.map((tag, index) => (
-                    <TagInfo key={index} bg="#D6FBC4" name={tag} />
-                  ))}
+                {tags?.map((tag) => (
+                  <TagInfo key={tag} bg="#D6FBC4" name={tag} />
+                ))}
               </div>
             </div>
             <div className="bg-base-white p-[10px] rounded-sm shadow-meal-card-modal-last-item 2xl:space-y-10 space-y-4">
@@ -107,23 +108,31 @@ const MealsInfoCard = ({
                 </div>
               </div>
               <div className="space-y-1">
-                {nutritionalInfo &&
-                  nutritionalInfo.map(({ name, value, unit }, index) => {
-                    const bg = getRandomColor("#FFFFFF");
-                    return (
-                      <NutritionalInfoBox
-                        key={index}
-                        bg={bg}
-                        name={name}
-                        value={value}
-                        unit={unit}
-                      />
-                    );
-                  })}
+                {nutritionalInfo?.map(({ name, value, unit }) => {
+                  const bg = getRandomColor("#FFFFFF");
+                  return (
+                    <NutritionalInfoBox
+                      key={name}
+                      bg={bg}
+                      name={name}
+                      value={value}
+                      unit={unit}
+                    />
+                  );
+                })}
               </div>
             </div>
           </DialogContent>
         </Dialog>
+      </div>
+    </CardContainer>
+  ) : (
+    <CardContainer className="inter-var w-full">
+      <div
+        style={{ backgroundColor: primaryColor }}
+        className="lg:min-w-[245px] max-w-[260px] w-full [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d] rounded-[30px] shadow-meal-card px-2 py-6 space-y-[30px]"
+      >
+        No meal plan for today
       </div>
     </CardContainer>
   );
@@ -171,4 +180,4 @@ const TagInfo = ({ bg, name }: { bg: string; name: string }) => (
   </div>
 );
 
-export default MealsInfoCard
+export default MealsInfoCard;

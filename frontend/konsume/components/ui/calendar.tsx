@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker } from "react-day-picker";
 
@@ -18,7 +18,8 @@ function Calendar({
       showOutsideDays={showOutsideDays}
       className={cn("p-0", className)}
       classNames={{
-        months: "flex flex-col  sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
+        months:
+          "flex flex-col  sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4 w-full",
         caption: "flex justify-between pt-1 relative items-center",
         caption_label: "text-sm font-medium ",
@@ -36,7 +37,7 @@ function Calendar({
         head_cell:
           "text-muted-foreground rounded-md w-7 text-[8.35px]/[120%] font-bold",
         row: "flex w-full justify-between items-center mt-2",
-        cell: "flex h-7 w-7 text-center text-sm p-0  relative [&:has([aria-selected].day-range-end)]:rounded-r-[100%] [&:has([aria-selected].day-range-start)]:rounded-l-[100%] [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-[#D3D3D3] first:[&:has([aria-selected])]:rounded-l-[100%] last:[&:has([aria-selected])]:rounded-r-[100%] focus-within:relative focus-within:z-20",
+        cell: "flex h-7 w-7 text-center text-sm w-full p-0  relative [&:has([aria-selected].day-range-end)]:rounded-r-[100%] [&:has([aria-selected].day-range-start)]:rounded-l-[100%] [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-[#D3D3D3] first:[&:has([aria-selected])]:rounded-l-[100%] last:[&:has([aria-selected])]:rounded-r-[100%] focus-within:relative focus-within:z-20",
         day: cn(
           buttonVariants({ variant: "ghost" }),
           "h-7 w-7 p-0 font-normal text-[8.35px]/[120%] font-bold aria-selected:opacity-100 hover:bg-[#393939]/50 rounded-[100%]"
