@@ -1,7 +1,7 @@
 import {
   MealDatatype,
-  DailyMealsDatatype,
-  NutritionalInfoItem,
+  type DailyMealsDatatype,
+  type NutritionalInfoItem,
 } from "@/@types/timetable";
 
 const nutritionalInfo: NutritionalInfoItem[] = [
