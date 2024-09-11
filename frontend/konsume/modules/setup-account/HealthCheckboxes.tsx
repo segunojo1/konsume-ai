@@ -58,11 +58,7 @@ const HealthCheckboxes: React.FC<HealthProps> = ({ label, specify }) => {
           }
           type="checkbox"
           value={label}
-          style={
-            possibleDiseases.includes(label) || (label === "Other" && possibleDiseases.includes("headache"))
-              ? { backgroundImage: `url(${on.src})` }
-              : {}
-          }
+          
           className={`min-w-6 h-6 appearance-none cursor-pointer border bg-primary-bg-100 rounded-md checked:bg-center `}
           id="checkbox-in-form"
         />
