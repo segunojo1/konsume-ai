@@ -16,7 +16,7 @@ import { DashboardNavProps } from "../@types";
 const Sidebar: React.FC<DashboardNavProps> = ({ toggled }) => {
   return (
     <div
-      className={`h-full p-4 bg-[#DAFDC9] md:fixed left-0 min-w-[82px] top-0  ${
+      className={`h-full p-4 bg-primary-bg md:fixed left-0 min-w-[82px] top-0  ${
         toggled ? "left-0" : "md:left-0 left-[-300px]"
       } absolute z-50 transition-all`}
     >

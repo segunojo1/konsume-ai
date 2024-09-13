@@ -10,15 +10,23 @@ import DashboardProgressTracker from "./body/DashboardProgressTracker";
 import DashboardHighlights from "./body/DashboardHighlights";
 import { Button } from "@/components/ui/button";
 import BlogCard from "../blog/BlogCard";
+import BlogContext from "@/context/BlogContext";
+import { BlogProps } from "@/@types";
 
 const DashboardBody = () => {
   const { breakfast, lunch, dinner, loading, getRandomMeals } = useContext(DashboardContext);
+  const {blogs}  = useContext(BlogContext);
   const [showTimetable, setShowTimetable] = useState(false);
+  const [randomBlog, setRandomBlog] = useState<BlogProps>();
   useEffect(() => {
     const timer1 = setTimeout(() => { }, 2000);
     const timer2 = setTimeout(() => {
       getRandomMeals();
     }, 4000);
+
+    if (blogs.length > 1) {
+      setRandomBlog(blogs[Math.floor(Math.random() * blogs.length)])
+    }
 
     return () => {
       clearTimeout(timer1);
@@ -67,7 +75,10 @@ const DashboardBody = () => {
         </div>
       </div>
       <div className="md:flex-[.5] md:hidden md:min-w-fit min-w-full mt-4">
-        <BlogCard category="nutrition" title="Eating Healthy" text="djjkdjsjksjks" showHeading />
+        {
+          randomBlog && <BlogCard key={randomBlog.id} title={randomBlog.title} text={randomBlog.text} category={randomBlog.category} showHeading/>
+        }
+
       </div>
       <DashboardMeals
         breakfast={breakfast}
