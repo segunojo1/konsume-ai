@@ -35,8 +35,8 @@ const GoogleTranslateWrapper = () => {
       }, []);
 
   return (
-    <div className="googleTranslateWrapper">
-      <div id="google_translate_element"></div>
+    <div className="googleTranslateWrapper font-satoshi">
+      <div id="google_translate_element" className='font-satoshi'></div>
     </div>
   );
 };

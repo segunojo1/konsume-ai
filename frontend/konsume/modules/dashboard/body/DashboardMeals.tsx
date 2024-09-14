@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
 import { twMerge } from "tailwind-merge";
+import Link from "next/link";
 
 interface DashboardMealsProps {
   breakfast: string;
@@ -23,7 +24,6 @@ const DashboardMeals: React.FC<DashboardMealsProps> = ({ breakfast, lunch, dinne
   }, []);
   const renderMealCard = (meal: string, label: string) => (
     <div
-      onClick={() => onNavigate(meal)}
       className="justify-between flex flex-col min-h-[130px] bg-primary-bg-100 px-3 pt-3 relative rounded-lg opacity-70"
     >
       <div className="flex justify-between">
@@ -43,9 +43,9 @@ const DashboardMeals: React.FC<DashboardMealsProps> = ({ breakfast, lunch, dinne
           </p>
         </div>
       )}
-      <Button className="bg-base-white text-[#8C77EC] font-bold text-[12px] right-0 absolute bottom-0 rounded-[8.8px] py-[11px] px-[32.5px] flex items-center justify-center">
+      <Link href={`/meals/${meal}`} className="bg-base-white text-[#8C77EC] font-bold text-[12px] right-0 absolute bottom-0 rounded-[8.8px] py-[11px] px-[32.5px] flex items-center justify-center">
         View Recipe and Details
-      </Button>
+      </Link>
     </div>
   );
 

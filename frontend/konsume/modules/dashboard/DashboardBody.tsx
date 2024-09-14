@@ -12,10 +12,21 @@ import { Button } from "@/components/ui/button";
 import BlogCard from "../blog/BlogCard";
 import BlogContext from "@/context/BlogContext";
 import { BlogProps } from "@/@types";
+// import Swiper core and required modules
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import { DashboardBlogSkeleton } from "@/components/skeleton-loaders/DashboardBlogSkeleton";
 
 const DashboardBody = () => {
   const { breakfast, lunch, dinner, loading, getRandomMeals } = useContext(DashboardContext);
-  const {blogs}  = useContext(BlogContext);
+  const {blogs, loadingBlog}  = useContext(BlogContext);
   const [showTimetable, setShowTimetable] = useState(false);
   const [randomBlog, setRandomBlog] = useState<BlogProps>();
   useEffect(() => {
@@ -24,15 +35,18 @@ const DashboardBody = () => {
       getRandomMeals();
     }, 4000);
 
-    if (blogs.length > 1) {
-      setRandomBlog(blogs[Math.floor(Math.random() * blogs.length)])
-    }
+    
 
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
     };
   }, []);
+  useEffect(() => {
+    if (blogs.length > 1) {
+      setRandomBlog(blogs[Math.floor(Math.random() * blogs.length)])
+    }
+  }, [blogs])
 
   const router = useRouter();
 
@@ -62,7 +76,7 @@ const DashboardBody = () => {
                 dinner={dinner}
                 loading={loading}
                 onNavigate={handleNavigate}
-                className="md:hidden"
+                className="md:hidden transition-opacity"
               />
             )
           }
@@ -73,13 +87,32 @@ const DashboardBody = () => {
         <div className="md:flex ">
           <DashboardHighlights loading={loading} />
         </div>
+        
       </div>
       <div className="md:flex-[.5] md:hidden md:min-w-fit min-w-full mt-4">
-        {
-          randomBlog && <BlogCard key={randomBlog.id} title={randomBlog.title} text={randomBlog.text} category={randomBlog.category} showHeading/>
+        {loadingBlog ? (
+          <DashboardBlogSkeleton />
+        ) : (<BlogCard key={randomBlog?.id} title={randomBlog?.title} text={randomBlog?.text} category={randomBlog?.category} showHeading/>)
         }
 
       </div>
+      {/* <Swiper
+      // install Swiper modules
+      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      spaceBetween={50}
+      slidesPerView={3}
+      navigation
+      pagination={{ clickable: true }}
+      scrollbar={{ draggable: true }}
+      onSwiper={(swiper) => console.log(swiper)}
+      onSlideChange={() => console.log('slide change')}
+    >
+      <SwiperSlide>Slide 1</SwiperSlide>
+      <SwiperSlide>Slide 2</SwiperSlide>
+      <SwiperSlide>Slide 3</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+      ...
+    </Swiper> */}
       <DashboardMeals
         breakfast={breakfast}
         lunch={lunch}

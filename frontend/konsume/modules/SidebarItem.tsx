@@ -4,10 +4,15 @@ import React, { useContext } from 'react';
 import { SidebarProps } from '../@types';
 import Cookies from 'js-cookie';
 import MealsContext from '@/context/MealsContext';
+import { useRouter } from 'next/router';
+import MainLayoutContext from '@/context/LayoutContext';
 
 const SidebarItem: React.FC<SidebarProps> = ({ icon, text, href }) => {
-  const { setRecommendedMeals }:any = useContext(MealsContext);
+  const { toggled, setToggled } = useContext(MainLayoutContext);
+
+  const router = useRouter();
   const handleClick = () => {
+    setToggled(false);
     if (href == 'auth/login') {
       Cookies.remove('ktn');
       Cookies.remove('userid');
@@ -15,13 +20,14 @@ const SidebarItem: React.FC<SidebarProps> = ({ icon, text, href }) => {
       localStorage.removeItem('lastFetchDate');
     }
   };
+  const isActive = router.pathname === `/${href}`;
   return (
     <Link href={`/${href}`}>
       <div
-        className="flex gap-5 hover:text-[#b6a5ff] text-[#032902B2] font-medium text-xl leading-[53px] rounded-lg cursor-pointer items-center p-3"
+        className={`flex gap-5 ${isActive ? 'bg-[#0c250353] sideitem' : ''} relative font-medium text-xl leading-[53px] rounded-lg cursor-pointer items-center p-2`}
         onClick={handleClick}
       >
-        <Image src={icon} alt={text} className="" width={18} height={18}/>
+        <Image src={icon} alt={text} className={isActive ? 'brightness-150' : ''} width={18} height={18}/>
       </div>
     </Link>
   );

@@ -336,6 +336,9 @@ body {
   padding: .5rem !important;
   width: fit-content !important;
   background-color: #F5F6F7;
+  font-family: 'Satoshi' !important;
+  margin: 0 !important;
+ margin-top: 2px !important;
 }
 @media screen and (max-width: 768px) {
   .goog-te-combo{
@@ -679,4 +682,24 @@ body {
   .daily-tea{
     min-width: 100%
   }
+}
+
+.swiper-pagination-bullet {
+  background-color: #D2D6DB !important; /* Change to your desired active color */
+}
+.swiper-pagination-bullet-active {
+  background-color: #8C77EC !important; /* Change to your desired active color */
+  width: 31px !important;
+  border-radius: 10px !important;
+  transition: 1s width;
+}
+.sideitem::after{
+  content: '';
+  position: absolute;
+  right: -22px;
+  width: 4px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  height: 100%;
+  background-color: #0c2503;
 }

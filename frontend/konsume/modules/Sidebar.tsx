@@ -20,13 +20,13 @@ const Sidebar: React.FC<DashboardNavProps> = ({ toggled }) => {
         toggled ? "left-0" : "md:left-0 left-[-300px]"
       } absolute z-50 transition-all`}
     >
-      <div className="h-full relative mx-auto w-fit flex flex-col gap-1 items-start">
+      <div className="h-full relative mx-auto w-fit flex flex-col gap-1 items-center">
         <Image
           src={logo}
           alt="logo"
           width={42}
           height={52}
-          className="mx-auto"
+          className="mx-auto mb-5"
         />
         <SidebarItem href="dashboard" text="Dashboard" icon={home} />
         <SidebarItem href="profile" text="Dashboard" icon={profile} />
