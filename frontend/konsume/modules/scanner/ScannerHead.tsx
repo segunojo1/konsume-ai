@@ -8,8 +8,11 @@ import Cookies from "js-cookie";
 
 const ScannerHead = () => {
   const { name} = useSetupContext();
-  const firstName = name?.split(" ");
-  const [answer, setAnswer] = useState("");
+  const [firstName, setFirstName] = useState(name?.split(" ")[0] ?? "");
+
+useEffect(() => {
+  setFirstName(name?.split(" ")[0] ?? "");
+}, [name]);
   const [client, setClient] = useState(false);
 
   useEffect(() => {
@@ -37,7 +40,7 @@ const ScannerHead = () => {
       <div className="flex justify-between">
         <div className="flex flex-col gap-5 md:w-[488px]">
           <h1 className=" text-[#D6FBC4] text-4xl font-bold">
-            Hello {firstName ? firstName[0] : "..."}
+            Hello {firstName}
           </h1>
           <p className=" text-sm font-medium text-[white]">
             Chat with our AI bot to get personalized nutrition advice, recipes,

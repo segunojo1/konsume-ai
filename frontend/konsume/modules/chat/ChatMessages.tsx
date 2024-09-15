@@ -14,7 +14,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
   containerRef,
 }) => {
   return (
-    <div className="text-white p-5 flex flex-col gap-2 overflow-y-auto h-[60vh] pb-32 scroll-smooth" ref={containerRef}>
+    <div className="text-white md:p-5 flex flex-col gap-2 overflow-y-auto h-[75vh]  scroll-smooth" ref={containerRef}>
       {chatLog.map((chat: any) => {
         if (chat.user == "me") {
           return (

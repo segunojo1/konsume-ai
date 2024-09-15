@@ -25,12 +25,12 @@ function MainLayout({
   }, []);
 
   return (
-    <div className={twMerge('w-full relative bg-[#fafafa] z-20', className)}>
+    <div className={twMerge('w-full relative bg-[#fafafa] z-20')}>
       <TopBar setToggled={setToggled} className={fixedTopbar ? 'fixed' : ''} topBarText={topBarText} topBarIcon={topBarIcon} />
 
       {showDashboardSidebar && <Sidebar toggled={toggled} setToggled={setToggled} />}
-      <div className={`${toggled ? "" : "md:ml-[100px]"} gap-5 flex flex-col px-5 `}>
-        <div className={`w-full ${includeMarginTop ? 'mt-28 flex flex-col' : ''}`}>{children}</div>
+      <div className={twMerge(`${toggled ? "" : "md:ml-[100px]"} min-h-screen gap-5 flex flex-col px-5 `, className)}>
+        <div className={twMerge(`w-full ${includeMarginTop ? 'mt-24 flex flex-col' : ''}` )}>{children}</div>
       </div>
     </div>
   );

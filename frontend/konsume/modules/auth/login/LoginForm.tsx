@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { LoginFormProps } from '@/@types';
 
 const LoginForm: React.FC<LoginFormProps> = ({ form, onSubmit }) => (
-    <div className='max-w-[807px] mx-auto'>
+    <div className='max-w-[807px] md:mx-auto'>
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center">
                 <div className="flex flex-col gap-6 w-full">

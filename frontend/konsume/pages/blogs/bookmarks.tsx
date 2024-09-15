@@ -18,30 +18,34 @@ const Bookmarks = () => {
         <MainLayout topBarIcon='blog' topBarText='Bookmarked Blogs' fixedTopbar={true} className=' '>
             <div className='  gap-5 mb-6 font-satoshi'>
                 <BlogHead />
-                <div className='flex items-center my-4 gap-3 justify-center h-fit'>
-                    {['All', 'Nutrition', 'Meals', 'Fitness', 'Others'].map((blog) => (
-                        <FilterBlog
-                            key={blog}
-                            text={blog}
-                            src={`/${blog.toLowerCase()}.svg`}
-                            isActive={activeBlog === blog}
-                            onChangeBlog={handleBlogChange}
-                            mainValue={bookmarkedBlogs}
-                            setTempValue={setTempBookmarks}
-                        />
-                    ))}
-                </div>
-                <div className='flex  justify-between mt-3'>
-                    <Button className='bg-primarygtext self-end flex px-3 py-2 gap-3'>
-                        <Image alt='logo' width={27.6} height={27.6} src='/icon6.svg' />
-                        <p className='text-primary-bg text-desktop-content font-bold'>View Reading Streak</p>
-                    </Button>
-                    <Link href='/blogs'>
-                        <Button className='border-2 border-[#0C2503] self-end flex px-3 py-2 gap-3 rounded-lg'>
-                            <Image alt='logo' width={27.6} height={27.6} src='/timetablelogo.svg' />
-                            <p className='text-primarygtext text-desktop-content font-bold'>Back to Blogs</p>
+                <div className='flex flex-col gap-3'>
+
+                    <div className='flex items-center my-4 gap-3 justify-center h-fit md:order-1 order-2 mb-8 md:mb-0'>
+                        {['All', 'Nutrition', 'Meals', 'Fitness', 'Others'].map((blog) => (
+                            <FilterBlog
+                                key={blog}
+                                text={blog}
+                                src={`/${blog.toLowerCase()}.svg`}
+                                isActive={activeBlog === blog}
+                                onChangeBlog={handleBlogChange}
+                                mainValue={bookmarkedBlogs}
+                                setTempValue={setTempBookmarks}
+                            />
+                        ))}
+                    </div>
+                    <div className='flex  justify-between mt-3 '>
+                        <Button className='bg-primarygtext self-end flex px-3 py-2 gap-3'>
+                            <Image alt='logo' width={27.6} height={27.6} src='/icon6.svg' />
+                            <p className='text-primary-bg text-desktop-content font-bold'>View Reading Streak</p>
                         </Button>
-                    </Link>
+                        <Link href='/blogs'>
+                            <Button className='border-2 border-[#0C2503] self-end hidden px-3 py-2 gap-3 rounded-lg md:flex'>
+                                <Image alt='logo' width={27.6} height={27.6} src='/timetablelogo.svg' />
+                                <p className='text-primarygtext text-desktop-content font-bold max-w-[286px]'>View Bookmarked blogs</p>
+                            </Button>
+                            <Image alt='bookmarks' width={38.6} height={30.6} src='/blog.svg' />
+                        </Link>
+                    </div>
                 </div>
                 {tempBookmarks.length > 0 ? (
                     <div className='grid lg:grid-cols-3 grid-cols-1 gap-4 mt-6 mx-auto lg:mx-0 w-fit lg:w-full'>

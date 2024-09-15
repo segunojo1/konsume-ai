@@ -43,12 +43,14 @@ export const SignupForm = () => {
           headers: { 'Content-Type': 'multipart/form-data' },
         }),
         {
-          pending: 'Creating your account...',
-          success: `Welcome to Konsume ${values.FirstName} 👌`,
-          error: 'Failed to create your account 🤯'
+          pending: 'Processing...',
+          success: `Account created!👌`,
+          error: `Failed to create your account 🤯`
         })
       Cookies.set('userid', data.value.id);
-      Cookies.set('konsumeUsername', values.FirstName);
+      if(typeof window !== 'undefined'){
+      localStorage.setItem('konsumeUsername', values.FirstName);
+      }
       setShowOtp(true);
     } catch (error: any) {
       handleError(error);

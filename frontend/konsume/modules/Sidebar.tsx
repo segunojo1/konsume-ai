@@ -16,17 +16,17 @@ import { DashboardNavProps } from "../@types";
 const Sidebar: React.FC<DashboardNavProps> = ({ toggled }) => {
   return (
     <div
-      className={`h-full p-4 bg-[#DAFDC9] md:fixed left-0 min-w-[82px] top-0  ${
+      className={`min-h-screen p-4 bg-primary-bg md:fixed left-0 min-w-[82px] top-0  ${
         toggled ? "left-0" : "md:left-0 left-[-300px]"
-      } absolute z-50 transition-all`}
+      } fixed  z-[6000] transition-all`}
     >
-      <div className="h-full relative mx-auto w-fit flex flex-col gap-1 items-start">
+      <div className="min-h-[90vh] relative mx-auto w-fit flex flex-col gap-1 items-center">
         <Image
           src={logo}
           alt="logo"
           width={42}
           height={52}
-          className="mx-auto"
+          className="mx-auto mb-5"
         />
         <SidebarItem href="dashboard" text="Dashboard" icon={home} />
         <SidebarItem href="profile" text="Dashboard" icon={profile} />

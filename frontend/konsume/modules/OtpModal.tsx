@@ -29,15 +29,20 @@ const OtpModal = () => {
     })
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
+        
         try {
             const resp = await toast.promise(
-                axiosKonsumeInstance.get(`/api/VerificationCode/VerifyCode/${data.pin}/${Cookies.get("userid")}`),
+                axiosKonsumeInstance.get(`/api/VerificationCode/VerifyCode/${data.pin}/${Cookies.get("userid")}`
+            ),
                 {
-                  pending: 'Verifying...',
-                  success: `Confirmed! 👌`,
-                  error: 'Incorrect code! 🤯'
+                  pending: 'Verifying code...',
+                  success: `Verified!👌`,
+                  error: `Invalid code 🤯`
                 })
-            console.log(resp);
+            // toast.info('Verifying code...');
+            // const resp = await axiosKonsumeInstance.get(`/api/VerificationCode/VerifyCode/${data.pin}/${Cookies.get("userid")}`);
+            // console.log(resp);
+            // toast.success(resp.data.message);
             route.push('/auth/login');
           } catch (error: any) {
             console.error(error);
