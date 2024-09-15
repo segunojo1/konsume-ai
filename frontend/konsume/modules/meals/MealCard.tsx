@@ -63,7 +63,7 @@ const MealCard = ({ meal }: MealCardProps) => {
   }, [recommendedMeals]);
 
   return (
-    <div className='bg-[white] flex flex-col items-start gap-4 py-6 px-3 shadow-sm rounded-[34px] hover:shadow-lg font-satoshi lg:w-full w-fit'>
+    <div className=' md:mx-auto md:max-w-[354px] h-[292px] bg-[white] flex flex-col items-start gap-4 py-6 px-3 shadow-sm rounded-[34px] hover:shadow-lg font-satoshi lg:w-full w-fit'>
       <div
         className="justify-between [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d] flex flex-col gap-2 min-h-[130px] bg-primary-bg px-3 pt-3 relative rounded-lg w-full "
       >
