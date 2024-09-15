@@ -117,13 +117,18 @@ const Meal = () => {
       }
     };
 
-    if (!dataFetchedRef.current) {
-      getMealDetailsWithDelay();
+    if (id) {
+      setGeneratingMeal(true);
+      setTimeout(() => {
+        getMealDetailsWithDelay();
+      }, 2000)
       dataFetchedRef.current = true;
     }
   }, [id]);
 
-
+const changeRef = () => {
+  dataFetchedRef.current = true
+}
 
 
   console.log(id);
@@ -163,7 +168,7 @@ const Meal = () => {
               <p className=" text-[#FFC501]">{fats}%</p>
             </div>
           </div>
-          <div className='md:hidden w-[34px]'>
+          <div className='md:hidden w-[34px]' onClick={changeRef}>
             <SearchBar />
           </div>
         </div>
@@ -176,7 +181,7 @@ const Meal = () => {
             pagination={{ clickable: true }}
             onSwiper={(swiper) => console.log(swiper)}
             onSlideChange={() => console.log('slide change')}
-            className="flex "
+            className="flex font-bold font-satoshi"
           >
             <SwiperSlide>
               <div className="justify-between flex bg-primary-bg-400 p-3 rounded-lg mb-4">
@@ -207,7 +212,7 @@ const Meal = () => {
           <Button className='bg-primarygtext  flex px-3 py-2 gap-3  '>
             <Image alt='logo' width={27.6} height={27.6} src='/timetablelogo.svg' /><p className=' text-primary-bg text-desktop-content font-bold font-satoshi'>Add to My Timetable</p>
           </Button>
-          <div className='md:block hidden'>
+          <div className='md:block hidden' onClick={changeRef}>
             <SearchBar />
           </div>
           <Button className='border-2 border-[#0C2503] flex px-3 py-3 h-full gap-3 rounded-lg font-satoshi'>
@@ -223,7 +228,7 @@ const Meal = () => {
         </div>
         <div className={`z-50 fixed backdrop-blur-md ${generatingMeal ? 'flex' : 'hidden'}  justify-center items-center top-0 left-0 bottom-0 right-0`}>
           <div className='loader2'></div>
-          <h1 className='font-bold bg-base-white rounded-full'>Generating Meal...</h1>
+          <h1 className='font-bold rounded-full font-satoshi'>Generating Meal...</h1>
         </div>
       </MainLayout>
     </div>
