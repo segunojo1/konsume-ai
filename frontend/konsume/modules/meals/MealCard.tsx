@@ -67,7 +67,7 @@ const MealCard = ({ meal }: MealCardProps) => {
       <div
         className="justify-between [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d] flex flex-col gap-2 min-h-[130px] bg-primary-bg px-3 pt-3 relative rounded-lg w-full "
       >
-        <Image src={`${meal.course}.svg`} width={39} height={32} alt='expand' className='absolute -top-4 -right-4' />
+        <Image src={`/${meal.course.toLowerCase()}.svg`} width={39} height={32} alt='expand' className='absolute -top-4 -right-4' />
         <div className="flex justify-between">
           <p className="text-secondary-500 font-bold text-mobile-caption ">{meal.course}</p>
         </div>
