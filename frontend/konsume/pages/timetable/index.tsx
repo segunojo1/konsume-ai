@@ -2,7 +2,7 @@
 
 import MainLayout from "@/components/Layout/MainLayout";
 import React, { useState } from "react";
-import { DateRange } from "react-day-picker";
+import type { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 import MainPanel from "./components/main-panel";
 import RightPanel from "./components/right-panel";
@@ -13,11 +13,13 @@ export default function SidebarDemo() {
     from: new Date(),
     to: addDays(new Date(), 6),
   });
+  
 
   return (
     <MainLayout
       fixedTopbar={true}
-      topBarText="Timetable"
+      topBarText="Timetable" 
+      
       topBarIcon="dashborad"
     >
       <main className="flex font-satoshi">

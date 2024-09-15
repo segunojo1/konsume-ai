@@ -2,11 +2,11 @@ import { configureStore, Middleware, PayloadAction } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import timetableSliceReducer from "./features/timetable/timetable.slice";
+import timetableSliceReducer from "./features/timetable.slice";
 
 import { useStorage } from "@/lib/manage-store";
 import { api } from "./api";
-import { timetableApi } from "./features/timetable/timetable.api";
+import { timetableApi } from "./api/timetable.api";
 
 const persistConfig = {
   key: "root",

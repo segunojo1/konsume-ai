@@ -26,12 +26,11 @@ const MealsInfoCard = ({
     caloriesPerServing,
     nutritionalInfo,
   },
-  data,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { primaryColor, secondaryColor } = getColorsByMealType(label);
 
-  return data ? (
+  return (
     <CardContainer className={cn("inter-var w-full", className)}>
       <div
         style={{ backgroundColor: primaryColor }}
@@ -81,7 +80,7 @@ const MealsInfoCard = ({
                 <Image src="/shop-icon.svg" alt="" width={28} height={21} />
               </div>
               <div className="flex flex-wrap gap-[6px] max-w-[184px]">
-                {tags?.map((tag) => (
+                {tags?.$values?.map((tag) => (
                   <TagInfo key={tag} bg="#D6FBC4" name={tag} />
                 ))}
               </div>
@@ -108,7 +107,7 @@ const MealsInfoCard = ({
                 </div>
               </div>
               <div className="space-y-1">
-                {nutritionalInfo?.map(({ name, value, unit }) => {
+                {nutritionalInfo?.$values?.map(({ name, value, unit }) => {
                   const bg = getRandomColor("#FFFFFF");
                   return (
                     <NutritionalInfoBox
@@ -124,15 +123,6 @@ const MealsInfoCard = ({
             </div>
           </DialogContent>
         </Dialog>
-      </div>
-    </CardContainer>
-  ) : (
-    <CardContainer className="inter-var w-full">
-      <div
-        style={{ backgroundColor: primaryColor }}
-        className="lg:min-w-[245px] max-w-[260px] w-full [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d] rounded-[30px] shadow-meal-card px-2 py-6 space-y-[30px]"
-      >
-        No meal plan for today
       </div>
     </CardContainer>
   );

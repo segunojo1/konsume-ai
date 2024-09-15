@@ -1,7 +1,7 @@
 "use client";
 
 import { Tabs } from "@/components/ui/tabs";
-import { DateRange } from "react-day-picker";
+import type { DateRange } from "react-day-picker";
 import {
   format,
   addDays,
@@ -10,15 +10,21 @@ import {
 } from "date-fns";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { formatDateToDDMMYY } from "@/lib/date";
-import { DailyMealsDatatype } from "@/@types/timetable";
-import { setMeals } from "@/redux/features/timetable/timetable.slice";
-import Marquee from "@/components/ui/marquee";
+import type { DailyMealsDatatype } from "@/@types/timetable";
+import {
+  setDailyMeals,
+  setMeals,
+  setTimetableLoading,
+} from "@/redux/features/timetable.slice";
 import Image from "next/image";
 import MealsInfoCard from "./meals-info-card";
 import DayContent from "./day-content";
+import Cookies from "js-cookie";
+import { useGetMealPlansQuery } from "@/redux/api/timetable.api";
+import { Loading } from "./loading";
 
 type Props = {
   date: DateRange | undefined;
@@ -28,8 +34,10 @@ type Props = {
 
 function MainPanel({ date, open, setOpen }: Props) {
   const [weekOffset, setWeekOffset] = useState(0);
-  const { dailyMeals } = useAppSelector((state) => state.timetable);
+  const { dailyMeals, loading } = useAppSelector((state) => state.timetable);
   const dispatch = useAppDispatch();
+  const userId = Cookies.get("userid");
+  const { data, isLoading } = useGetMealPlansQuery(userId);
 
   const weeks =
     date?.from && date?.to
@@ -49,30 +57,30 @@ function MainPanel({ date, open, setOpen }: Props) {
     setWeekOffset((prev) => (prev - 4 >= 0 ? prev - 4 : 0));
   };
 
-  const filterMealsByDay = (
-    dailyMeals: DailyMealsDatatype[] | null,
-    date: string
-  ) => {
-    const meals = dailyMeals
-      ? dailyMeals?.find((day) => day.date === date)?.meals || null
-      : null;
-
-    return dispatch(setMeals(meals));
-  };
-
-  console.log(weeks);
+  const filterMealsByDay = useCallback(
+    (dailyMeals: DailyMealsDatatype[] | null, date: string) => {
+      const meals = dailyMeals
+        ? dailyMeals?.find((day) => day.date === date)?.meal?.$values || null
+        : null;
+      return dispatch(setMeals(meals));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     if (date?.from) {
       const dateData = formatDateToDDMMYY(date?.from);
       filterMealsByDay(dailyMeals, dateData);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date, dailyMeals]);
+  }, [date, dailyMeals, filterMealsByDay]);
 
   useEffect(() => {
-    // TODO: Call the timetable endpoint here
-  }, []);
+    if (isLoading) {
+      dispatch(setTimetableLoading(true));
+    } else if (data) {
+      dispatch(setDailyMeals(data.value.$values));
+    }
+  }, [data, dispatch, isLoading]);
 
   const tabs = [
     {
@@ -85,7 +93,7 @@ function MainPanel({ date, open, setOpen }: Props) {
               const date = formatDateToDDMMYY(day);
               return (
                 <Button
-                  key={index}
+                  key={`day-${date}`}
                   className="rounded-lg px-[7px] py-[14px] bg-base-black text-base-white gap-2 flex flex-col items-center w-[103px] h-auto"
                   onClick={() => filterMealsByDay(dailyMeals, date)}
                 >
@@ -137,11 +145,12 @@ function MainPanel({ date, open, setOpen }: Props) {
             {weeks.map((week, index) => {
               const date = formatDateToDDMMYY(week);
               const filteredMeals =
-                dailyMeals?.find((day) => day.date === date)?.meals || [];
-              console.log(date, "week", dailyMeals);
+                dailyMeals?.find((day) => day.date === date)?.meal.$values ||
+                [];
+              console.log(date, "week", filteredMeals);
               return (
                 <div
-                  key={index}
+                  key={`week-${date}`}
                   className="flex flex-col  flex-1 gap-10 items-center"
                 >
                   <div className="rounded-lg px-[7px] py-[14px] bg-base-black text-base-white gap-2 flex flex-col items-center w-[103px]">
@@ -153,15 +162,13 @@ function MainPanel({ date, open, setOpen }: Props) {
                     </p>
                   </div>
                   <div className="border-[#D1C9F7] border-r px-5 w-full space-y-8 ">
-                    {filteredMeals?.map((meal, index) =>
-                      meal ? (
-                        <MealsInfoCard
-                          key={meal.label}
-                          data={meal}
-                          className="w-full"
-                        />
-                      ) : null
-                    )}
+                    {filteredMeals?.map((meal, index) => (
+                      <MealsInfoCard
+                        key={meal.label}
+                        data={meal}
+                        className="w-full"
+                      />
+                    ))}
                   </div>
                 </div>
               );
@@ -175,12 +182,18 @@ function MainPanel({ date, open, setOpen }: Props) {
   return (
     <div className="flex-[3] px-7 container">
       <div className="flex flex-col items-center justify-center w-full relative">
-        <Tabs
-          key={
-            weekOffset || (date?.from?.toISOString() && date?.to?.toISOString())
-          }
-          tabs={tabs}
-        />
+        {loading ? (
+          <Loading />
+        ) : (
+          <Tabs
+            key={
+              weekOffset ||
+              (date?.from?.toISOString() && date?.to?.toISOString())
+            }
+            tabs={tabs}
+          />
+        )}
+
         {!open && (
           <Button
             onClick={() => setOpen(!open)}

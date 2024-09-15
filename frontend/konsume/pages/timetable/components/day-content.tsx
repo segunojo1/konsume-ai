@@ -41,4 +41,4 @@ const DayContent = () => {
     </div>
   );
 };
-export default DayContent
+export default DayContent;
