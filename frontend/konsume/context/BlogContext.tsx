@@ -22,11 +22,6 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
     const [loadingBlog, setLoadingBlog] = useState(false)
 
     const dataFetchedRef = useRef(false);
-    useEffect(() => {
-
-        const username = Cookies.get('konsumeUsername')
-        setName(username)
-    }, [])
 
     useEffect(() => {
         console.log('hi');

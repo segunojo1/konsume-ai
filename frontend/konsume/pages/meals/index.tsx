@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import MainLayout from '@/components/Layout/MainLayout';
 import { Button } from '@/components/ui/button';
@@ -11,17 +11,20 @@ import Link from 'next/link';
 import { motion } from "framer-motion";
 
 import { DashboardBlogSkeleton } from '@/components/skeleton-loaders/DashboardBlogSkeleton';
+import BlogContext from '@/context/BlogContext';
+import { useUserContext } from '@/context/UserContext';
 
 const Meals: React.FC = () => {
   const [activeMeal, setActiveMeal] = useState<string>('All');
   const [open, setOpen] = useState(true);
-  const { setRecommendedMeals, recommendedMeals, user, tempMeals, loadingMeal }: any = useContext(MealsContext);
+  const { tempMeals, loadingMeal }: any = useContext(MealsContext);
 
-  // useEffect(() => {
-  //  if (!localStorage.getItem('recommendedMeals')) {
-  //    setRecommendedMeals([]);
-  //  }
-  // }, [])
+  const {username} = useUserContext();
+const [firstName, setFirstName] = useState(username?.split(" ")[0] ?? "");
+useEffect(() => {
+  
+  setFirstName(username?.split(" ")[0] ?? "");
+}, [username]);
 
   const handleMealChange = (meal: string) => {
     setActiveMeal(meal);
@@ -43,7 +46,7 @@ const Meals: React.FC = () => {
           <div className="flex flex-col gap-7">
             <div className="relative w-fit">
               <Image src='/multi-line.svg' alt='multi line' height={141} width={98} className='absolute bottom-0 top-0 my-auto right-0 -z-50' />
-              <h1 className="md:text-desktop-heading4 text-[28px]/[40px] font-bold z-50">Hello, {user ? user : ".."}</h1>
+              <h1 className="md:text-desktop-heading4 text-[28px]/[40px] font-bold z-50">Hello, {firstName ? firstName : '...' }</h1>
             </div>
             <p className="text-desktop-content text-primarygtext italic max-w-[450px]">
               Here are your personalized meal recommendations, tailored just for you based on your health, dietary goals and preferences. <b>Bon Appétit!</b>

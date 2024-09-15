@@ -2,8 +2,7 @@ import { Button } from '@/components/ui/button'
 import SearchBlog from '@/components/ui/SearchBlog'
 import BlogContext from '@/context/BlogContext'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import GenerateBlogModal from './GenerateBlogModal'
 import {
   Dialog,
@@ -16,19 +15,22 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useUserContext } from '@/context/UserContext'
 
 const BlogHead = () => {
-  const { name } = useContext(BlogContext);
-  const firstName = name?.split(" ");
-  const router = useRouter();
-  const { showModal, setShowModal } = useContext(BlogContext);
+  const {username} = useUserContext();
+const [firstName, setFirstName] = useState(username?.split(" ")[0] ?? "");
+useEffect(() => {
+  
+  setFirstName(username?.split(" ")[0] ?? "");
+}, [username]);
   return (
     <div>
       <div className='flex justify-between w-full font-satoshi'>
         <div className="flex flex-col gap-7">
           <div className="relative w-fit">
             <Image src='/multipleline.svg' alt='multi line' height={141} width={98} className='md:w-[98px] w-[60px] absolute bottom-0 top-0 my-auto right-0 z-0' />
-            <h1 className="md:text-desktop-heading4 text-[28px]/[40px] font-bold z-50">Hello, {firstName ? firstName[0] : ".."}</h1>
+            <h1 className="md:text-desktop-heading4 text-[28px]/[40px] font-bold z-50">Hello, {firstName ? firstName : '...' }</h1>
           </div>
           <p className="text-desktop-content text-primarygtext italic max-w-[388px]">
             We've curated some blogs just for you, tailored to your goals and preferences.  Dive in to explore articles that match your needs, or feel free to <b>generate any nutrition-based blog using our AI!</b>

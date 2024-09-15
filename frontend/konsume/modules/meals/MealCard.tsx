@@ -58,7 +58,7 @@ const MealCard = ({ meal }: MealCardProps) => {
     if (cachedImageUrl) {
       setImageUrl(cachedImageUrl);
     } else {
-      fetchImage(meal?.name);
+      // fetchImage(meal?.name);
     }
   }, [recommendedMeals]);
 

@@ -33,8 +33,13 @@ const SetupAccount = () => {
   const [user, setUser] = useState<string | undefined>();
 
   useEffect(() => {
-    setUser(Cookies.get("konsumeUsername"))
-  }, [])
+  if(typeof window !== 'undefined'){
+      const storedUsername = localStorage.getItem('konsumeUsername');
+      if (storedUsername) {
+          setUser(storedUsername);
+      }
+  }
+}, [])
   useEffect(() => {
     setPossibleDiseases([]);
     setUserGoal("");

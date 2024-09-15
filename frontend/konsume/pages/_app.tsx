@@ -18,6 +18,7 @@ import { ScannerContextProvider } from "@/context/ScannerContext";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 import { BlogContextProvider } from "@/context/BlogContext";
+import { UserProvider } from "@/context/UserContext";
 
 Router.events.on("routeChangeStart", nProgress.start);
 Router.events.on("routeChangeError", nProgress.done);
@@ -28,6 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Provider store={store}>
+        <UserProvider>
         <BlogContextProvider>
           <SetupProvider>
             <DashboardContextProvider>
@@ -43,6 +45,7 @@ export default function App({ Component, pageProps }: AppProps) {
             </DashboardContextProvider>
           </SetupProvider>
         </BlogContextProvider>
+        </UserProvider>
         <ToastContainer />
       </Provider>
     </>

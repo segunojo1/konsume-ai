@@ -38,24 +38,22 @@ const Login = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // Handle form submission and login
-    try {
-      const {data} = await toast.promise(
-        axiosKonsumeInstance.post('/api/auth/login', values, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        }),
-        {
-          pending: 'Processing...',
-          success: `Welcome back ${Cookies.get('konsumeUsername')} 👌`,
-          error: 'Failed to login 🤯'
-        })
-      // Set user-specific cookies after successful login
-      Cookies.set('ktn', data.token);
-      Cookies.set('userid', data.value.id);
-      Cookies.set('konsumeUsername', data.value.fullName);
-      checkUser();
-    } catch (error: any) {
-      toast.error(error?.response?.data);
-    }
+    const id = toast.loading("Processing...")
+try {
+  const {data} = await axiosKonsumeInstance.post('/api/auth/login', values, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+  toast.update(id, { render: `Welcome back ${data.value.fullName}👨‍🍳!`, type: "success", isLoading: false, autoClose: 2000 });
+  // Set user-specific cookies after successful login
+  Cookies.set('ktn', data.token);
+  Cookies.set('userid', data.value.id);
+  if(typeof window !== 'undefined'){
+    localStorage.setItem('konsumeUsername', data.value.fullName);
+  }
+  checkUser();
+} catch (error: any) {
+  toast.update(id, { render: `${error?.response?.data}😞`, type: "error", isLoading: false, autoClose: 2000 });
+}
   };
 
   const checkUser = async () => {
