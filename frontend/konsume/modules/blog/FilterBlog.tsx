@@ -25,8 +25,8 @@ console.log(filteredBlogs);
   };
   return (
     <div className='flex gap-3 items-center cursor-pointer'>
-      {src && <Image alt='meal' width={27.6} height={27.6} src={src} />}
-      <div className={`rounded-[40px] px-[18px] py-[5px] text-desktop-content ${isActive ? 'bg-primarygtext text-base-white' : 'border-[1.5px] border-primarygtext text-primarygtext'}`} onClick={handleClick}>
+      {src && <Image alt='meal' width={27.6} height={27.6} src={src} className='md:block hidden' />}
+      <div className={`rounded-[40px] md:px-[18px] px-3 md:py-[5px] py-1 md:text-desktop-content text-mobile-caption ${isActive ? 'bg-primarygtext text-base-white' : 'md:border-[1.5px] border-[1.09px] border-primarygtext text-primarygtext'}`} onClick={handleClick}>
         {text}
       </div>
     </div>

@@ -27,7 +27,7 @@ const BlogHead = () => {
       <div className='flex justify-between w-full font-satoshi'>
         <div className="flex flex-col gap-7">
           <div className="relative w-fit">
-            <Image src='/multipleline.svg' alt='multi line' height={141} width={98} className='absolute bottom-0 top-0 my-auto right-0 z-0' />
+            <Image src='/multipleline.svg' alt='multi line' height={141} width={98} className='md:w-[98px] w-[60px] absolute bottom-0 top-0 my-auto right-0 z-0' />
             <h1 className="md:text-desktop-heading4 text-[28px]/[40px] font-bold z-50">Hello, {firstName ? firstName[0] : ".."}</h1>
           </div>
           <p className="text-desktop-content text-primarygtext italic max-w-[388px]">
@@ -40,12 +40,17 @@ const BlogHead = () => {
         </Button> */}
         <Dialog>
           <DialogTrigger asChild className='font-satoshi backdrop-blur-md'>
-            <Button variant="outline">
+            <div>
+            <Button variant="outline" className='md:flex hidden'>
               <h1 className=''>Generate Blog with AI</h1>
               <Image src="/ai.svg" className='' width={23} height={40} alt='' />
             </Button>
+            <div className='md:hidden animate-pulse'>
+            <Image src="/searchai.svg" className='' width={40} height={40} alt='' />
+            </div>
+            </div>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] min-w-[550px] p-10 py-6">
+          <DialogContent className="md:min-w-[550px] md:p-10 py-6 w-[95%] mx-auto">
             <DialogHeader>
               <div className='relative w-fit'>
                 <Image

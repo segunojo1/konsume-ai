@@ -51,19 +51,19 @@ const MealCard = ({ meal }: MealCardProps) => {
       console.error('Error fetching image:', error);
       retry(fetchImage);
     }
-  }, 2000); // Debounce requests to prevent overwhelming the API
+  }, 5000); // Debounce requests to prevent overwhelming the API
 
   useEffect(() => {
     const cachedImageUrl = localStorage.getItem(`mealImage_${meal?.name}`);
     if (cachedImageUrl) {
       setImageUrl(cachedImageUrl);
     } else {
-      fetchImage(meal?.name);
+      // fetchImage(meal?.name);
     }
   }, [recommendedMeals]);
 
   return (
-    <div className=' flex flex-col items-start gap-4 py-6 px-3 shadow-sm rounded-[34px] hover:shadow-lg font-satoshi lg:w-full w-fit'>
+    <div className='bg-[white] flex flex-col items-start gap-4 py-6 px-3 shadow-sm rounded-[34px] hover:shadow-lg font-satoshi lg:w-full w-fit'>
       <div
         className="justify-between [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d] flex flex-col gap-2 min-h-[130px] bg-primary-bg px-3 pt-3 relative rounded-lg w-full "
       >
@@ -84,7 +84,7 @@ const MealCard = ({ meal }: MealCardProps) => {
 
 
         <div className="flex justify-between flex-col mb-14">
-          <p className="text-primarygtext font-bold text-[15px]">{meal.name}</p>
+          <p className="text-primarygtext font-bold text-[15px] max-w-[200px] md:max-w-auto">{meal.name}</p>
           <p className="text-color8-700 font-medium text-[11.2px] max-w-[240px]">
             {meal.description}
           </p>

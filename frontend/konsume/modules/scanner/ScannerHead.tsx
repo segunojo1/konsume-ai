@@ -9,7 +9,6 @@ import Cookies from "js-cookie";
 const ScannerHead = () => {
   const { name} = useSetupContext();
   const firstName = name?.split(" ");
-  const [answer, setAnswer] = useState("");
   const [client, setClient] = useState(false);
 
   useEffect(() => {

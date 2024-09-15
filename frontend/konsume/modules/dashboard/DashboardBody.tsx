@@ -26,7 +26,7 @@ import { DashboardBlogSkeleton } from "@/components/skeleton-loaders/DashboardBl
 
 const DashboardBody = () => {
   const { breakfast, lunch, dinner, loading, getRandomMeals } = useContext(DashboardContext);
-  const {blogs, loadingBlog}  = useContext(BlogContext);
+  const { blogs, loadingBlog } = useContext(BlogContext);
   const [showTimetable, setShowTimetable] = useState(false);
   const [randomBlog, setRandomBlog] = useState<BlogProps>();
   useEffect(() => {
@@ -35,7 +35,7 @@ const DashboardBody = () => {
       getRandomMeals();
     }, 4000);
 
-    
+
 
     return () => {
       clearTimeout(timer1);
@@ -58,11 +58,11 @@ const DashboardBody = () => {
   };
 
   return (
-    <div className="flex md:flex-row flex-col">
-      <div className="flex flex-col justify-between gap-4 md:px-5 flex-[.7] text-primarygtext">
-        <div className="flex flex-col md:flex-row gap-2 text-primarygtext">
+    <div className="flex md:flex-row flex-col ">
+      <div className="flex flex-col justify-between  gap-4 md:px-5 flex-[.7] text-primarygtext ">
+        <div className="md:min-w-[648px] md:mx-auto flex flex-col md:flex-row justify-between gap-2 text-primarygtext">
           <SpotlightedMealCard meal={breakfast} loading={loading} />
-          <div className="md:flex w-full flex-[.5] hidden">
+          <div className="md:flex w-full flex-[.5] hidden md:min-w-[299px] h-[227px] ">
             <DashboardProgressTracker />
           </div>
           <Button className="cursor-pointer md:hidden bg-primarygtext mb-3 text-primary-bg-100 font-medium text-[12px] rounded-lg py-[11px] px-[32.5px] flex items-center justify-center" onClick={() => setShowTimetable(!showTimetable)}>
@@ -81,18 +81,16 @@ const DashboardBody = () => {
             )
           }
         </div>
-        <div className="md:block hidden">
+        <div className="md:block hidden mx-auto md:min-w-[648px]">
           <DashboardQuickActions />
         </div>
-        <div className="md:flex ">
-          <DashboardHighlights loading={loading} />
-        </div>
-        
+        <DashboardHighlights loading={loading} />
+
       </div>
       <div className="md:flex-[.5] md:hidden md:min-w-fit min-w-full mt-4">
         {loadingBlog ? (
           <DashboardBlogSkeleton />
-        ) : (<BlogCard key={randomBlog?.id} title={randomBlog?.title} text={randomBlog?.text} category={randomBlog?.category} showHeading/>)
+        ) : (<BlogCard key={randomBlog?.id} title={randomBlog?.title} text={randomBlog?.text} category={randomBlog?.category} showHeading />)
         }
 
       </div>

@@ -37,7 +37,7 @@ const SearchBar = (
         }
     };
     return (
-        <div className='relative h-fit w-fit flex flex-col justify-end'>
+        <div className='relative h-fit md:w-fit w-[34px] flex flex-col justify-end'>
             <Image src={img ? img : '/searchplaceholder.svg'} alt='search' height={22} width={22} className={`md:flex hidden bottom-0 top-0 absolute left-5 my-auto`} onClick={() => setShowInput(!showInput)} />
             <Input
                 type='text'
@@ -48,7 +48,7 @@ const SearchBar = (
                 placeholder={placeholder ? placeholder : 'Search for Meals, Snacks and Drinks'} />
             <Dialog>
                 <DialogTrigger asChild className='font-satoshi backdrop-blur-md md:hidden block'>
-                    <Image src={img ? img : '/searchplaceholder.svg'} alt='search' height={22} width={22} className={`md:hidden bottom-0 top-0 left-5 my-auto`} onClick={() => setShowInput(!showInput)} />
+                    <Image src={img ? img : '/searchplaceholder.svg'} alt='search' height={34} width={34} className={`animate-pulse md:hidden bottom-0 top-0 left-5 my-auto w-[34px]`} onClick={() => setShowInput(!showInput)} />
 
                 </DialogTrigger>
                 <DialogContent className="  px-4 py-6">

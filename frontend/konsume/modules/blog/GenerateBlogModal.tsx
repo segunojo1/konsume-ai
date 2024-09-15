@@ -28,7 +28,7 @@ const GenerateBlogModal = () => {
                     />
                     <h1 className='text-desktop-heading4 font-bold z-50 '>Generate with AI</h1>
                 </div> */}
-                <p className='text-desktop-content font-normal my-8 '>Type in a keyword or phrase related to nutrition, meals, or goals. Our AI will generate a detailed blog based on your input.</p>
+                <p className='text-desktop-content font-normal md:my-8 my-3 '>Type in a keyword or phrase related to nutrition, meals, or goals. Our AI will generate a detailed blog based on your input.</p>
                 <h1 className='font-medium text-[18px] mb-2'>What do you want to read?</h1>
                 <SearchBlog />
             </div>

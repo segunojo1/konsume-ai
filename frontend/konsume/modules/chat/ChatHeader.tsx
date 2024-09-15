@@ -15,7 +15,7 @@ const ChatHeader = () => {
             alt="multi line"
             height={141}
             width={153}
-            className="absolute bottom-0 top-0 my-auto right-0 -z-50"
+            className="md:w-[150px] w-[70px] absolute bottom-0 top-0 my-auto right-0 -z-50"
           />
           <h1 className="md:text-desktop-heading1 text-[28px]/[40px] font-bold z-50">
             Hello, {firstName ? firstName[0] : ".."}

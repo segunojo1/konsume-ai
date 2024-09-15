@@ -12,21 +12,25 @@ export function MealsContextProvider({ children }: { children: React.ReactNode }
     const [user, setUser] = useState<string | undefined>();
     const [tempMeals, setTempMeals] = useState(recommendedMeals);
     const [generatingMeal, setGeneratingMeal] = useState<boolean>(false);
+    const [loadingMeal, setLoadingMeal] = useState(false);
 
     const dataFetchedRef = useRef(false);
     useEffect(() => {
 
         const username = Cookies.get('konsumeUsername')
         setUser(username)
-    }, [])
+    }, [user])
     useEffect(() => {
         console.log('hi');
 
         const fetchMeals = async () => {
             try {
+                setLoadingMeal(true);
                 const { data } = await axiosKonsumeInstance.get('/api/ChatBot/GenerateMeals', {
                     params: { profileId: Cookies.get('userid') },
                 });
+                console.log('fetching meals');
+
                 setRecommendedMeals(data.$values);
                 setTempMeals(data.$values)
 
@@ -39,6 +43,9 @@ export function MealsContextProvider({ children }: { children: React.ReactNode }
                     localStorage.setItem('recommendedMeals', JSON.stringify(data.$values));
                     }
                 }
+                setLoadingMeal(false)
+                console.log('fetched meals');
+                
             } catch (error) {
                 console.error('Fetch Meals Error:', error);
             }
@@ -46,6 +53,7 @@ export function MealsContextProvider({ children }: { children: React.ReactNode }
 
         const checkAndFetchMeals = async () => {
             if(typeof window !== 'undefined'){
+                setLoadingMeal(true);
             const lastFetchDate = localStorage.getItem('lastFetchDate');
             const today = new Date().toISOString().split('T')[0];
 
@@ -55,7 +63,8 @@ export function MealsContextProvider({ children }: { children: React.ReactNode }
             } else {
                 const cachedMeals = JSON.parse(localStorage.getItem('recommendedMeals') || '[]');
                 setRecommendedMeals(cachedMeals);
-                setTempMeals(cachedMeals)
+                setTempMeals(cachedMeals);
+                setLoadingMeal(false);
             }
         }
 
@@ -87,7 +96,7 @@ export function MealsContextProvider({ children }: { children: React.ReactNode }
 
 
     const contextValue: any = {
-        recommendedMeals, setRecommendedMeals, dataFetchedRef, setMidnightTimer, user, setUser, tempMeals, setTempMeals, generatingMeal, setGeneratingMeal
+        recommendedMeals, setRecommendedMeals, dataFetchedRef, setMidnightTimer, user, setUser, tempMeals, setTempMeals, generatingMeal, setGeneratingMeal, loadingMeal
     };
 
     return <MealsContext.Provider value={contextValue}>{children}</MealsContext.Provider>;

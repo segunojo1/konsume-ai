@@ -25,7 +25,7 @@ const DashboardHighlights = ({ loading }: DashboardHighlightsProp) => {
     setIsMounted(true);
   }, []);
   return (
-    <div className="md:flex flex-row gap-2 justify-between cursor-pointer font-jakarta">
+    <div className="md:flex flex-row md:min-w-[648px] md:mx-auto justify-between cursor-pointer font-jakarta">
       <div className="md:hidden flex h-[120%]">
         <Swiper
           // install Swiper modules
@@ -75,8 +75,8 @@ const DashboardHighlights = ({ loading }: DashboardHighlightsProp) => {
           ...
         </Swiper>
       </div>
-      <div className="hidden md:flex flex-row gap-2 justify-between cursor-pointer font-jakarta">
-        <div className="flex flex-col bg-[#D6FBC4] p-4 rounded-2xl js-tilt mealreco md:min-w-fit min-w-full md:flex-[.5]">
+      {/* <div className="hidden md:flex flex-row gap-2 justify-between cursor-pointer font-jakarta"> */}
+        <div className="md:max-w-[299px] h-[227px] hidden md:flex flex-col justify-between bg-[#D6FBC4] p-4 rounded-2xl js-tilt mealreco md:min-w-fit  min-w-full md:flex-[.5]">
           <div className="flex justify-between items-center mb-5">
             <p className="font-bold text-xs">Restaurant Track</p>
             <Image src={scanner} alt="restaurant" />
@@ -90,11 +90,11 @@ const DashboardHighlights = ({ loading }: DashboardHighlightsProp) => {
       <BlogCard category="nutrition" title="Eating Healthy" text="djjkdjsjksjks" showHeading/>
       </div> */}
 
-        <div className="flex md:hidden">
+        {/* <div className="flex md:hidden">
           <DashboardProgressTracker />
-        </div>
+        </div> */}
 
-        <div className="bg-primary-bg p-4 rounded-2xl js-tilt h-full mealreco md:flex-[.5] daily-tea">
+        <div className="max-w-[299px] hidden md:flex flex-col gap-6 bg-primary-bg p-4 rounded-2xl js-tilt h-full mealreco md:flex-[.5] daily-tea">
           <div className="flex justify-between items-center mb-5">
             <p className="font-bold">Daily Nutritional Tea</p>
             <Image src={tea} alt="tea" />
@@ -110,7 +110,7 @@ const DashboardHighlights = ({ loading }: DashboardHighlightsProp) => {
             )}
           </div>
         </div>
-      </div>
+      {/* </div> */}
 
     </div>
   );
