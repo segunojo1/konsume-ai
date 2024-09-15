@@ -18,9 +18,9 @@ const Sidebar: React.FC<DashboardNavProps> = ({ toggled }) => {
     <div
       className={`min-h-screen p-4 bg-primary-bg md:fixed left-0 min-w-[82px] top-0  ${
         toggled ? "left-0" : "md:left-0 left-[-300px]"
-      } fixed z-[6000] transition-all`}
+      } fixed  z-[6000] transition-all`}
     >
-      <div className="h-full relative mx-auto w-fit flex flex-col gap-1 items-center">
+      <div className="min-h-[90vh] relative mx-auto w-fit flex flex-col gap-1 items-center">
         <Image
           src={logo}
           alt="logo"

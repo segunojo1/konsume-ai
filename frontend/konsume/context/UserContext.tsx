@@ -2,12 +2,13 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import Cookies from 'js-cookie';
 import { axiosKonsumeInstance } from '@/http/konsume';
+import { useRouter } from 'next/router';
 
 const UserContext = createContext<any>(undefined);
 
 export const UserProvider: React.FC<any> = ({ children }) => {
   const [username, setUsername] = useState<string>('');
-
+  const router = useRouter();
   const getUserDetails = async () => {
   try {
     const {data} = await axiosKonsumeInstance.get(`/api/users/users/${Cookies.get('userid')}`, {
@@ -33,7 +34,7 @@ export const UserProvider: React.FC<any> = ({ children }) => {
 }
 useEffect(() => {
   getUserDetails()
-}, [])
+}, [router.pathname])
   return (
     <UserContext.Provider
       value={{
