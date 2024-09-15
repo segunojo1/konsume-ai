@@ -15,6 +15,7 @@ import ProgressBar from "@/modules/ProgressBar";
 import MultiStepProgressBar from "@/modules/MultiStepProgressBar";
 import withHigherAuth from "@/helpers/withHigherAuth";
 import BlogContext from "@/context/BlogContext";
+import { useUserContext } from "@/context/UserContext";
 
 const SetupAccount = () => {
   const {
@@ -29,18 +30,12 @@ const SetupAccount = () => {
     weight,
     diet
   } = useSetupContext();
-  const [test, setTest] = useState(false);
-  // const { name } = useContext(BlogContext);
-  const [user, setUser] = useState<string | undefined>();
-  let firstName = user?.split(" ");
-  useEffect(() => {
-  if(typeof window !== 'undefined'){
-      const storedUsername = localStorage.getItem('konsumeUsername');
-      if (storedUsername) {
-          setUser(storedUsername);
-      }
-  }
-}, [])
+  const {username} = useUserContext();
+const [firstName, setFirstName] = useState(username?.split(" ")[0] ?? "");
+useEffect(() => {
+  
+  setFirstName(username?.split(" ")[0] ?? "");
+}, [username]);
   useEffect(() => {
     setPossibleDiseases([]);
     setUserGoal("");
