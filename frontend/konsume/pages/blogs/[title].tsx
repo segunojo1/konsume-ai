@@ -7,6 +7,7 @@ import MainBlogText from '@/modules/blog/MainBlogText'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+import Cookies from 'js-cookie'
 
 const BlogDetail = () => {
     const router = useRouter()
@@ -48,6 +49,21 @@ const BlogDetail = () => {
     
         fetchBlogData();
       }, [title]);
+      useEffect(() => {
+        const addToStreaks = async () => {
+          try {
+            const {data} = await axiosKonsumeInstance.get('/api/Streak/read', {
+              params: {
+                profileId: Cookies.get('userid')
+              }
+            })
+            console.log(data);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        addToStreaks();
+      }, [])
 
     if (!blog) {
         return <p>Loading...</p>
