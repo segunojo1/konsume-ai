@@ -60,3 +60,6 @@ export const store = configureStore({
 export type AppDispatch = typeof store.dispatch;
 
 export const persistor = persistStore(store);
+// persistor.flush().then(() => {
+//   console.log('Persisted state has been flush.');
+//   });
