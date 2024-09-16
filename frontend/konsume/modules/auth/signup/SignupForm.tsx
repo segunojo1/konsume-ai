@@ -41,19 +41,19 @@ export const SignupForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      toast.info("Creating your account... please wait");
-      const { data } = await axiosKonsumeInstance.post(
-        "/api/auth/register",
-        values,
+      const {data} = await toast.promise(
+        axiosKonsumeInstance.post('/api/auth/register', values, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        }),
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      toast.success(data.message);
-      Cookies.set("userid", data.value.id);
-      Cookies.set("konsumeUsername", values.FirstName);
+          pending: 'Processing...',
+          success: `Account created!👌`,
+          error: `Failed to create your account 🤯`
+        })
+      Cookies.set('userid', data.value.id);
+      if(typeof window !== 'undefined'){
+      localStorage.setItem('konsumeUsername', values.FirstName);
+      }
       setShowOtp(true);
     } catch (error: any) {
       handleError(error);

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { SetupContextType, SetupProviderProps } from '../@types';
 import Cookies from 'js-cookie';
 
@@ -11,10 +11,11 @@ export const SetupProvider: React.FC<SetupProviderProps> = ({ children }) => {
   const [age, setAge] = useState<string>('');
   const [gender, setGender] = useState<string>('');
   const [weight, setWeight] = useState<string>('');
-  const [name, setName] = useState<string | undefined>(Cookies.get('konsumeUsername'));
+  const [name, setName] = useState<string | undefined>();
   const [diet, setDiet] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [userID, setUserID] = useState<number>();
+
   const nextPage = () => {
     setCurrentPage((prev) => prev + 1);
   };

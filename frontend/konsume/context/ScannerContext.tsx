@@ -24,7 +24,7 @@ export function ScannerContextProvider({ children }: { children: React.ReactNode
     const { userGoal, possibleDiseases, name, age, gender, weight } =
       useSetupContext();
     const [queryText, setQueryText] = useState(
-      `Whats in this image? Is it a food? What is in this food? with my information like my goal of ${userGoal}, health conditions i have like ${possibleDiseases}`
+      `Whats in this image? Is it a food? What is in this food? with my information like my goal of ${Cookies.get("userGoal")}, health conditions i have like ${Cookies.get("possibleDiseases")}`
     );
   
   

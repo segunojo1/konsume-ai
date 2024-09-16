@@ -78,6 +78,7 @@ export function DashboardContextProvider({ children }: { children: React.ReactNo
   const [carbPercent, setCarbPercent] = useState();
   const [fats, setFats] = useState();
   const [loading, setLoading] = useState(false);
+  const [showInput, setShowInput] = useState(false);
 
   const dataFetchedRef = useRef(false);
 
@@ -203,7 +204,7 @@ export function DashboardContextProvider({ children }: { children: React.ReactNo
   }, [])
 
   const contextValue: any = {
-    breakfast, setBreakfast, lunch, setLunch, dinner, setDinner, breakfastQuery, lunchQuery, dinnerQuery, loading, setLoading, getRandomMeals, nutritionTea
+    breakfast, setBreakfast, lunch, setLunch, dinner, setDinner, breakfastQuery, lunchQuery, dinnerQuery, loading, setLoading, getRandomMeals, nutritionTea, showInput, setShowInput
   };
 
   return <DashboardContext.Provider value={contextValue}>{children}</DashboardContext.Provider>;

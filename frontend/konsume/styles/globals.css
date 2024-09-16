@@ -191,16 +191,31 @@ input[type="radio"]::before{
 .loader {
   width: 50px;
   aspect-ratio: 1;
-  --_c:no-repeat radial-gradient(farthest-side,#25b09b 92%,#0000);
-  background: 
-    var(--_c) top,
-    var(--_c) left,
-    var(--_c) right,
-    var(--_c) bottom;
-  background-size: 12px 12px;
-  animation: l7 1s infinite;
+  display: grid;
 }
-@keyframes l7 {to{transform: rotate(.5turn)}}
+.loader::before,
+.loader::after {    
+  content:"";
+  grid-area: 1/1;
+  --c:no-repeat radial-gradient(farthest-side,#25b09b 92%,#0000);
+  background: 
+    var(--c) 50%  0, 
+    var(--c) 50%  100%, 
+    var(--c) 100% 50%, 
+    var(--c) 0    50%;
+  background-size: 12px 12px;
+  animation: l12 1s infinite;
+}
+.loader::before {
+  margin: 4px;
+  filter: hue-rotate(45deg);
+  background-size: 8px 8px;
+  animation-timing-function: linear
+}
+
+@keyframes l12 { 
+  100%{transform: rotate(.5turn)}
+}
 
 
 /* HTML: <div class="loader"></div> */
@@ -248,8 +263,9 @@ input[type="checkbox"]::before {
   transition: 120ms transform ease-in-out;
   box-shadow: inset 1em 1em var(--form-control-color);
   transform-origin: bottom left;
-  background-image: url("../public/On.png");
+  background-image: url("/checked.svg");
   background-position: center;
+  
 }
 input[type="checkbox"]:checked::before {
   transform: scale(1);
@@ -334,15 +350,31 @@ body {
   font-weight: bold !important;
   font-size: 14px !important;
   padding: .5rem !important;
+  width: fit-content !important;
+  background-color: #F5F6F7;
+  font-family: 'Satoshi' !important;
+  margin: 0 !important;
+ margin-top: 2px !important;
+}
+@media screen and (max-width: 768px) {
+  .goog-te-combo{
+    width: 100px !important;
+  }
 }
 
 .VIpgJd-ZVi9od-l4eHX-hSRGPd, .VIpgJd-ZVi9od-ORHb-OEVmcd {
   display: none;
 }
-/* .goog-te-gadget:nth-child(2) {
-  display: none;
-  font-size: 122px;
-} */
+@media screen and (max-width: 768px) {
+#\:0\.targetLanguage {
+  background-color: #E8E4FB;
+}
+.goog-te-combo{
+  background-color: #E8E4FB;
+}
+}
+
+
 /* ProgressLines.css */
 .progress-lines-container {
   display: flex;
@@ -666,4 +698,24 @@ body {
   .daily-tea{
     min-width: 100%
   }
+}
+
+.swiper-pagination-bullet {
+  background-color: #D2D6DB !important; /* Change to your desired active color */
+}
+.swiper-pagination-bullet-active {
+  background-color: #8C77EC !important; /* Change to your desired active color */
+  width: 31px !important;
+  border-radius: 10px !important;
+  transition: 1s width;
+}
+.sideitem::after{
+  content: '';
+  position: absolute;
+  right: -22px;
+  width: 4px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  height: 100%;
+  background-color: #0c2503;
 }
