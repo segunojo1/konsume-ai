@@ -5,6 +5,7 @@ import Image from "next/image";
 import { LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ScannerContext from "@/context/ScannerContext";
+import { renderTextWithBold } from "@/helpers/renderTextWithBold";
 
 const ScannerBody = () => {
 
@@ -58,7 +59,7 @@ const ScannerBody = () => {
               alt="img"
               className="w-[150px] rounded-md flex-[.5]"
             />
-        <p>Result: {loading ? <LoaderCircle className=" animate-spin" /> : result}</p>
+        <p>Result: {loading ? <LoaderCircle className=" animate-spin" /> : renderTextWithBold(result)}</p>
       </div>
             )}
       </div>

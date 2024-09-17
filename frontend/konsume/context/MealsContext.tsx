@@ -66,6 +66,8 @@ export function MealsContextProvider({ children }: { children: React.ReactNode }
                     setRecommendedMeals(cachedMeals);
                     setTempMeals(cachedMeals);
                     setLoadingMeal(false);
+                    console.log(recommendedMeals);
+                    
                 }
             }
 
