@@ -13,7 +13,7 @@ const ScannerBody = () => {
     <div>
       {
         loading ? (
-          <div className="loader m-auto"></div>
+          <div className="loader "></div>
         ) : (
           <div>
             {showScanner ? (

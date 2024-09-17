@@ -51,6 +51,7 @@ export function ChatBotContextProvider({ children }: { children: React.ReactNode
 
   const sendMessage = async (e: any) => {
       console.log(userMessage);
+      e.preventDefault();
     if (chatLog.length < 1) {
       setIsContentReplaced(true)
     }

@@ -7,6 +7,7 @@ import ChatHeader from "@/modules/chat/ChatHeader";
 import ChatQuestions from "@/modules/chat/ChatQuestions";
 import ChatInput from "@/modules/chat/ChatInput";
 import ChatMessages from "@/modules/chat/ChatMessages";
+import Link from "next/link";
 
 const Chat = () => {
   const {
@@ -36,9 +37,9 @@ const Chat = () => {
 
   return (
     <div>
-      <MainLayout activePage="chat" className="overflow-y-hidden" includeMarginTop={false}>
+      <MainLayout fixedTopbar activePage="chat" className="fixed overflow-y-hidden min-h-screen" includeMarginTop>
         {!isContentReplaced ? (
-          <div className="justify-between flex flex-col min-h-[80vh]">
+          <div className="justify-between flex flex-col min-h-[87vh] ">
             <ChatHeader />
             <ChatQuestions
               isContentReplaced={isContentReplaced}
@@ -53,10 +54,10 @@ const Chat = () => {
             />
           </div>
         ) : (
-          <div className="relative p-8 mt-auto">
-            <div className="right-0 -top-5 absolute">
-              <Image src="/tryscanner.svg" alt="multi line" height={141} width={153} className="" />
-            </div>
+          <div className="md:p-8  flex flex-col justify-between ">
+            <Link href="/scanner" className="left-0 -top-5 absolute">
+              <Image src="/tryscanner.svg" alt="multi line" height={141} width={100} className="" />
+            </Link>
             <ChatMessages chatLog={chatLog} loading={loading} containerRef={containerRef} />
             <ChatInput
               userMessage={userMessage}

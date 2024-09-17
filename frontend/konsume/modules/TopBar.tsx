@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React, { useEffect } from 'react'
 import { twMerge } from 'tailwind-merge';
+import GoogleTranslateWrapper from './GoogleTranslateWrapper';
 
 declare global {
   interface Window {
@@ -9,63 +10,36 @@ declare global {
   }
 }
 
-const TopBar = ({setToggled, className, topBarText, topBarIcon}:any) => {
+const TopBar = ({ setToggled, className, topBarText, topBarIcon }: any) => {
   const navClick = () => {
-    setToggled((prev:any) => !prev);
+    setToggled((prev: any) => !prev);
   };
 
-  useEffect(() => {
-    const addGoogleTranslateScript = () => {
-      if (document.querySelector('script[src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"]')) {
-        return; // Script already exists, don't add it again
-      }
-
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      script.async = true;
-      document.body.appendChild(script);
-    };
-
-    const googleTranslateElementInit = () => {
-      if (window.google && window.google.translate) {
-        new window.google.translate.TranslateElement(
-          { pageLanguage: 'en'}, 
-          'google_translate_element'
-        );
-      }
-    };
-
-    // Attach the function to the window object
-    window.googleTranslateElementInit = googleTranslateElementInit;
-
-    // Add the Google Translate script to the document
-    addGoogleTranslateScript();
-
-    return () => {
-      // Cleanup by setting the function to undefined
-      window.googleTranslateElementInit = undefined;
-    };
-  }, []);
   // const textt = document.getElementById('goog-te-gadget')
-  
+
 
   return (
-    <div className={twMerge(' right-0 left-0 md:ml-[100px] md:mr-7 flex justify-between  px-10 py-5 font-satoshi shadow-bordershad border-b-[1px] border-[#4a4a682e] bg-[#fafafa7d] z-10', className)}>
-      <div className='flex gap-5 items-center'>
-        <Image alt='chatai' src={`/${topBarIcon}.svg`} width={30} height={30}/>
+    <div className={twMerge(' right-0 left-0 md:ml-[100px] md:mr-7 flex justify-between  md:px-10 px-5 md:py-5 py-4 font-satoshi shadow-bordershad border-b-[1px] border-[#4a4a682e] bg-[#fafafa7d] z-10', className)}>
+      <div className='gap-5 items-center md:flex hidden'>
+        <Image alt='chatai' src={`/${topBarIcon}.svg`} width={30} height={30} />
         <p className=' font-bold text-desktop-content'>{topBarText}</p>
       </div>
-      <div className='flex gap-4 items-center justify-center'>
-        <div className='googleTranslateWrapper'>
-      <div id="google_translate_element"></div>
+      <Image alt='logo' src={`/konsume_logo.svg`} width={30} height={30} className='md:hidden block' />
+      <div className='flex gap-4 items-center justify-between'>
+
+        <GoogleTranslateWrapper />
+        <div className='flex gap-4 items-center justify-center'>
+          {/* <div className='googleTranslateWrapper bg-success-200'>
+          <div id="google_translate_element"></div>
+        </div> */}
+          <div className='md:block hidden ' >
+            <Image src='/icon2.svg' alt='' width={15} height={15} />
+          </div>
+          <Image src='/notifications.svg' alt='' width={15} height={15} className='w-[15px] h-[15px] md:block hidden' />
+          <Image src='/avatar.svg' alt='' width={40} height={40} className='md:block hidden' />
         </div>
-        <div className='block md:hidden' onClick={navClick}>
-        <Image src='/icon2.svg' alt='' width={15} height={15}/>
-        </div>
-        <Image src='/notifications.svg' alt='' width={15} height={15} className='w-[15px] h-[15px]'/>
-        <Image src='/avatar.svg' alt='' width={40} height={40}/>
       </div>
+        <Image src='/hamburger.svg' alt='' width={40} height={40} className='md:hidden block cursor-pointer' onClick={navClick} />
     </div>
   )
 }

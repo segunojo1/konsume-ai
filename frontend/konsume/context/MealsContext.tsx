@@ -1,15 +1,10 @@
-import type React from "react";
-import {
-  createContext,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { MainLayoutContextProps } from "../@types";
-import Cookies from "js-cookie";
-import { axiosKonsumeInstance } from "@/http/konsume";
-import { retry } from "@/helpers/retryapi";
+import React, { createContext, useEffect, useRef, useState } from 'react';
+import { MainLayoutContextProps } from '../@types';
+import Cookies from 'js-cookie';
+import { axiosKonsumeInstance } from '@/http/konsume';
+import { retry } from '@/helpers/retryapi';
+import useIsClient from '@/hooks/useIsClient';
+import { useRouter } from 'next/router';
 
 const MealsContext = createContext({} as any);
 export default MealsContext;
@@ -23,44 +18,24 @@ export function MealsContextProvider({
   const [user, setUser] = useState<string | undefined>();
   const [tempMeals, setTempMeals] = useState(recommendedMeals);
   const [generatingMeal, setGeneratingMeal] = useState<boolean>(false);
+  const [loadingMeal, setLoadingMeal] = useState(false);
 
   const dataFetchedRef = useRef(false);
-  useEffect(() => {
-    const username = Cookies.get("konsumeUsername");
-    setUser(username);
-  }, []);
-
-  // Set a timer to fetch new data at the next 12:00 AM
-  const setMidnightTimer = useCallback((fetchMeals: any) => {
-    const now = new Date();
-    const midnight = new Date(now);
-    midnight.setHours(24, 0, 0, 0); // Set to midnight of the next day
-
-    const timeUntilMidnight = midnight.getTime() - now.getTime();
-
-    setTimeout(() => {
-      fetchMeals();
-      if (typeof window !== "undefined") {
-        localStorage.setItem(
-          "lastFetchDate",
-          new Date().toISOString().split("T")[0]
-        );
-      }
-      setMidnightTimer(fetchMeals); // Set the timer again for the next day
-    }, timeUntilMidnight);
-  }, []);
+  const router = useRouter(); // Get the current route
 
   useEffect(() => {
+    console.log('hi');
+
     const fetchMeals = async () => {
       try {
-        const { data } = await axiosKonsumeInstance.get(
-        //   "/api/ChatBot/GenerateMeals",
-          {
-            params: { profileId: Cookies.get("userid") },
-          }
-        );
+        setLoadingMeal(true);
+        const { data } = await axiosKonsumeInstance.get('/api/ChatBot/GenerateMeals', {
+          params: { profileId: Cookies.get('userid') },
+        });
+        console.log('fetching meals');
+
         setRecommendedMeals(data.$values);
-        setTempMeals(data.$values);
+        setTempMeals(data.$values)
 
         if (data.$values.length < 2) {
           console.log("Retrying due to insufficient meal data...");
@@ -80,9 +55,12 @@ export function MealsContextProvider({
     };
 
     const checkAndFetchMeals = async () => {
-      if (typeof window !== "undefined") {
-        const lastFetchDate = localStorage.getItem("lastFetchDate");
-        const today = new Date().toISOString().split("T")[0];
+      console.log('meal fetch text');
+
+      if (typeof window !== 'undefined') {
+        setLoadingMeal(true);
+        const lastFetchDate = localStorage.getItem('lastFetchDate');
+        const today = new Date().toISOString().split('T')[0];
 
         if (lastFetchDate !== today) {
           await fetchMeals();
@@ -96,26 +74,33 @@ export function MealsContextProvider({
         }
       }
 
-      setMidnightTimer(fetchMeals);
-    };
 
-    if (!dataFetchedRef.current) {
-      checkAndFetchMeals();
-      dataFetchedRef.current = true;
+      if (router.pathname === '/dashboard' || router.pathname === '/meals') {
+        checkAndFetchMeals();
+      }
     }
-  }, [setMidnightTimer]);
+  }, [router.pathname]);
+
+  // Set a timer to fetch new data at the next 12:00 AM
+  const setMidnightTimer = (fetchMeals: any) => {
+    const now = new Date();
+    const midnight = new Date(now);
+    midnight.setHours(24, 0, 0, 0); // Set to midnight of the next day
+
+    const timeUntilMidnight = midnight.getTime() - now.getTime();
+
+    setTimeout(() => {
+      fetchMeals();
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('lastFetchDate', new Date().toISOString().split('T')[0]);
+      }
+      setMidnightTimer(fetchMeals); // Set the timer again for the next day
+    }, timeUntilMidnight);
+  };
+
 
   const contextValue: any = {
-    recommendedMeals,
-    setRecommendedMeals,
-    dataFetchedRef,
-    setMidnightTimer,
-    user,
-    setUser,
-    tempMeals,
-    setTempMeals,
-    generatingMeal,
-    setGeneratingMeal,
+    recommendedMeals, setRecommendedMeals, dataFetchedRef, setMidnightTimer, user, setUser, tempMeals, setTempMeals, generatingMeal, setGeneratingMeal, loadingMeal
   };
 
   return (

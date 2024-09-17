@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useSetupContext } from '../../context/SetupContext';
 import { Input } from '@/components/ui/input';
 import { HealthProps } from '../../@types';
+import Image from 'next/image';
+import on from '../../public/checked.svg'
 
 const HealthCheckboxes: React.FC<HealthProps> = ({ label, specify }) => {
   const { possibleDiseases, setPossibleDiseases } = useSetupContext();
@@ -56,12 +58,14 @@ const HealthCheckboxes: React.FC<HealthProps> = ({ label, specify }) => {
           }
           type="checkbox"
           value={label}
-          className="min-w-6 h-6 appearance-none cursor-pointer border bg-primary-bg-100 rounded-md checked:bg-center  "
+          
+          className={`min-w-6 h-6 appearance-none cursor-pointer border bg-primary-bg-100 rounded-md checked:bg-center `}
           id="checkbox-in-form"
         />
         <span className="md:text-[22.26px] text-[16px]  text-[#0C2503] font-medium">
           {label}
         </span>
+        {/* <Image width={50} height={50} src='/on.png' alt='on'/> */}
       </div>
       {specify == 'true' && (
         <Input
