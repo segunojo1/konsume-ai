@@ -1,10 +1,26 @@
 import MainLayout from "@/components/Layout/MainLayout";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import profile from "../../public/avatar.svg";
 import { Button } from "@/components/ui/button";
+import { useUserContext } from "@/context/UserContext";
+import EditProfileModal from "@/modules/profile/EditProfileModal";
 
 const Profile = () => {
+    const {username, email, nationality, userGoals, allergies, DOB, weight, gender, dietType} = useUserContext();
+    const [firstName, setFirstName] = useState(username?.split(" ")[0] ?? "");
+    const [lastName, setLastName] = useState(username?.split(" ")[1] ?? "");
+    const colorsList = ["#EDFAE7", "#E8E4FB", "#f4c7908c", "#b0d2c18f"];
+    function getRandomColor() {
+        const randomIndex = Math.floor(Math.random() * colorsList.length);
+        return colorsList[randomIndex];
+    }
+
+useEffect(() => {
+  
+  setFirstName(username?.split(" ")[0] ?? "");
+  setLastName(username?.split(" ")[1] ?? "");
+}, [username]);
   return (
     <MainLayout
       topBarIcon="profile"
@@ -23,9 +39,9 @@ const Profile = () => {
         <div className="bg-[#FAFAFA] flex gap-3 p-8">
           <Image src={profile} width={80} height={80} alt="" />
           <div className="flex flex-col justify-between">
-            <h1 className="font-bold text-[18px]/[24px]">Segun Ojo</h1>
-            <p className="text-[14px]/[24px] text-[#667185]">Weight: 223kg</p>
-            <p className="text-[14px]/[24px] text-[#667185]">Nigerian</p>
+            <h1 className="font-bold text-[18px]/[24px]">{username ? username : "..." }</h1>
+            <p className="text-[14px]/[24px] text-[#667185]">Weight: {weight} kg, Gender: {gender}</p>
+            <p className="text-[14px]/[24px] text-[#667185]">{nationality}</p>
           </div>
         </div>
         <div className="border border-[#d9d9d94d] py-10 p-8 rounded-lg flex flex-col gap-12">
@@ -38,27 +54,25 @@ const Profile = () => {
                 Here you get information on yourself
               </p>
             </div>
-            <Button className="bg-[#fafbfc] border-[#D1D8E2] border w-[155px] text-[16px]/[24px]">
-              Edit
-            </Button>
           </div>
-          <div className="grid grid-cols-2 max-w-[600px] gap-5">
-            <div className="fle flex-col gap-2">
+          <div className="grid md:grid-cols-2 max-w-[600px] gap-5">
+            <div className="flex flex-col gap-2">
                 <p className="text-[15px]/[24px] text-[#667185] ">First Name</p>
-                <p className="font-medium text-[16px]/[24px]">Segun</p>
+                <p className="font-medium text-[16px]/[24px]">{firstName ? firstName : "..."}</p>
             </div>
-            <div className="fle flex-col gap-2">
+            <div className="flex flex-col gap-2">
                 <p className="text-[15px]/[24px] text-[#667185] ">Last Name</p>
-                <p className="font-medium text-[16px]/[24px]">Ojo</p>
+                <p className="font-medium text-[16px]/[24px]">{lastName ? lastName : "..."}</p>
             </div>
-            <div className="fle flex-col gap-2">
+            <div className="flex flex-col gap-2">
                 <p className="text-[15px]/[24px] text-[#667185] ">Email</p>
-                <p className="font-medium text-[16px]/[24px]">olusegunkd2017@gmail.com</p>
+                <p className="font-medium text-[16px]/[24px]">{email}</p>
             </div>
-            <div className="fle flex-col gap-2">
-                <p className="text-[15px]/[24px] text-[#667185] ">Nationality</p>
-                <p className="font-medium text-[16px]/[24px]">Nigerian</p>
+            <div className="flex flex-col gap-2">
+                <p className="text-[15px]/[24px] text-[#667185] ">Date of Birth</p>
+                <p className="font-medium text-[16px]/[24px]">{DOB}</p>
             </div>
+            
           </div>
         </div>
         <div className="border border-[#d9d9d94d] py-10 p-8 rounded-lg flex flex-col gap-12">
@@ -71,26 +85,24 @@ const Profile = () => {
                 Here you get other information on yourself
               </p>
             </div>
-            <Button className="bg-[#fafbfc] border-[#D1D8E2] border w-[155px] text-[16px]/[24px]">
-              Edit
-            </Button>
+            <EditProfileModal />
           </div>
-          <div className="grid grid-cols-2 max-w-[600px] gap-5">
-            <div className="fle flex-col gap-2">
+          <div className="grid md:grid-cols-2 max-w-[600px] gap-5">
+            <div className="flex flex-col gap-2">
                 <p className="text-[15px]/[24px] text-[#667185] ">Wellness Goal</p>
-                <p className="font-medium text-[16px]/[24px]">Segun</p>
+                <p className="font-medium text-[16px]/[24px]">{userGoals.map((goal:any) => <div style={{backgroundColor: getRandomColor()}} className={`text-[#344054] p-2 rounded-[6px] border border-[#D0D5DD] w-fit px-3 `}>{goal}</div>)}</p>
             </div>
-            <div className="fle flex-col gap-2">
+            <div className="flex flex-col gap-2">
                 <p className="text-[15px]/[24px] text-[#667185] ">Health Conditions</p>
-                <p className="font-medium text-[16px]/[24px]">Ojo</p>
+                <p className="font-medium text-[16px]/[24px]">{allergies.map((goal:any) => <div style={{backgroundColor: getRandomColor()}} className={`text-[#344054] p-2 rounded-[6px] border border-[#D0D5DD] w-fit px-3 `}>{goal}</div>)}</p>
             </div>
-            <div className="fle flex-col gap-2">
+            <div className="flex flex-col gap-2">
                 <p className="text-[15px]/[24px] text-[#667185] ">Diet</p>
-                <p className="font-medium text-[16px]/[24px]">olusegunkd2017@gmail.com</p>
+                <p className="font-medium text-[16px]/[24px] text-[#344054] p-2 rounded-[6px] border border-[#D0D5DD] w-fit px-3 " style={{backgroundColor: getRandomColor()}}>{dietType}</p>
             </div>
-            <div className="fle flex-col gap-2">
+            <div className="flex flex-col gap-2">
                 <p className="text-[15px]/[24px] text-[#667185] ">Nationality</p>
-                <p className="font-medium text-[16px]/[24px]">Nigerian</p>
+                <p className="font-medium text-[16px]/[24px]">{nationality}</p>
             </div>
           </div>
         </div>

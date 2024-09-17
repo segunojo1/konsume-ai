@@ -52,7 +52,7 @@ const BlogDetail = () => {
       useEffect(() => {
         const addToStreaks = async () => {
           try {
-            const {data} = await axiosKonsumeInstance.get('/api/Streak/read', {
+            const {data} = await axiosKonsumeInstance.get('/api/Streak/update-reading-streak', {
               params: {
                 profileId: Cookies.get('userid')
               }
