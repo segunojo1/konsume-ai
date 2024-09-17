@@ -7,9 +7,9 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
 interface Blog {
-    text: string | undefined;
-    category: string | undefined;
-    titlee: string | undefined;
+  text: string | undefined;
+  category: string | undefined;
+  titlee: string | undefined;
 }
 const MainBlogText = ({ text, category, titlee }: Blog) => {
   const router = useRouter();
@@ -24,21 +24,22 @@ const MainBlogText = ({ text, category, titlee }: Blog) => {
       if (section.includes(":")) {
         const [heading, ...rest] = section.split(":");
         return (
-          <React.Fragment key={section}>
+          <React.Fragment key={index}>
             <h1 className="text-secondary-500 font-bold text-desktop-feature">
               {heading}
             </h1>
             <p>{rest.join(":")}</p>
           </React.Fragment>
         );
+      } else {
+        // If no ':' is found, return it as a paragraph
+        return (
+          <div>
+            <p key={index}>{section}</p>
+            <p>--</p>
+          </div>
+        );
       }
-      // If no ':' is found, return it as a paragraph
-      return (
-        <div key={section}>
-          <p>{section}</p>
-          <p>--</p>
-        </div>
-      );
     });
   };
 
@@ -46,7 +47,7 @@ const MainBlogText = ({ text, category, titlee }: Blog) => {
     const bookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
     console.log(bookmarks);
 
-    // Check if the title passed as a prop exists in the array
+    // Check if the text passed as a prop exists in the array
     const isBookmarked = bookmarks.some(
       (bookmark: { title: string }) =>
         bookmark.title.trim().toLowerCase() === titlee?.trim().toLowerCase()
@@ -123,7 +124,7 @@ const MainBlogText = ({ text, category, titlee }: Blog) => {
         </div>
       </div>
       <div>
-        <p className="flex flex-col">{text && formatText(text)}</p>
+        <p className="flex flex-col">{formatText(text ?? "")}</p>
       </div>
     </div>
   );

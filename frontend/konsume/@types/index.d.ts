@@ -72,7 +72,7 @@ export interface Mealprops {
 export interface BlogProps {
   id?: number;
   title?: string;
-  text?: string;
+  text: string | undefined;
   category?: string;
   showHeading?: boolean;
 }
