@@ -9,29 +9,33 @@ import { useRouter } from 'next/router';
 const MealsContext = createContext({} as any);
 export default MealsContext;
 
-export function MealsContextProvider({ children }: { children: React.ReactNode }) {
-    const [recommendedMeals, setRecommendedMeals] = useState([]);
-    const [user, setUser] = useState<string | undefined>();
-    const [tempMeals, setTempMeals] = useState(recommendedMeals);
-    const [generatingMeal, setGeneratingMeal] = useState<boolean>(false);
-    const [loadingMeal, setLoadingMeal] = useState(false);
+export function MealsContextProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [recommendedMeals, setRecommendedMeals] = useState([]);
+  const [user, setUser] = useState<string | undefined>();
+  const [tempMeals, setTempMeals] = useState(recommendedMeals);
+  const [generatingMeal, setGeneratingMeal] = useState<boolean>(false);
+  const [loadingMeal, setLoadingMeal] = useState(false);
 
-    const dataFetchedRef = useRef(false);
-    const router = useRouter(); // Get the current route
+  const dataFetchedRef = useRef(false);
+  const router = useRouter(); // Get the current route
 
-    useEffect(() => {
-        console.log('hi');
+  useEffect(() => {
+    console.log('hi');
 
-        const fetchMeals = async () => {
-            try {
-                setLoadingMeal(true);
-                const { data } = await axiosKonsumeInstance.get('/api/ChatBot/GenerateMeals', {
-                    params: { profileId: Cookies.get('userid') },
-                });
-                console.log('fetching meals');
+    const fetchMeals = async () => {
+      try {
+        setLoadingMeal(true);
+        const { data } = await axiosKonsumeInstance.get('/api/ChatBot/GenerateMeals', {
+          params: { profileId: Cookies.get('userid') },
+        });
+        console.log('fetching meals');
 
-                setRecommendedMeals(data.$values);
-                setTempMeals(data.$values)
+        setRecommendedMeals(data.$values);
+        setTempMeals(data.$values)
 
                 if (data.$values.length < 2) {
                     console.log('Retrying due to insufficient meal data...');
@@ -96,10 +100,13 @@ export function MealsContextProvider({ children }: { children: React.ReactNode }
         }, timeUntilMidnight);
     };
 
+  const contextValue: any = {
+    recommendedMeals, setRecommendedMeals, dataFetchedRef, setMidnightTimer, user, setUser, tempMeals, setTempMeals, generatingMeal, setGeneratingMeal, loadingMeal
+  };
 
-    const contextValue: any = {
-        recommendedMeals, setRecommendedMeals, dataFetchedRef, setMidnightTimer, user, setUser, tempMeals, setTempMeals, generatingMeal, setGeneratingMeal, loadingMeal
-    };
-
-    return <MealsContext.Provider value={contextValue}>{children}</MealsContext.Provider>;
+  return (
+    <MealsContext.Provider value={contextValue}>
+      {children}
+    </MealsContext.Provider>
+  );
 }

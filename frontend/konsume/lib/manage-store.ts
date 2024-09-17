@@ -32,7 +32,7 @@ export const useStorage = () => {
     Cookies.get(token);
   };
   const getAccessToken = (): string | undefined => {
-    return Cookies.get("access_token");
+    return Cookies.get("ktn");
   };
   const getRefreshToken = (): string | undefined => {
     return Cookies.get("refresh_token");

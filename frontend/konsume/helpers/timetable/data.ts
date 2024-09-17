@@ -1,36 +1,46 @@
 import {
   MealDatatype,
-  DailyMealsDatatype,
-  NutritionalInfoItem,
+  type DailyMealsDatatype,
+  type NutritionalInfoItem,
 } from "@/@types/timetable";
+const nutritionalInfo: NutritionalInfoItem = {
+  $id: "1",
+  $values: [
+    {
+      $id: "1",
+      id: 1,
+      name: "Calories",
+      value: "200",
+      unit: "kcal",
+    },
+    {
+      $id: "2",
+      id: 2,
+      name: "Protein",
+      value: "10",
+      unit: "g",
+    },
+    {
+      $id: "3",
+      id: 3,
+      name: "Carbohydrate",
+      value: "50",
+      unit: "g",
+    },
+    {
+      $id: "4",
+      id: 4,
+      name: "Healthy Fats",
+      value: "10",
+      unit: "g",
+    },
+  ],
+};
 
-const nutritionalInfo: NutritionalInfoItem[] = [
-  {
-    name: "Calories",
-    value: "200",
-    unit: "kcal",
-  },
-  {
-    name: "Protein",
-    value: "10",
-    unit: "g",
-  },
-  {
-    name: "Carbohydrate",
-    value: "50",
-    unit: "g",
-  },
-  {
-    name: "Healthy Fats",
-    value: "10",
-    unit: "g",
-  },
-];
-
-export const dailyMealsData: DailyMealsDatatype[] = [
+export const dailyMealsData = [
   {
     date: "04/09/24",
-    meals: [
+    meal: [
       {
         label: "breakfast",
         mealType: "Breakfast",
@@ -39,11 +49,7 @@ export const dailyMealsData: DailyMealsDatatype[] = [
         tags: ["Healthy", "Vegetarian", "High Protein", "Local Cuisine"],
         cookTime: 30,
         caloriesPerServing: 500,
-        nutritionalInfo: [
-          { name: "Calories", value: "200", unit: "kcal" },
-          { name: "Protein", value: "10", unit: "g" },
-          { name: "Carbohydrate", value: "50", unit: "g" },
-        ],
+        nutritionalInfo: nutritionalInfo,
       },
       {
         label: "lunch",
@@ -126,8 +132,6 @@ export const dailyMealsData: DailyMealsDatatype[] = [
   },
 ];
 
-
-
 export const mealsInfoCardColors = [
   { meal: "breakfast", primaryColor: "#FFFFFF", secondaryColor: "#EDFAE7" },
   { meal: "lunch", primaryColor: "#D6FBC4", secondaryColor: "#FFFFFF" },
@@ -135,4 +139,4 @@ export const mealsInfoCardColors = [
 ];
 
 export const colors = ["#D6FBC4", "#D3D3D3", "#FFFFFF", "#EDFAE7"];
-export default nutritionalInfo
+export default nutritionalInfo;
