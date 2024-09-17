@@ -1,47 +1,35 @@
-import { NutritionalValue } from "@/@types/timetable";
-
-
-
-type NutritionalInfoProp = {
-  $id: number;
-  $values: NutritionalValue[];
-};
-
-type Meal = {
-  label: string;
-  mealType: string;
-  foodName: string;
-  foodDescription: string;
-  tags: string[];
-  cookTime: number;
-  caloriesPerServing: number;
-  nutritionalInfo: NutritionalValue[];
-};
-
-type DailyMeals = {
-  date: string;
-  meals: Meal[];
-};
-
-const nutritionalInfo: NutritionalInfoProp = {
-  $id: 1,
+import {
+  MealDatatype,
+  type DailyMealsDatatype,
+  type NutritionalInfoItem,
+} from "@/@types/timetable";
+const nutritionalInfo: NutritionalInfoItem = {
+  $id: "1",
   $values: [
     {
+      $id: "1",
+      id: 1,
       name: "Calories",
       value: "200",
       unit: "kcal",
     },
     {
+      $id: "2",
+      id: 2,
       name: "Protein",
       value: "10",
       unit: "g",
     },
     {
+      $id: "3",
+      id: 3,
       name: "Carbohydrate",
       value: "50",
       unit: "g",
     },
     {
+      $id: "4",
+      id: 4,
       name: "Healthy Fats",
       value: "10",
       unit: "g",
@@ -49,10 +37,10 @@ const nutritionalInfo: NutritionalInfoProp = {
   ],
 };
 
-export const dailyMealsData: DailyMeals[] = [
+export const dailyMealsData = [
   {
     date: "04/09/24",
-    meals: [
+    meal: [
       {
         label: "breakfast",
         mealType: "Breakfast",
@@ -61,11 +49,7 @@ export const dailyMealsData: DailyMeals[] = [
         tags: ["Healthy", "Vegetarian", "High Protein", "Local Cuisine"],
         cookTime: 30,
         caloriesPerServing: 500,
-        nutritionalInfo: [
-          { name: "Calories", value: "200", unit: "kcal" },
-          { name: "Protein", value: "10", unit: "g" },
-          { name: "Carbohydrate", value: "50", unit: "g" },
-        ],
+        nutritionalInfo: nutritionalInfo,
       },
       {
         label: "lunch",

@@ -14,13 +14,9 @@ type Props = {
   className?: string;
 };
 
-const MealsInfoCard = ({
-  className,
-  data,
-}: Props) => {
+const MealsInfoCard = ({ className, data }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { primaryColor, secondaryColor } = getColorsByMealType(data?.label || 'breakfast');
-  
+  const { primaryColor, secondaryColor } = getColorsByMealType(data?.label);
 
   return (
     <CardContainer className={cn("inter-var w-full", className)}>
@@ -72,7 +68,7 @@ const MealsInfoCard = ({
                 <Image src="/shop-icon.svg" alt="" width={28} height={21} />
               </div>
               <div className="flex flex-wrap gap-[6px] max-w-[184px]">
-                {data?.tags?.$values?.map((tag:any) => (
+                {data?.tags?.$values?.map((tag) => (
                   <TagInfo key={tag} bg="#D6FBC4" name={tag} />
                 ))}
               </div>
@@ -99,7 +95,7 @@ const MealsInfoCard = ({
                 </div>
               </div>
               <div className="space-y-1">
-                {data?.nutritionalInfo?.$values?.map(({ name, value, unit }:any) => {
+                {data?.nutritionalInfo?.$values?.map(({ name, value, unit }) => {
                   const bg = getRandomColor("#FFFFFF");
                   return (
                     <NutritionalInfoBox
