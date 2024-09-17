@@ -69,17 +69,15 @@ function MainPanel({ date, open, setOpen }: Props) {
     (dailyMeals: DailyMealsDatatype[] | null, date: string) => {
       const meals = dailyMeals
         ? dailyMeals?.find((day) => {
-          // Format the API date to match your 'DD/MM/YY' format
-          const formattedAPIDate = formatDateToDDMMYY(new Date(day.date));
-          return formattedAPIDate === date;
-        })?.meal?.$values || null
+            // Format the API date to match your 'DD/MM/YY' format
+            const formattedAPIDate = formatDateToDDMMYY(new Date(day.date));
+            return formattedAPIDate === date;
+          })?.meal?.$values || null
         : null;
       return dispatch(setMeals(meals));
     },
     [dispatch]
   );
-
-
 
   useEffect(() => {
     if (date?.from) {
@@ -91,14 +89,13 @@ function MainPanel({ date, open, setOpen }: Props) {
   useEffect(() => {
     if (isLoading) {
       dispatch(setTimetableLoading(true));
-    } else if (data && data.value && data.value.$values) {
+    } else if (data?.value?.$values) {
       console.log(data.value.$values); // Debug: Check if data is fetched correctly
       dispatch(setDailyMeals(data.value.$values));
     } else {
-      console.error('Data is not in expected format:', data); // Debug error logging
+      console.error("Data is not in expected format:", data); // Debug error logging
     }
   }, [data, dispatch, isLoading]);
-
 
   const tabs = [
     {
@@ -163,16 +160,21 @@ function MainPanel({ date, open, setOpen }: Props) {
             {weeks.map((week, index) => {
               const date = formatDateToDDMMYY(week);
 
-              const filteredMeals = dailyMeals?.find((day) => {
-                // Convert API date to YYYY-MM-DD format
-                const formattedAPIDate = new Date(day.date).toISOString().split("T")[0];
+              const filteredMeals =
+                dailyMeals?.find((day) => {
+                  // Convert API date to YYYY-MM-DD format
+                  const formattedAPIDate = new Date(day.date)
+                    .toISOString()
+                    .split("T")[0];
 
-                // Parse the DD/MM/YY date string into a Date object, then convert it to YYYY-MM-DD format
-                const parsedInputDate = parse(date, "dd/MM/yy", new Date());
-                const formattedInputDate = parsedInputDate.toISOString().split("T")[0];
+                  // Parse the DD/MM/YY date string into a Date object, then convert it to YYYY-MM-DD format
+                  const parsedInputDate = parse(date, "dd/MM/yy", new Date());
+                  const formattedInputDate = parsedInputDate
+                    .toISOString()
+                    .split("T")[0];
 
-                return formattedAPIDate === formattedInputDate;
-              })?.meal.$values || [];
+                  return formattedAPIDate === formattedInputDate;
+                })?.meal.$values || [];
 
               console.log(date, "week", filteredMeals);
 
