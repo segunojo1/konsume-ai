@@ -35,7 +35,7 @@ export function MealsContextProvider({ children }: { children: React.ReactNode }
 
                 if (data.$values.length < 2) {
                     console.log('Retrying due to insufficient meal data...');
-                    await retry(fetchMeals);
+                    await retry(fetchMeals, 3, 5000);
                 } else {
                     console.log('Meals fetched successfully:', data.$values);
                     if (typeof window !== 'undefined') {
