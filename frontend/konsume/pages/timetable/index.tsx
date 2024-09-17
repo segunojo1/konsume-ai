@@ -19,15 +19,14 @@ export default function SidebarDemo() {
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  if (!mounted) return <p>Loading...</p>;
-
   return (
     <MainLayout
       fixedTopbar={true}
       topBarText="Timetable"
       topBarIcon="dashborad"
     >
+      {mounted ? (
+
       <main className="flex font-satoshi">
         <RightPanel
           date={date}
@@ -37,6 +36,7 @@ export default function SidebarDemo() {
         />
         <MainPanel date={date} open={open} setOpen={setOpen} />
       </main>
+      ) : <p>Loading...</p> }
     </MainLayout>
   );
 }
