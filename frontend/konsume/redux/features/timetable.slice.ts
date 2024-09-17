@@ -1,5 +1,4 @@
 import type { MealDatatype, DailyMealsDatatype } from "@/@types/timetable";
-import { dailyMealsData } from "@/helpers/timetable/data";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface InitialType {

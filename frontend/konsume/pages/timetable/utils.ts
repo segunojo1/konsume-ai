@@ -7,9 +7,9 @@ const getRandomColor = (excludeColor?: string) => {
   const randomIndex = Math.floor(Math.random() * filteredColors.length);
   return filteredColors[randomIndex];
 };
-export default getRandomColor
+export default getRandomColor;
 
-export const getColorsByMealType = (label?: string) => {
+export const getColorsByMealType = (label: string) => {
   const mealInfo = mealsInfoCardColors.find(
     ({ meal }) => meal?.toLowerCase() === label?.toLowerCase()
   );

@@ -192,7 +192,7 @@ function MainPanel({ date, open, setOpen }: Props) {
                     </p>
                   </div>
                   <div className="border-[#D1C9F7] border-r px-5 w-full space-y-8 ">
-                    {filteredMeals?.map((meal, index) => (
+                    {filteredMeals?.map((meal) => (
                       <MealsInfoCard
                         key={meal.label}
                         data={meal}

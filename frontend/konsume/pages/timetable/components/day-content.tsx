@@ -11,7 +11,7 @@ const DayContent = () => {
     label: string
   ): MealDatatype | undefined | null => {
     return meals
-      ? meals.find((meal) => meal.label?.toLowerCase() === label.toLowerCase())
+      ? meals.find((meal) => meal.label?.toLowerCase() === label?.toLowerCase())
       : null;
   };
 

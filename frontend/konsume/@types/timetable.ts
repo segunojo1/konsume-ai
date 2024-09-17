@@ -22,7 +22,7 @@ export interface MealDatatype {
   cookTime: number;
   caloriesPerServing: number;
   nutritionalInfo: NutritionalInfoItem;
-  label?: string;
+  label: string;
 }
 export interface DailyMealsDatatype {
   $id: string;
@@ -41,7 +41,7 @@ export interface DailyMealsDatatype {
       cookTime: number;
       caloriesPerServing: number;
       nutritionalInfo: NutritionalInfoItem;
-      label?: string;
+      label: string;
     }[];
   };
 }

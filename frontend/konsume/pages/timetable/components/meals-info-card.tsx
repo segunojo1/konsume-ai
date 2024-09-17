@@ -14,21 +14,9 @@ type Props = {
   className?: string;
 };
 
-const MealsInfoCard = ({
-  className,
-  data: {
-    label,
-    mealType,
-    foodName,
-    foodDescription,
-    tags,
-    cookTime,
-    caloriesPerServing,
-    nutritionalInfo,
-  },
-}: Props) => {
+const MealsInfoCard = ({ className, data }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { primaryColor, secondaryColor } = getColorsByMealType(label);
+  const { primaryColor, secondaryColor } = getColorsByMealType(data?.label);
 
   return (
     <CardContainer className={cn("inter-var w-full", className)}>
@@ -38,9 +26,9 @@ const MealsInfoCard = ({
       >
         <MealBriefDetail
           bg={secondaryColor}
-          name={mealType}
-          foodName={foodName}
-          foodDescription={foodDescription}
+          name={data?.mealType}
+          foodName={data?.foodName}
+          foodDescription={data?.foodDescription}
         />
         <Dialog open={isOpen}>
           <DialogTrigger onClick={() => setIsOpen(true)} asChild>
@@ -63,9 +51,9 @@ const MealsInfoCard = ({
             <div className="2xl:space-y-7 space-y-3">
               <MealBriefDetail
                 bg={secondaryColor}
-                name={mealType}
-                foodName={foodName}
-                foodDescription={foodDescription}
+                name={data?.mealType}
+                foodName={data?.foodName}
+                foodDescription={data?.foodDescription}
               />
               <div className="flex justify-between">
                 <Button
@@ -80,7 +68,7 @@ const MealsInfoCard = ({
                 <Image src="/shop-icon.svg" alt="" width={28} height={21} />
               </div>
               <div className="flex flex-wrap gap-[6px] max-w-[184px]">
-                {tags?.$values?.map((tag) => (
+                {data?.tags?.$values?.map((tag) => (
                   <TagInfo key={tag} bg="#D6FBC4" name={tag} />
                 ))}
               </div>
@@ -92,7 +80,7 @@ const MealsInfoCard = ({
                   <div className="flex justify-between items-center gap-[10px]">
                     <Clock />
                     <span className="font-bold text-[12px]">
-                      {cookTime}mins
+                      {data?.cookTime}mins
                     </span>
                   </div>
                 </div>
@@ -101,13 +89,13 @@ const MealsInfoCard = ({
                   <div className="flex justify-between items-center gap-[10px]">
                     <Clock />
                     <span className="font-bold text-[12px]">
-                      {caloriesPerServing} Kcal
+                      {data?.caloriesPerServing} Kcal
                     </span>
                   </div>
                 </div>
               </div>
               <div className="space-y-1">
-                {nutritionalInfo?.$values?.map(({ name, value, unit }) => {
+                {data?.nutritionalInfo?.$values?.map(({ name, value, unit }) => {
                   const bg = getRandomColor("#FFFFFF");
                   return (
                     <NutritionalInfoBox
