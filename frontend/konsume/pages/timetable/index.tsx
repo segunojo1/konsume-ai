@@ -20,7 +20,7 @@ export default function SidebarDemo() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted) return <p>Loading...</p>;
 
   return (
     <MainLayout
