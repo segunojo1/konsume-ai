@@ -76,8 +76,8 @@ useEffect(() => {
           </div>
         </div>
         <div className="border border-[#d9d9d94d] py-10 p-8 rounded-lg flex flex-col gap-12">
-          <div className="flex justify-between">
-            <div>
+          <div className="flex md:flex-row flex-col gap-1 justify-between">
+            <div className="">
               <h1 className="text-[18px]/[24px] font-bold">
               Other Information
               </h1>
