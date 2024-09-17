@@ -90,11 +90,11 @@ useEffect(() => {
           <div className="grid md:grid-cols-2 max-w-[600px] gap-5">
             <div className="flex flex-col gap-2">
                 <p className="text-[15px]/[24px] text-[#667185] ">Wellness Goal</p>
-                <p className="font-medium text-[16px]/[24px]">{userGoals.map((goal:any) => <div style={{backgroundColor: getRandomColor()}} className={`text-[#344054] p-2 rounded-[6px] border border-[#D0D5DD] w-fit px-3 `}>{goal}</div>)}</p>
+                <p className="font-medium text-[16px]/[24px]">{userGoals.map((goal:any) => <div key={goal} style={{backgroundColor: getRandomColor()}} className={`text-[#344054] p-2 rounded-[6px] border border-[#D0D5DD] w-fit px-3 `}>{goal}</div>)}</p>
             </div>
             <div className="flex flex-col gap-2">
                 <p className="text-[15px]/[24px] text-[#667185] ">Health Conditions</p>
-                <p className="font-medium text-[16px]/[24px]">{allergies.map((goal:any) => <div style={{backgroundColor: getRandomColor()}} className={`text-[#344054] p-2 rounded-[6px] border border-[#D0D5DD] w-fit px-3 `}>{goal}</div>)}</p>
+                <p className="font-medium text-[16px]/[24px]">{allergies.map((goal:any) => <div key={goal} style={{backgroundColor: getRandomColor()}} className={`text-[#344054] p-2 rounded-[6px] border border-[#D0D5DD] w-fit px-3 `}>{goal}</div>)}</p>
             </div>
             <div className="flex flex-col gap-2">
                 <p className="text-[15px]/[24px] text-[#667185] ">Diet</p>
