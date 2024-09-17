@@ -4,28 +4,31 @@ import {
   type NutritionalInfoItem,
 } from "@/@types/timetable";
 
-const nutritionalInfo: NutritionalInfoItem[] = [
-  {
-    name: "Calories",
-    value: "200",
-    unit: "kcal",
-  },
-  {
-    name: "Protein",
-    value: "10",
-    unit: "g",
-  },
-  {
-    name: "Carbohydrate",
-    value: "50",
-    unit: "g",
-  },
-  {
-    name: "Healthy Fats",
-    value: "10",
-    unit: "g",
-  },
-];
+const nutritionalInfo: NutritionalInfoItem = {
+  $id: 1,
+  $values: [
+    {
+      name: "Calories",
+      value: "200",
+      unit: "kcal",
+    },
+    {
+      name: "Protein",
+      value: "10",
+      unit: "g",
+    },
+    {
+      name: "Carbohydrate",
+      value: "50",
+      unit: "g",
+    },
+    {
+      name: "Healthy Fats",
+      value: "10",
+      unit: "g",
+    },
+  ],
+};
 
 export const dailyMealsData: DailyMealsDatatype[] = [
   {
@@ -126,8 +129,6 @@ export const dailyMealsData: DailyMealsDatatype[] = [
   },
 ];
 
-
-
 export const mealsInfoCardColors = [
   { meal: "breakfast", primaryColor: "#FFFFFF", secondaryColor: "#EDFAE7" },
   { meal: "lunch", primaryColor: "#D6FBC4", secondaryColor: "#FFFFFF" },
@@ -135,4 +136,4 @@ export const mealsInfoCardColors = [
 ];
 
 export const colors = ["#D6FBC4", "#D3D3D3", "#FFFFFF", "#EDFAE7"];
-export default nutritionalInfo
+export default nutritionalInfo;

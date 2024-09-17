@@ -25,6 +25,13 @@ import DayContent from "./day-content";
 import Cookies from "js-cookie";
 import { useGetMealPlansQuery } from "@/redux/api/timetable.api";
 import { Loading } from "./loading";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 type Props = {
   date: DateRange | undefined;
@@ -94,7 +101,7 @@ function MainPanel({ date, open, setOpen }: Props) {
               return (
                 <Button
                   key={`day-${date}`}
-                  className="rounded-lg px-[7px] py-[14px] bg-base-black text-base-white gap-2 flex flex-col items-center w-[103px] h-auto"
+                  className="rounded-lg px-[8px] py-[14px] bg-base-black text-base-white gap-2 flex flex-col items-center w-[103px] h-auto"
                   onClick={() => filterMealsByDay(dailyMeals, date)}
                 >
                   <p className="text-desktop-caption font-bold">

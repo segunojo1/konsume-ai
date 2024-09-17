@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Calendar } from "@/components/ui/calendar";
-import { DateRange } from "react-day-picker";
+import type { DateRange } from "react-day-picker";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
@@ -9,6 +10,7 @@ import nutritionalInfo, { colors } from "../../../helpers/timetable/data";
 import Card from "./card";
 import NutritionalInfoBox from "./nutritional-info-box";
 import getRandomColor from "../utils";
+
 
 type Props = {
   date: DateRange | undefined;
@@ -19,19 +21,20 @@ type Props = {
 
 const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
   const [firstName, setFirstName] = useState("");
-
   useEffect(() => {
-    const user = Cookies.get("konsumeUsername")!;
-    const [firstName] = user.split(" ");
-    setFirstName(firstName);
+    const user = Cookies.get("konsumeUsername");
+    if (user) {
+      const [firstName] = user.split(" ");
+      setFirstName(firstName);
+    }
   }, []);
 
   return (
     <motion.aside
-      className=" space-y-11 w-[273px] overflow-hidden "
+      className=" space-y-11 w-[273px] overflow-hidden hidden sm:block f"
       animate={{
-        width: open ? "273px" : "30px",
-        display: open ? "block" : "none",
+        width: open ? "273px" : "0px",
+        // display: open ? "block" : "none",
       }}
     >
       <section className="relative">
@@ -74,19 +77,18 @@ const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
               Nutritional Info
             </h2>
             <div className="space-y-1 max-w-[196px] mx-auto">
-              {nutritionalInfo &&
-                nutritionalInfo.map(({ name, value, unit }, index) => {
-                  const bg = getRandomColor();
-                  return (
-                    <NutritionalInfoBox
-                      key={index}
-                      bg={bg}
-                      name={name}
-                      value={value}
-                      unit={unit}
-                    />
-                  );
-                })}
+              {nutritionalInfo?.$values?.map(({ name, value, unit }, index) => {
+                const bg = getRandomColor();
+                return (
+                  <NutritionalInfoBox
+                    key={`${name}-${value}-${unit}`}
+                    bg={bg}
+                    name={name}
+                    value={value}
+                    unit={unit}
+                  />
+                );
+              })}
             </div>
           </div>
         </Card.Container>
@@ -94,4 +96,4 @@ const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
     </motion.aside>
   );
 };
-export default RightPanel
+export default RightPanel;
