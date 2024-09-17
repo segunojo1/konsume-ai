@@ -128,3 +128,4 @@ const MainBlogText = ({ text, category, titlee }: Blog) => {
     </div>
   );
 };
+export default MainBlogText;
