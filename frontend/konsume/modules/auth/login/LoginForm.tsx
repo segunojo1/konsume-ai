@@ -44,7 +44,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, onSubmit }) => (
                         )}
                     />
                 </div>
-                <Button className="mt-8 w-[348.9px] bg-[#8DCF384D] p-[10px] border-2 border-[#D6FBC4] rounded-[30px] text-desktop-highlight font-bold min-h-[52px]" type="submit">
+                <Button className="mt-8 w-full max-w-[348.9px] bg-[#8DCF384D] p-[10px] border-2 border-[#D6FBC4] rounded-[30px] text-desktop-highlight font-bold min-h-[52px]" type="submit">
                     Continue
                 </Button>
             </form>
