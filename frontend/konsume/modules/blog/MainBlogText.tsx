@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
 interface Blog {
-    text: string;
+    text: string | undefined;
     category: string | undefined;
     titlee: string | undefined;
 }
@@ -122,7 +122,7 @@ const bookMarkBlog = async () => {
                 </div>
             </div>
             <div>
-                <p className='flex flex-col'>{formatText(text)}</p>
+                <p className='flex flex-col'>{formatText(text ?? '' )}</p>
             </div>
         </div>
     )

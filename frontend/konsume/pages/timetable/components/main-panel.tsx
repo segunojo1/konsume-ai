@@ -25,7 +25,7 @@ import MealsInfoCard from "./meals-info-card";
 import DayContent from "./day-content";
 import Cookies from "js-cookie";
 import { useGetMealPlansQuery } from "@/redux/api/timetable.api";
-import { Loading } from "./loading";
+import Loading from "./loading";
 import {
   Carousel,
   CarouselContent,

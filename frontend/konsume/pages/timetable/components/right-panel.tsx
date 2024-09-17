@@ -10,6 +10,7 @@ import nutritionalInfo, { colors } from "../../../helpers/timetable/data";
 import Card from "./card";
 import NutritionalInfoBox from "./nutritional-info-box";
 import getRandomColor from "../utils";
+import { NutritionalValue } from "@/@types/timetable";
 
 
 type Props = {
@@ -77,7 +78,7 @@ const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
               Nutritional Info
             </h2>
             <div className="space-y-1 max-w-[196px] mx-auto">
-              {nutritionalInfo?.$values?.map(({ name, value, unit }, index) => {
+              {nutritionalInfo?.$values?.map(({ name, value, unit }:NutritionalValue) => {
                 const bg = getRandomColor();
                 return (
                   <NutritionalInfoBox

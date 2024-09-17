@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
-export function Loading() {
+const Loading = () => {
   const [rotation, setRotation] = useState(0);
 
   useEffect(() => {
@@ -53,3 +53,4 @@ export function Loading() {
     </div>
   );
 }
+export default Loading;

@@ -1,10 +1,29 @@
-import {
-  MealDatatype,
-  type DailyMealsDatatype,
-  type NutritionalInfoItem,
-} from "@/@types/timetable";
+import { NutritionalValue } from "@/@types/timetable";
 
-const nutritionalInfo: NutritionalInfoItem = {
+
+
+type NutritionalInfoProp = {
+  $id: number;
+  $values: NutritionalValue[];
+};
+
+type Meal = {
+  label: string;
+  mealType: string;
+  foodName: string;
+  foodDescription: string;
+  tags: string[];
+  cookTime: number;
+  caloriesPerServing: number;
+  nutritionalInfo: NutritionalValue[];
+};
+
+type DailyMeals = {
+  date: string;
+  meals: Meal[];
+};
+
+const nutritionalInfo: NutritionalInfoProp = {
   $id: 1,
   $values: [
     {
@@ -30,7 +49,7 @@ const nutritionalInfo: NutritionalInfoItem = {
   ],
 };
 
-export const dailyMealsData: DailyMealsDatatype[] = [
+export const dailyMealsData: DailyMeals[] = [
   {
     date: "04/09/24",
     meals: [

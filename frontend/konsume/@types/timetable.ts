@@ -1,10 +1,10 @@
 import { number } from "zod";
 
 export interface NutritionalInfoItem {
-  $id: string;
+  $id?: string;
   $values: {
-    $id: string;
-    id: number;
+    $id?: string;
+    id?: number;
     name: string;
     value: string;
     unit: string;
@@ -16,7 +16,7 @@ export interface MealDatatype {
   foodName: string;
   foodDescription: string;
   tags: {
-    $id: string;
+    $id?: string;
     $values: string[];
   };
   cookTime: number;
@@ -25,7 +25,7 @@ export interface MealDatatype {
   label?: string;
 }
 export interface DailyMealsDatatype {
-  $id: string;
+  $id?: string;
   date: string;
   meal: {
     $id: string;
@@ -50,4 +50,9 @@ export type Tab = {
   title: string;
   value: string;
   content?: string | React.ReactNode;
+};
+export type NutritionalValue = {
+  name: string;
+  value: string; // or 'number' if you prefer numeric values here
+  unit: string;
 };
