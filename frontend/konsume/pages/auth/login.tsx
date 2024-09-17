@@ -94,7 +94,7 @@ try {
     }
 }
   return (
-    <div className="font-satoshi flex flex-col gap-5 w-fit mx-auto pb-5 py-10 md:px-5">
+    <div className="font-satoshi flex flex-col gap-5 w-fit mx-auto pb-5 py-10 px-2 md:px-5">
       <Header />
       <LoginForm form={form} onSubmit={onSubmit} />
       <SocialLogin />
