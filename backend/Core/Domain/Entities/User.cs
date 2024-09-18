@@ -12,7 +12,7 @@ namespace KONSUME.Core.Domain.Entities
         [JsonInclude]
         public string Email { get; set; }
         [JsonInclude]
-        public string Password { get; set; }
+        public string? Password { get; set; }
         [JsonInclude]
         public Profile Profile { get; set; }
         public int RoleId { get; set; }

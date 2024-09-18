@@ -11,7 +11,6 @@ namespace KonsumeTestRun.Controllers
         private readonly IUserService _userService;
         private readonly IIdentityService _identityService;
         private readonly IConfiguration _config;
-        private readonly IIdentityService _authentication;
 
 
         public AuthenticationController(IUserService userService, IIdentityService identityService, IConfiguration config)
@@ -37,6 +36,23 @@ namespace KonsumeTestRun.Controllers
             }
         }
 
+        [HttpPost("LoginWithGoogle")]
+        public async Task<IActionResult> LoginWithGoogle([FromForm] GoogleRequestModel model)
+        {
+            var user = await _userService.LoginWithGoogle(model);
+
+            if (user.IsSuccessful == true)
+            {
+                var token = _identityService.GenerateToken(_config["Jwt:Key"], _config["Jwt:Issuer"], user.Value);
+                return Ok(new { token, user.Value, user.Message });
+            }
+            else
+            {
+                return StatusCode(400, user.Message);
+            }
+        }
+
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromForm] UserRequest request)
         {
@@ -53,4 +69,6 @@ namespace KonsumeTestRun.Controllers
         }
     }
 }
+
+
 

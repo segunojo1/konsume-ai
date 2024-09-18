@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace YourNamespace.Models.AIModels
+namespace KONSUME.Models
 {
     public class BlogResponse
     {

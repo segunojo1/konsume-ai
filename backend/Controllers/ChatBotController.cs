@@ -1,6 +1,11 @@
-﻿using KONSUME.Core.Application.Interfaces.Services;
+﻿using KONSUME.Core.Application.Interfaces.Repositories;
+using KONSUME.Core.Application.Interfaces.Services;
+using KONSUME.Core.Application.Services;
+using KONSUME.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using OpenAI_API;
 using OpenAI_API.Chat;
 using System.Linq;
@@ -59,7 +64,7 @@ namespace DaticianProj.Controllers
                 var openai = new OpenAIAPI(apiKey);
                 var chatRequest = new ChatRequest
                 {
-                    Model = "ft:gpt-3.5-turbo-0613:personal:foodieai:9zrEI7Ix",
+                    Model = "ft:gpt-4o-mini-2024-07-18:personal:foodieai:A5z1pehk",
                     Messages = new[]
                     {
                         new ChatMessage(ChatMessageRole.System, "FoodieAI is a food and health chatbot."),
@@ -132,10 +137,23 @@ namespace DaticianProj.Controllers
             // Generate a daily unique seed or identifier based on the current date
             string dateSeed = DateTime.UtcNow.ToString("yyyyMMdd");
 
-            // Create a prompt based on the user's goals, allergies, and nationality
-            var prompt = $"I want to {profile.UserGoals} and I have {profile.Allergies} generate 15 {profile.Nationality} meals for breakfast, lunch, dinner, or snacks suitable for me" +
-                $" , considering that I follow a {profile.DietType ?? "general"} diet and I am {CalculateAge(profile.DateOfBirth)} years old.";
+            var existingMeals = await _mealRecommendationService.GetDailyRecommendationsAsync(profileId, dateSeed);
 
+            if (!string.IsNullOrEmpty(existingMeals))
+            {
+                // Deserialize the JSON string to a list
+                var mealList = JsonConvert.DeserializeObject<List<Meal>>(existingMeals);
+
+            // If the deserialized list contains items, return them as the response
+                if (mealList != null && mealList.Count > 0)
+                {
+                    return Ok(mealList);
+                }
+            }
+
+            // Construct the prompt for the AI
+            var prompt = $"I want to {profile.UserGoals} and I have {profile.Allergies} generate 15 {profile.Nationality} meals for breakfast, lunch, dinner, or snacks suitable for me";
+            
             try
             {
                 var openai = new OpenAIAPI(apiKey);
@@ -144,7 +162,7 @@ namespace DaticianProj.Controllers
                     Model = "ft:gpt-3.5-turbo-0613:personal:foodieai:A0W1EPi5", // Correct model name
                     Messages = new[]
                     {
-                        new ChatMessage(ChatMessageRole.System, "FoodieAI is a food and health chatbot."),
+                        new ChatMessage(ChatMessageRole.System, "FoodieAI is a food chatbot."),
                         new ChatMessage(ChatMessageRole.User, prompt)
                     }
                 };
@@ -156,8 +174,12 @@ namespace DaticianProj.Controllers
                 Console.WriteLine("Raw AI Response: ");
                 Console.WriteLine(aiResponse);
 
+                var cleanedResponse = aiResponse
+                                    .Replace("System.Collections.Generic.List`1[System.String]", "")
+                                    .Trim();
+
                 // Split the meals by '$' to get individual meal entries
-                string[] meals = aiResponse.Split('$', StringSplitOptions.RemoveEmptyEntries);
+                string[] meals = cleanedResponse.Split('$', StringSplitOptions.RemoveEmptyEntries);
 
                 // Create a list to hold structured meal objects
                 var mealList = new List<object>();
@@ -179,6 +201,12 @@ namespace DaticianProj.Controllers
                     }
                 }
 
+                // Serialize the meal list to a JSON string for storage
+                string mealJson = JsonConvert.SerializeObject(mealList);
+
+                // Save the generated meal recommendations to the database
+                await _mealRecommendationService.SaveDailyRecommendationsAsync(profileId, dateSeed, mealJson);
+
                 // Return the structured meal list as a response
                 return Ok(mealList);
             }
@@ -188,9 +216,13 @@ namespace DaticianProj.Controllers
             }
         }
 
-
     }
+
+    public class Meal
+    {
+        public string Name { get; set; }
+        public string Course { get; set; }
+        public string Description { get; set; }
+    }
+
 }
-
-
-

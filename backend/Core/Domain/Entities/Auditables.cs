@@ -25,7 +25,5 @@ namespace KONSUME.Core.Domain.Entities
         }
     }
 
-
 }
-
 

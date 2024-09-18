@@ -50,6 +50,7 @@ namespace KONSUME.Infrastructure.Repositories
         {
             var answer = await _context.Set<Profile>()
                         .Where(a => !a.IsDeleted && a.Id == id)
+                        .Include(a =>  a.User)
                         .SingleOrDefaultAsync();
             return answer;
         }
@@ -84,5 +85,6 @@ namespace KONSUME.Infrastructure.Repositories
 
 
     }
+
 }
 

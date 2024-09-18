@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace KONSUME.Core.Application.Interfaces.Repositories
 {
-    public interface IProfileRepository
+    public partial interface IProfileRepository
     {
         Task<Profile> AddAsync(Profile Profile);
         Task<Profile> GetAsync(int id);
@@ -16,4 +16,5 @@ namespace KONSUME.Core.Application.Interfaces.Repositories
         Task<bool> ExistsAsync(string email, int id);
         Task<bool> ExistsAsync(string email);
     }
+
 }

@@ -143,7 +143,73 @@ namespace KONSUME.Core.Application.Services
 
 
 
+        public async Task<BaseResponse<UserResponse>> LoginWithGoogle(GoogleRequestModel model)
+        {
+            var getUser = await _userRepository.GetAsync(model.Email);
+            var role = await _roleRepository.GetAsync(r => r.Name.ToLower() == "patient");
+            if (getUser != null)
+            {
 
+
+                return new BaseResponse<UserResponse>
+                {
+                    Message = "Login Successfull",
+                    IsSuccessful = true,
+                    Value = new UserResponse
+                    {
+                        Id = getUser.Id,
+                        FullName = getUser.FirstName + " " + getUser.LastName,
+                        Email = getUser.Email,
+                        RoleId = role.Id,
+                        RoleName = role.Name,
+                    }
+                };
+            }
+            if (role == null)
+            {
+                return new BaseResponse<UserResponse>
+                {
+                    Message = "Role does not exist",
+                    IsSuccessful = false
+                };
+            }
+
+            // Create the user entity
+            var user = new User
+            {
+                Email = model.Email,
+                Password = null,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                DateCreated = DateTime.UtcNow,
+                IsDeleted = false,
+                RoleId = role.Id,
+                Role = role,
+                CreatedBy = "1"
+            };
+
+            // Add user to the role and update the role
+            role.Users.Add(user);
+            _roleRepository.Update(role);
+
+            // Add the user to the repository
+            var newUser = await _userRepository.AddAsync(user);
+
+            await _unitOfWork.SaveAsync();
+            return new BaseResponse<UserResponse>
+            {
+                Message = "Login Successfull",
+                IsSuccessful = true,
+                Value = new UserResponse
+                {
+                    Id = user.Id,
+                    FullName = user.FirstName + " " + user.LastName,
+                    Email = user.Email,
+                    RoleId = role.Id,
+                    RoleName = role.Name,
+                }
+            };
+        }
 
         public async Task<BaseResponse<ICollection<UserResponse>>> GetAllUsers()
         {
