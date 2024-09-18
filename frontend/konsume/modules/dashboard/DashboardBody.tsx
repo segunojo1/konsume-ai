@@ -50,12 +50,6 @@ const DashboardBody = () => {
 
   const router = useRouter();
 
-  const handleNavigate = (meal: string) => {
-    router.push({
-      pathname: "/dashboard/meal-details",
-      query: { meal: encodeURIComponent(meal) },
-    });
-  };
 
   return (
     <div className="flex md:flex-row flex-col ">
@@ -75,7 +69,6 @@ const DashboardBody = () => {
                 lunch={lunch}
                 dinner={dinner}
                 loading={loading}
-                onNavigate={handleNavigate}
                 className="md:hidden transition-opacity"
               />
             )
@@ -116,7 +109,6 @@ const DashboardBody = () => {
         lunch={lunch}
         dinner={dinner}
         loading={loading}
-        onNavigate={handleNavigate}
         className="md:flex hidden"
       />
     </div>

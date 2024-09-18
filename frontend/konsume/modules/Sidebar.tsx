@@ -10,6 +10,7 @@ import settings from "../public/settings.svg";
 import logout from "../public/logout.svg";
 import Calendar from "../public/calendar.svg";
 import blogs from "../public/blog.svg"
+import meals from "../public/recommendedmeals.svg"
 import Image from "next/image";
 import { DashboardNavProps } from "../@types";
 
@@ -30,6 +31,7 @@ const Sidebar: React.FC<DashboardNavProps> = ({ toggled }) => {
         />
         <SidebarItem href="dashboard" text="Dashboard" icon={home} />
         <SidebarItem href="profile" text="Dashboard" icon={profile} />
+        <SidebarItem href="meals" text="Meals" icon={meals} />
         <SidebarItem href="scanner" text="Scanner" icon={scanner} />
         <SidebarItem href="timetable" text="Timetable" icon={Calendar} />
         <SidebarItem href="chat" text="Chat with Foodie AI" icon={chat} />

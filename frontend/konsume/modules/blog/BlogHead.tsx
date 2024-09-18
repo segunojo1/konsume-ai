@@ -47,7 +47,7 @@ useEffect(() => {
               <h1 className=''>Generate Blog with AI</h1>
               <Image src="/ai.svg" className='' width={23} height={40} alt='' />
             </Button>
-            <div className='md:hidden animate-pulse'>
+            <div className='md:hidden animate-pulse cursor-pointer'>
             <Image src="/searchai.svg" className='' width={40} height={40} alt='' />
             </div>
             </div>

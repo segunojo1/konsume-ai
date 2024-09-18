@@ -39,7 +39,7 @@ export function MealsContextProvider({
 
                 if (data.$values.length < 2) {
                     console.log('Retrying due to insufficient meal data...');
-                    await retry(fetchMeals, 3, 5000);
+                    await retry(fetchMeals, 3, 10000);
                 } else {
                     console.log('Meals fetched successfully:', data.$values);
                     if (typeof window !== 'undefined') {

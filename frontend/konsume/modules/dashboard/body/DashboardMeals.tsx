@@ -1,27 +1,34 @@
 "use client"
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import Link from "next/link";
+import MealsContext from "@/context/MealsContext";
 
 interface DashboardMealsProps {
   breakfast: string;
   lunch: string;
   dinner: string;
   loading: boolean;
-  onNavigate: (meal: string) => void;
   className ?: string;
 }
 
-const DashboardMeals: React.FC<DashboardMealsProps> = ({ breakfast, lunch, dinner, loading, onNavigate, className }) => {
+const DashboardMeals: React.FC<DashboardMealsProps> = ({ breakfast, lunch, dinner, loading, className }) => {
   const [isMounted, setIsMounted] = useState(false);
+  const {tempMeals} = useContext(MealsContext);
+  const [randomMeal, setRandomMeal] = useState<any>();
 
   useEffect(() => {
     // Set to true once the component is mounted
     setIsMounted(true);
   }, []);
+  useEffect(() => {
+    if (tempMeals.length > 1) {
+      setRandomMeal(tempMeals[Math.floor(Math.random() * tempMeals.length)])
+    }
+  }, [tempMeals])
   const renderMealCard = (meal: string, label: string) => (
     <div
       className="space-y-7 flex flex-col min-h-[145px] bg-primary-bg-100 px-3 pt-3 relative rounded-lg opacity-70"
@@ -34,7 +41,7 @@ const DashboardMeals: React.FC<DashboardMealsProps> = ({ breakfast, lunch, dinne
       ) : (
         <div className="flex justify-between flex-col ">
           <div>{isMounted ? (
-            <p className="text-[#1E5E08] font-bold text-[15px]">{meal ? meal : "No meal available"}</p>
+            <p className="text-[#1E5E08] font-bold text-[15px]">{randomMeal ? randomMeal?.name : "No meal available"}</p>
           ) : (
             <p>...</p>
           )}</div>
@@ -55,9 +62,9 @@ const DashboardMeals: React.FC<DashboardMealsProps> = ({ breakfast, lunch, dinne
         <p className="font-bold md:text-desktop-caption  text-white">Today&apos;s Spotlighted Meal</p>
         <Image src="/breakfast.svg" alt="food" width={33} height={33} />
       </div>
-      <Button className="bg-primarygtext text-primary-bg-100 font-medium text-[12px] rounded-lg py-[11px] px-[32.5px] flex items-center justify-center max-w-[242px]">
-        Open in Timetable
-      </Button>
+      <Link href="/timetable" className="bg-primarygtext text-primary-bg-100 font-medium text-[12px] rounded-lg py-[11px] px-[32.5px] flex items-center justify-center max-w-[242px]">
+        Open Timetable
+      </Link>
       {renderMealCard(breakfast, "Breakfast")}
       {renderMealCard(lunch, "Lunch")}
       {renderMealCard(dinner, "Dinner")}

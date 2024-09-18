@@ -24,6 +24,7 @@ interface UserContextProps {
     setUpdating: React.Dispatch<React.SetStateAction<boolean>>;
     updating: boolean;
     setDOB?: React.Dispatch<React.SetStateAction<string>>;
+    streakCount?: number;
 }
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
@@ -38,6 +39,7 @@ export const UserProvider: React.FC<any> = ({ children }) => {
   const [dietType, setDietType] = useState("");
   const [DOB, setDOB] = useState<string>("");
   const [updating, setUpdating] = useState<boolean>(false);
+  const [streakCount, setStreakCount] = useState(0);
   const router = useRouter();
   const getUserDetails = async () => {
     try {
@@ -97,9 +99,26 @@ export const UserProvider: React.FC<any> = ({ children }) => {
       console.log(error);
     }
   };
+  const getStreakCount = async () => {
+    try {
+      const { data } = await axiosKonsumeInstance.get(`/api/Streak/GetStreakCount/${Cookies.get("userid")}`, {
+        params: { 
+          profileId: Cookies.get("userid")
+         },
+      });
+      setStreakCount(data.streakCount)
+      console.log(data);
+      console.log(streakCount);
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
   useEffect(() => {
     getUserDetails();
     getProfileDetails();
+    getStreakCount()
   }, [router.pathname]);
   useEffect(() => {
     getProfileDetails();
@@ -124,7 +143,8 @@ export const UserProvider: React.FC<any> = ({ children }) => {
         DOB,
         setDOB,
         setUpdating,
-        updating
+        updating,
+        streakCount
       }}
     >
       {children}

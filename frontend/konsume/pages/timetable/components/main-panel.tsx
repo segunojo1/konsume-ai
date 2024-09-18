@@ -46,6 +46,7 @@ function MainPanel({ date, open, setOpen }: Props) {
   const dispatch = useAppDispatch();
   const userId = Cookies.get("userid");
   const { data, isLoading } = useGetMealPlansQuery(userId);
+  const [activeDate, setActiveDate] = useState<string | null>(null);
 
   const weeks =
     date?.from && date?.to
@@ -79,12 +80,25 @@ function MainPanel({ date, open, setOpen }: Props) {
     [dispatch]
   );
 
+  const handleDayClick = (date: string) => {
+    filterMealsByDay(dailyMeals, date); // Filter meals as usual
+    console.log("date change");
+    setActiveDate(date); // Update the activeDate when a button is clicked
+  };
   useEffect(() => {
-    if (date?.from) {
-      const dateData = formatDateToDDMMYY(date?.from);
-      filterMealsByDay(dailyMeals, dateData);
+    if (activeDate) {
+      console.log("activeDate has changed:", activeDate);
+      // Perform other actions if needed, based on the new activeDate value
     }
-  }, [date, dailyMeals, filterMealsByDay]);
+  }, [activeDate]); 
+  useEffect(() => {
+  // If the date is available, update the activeDate and filter the meals
+  if (date?.from) {
+    const formattedDate = formatDateToDDMMYY(date.from);
+    setActiveDate(formattedDate); // Set activeDate based on the selected date
+    filterMealsByDay(dailyMeals, formattedDate); // Call the filterMealsByDay function
+  }
+}, [date, dailyMeals, filterMealsByDay]);
 
   useEffect(() => {
     if (isLoading) {
@@ -104,23 +118,26 @@ function MainPanel({ date, open, setOpen }: Props) {
       content: (
         <div className="space-y-16 overflow-hidden">
           <div className=" flex gap-[18px] w-full justify-between flex-wrap ">
-            {days.map((day, index) => {
-              const date = formatDateToDDMMYY(day);
-              return (
-                <Button
-                  key={`day-${date}`}
-                  className="rounded-lg px-[8px] py-[14px] bg-base-black text-base-white gap-2 flex flex-col items-center w-[103px] h-auto"
-                  onClick={() => filterMealsByDay(dailyMeals, date)}
-                >
-                  <p className="text-desktop-caption font-bold">
-                    {format(day, "EEEE")}
-                  </p>
-                  <p className="text-desktop-feature font-bold">
-                    {format(day, "dd")}
-                  </p>
-                </Button>
-              );
-            })}
+          {days.map((day) => {
+        const date = formatDateToDDMMYY(day);
+        console.log(date);
+        
+        return (
+          <Button
+            key={`day-${date}`}
+            // Add conditional class based on whether this date is the active one
+            className={`cursor-pointer rounded-lg px-[8px] py-[14px] gap-2 flex flex-col items-center w-[103px] h-auto ${
+              activeDate == date
+                ? "bg-[#0A0609] text-base-white" // Apply active styles
+                : "bg-secondary-100 text-primarytext" // Default styles
+            }`}
+            onClick={() => handleDayClick(date)}
+          >
+            <p className="text-desktop-caption font-bold">{format(day, "EEEE")}</p>
+            <p className="text-desktop-feature font-bold">{format(day, "dd")}</p>
+          </Button>
+        );
+      })}
           </div>
           <DayContent />
         </div>
@@ -181,9 +198,9 @@ function MainPanel({ date, open, setOpen }: Props) {
               return (
                 <div
                   key={`week-${date}`}
-                  className="flex flex-col  flex-1 gap-10 items-center"
+                  className=" flex flex-col  flex-1 gap-10 items-center"
                 >
-                  <div className="rounded-lg px-[7px] py-[14px] bg-base-black text-base-white gap-2 flex flex-col items-center w-[103px]">
+                  <div className="cursor-pointer rounded-lg px-[7px] py-[14px] bg-base-black text-base-white gap-2 flex flex-col items-center w-[103px]">
                     <p className="text-desktop-caption font-bold">
                       {format(week, "EEEE")}
                     </p>
@@ -212,17 +229,15 @@ function MainPanel({ date, open, setOpen }: Props) {
   return (
     <div className="flex-[3] px-7 container">
       <div className="flex flex-col items-center justify-center w-full relative">
-        {loading ? (
-          <Loading />
-        ) : (
-          <Tabs
-            key={
-              weekOffset ||
-              (date?.from?.toISOString() && date?.to?.toISOString())
-            }
-            tabs={tabs}
-          />
-        )}
+      {loading ? (
+  <Loading />
+) : (
+  <Tabs
+    key={`${weekOffset}-${activeDate}-${date?.from?.toISOString()}-${date?.to?.toISOString()}`} // Include activeDate in the key
+    tabs={tabs}
+  />
+)}
+
 
         {!open && (
           <Button

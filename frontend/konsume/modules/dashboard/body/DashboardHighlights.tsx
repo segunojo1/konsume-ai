@@ -38,18 +38,6 @@ const DashboardHighlights = ({ loading }: DashboardHighlightsProp) => {
           className="flex "
         >
           <SwiperSlide>
-            <div className="flex flex-col bg-[#D6FBC4] p-4 rounded-2xl js-tilt h-[80%] mealreco md:min-w-fit min-w-full md:flex-[.5]">
-              <div className="flex justify-between items-center mb-5">
-                <p className="font-bold text-xs">Restaurant Track</p>
-                <Image src={scanner} alt="restaurant" />
-              </div>
-              <Button className="bg-[#fafafa86] border-primary-bg-100 border-2 mx-auto mt-10 text-primarygtext font-medium text-xs rounded-lg py-[11px] px-[32.5px] flex items-center gap-2 justify-center">
-                <Image src="/icon7.svg" height={27.6} width={27.6} alt="icon" />
-                <p className="text-mobile-caption font-bold">Setup Restaurant Profile</p>
-              </Button>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
             <div className=" h-[80%] flex md:hidden">
               <DashboardProgressTracker />
             </div>
@@ -72,6 +60,19 @@ const DashboardHighlights = ({ loading }: DashboardHighlightsProp) => {
               </div>
             </div>
           </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col bg-[#D6FBC4] p-4 rounded-2xl js-tilt h-[80%] mealreco md:min-w-fit min-w-full md:flex-[.5]">
+              <div className="flex justify-between items-center mb-5">
+                <p className="font-bold text-xs">Restaurant Track</p>
+                <Image src={scanner} alt="restaurant" />
+              </div>
+              <Button className="bg-[#fafafa86] border-primary-bg-100 border-2 mx-auto mt-10 text-primarygtext font-medium text-xs rounded-lg py-[11px] px-[32.5px] flex items-center gap-2 justify-center">
+                <Image src="/icon7.svg" height={27.6} width={27.6} alt="icon" />
+                <p className="text-mobile-caption font-bold">Setup Restaurant Profile</p>
+              </Button>
+            </div>
+          </SwiperSlide>
+          
           ...
         </Swiper>
       </div>
