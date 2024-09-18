@@ -41,13 +41,13 @@ const DashboardMeals: React.FC<DashboardMealsProps> = ({ breakfast, lunch, dinne
       ) : (
         <div className="flex justify-between flex-col ">
           <div>{isMounted ? (
-            <p className="text-[#1E5E08] font-bold text-[15px]">{randomMeal ? randomMeal?.name : "No meal available"}</p>
+            <p className="text-[#1E5E08] font-bold text-[15px]">{meal ? meal : "No meal available"}</p>
           ) : (
             <p>...</p>
           )}</div>
-          <p className="text-color8-700 font-medium text-[11.2px]">
+          {/* <p className="text-color8-700 font-medium text-[11.2px]">
             Nutritious bean cake high in protein and fiber.
-          </p>
+          </p> */}
         </div>
       )}
       <Link href={`/meals/${meal}`} className="bg-base-white text-[#8C77EC] font-bold text-[12px] right-0 absolute bottom-0 rounded-[8.8px] h-[34px] w-[154px] flex items-center justify-center">

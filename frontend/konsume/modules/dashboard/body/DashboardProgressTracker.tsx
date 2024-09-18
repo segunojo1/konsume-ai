@@ -15,9 +15,19 @@ const DashboardProgressTracker: React.FC = () => {
       </div>
       <div className="flex justify-between items-center">
         <Image src={streaks} alt="streak" />
-        <h1 className="text-[20px] font-bold p-5">{streakCount}</h1>
+        {streakCount == 0 ? (
+          <p className="text-[20px] font-bold p-5">No streak!</p>
+        ) : (
+        <div className="flex gap-2 text-[20px] font-bold p-5">{streakCount} {streakCount <= 1 ? <p>day</p>: <p>days</p>}</div>
+        )}
       </div>
-        <h1 className="text-[14px] font-bold text-primarygtext">Total Goal Streak: <span className="text-neutrals-100">{streakCount ? streakCount : "..."}</span> days of commitment</h1>
+      {
+        streakCount == 0 ? (
+          <h1 className="text-[14px] font-bold text-primarygtext">You haven't read any AI generated blogs😢</h1>
+        ) : (
+          <h1 className="text-[14px] font-bold text-primarygtext">You've read AI generated blogs for <span className="text-neutrals-100">{streakCount}</span> days straignt!</h1>
+        )
+      }
     </div>
   );
 };

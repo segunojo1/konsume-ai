@@ -29,7 +29,7 @@ export function MealsContextProvider({
     const fetchMeals = async () => {
       try {
         setLoadingMeal(true);
-        const { data } = await axiosKonsumeInstance.get('/api/ChatBot/GenerateMeals', {
+        const { data } = await axiosKonsumeInstance.get('/api/MealRecommendation/GenerateMeals', {
           params: { profileId: Cookies.get('userid') },
         });
         console.log('fetching meals');

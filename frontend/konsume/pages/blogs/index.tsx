@@ -9,6 +9,7 @@ import BlogContext from '@/context/BlogContext'
 import { BlogProps } from '@/@types'
 import Link from 'next/link'
 import { DashboardBlogSkeleton } from '@/components/skeleton-loaders/DashboardBlogSkeleton'
+import withAuth from '@/helpers/withAuth'
 
 const Blogs = () => {
 
@@ -79,4 +80,4 @@ const Blogs = () => {
     )
 }
 
-export default Blogs
+export default withAuth(Blogs);

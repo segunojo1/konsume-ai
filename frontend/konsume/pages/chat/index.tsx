@@ -37,9 +37,9 @@ const Chat = () => {
 
   return (
     <div>
-      <MainLayout fixedTopbar activePage="chat" className="fixed overflow-y-hidden min-h-screen" includeMarginTop>
+      <MainLayout fixedTopbar activePage="chat" className=" overflow-y-hidden pb-3 " includeMarginTop>
         {!isContentReplaced ? (
-          <div className="justify-between flex flex-col min-h-[87vh] ">
+          <div className="justify-between flex flex-col min-h-[80vh] ">
             <ChatHeader />
             <ChatQuestions
               isContentReplaced={isContentReplaced}
@@ -54,8 +54,8 @@ const Chat = () => {
             />
           </div>
         ) : (
-          <div className="md:p-8  flex flex-col justify-between ">
-            <Link href="/scanner" className="left-0 -top-5 absolute">
+          <div className="md:p-8 flex flex-col justify-between ">
+            <Link href="/scanner" className="left-0  absolute">
               <Image src="/tryscanner.svg" alt="multi line" height={141} width={100} className="" />
             </Link>
             <ChatMessages chatLog={chatLog} loading={loading} containerRef={containerRef} />
@@ -66,7 +66,7 @@ const Chat = () => {
               sendMessage={sendMessage}
             />
           </div>
-        )}
+        )} 
       </MainLayout>
     </div>
   );

@@ -24,7 +24,7 @@ interface UserContextProps {
     setUpdating: React.Dispatch<React.SetStateAction<boolean>>;
     updating: boolean;
     setDOB?: React.Dispatch<React.SetStateAction<string>>;
-    streakCount?: number;
+    streakCount: number;
 }
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 

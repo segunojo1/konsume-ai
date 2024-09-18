@@ -6,8 +6,9 @@ import type { DateRange } from "react-day-picker";
 import { addDays } from "date-fns";
 import MainPanel from "./components/main-panel";
 import RightPanel from "./components/right-panel";
+import withAuth from "@/helpers/withAuth";
 
-export default function SidebarDemo() {
+const SidebarDemo = () => {
   const [open, setOpen] = useState(true);
   const [mounted, setMounted] = useState(false);
 
@@ -40,3 +41,4 @@ export default function SidebarDemo() {
     </MainLayout>
   );
 }
+export default withAuth(SidebarDemo);

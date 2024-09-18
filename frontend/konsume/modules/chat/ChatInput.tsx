@@ -16,7 +16,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
   sendMessage,
 }) => {
   return (
-    <form>
+    <form className="w-full mt-20">
       <div className="relative w-full">
         <Input
           value={userMessage ?? ""}

@@ -5,6 +5,7 @@ import profile from "../../public/avatar.svg";
 import { Button } from "@/components/ui/button";
 import { useUserContext } from "@/context/UserContext";
 import EditProfileModal from "@/modules/profile/EditProfileModal";
+import withAuth from "@/helpers/withAuth";
 
 const Profile = () => {
     const {username, email, nationality, userGoals, allergies, DOB, weight, gender, dietType} = useUserContext();
@@ -111,4 +112,4 @@ useEffect(() => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);

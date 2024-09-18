@@ -13,6 +13,7 @@ import { motion } from "framer-motion";
 import { DashboardBlogSkeleton } from '@/components/skeleton-loaders/DashboardBlogSkeleton';
 import BlogContext from '@/context/BlogContext';
 import { useUserContext } from '@/context/UserContext';
+import withAuth from '@/helpers/withAuth';
 
 const Meals: React.FC = () => {
   const [activeMeal, setActiveMeal] = useState<string>('All');
@@ -160,4 +161,4 @@ useEffect(() => {
   );
 };
 
-export default Meals;
+export default withAuth(Meals);

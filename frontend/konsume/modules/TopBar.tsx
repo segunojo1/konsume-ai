@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React, { useEffect } from 'react'
 import { twMerge } from 'tailwind-merge';
 import GoogleTranslateWrapper from './GoogleTranslateWrapper';
+import Link from 'next/link';
 
 declare global {
   interface Window {
@@ -36,7 +37,9 @@ const TopBar = ({ setToggled, className, topBarText, topBarIcon }: any) => {
             <Image src='/icon2.svg' alt='' width={15} height={15} />
           </div>
           <Image src='/notifications.svg' alt='' width={15} height={15} className='w-[15px] h-[15px] md:block hidden' />
+          <Link href='/profile'>    
           <Image src='/avatar.svg' alt='' width={40} height={40} className='md:block hidden' />
+          </Link>
         </div>
       </div>
         <Image src='/hamburger.svg' alt='' width={40} height={40} className='md:hidden block cursor-pointer' onClick={navClick} />

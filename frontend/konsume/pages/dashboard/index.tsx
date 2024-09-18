@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import MainLayout from '@/components/Layout/MainLayout';
 import DashboardBody from '@/modules/dashboard/DashboardBody';
 import DashboardHead from '@/modules/dashboard/DashboardHead';
+import CreateProfileLoader from '@/components/animated-visual-cues/CreateProfileLoader';
 
 const Dashboard = () => {
   const { 

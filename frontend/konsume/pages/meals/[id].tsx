@@ -16,6 +16,7 @@ import MealsContext from '@/context/MealsContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
+import withAuth from '@/helpers/withAuth';
 
 const Meal = () => {
   const router = useRouter();
@@ -235,4 +236,4 @@ const changeRef = () => {
   )
 }
 
-export default Meal
+export default withAuth(Meal)
