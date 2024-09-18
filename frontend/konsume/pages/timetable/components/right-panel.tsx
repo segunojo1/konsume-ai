@@ -11,6 +11,7 @@ import Card from "./card";
 import NutritionalInfoBox from "./nutritional-info-box";
 import getRandomColor from "../utils";
 import { NutritionalValue } from "@/@types/timetable";
+import { useUserContext } from "@/context/UserContext";
 
 
 type Props = {
@@ -21,14 +22,14 @@ type Props = {
 };
 
 const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
+  const { username } = useUserContext();
   const [firstName, setFirstName] = useState("");
   useEffect(() => {
-    const user = Cookies.get("konsumeUsername");
-    if (user) {
-      const [firstName] = user.split(" ");
+    if (username) {
+      const [firstName] = username.split(" ");
       setFirstName(firstName);
     }
-  }, []);
+  }, [username]);
 
   return (
     <motion.aside
