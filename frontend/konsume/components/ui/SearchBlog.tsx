@@ -54,7 +54,9 @@ const SearchBlog = () => {
             >
                 Generate
             </Button>
-           <CreateProfileLoader />
+            <div className={`z-50 fixed backdrop-blur-md bg-base-white ${generatingBlog ? 'flex' : 'hidden'}  justify-center items-center top-0 left-0 bottom-0 right-0`}>
+                <CreateProfileLoader />
+            </div>
         </div>
     )
 }
