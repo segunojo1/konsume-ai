@@ -9,6 +9,7 @@ import MainLayout from '@/components/Layout/MainLayout';
 import DashboardBody from '@/modules/dashboard/DashboardBody';
 import DashboardHead from '@/modules/dashboard/DashboardHead';
 import CreateProfileLoader from '@/components/animated-visual-cues/CreateProfileLoader';
+import { useUserContext } from '@/context/UserContext';
 
 const Dashboard = () => {
   const { 
@@ -22,12 +23,13 @@ const Dashboard = () => {
     setAge, 
     setNationality 
   } = useSetupContext();
+  const {profileID} = useUserContext()
 
   const router = useRouter();
 
   const getUserDetails = async () => {
     try {
-      const { data } = await axiosKonsumeInstance.get(`/api/profile/${Cookies.get('userid')}`, {
+      const { data } = await axiosKonsumeInstance.get(`/api/profile/${profileID}`, {
         headers: {
           Authorization: `Bearer ${Cookies.get('ktn')}`,
         },
@@ -53,6 +55,7 @@ const Dashboard = () => {
         <div className="font-satoshi pb-10">
           <DashboardHead />
           <DashboardBody />
+          {/* <CreateProfileLoader /> */}
         </div>
       </MainLayout>
     </div>

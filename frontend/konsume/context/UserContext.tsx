@@ -25,6 +25,7 @@ interface UserContextProps {
     updating: boolean;
     setDOB?: React.Dispatch<React.SetStateAction<string>>;
     streakCount: number;
+    profileID: number | undefined;
 }
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
@@ -40,6 +41,7 @@ export const UserProvider: React.FC<any> = ({ children }) => {
   const [DOB, setDOB] = useState<string>("");
   const [updating, setUpdating] = useState<boolean>(false);
   const [streakCount, setStreakCount] = useState(0);
+  const [profileID, setProfileID] = useState<number | undefined>();
   const router = useRouter();
   const getUserDetails = async () => {
     try {
@@ -72,7 +74,7 @@ export const UserProvider: React.FC<any> = ({ children }) => {
   const getProfileDetails = async () => {
     try {
       const { data } = await axiosKonsumeInstance.get(
-        `/api/Profile/${Cookies.get("userid")}`,
+        `/api/Profile/${profileID}`,
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("ktn")}`,
@@ -101,9 +103,9 @@ export const UserProvider: React.FC<any> = ({ children }) => {
   };
   const getStreakCount = async () => {
     try {
-      const { data } = await axiosKonsumeInstance.get(`/api/Streak/GetStreakCount/${Cookies.get("userid")}`, {
+      const { data } = await axiosKonsumeInstance.get(`/api/Streak/GetStreakCount/${profileID}`, {
         params: { 
-          profileId: Cookies.get("userid")
+          profileId: profileID
          },
       });
       setStreakCount(data.streakCount)
@@ -115,10 +117,27 @@ export const UserProvider: React.FC<any> = ({ children }) => {
       
     }
   }
+  const getProfileID = async () => {
+    try {
+      
+      const { data } = await axiosKonsumeInstance.get(`/api/Profile/ProfileByIdUserId`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("ktn")}`,
+        },
+        params: { 
+          Userid: Cookies.get("userid")
+         },
+      });
+      setProfileID(data?.value);
+      console.log(data?.value);
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
   useEffect(() => {
-    getUserDetails();
-    getProfileDetails();
-    getStreakCount()
+    Promise.all([getUserDetails(), getProfileID()]).then(() => Promise.all([getProfileDetails(), getStreakCount()]))
   }, [router.pathname]);
   useEffect(() => {
     getProfileDetails();
@@ -144,7 +163,8 @@ export const UserProvider: React.FC<any> = ({ children }) => {
         setDOB,
         setUpdating,
         updating,
-        streakCount
+        streakCount,
+        profileID
       }}
     >
       {children}

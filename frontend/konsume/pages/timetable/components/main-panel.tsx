@@ -33,6 +33,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useUserContext } from "@/context/UserContext";
 
 type Props = {
   date: DateRange | undefined;
@@ -44,8 +45,8 @@ function MainPanel({ date, open, setOpen }: Props) {
   const [weekOffset, setWeekOffset] = useState(0);
   const { dailyMeals, loading } = useAppSelector((state) => state.timetable);
   const dispatch = useAppDispatch();
-  const userId = Cookies.get("userid");
-  const { data, isLoading } = useGetMealPlansQuery(userId);
+  const { profileID } = useUserContext();
+  const { data, isLoading } = useGetMealPlansQuery(profileID);
   const [activeDate, setActiveDate] = useState<string | null>(null);
 
   const weeks =

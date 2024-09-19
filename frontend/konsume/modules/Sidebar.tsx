@@ -30,12 +30,12 @@ const Sidebar: React.FC<DashboardNavProps> = ({ toggled }) => {
           className="mx-auto mb-5"
         />
         <SidebarItem href="dashboard" text="Dashboard" icon={home} />
-        <SidebarItem href="profile" text="Profile" icon={profile} />
         <SidebarItem href="timetable" text="Timetable" icon={Calendar} />
         <SidebarItem href="chat" text="Chat with Foodie AI" icon={chat} />
         <SidebarItem href="scanner" text="Scanner" icon={scanner} />
         <SidebarItem href="meals" text="Meals" icon={meals} />
         <SidebarItem href="blogs" text="Blogs" icon={blogs} />        
+        <SidebarItem href="profile" text="Profile" icon={profile} />
         <div className="absolute bottom-0">
           <SidebarItem href="auth/login" text="Logout" icon={logout} />
         </div>

@@ -5,6 +5,7 @@ import { axiosKonsumeInstance } from '@/http/konsume';
 import { retry } from '@/helpers/retryapi';
 import useIsClient from '@/hooks/useIsClient';
 import { useRouter } from 'next/router';
+import { useUserContext } from './UserContext';
 
 const MealsContext = createContext({} as any);
 export default MealsContext;
@@ -22,6 +23,7 @@ export function MealsContextProvider({
 
   const dataFetchedRef = useRef(false);
   const router = useRouter(); // Get the current route
+  const {profileID} = useUserContext();
 
   useEffect(() => {
     console.log('hi');
@@ -30,7 +32,7 @@ export function MealsContextProvider({
       try {
         setLoadingMeal(true);
         const { data } = await axiosKonsumeInstance.get('/api/MealRecommendation/GenerateMeals', {
-          params: { profileId: Cookies.get('userid') },
+          params: { profileId: profileID },
         });
         console.log('fetching meals');
 
@@ -51,6 +53,7 @@ export function MealsContextProvider({
 
             } catch (error) {
                 console.error('Fetch Meals Error:', error);
+                localStorage.removeItem('lastFetchDate');
             }
         };
 

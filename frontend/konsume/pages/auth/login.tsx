@@ -12,6 +12,7 @@ import SocialLogin from '@/modules/auth/login/SocialLogin';
 import Cookies from 'js-cookie';
 import { z } from 'zod';
 import SignUpLink from '@/modules/auth/login/SignupLink';
+import { useUserContext } from '@/context/UserContext';
 
 
 // Schema for form validation using zod
@@ -22,6 +23,7 @@ const formSchema = z.object({
 
 const Login = () => {
   const router = useRouter();
+  const { profileID } = useUserContext();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -65,13 +67,15 @@ try {
           Authorization: `Bearer ${Cookies.get('ktn')}`,
         },
         params: {
-          id: Cookies.get('userid'),
+          Userid: Cookies.get('userid'),
         },
       });
       console.log(resp);
       if (resp.data.value) {
       //save profile data when found
-        const { data } = await axiosKonsumeInstance.get(`/api/profile/${Cookies.get('userid')}`, {
+      
+      
+        const { data } = await axiosKonsumeInstance.get(`/api/profile/${profileID}`, {
           headers: {
             Authorization: `Bearer ${Cookies.get('ktn')}`,
           },
