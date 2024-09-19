@@ -106,7 +106,9 @@ useEffect(() => {
                 display: open ? "block" : "none",
               }}
             >
+              <Link href="/timetable">
               <p className={`text-primary-bg text-desktop-content font-bold `}>Set up My Timetable</p>
+              </Link>
             </motion.aside>
           </Link>
           {/* </motion.aside> */}

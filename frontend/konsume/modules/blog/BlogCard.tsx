@@ -11,10 +11,8 @@ const BlogCard = ({title, category, showHeading }: BlogProps) => {
     
     return (
             <Link href={`/blogs/${encodeURIComponent(title as string)}`} passHref>
-        <div className=' md:mx-auto md:max-w-[267px] h-[221px]  flex flex-col items-start gap-3 py-6 px-3 shadow-sm rounded-[25px] hover:shadow-lg font-satoshi lg:w-full w-fit'>
-            {showHeading && (
-                <p className='mx-auto w-fit font-bold text-[12px]'>Today&apos;s Spotlighted Blog</p>
-            )}
+        <div className={`md:mx-auto  h-[221px]  flex flex-col items-start gap-3 py-6 px-3  rounded-[25px] hover:shadow-lg font-satoshi lg:w-full w-fit ${showHeading ? "shadow-md max-w-[300px]" : "shadow-sm md:max-w-[267px]"}`}>
+            
             <div
                 className="justify-between flex flex-col min-h-[130px] bg-primary-bg px-3 pt-3 relative -z-10 rounded-lg w-full "
             >

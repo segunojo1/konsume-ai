@@ -77,7 +77,7 @@ const DashboardBody = () => {
         <div className="md:block hidden mx-auto md:min-w-[648px]">
           <DashboardQuickActions />
         </div>
-        <DashboardHighlights loading={loading} />
+        <DashboardHighlights loadingBlog={loadingBlog} key={randomBlog?.id} title={randomBlog?.title} text={randomBlog?.text} category={randomBlog?.category} loading={loading} />
 
       </div>
       <div className="md:flex-[.5] md:hidden md:min-w-fit min-w-full mt-4">

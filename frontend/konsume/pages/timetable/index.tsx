@@ -24,7 +24,7 @@ const SidebarDemo = () => {
     <MainLayout
       fixedTopbar={true}
       topBarText="Timetable"
-      topBarIcon="dashborad"
+      topBarIcon="calendar"
     >
       {mounted ? (
 

@@ -1,5 +1,5 @@
 import type React from "react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Calendar } from "@/components/ui/calendar";
 import type { DateRange } from "react-day-picker";
@@ -12,6 +12,8 @@ import NutritionalInfoBox from "./nutritional-info-box";
 import getRandomColor from "../utils";
 import { NutritionalValue } from "@/@types/timetable";
 import { useUserContext } from "@/context/UserContext";
+import SpotlightedMealCard from "@/modules/dashboard/body/SpotlightedMealCard";
+import DashboardContext from "@/context/DashboardContext";
 
 
 type Props = {
@@ -30,6 +32,8 @@ const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
       setFirstName(firstName);
     }
   }, [username]);
+  const { breakfast, loading } = useContext(DashboardContext);
+
 
   return (
     <motion.aside
@@ -51,7 +55,7 @@ const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
         <Card.Container>
           <Calendar mode="range" selected={date} onSelect={setDate} />
         </Card.Container>
-        <Card.Container>
+        {/* <Card.Container>
           <div className="space-y-6">
             <div className="flex justify-between gap-4 ">
               <h2 className="text-desktop-caption font-bold max-w-[125px]">
@@ -72,7 +76,8 @@ const RightPanel = ({ date, setDate, open, setOpen }: Props) => {
               View Recipe and Details
             </Button>
           </div>
-        </Card.Container>
+        </Card.Container> */}
+        <SpotlightedMealCard meal={breakfast} loading={loading} />
         <Card.Container>
           <div className="space-y-6">
             <h2 className="text-desktop-caption font-bold max-w-[125px]">

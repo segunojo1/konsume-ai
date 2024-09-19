@@ -56,7 +56,10 @@ const Bookmarks = () => {
                         }
                     </div>
                 ) : (
-                    <p className='mx-auto w-fit'>Ouch, no blogs to show.😥</p>
+                    <div className='flex flex-col gap-5 w-fit mx-auto mt-6'>
+                        <Image alt='sad' width={200} height={200} src='/sad_illustration.svg' />
+                        <p className='mx-auto w-fit'>Ouch, no blogs to show.😥</p>
+                    </div>
                 )
                 }
             </div>

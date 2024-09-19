@@ -39,19 +39,23 @@ const Chat = () => {
     <div>
       <MainLayout fixedTopbar activePage="chat" className=" overflow-y-hidden pb-3 " includeMarginTop>
         {!isContentReplaced ? (
-          <div className="justify-between flex flex-col min-h-[80vh] ">
+          <div className="justify-between flex flex-col lg:min-h-[80vh] xl:min-h-[85vh]">
             <ChatHeader />
             <ChatQuestions
               isContentReplaced={isContentReplaced}
               setIsContentReplaced={setIsContentReplaced}
               sendMessage={sendMessage}
             />
+            <div>
+
             <ChatInput
               userMessage={userMessage}
               handleMessage={handleMessage}
               handleEnter={handleEnter}
               sendMessage={sendMessage}
             />
+            <p className="text-[14px] font-normal  mb-2 w-fit mx-auto">FoodieAI can make mistakes. Check important info.</p>
+            </div>
           </div>
         ) : (
           <div className="md:p-8 flex flex-col justify-between ">
@@ -65,6 +69,7 @@ const Chat = () => {
               handleEnter={handleEnter}
               sendMessage={sendMessage}
             />
+            <p className="text-[14px] font-normal  mb-2 w-fit mx-auto">FoodieAI can make mistakes. Check important info.</p>
           </div>
         )} 
       </MainLayout>

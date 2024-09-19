@@ -263,7 +263,7 @@ const Meal = () => {
             </p>
           </Button>
         </div>
-
+<p className="font-bold mb-2">KonsumeAI can make mistakes. Check important info.</p>
         <div className="grid md:grid-cols-3  gap-4">
           <MealInfo
             title="Nutritional Information"

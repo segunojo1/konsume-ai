@@ -127,6 +127,7 @@ const MainBlogText = ({ text, category, titlee }: Blog) => {
       </div>
       <div>
         <p className="flex flex-col">{formatText(text ?? "")}</p>
+        <p className="font-bold mx-auto w-fit">KonsumeAI can make mistakes. Check important info.</p>
       </div>
     </div>
   );
