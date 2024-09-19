@@ -209,7 +209,7 @@ function MainPanel({ date, open, setOpen }: Props) {
                       {format(week, "dd")}
                     </p>
                   </div>
-                  <div className="border-[#D1C9F7] border-r px-5 w-full flex space-y-8 ">
+                  <div className="border-[#D1C9F7] border-r px-5 w-full space-y-8 ">
                     {filteredMeals?.map((meal) => (
                       <MealsInfoCard
                         key={meal.label}
