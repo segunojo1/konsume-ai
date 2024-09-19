@@ -80,7 +80,7 @@ export const UserProvider: React.FC<any> = ({ children }) => {
             Authorization: `Bearer ${Cookies.get("ktn")}`,
           },
           params: {
-            id: Cookies.get("userid"),
+            id: profileID,
           },
         }
       );

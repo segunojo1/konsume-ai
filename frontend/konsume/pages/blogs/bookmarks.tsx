@@ -41,7 +41,7 @@ const Bookmarks = () => {
                         <Link href='/blogs'>
                             <Button className='border-2 border-[#0C2503] self-end hidden px-3 py-2 gap-3 rounded-lg md:flex'>
                                 <Image alt='logo' width={27.6} height={27.6} src='/timetablelogo.svg' />
-                                <p className='text-primarygtext text-desktop-content font-bold max-w-[286px]'>View Bookmarked blogs</p>
+                                <p className='text-primarygtext text-desktop-content font-bold max-w-[286px]'>Back to blogs</p>
                             </Button>
                             <Image alt='bookmarks' width={38.6} height={30.6} src='/blog.svg' className='md:hidden'/>
                         </Link>

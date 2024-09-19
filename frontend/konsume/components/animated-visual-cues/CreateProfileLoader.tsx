@@ -19,7 +19,7 @@ const CreateProfileLoader = () => {
       return () => clearInterval(interval);
     }, []);
   return (
-    <div className={`z-50 fixed  backdrop-blur-md flex items-center flex-col gap-5 w-full h-full  justify-center top-0 left-0 bottom-0 right-0`}>
+    <div className={`z-50 fixed  backdrop-blur-md flex items-center flex-col gap-5 w-full h-full font-satoshi justify-center top-0 left-0 bottom-0 right-0`}>
        <video
         autoPlay
         muted

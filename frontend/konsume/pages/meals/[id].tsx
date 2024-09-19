@@ -17,6 +17,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
 import withAuth from '@/helpers/withAuth';
+import CreateProfileLoader from '@/components/animated-visual-cues/CreateProfileLoader';
 
 const Meal = () => {
   const router = useRouter();
@@ -228,8 +229,8 @@ const changeRef = () => {
           <MealInfo title='Health Impact' text={healthImpact ? renderTextWithBold(healthImpact) : ''} />
         </div>
         <div className={`z-50 fixed backdrop-blur-md ${generatingMeal ? 'flex' : 'hidden'}  justify-center items-center top-0 left-0 bottom-0 right-0`}>
-          <div className='loader2'></div>
-          <h1 className='font-bold rounded-full font-satoshi'>Generating Meal...</h1>
+          <CreateProfileLoader />
+          
         </div>
       </MainLayout>
     </div>

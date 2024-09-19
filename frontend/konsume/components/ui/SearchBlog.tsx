@@ -4,6 +4,7 @@ import { Input } from './input'
 import { useRouter } from 'next/router';
 import { axiosKonsumeInstance } from '@/http/konsume';
 import { Button } from './button';
+import CreateProfileLoader from '../animated-visual-cues/CreateProfileLoader';
 
 const SearchBlog = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -53,10 +54,7 @@ const SearchBlog = () => {
             >
                 Generate
             </Button>
-            <div className={`z-50 fixed backdrop-blur-md bg-base-white ${generatingBlog ? 'flex' : 'hidden'}  justify-center items-center top-0 left-0 bottom-0 right-0`}>
-                <div className='loader2'></div>
-                <h1 className='font-bold bg-base-white rounded-full'>Generating Blog...</h1>
-            </div>
+           <CreateProfileLoader />
         </div>
     )
 }

@@ -10,7 +10,8 @@ const BlogCard = ({title, category, showHeading }: BlogProps) => {
     };
     
     return (
-        <div className=' flex flex-col items-start gap-4 py-6 px-3 shadow-md rounded-[34px] hover:shadow-lg lg:w-full w-fit mx-auto md:min-w-fit min-w-full'>
+            <Link href={`/blogs/${encodeURIComponent(title as string)}`} passHref>
+        <div className=' md:mx-auto md:max-w-[267px] h-[221px]  flex flex-col items-start gap-3 py-6 px-3 shadow-sm rounded-[25px] hover:shadow-lg font-satoshi lg:w-full w-fit'>
             {showHeading && (
                 <p className='mx-auto w-fit font-bold text-[12px]'>Today&apos;s Spotlighted Blog</p>
             )}
@@ -22,19 +23,19 @@ const BlogCard = ({title, category, showHeading }: BlogProps) => {
                     <p className="text-secondary-500 font-bold text-mobile-caption ">{capitalizeFirstLetter(category)}</p>
                 </div>
                 <div className="flex justify-between flex-col mb-14">
-                    <p className="text-primarygtext font-bold text-[15px]">{title}</p>
+                    <p className="text-primarygtext font-bold text-[14px]/[120%]">{title}</p>
                     {/* <p className="text-color8-700 font-medium text-[11.2px]">
                         Nutritious bean cake high in protein and fiber.
                     </p> */}
                 </div>
             </div>
-            <Link href={`/blogs/${encodeURIComponent(title as string)}`} passHref>
+            
                 <div className='flex gap-5 items-center'>
                     <Image src='/expand_meal.svg' width={39} height={32} alt='expand' className='hover:rotate-12 cursor-pointer' />
                     <p className='font-bold text-[14px]/[120%]'>Open Blog</p>
                 </div>
-            </Link>
         </div>
+            </Link>
     )
 }
 

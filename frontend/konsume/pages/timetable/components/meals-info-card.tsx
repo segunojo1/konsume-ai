@@ -35,9 +35,9 @@ const MealsInfoCard = ({ className, data }: Props) => {
             <CardItem className=" cursor-pointer text-desktop-caption gap-3   flex items-center px-0">
               <CardItem
                 rotateZ="30"
-                className="  w-max roundsetIsOpen(!isOpen)setIsOpen(!isOpen)ed-[3.8px] bg-neutrals-100 p-[4px] -rotate-[8deg]"
+                className="  w-max roundsetIsOpen(!isOpen)setIsOpen(!isOpen)ed-[3.8px] bg-[#0C2503] p-[10px] py-[6px] rounded-sm -rotate-[8deg]"
               >
-                <ArrowUpRight className="rotate-[14deg]" />
+                <ArrowUpRight className="rotate-[14deg] text-[#EDFAE7]" />
               </CardItem>
               <CardItem translateZ="20" className="font-bold text-[14px]">
                 Expand Meal Card
@@ -48,7 +48,7 @@ const MealsInfoCard = ({ className, data }: Props) => {
             closeIcon={false}
             className="font-satoshi max-w-[363px] 2xl:px-[49px] px-9 shadow-meal-card-modal !rounded-[32px] 2xl:space-y-8 space-y-2 "
           >
-            <div className="2xl:space-y-7 space-y-3">
+            <div className="2xl:space-y-7 space-y-6">
               <MealBriefDetail
                 bg={secondaryColor}
                 name={data?.mealType}
@@ -60,8 +60,8 @@ const MealsInfoCard = ({ className, data }: Props) => {
                   onClick={() => setIsOpen(false)}
                   className="text-desktop-caption gap-3 px-0"
                 >
-                  <div className=" rounded-[3.8px] bg-neutrals-100 p-[4px] rotate-[8deg]">
-                    <ArrowDownRight className="-rotate-[14deg]" />
+                  <div className=" rounded-[3.8px] bg-[#0C2503] p-[10px] py-[6px] rotate-[8deg]">
+                    <ArrowDownRight className="-rotate-[14deg] text-[#EDFAE7]" />
                   </div>
                   Close Meal Card
                 </Button>
