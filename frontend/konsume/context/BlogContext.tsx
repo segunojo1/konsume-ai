@@ -78,7 +78,7 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
             checkAndFetchBlogs();
             dataFetchedRef.current = true;
         }
-    }, [setBlogs, blogs]);
+    }, []);
 
     useEffect(() => {
         const getBookmarks = async () => {

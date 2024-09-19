@@ -6,6 +6,7 @@ import ChooseAccount from '@/modules/ChooseAccount';
 import { personalAccountFeatures } from '@/helpers/personalAccountFeatures';
 import { restaurantAccountFeatures } from '@/helpers/restaurantAccountFeatures';
 import Link from 'next/link';
+import withoutAuth from '@/helpers/withoutAuth';
 
 const Signup: React.FC = () => {
   const router = useRouter();
@@ -86,4 +87,4 @@ const Signup: React.FC = () => {
   );
 };
 
-export default Signup;
+export default withoutAuth(Signup);

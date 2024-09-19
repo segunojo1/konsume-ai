@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useUserContext } from "@/context/UserContext";
 import {
@@ -56,8 +56,14 @@ const EditProfileModal = () => {
     gender,
     dietType,
     setUpdating,
-    updating
+    getProfileDetails,
+    updating,
+    profileID
   } = useUserContext();
+
+  useEffect(() => {
+    getProfileDetails();
+  }, [updating])
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -86,7 +92,7 @@ const EditProfileModal = () => {
     try {
       const { data } = await toast.promise(
         axiosKonsumeInstance.put(
-          `/api/profile/${Cookies.get("userid")}`,
+          `/api/profile/${profileID}`,
           {
             gender: values.gender,
             height: 2147483647,
@@ -100,7 +106,7 @@ const EditProfileModal = () => {
             headers: {
               Authorization: `Bearer ${Cookies.get("ktn")}`,
             },
-            params: { id: Cookies.get("userid") }, // Adding id to the params object
+            params: { id: profileID }, // Adding id to the params object
           }
         ),
         {

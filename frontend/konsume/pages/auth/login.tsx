@@ -13,6 +13,7 @@ import Cookies from 'js-cookie';
 import { z } from 'zod';
 import SignUpLink from '@/modules/auth/login/SignupLink';
 import { useUserContext } from '@/context/UserContext';
+import withoutAuth from '@/helpers/withoutAuth';
 
 
 // Schema for form validation using zod
@@ -23,7 +24,7 @@ const formSchema = z.object({
 
 const Login = () => {
   const router = useRouter();
-  const { profileID } = useUserContext();
+  const { profileID, getProfileID } = useUserContext();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -71,15 +72,14 @@ try {
         },
       });
       console.log(resp);
-      if (resp.data.value) {
-      //save profile data when found
-      
-      
-        const { data } = await axiosKonsumeInstance.get(`/api/profile/${profileID}`, {
-          headers: {
-            Authorization: `Bearer ${Cookies.get('ktn')}`,
-          },
-        });
+     if (resp.data.value) {
+  //save profile data when found
+  const profileId = await getProfileID()
+  const { data } = await axiosKonsumeInstance.get(`/api/profile/${profileId}`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get('ktn')}`,
+    },
+  });
         console.log(data);
         
         Cookies.set('age', data?.value?.age);
@@ -107,4 +107,4 @@ try {
   );
 };
 
-export default Login
+export default withoutAuth(Login)

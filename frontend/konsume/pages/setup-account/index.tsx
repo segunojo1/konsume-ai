@@ -34,6 +34,10 @@ const SetupAccount = () => {
   const { username } = useUserContext();
   const [firstName, setFirstName] = useState(username?.split(" ")[0] ?? "");
   const [showLoader, setShowLoader] = useState(false);
+
+  const MIN_DURATION = 5000; // 5 seconds
+    const startTime = Date.now();
+
   useEffect(() => {
     setFirstName(username?.split(" ")[0] ?? "");
   }, [username]);
@@ -45,6 +49,8 @@ const SetupAccount = () => {
   }, []);
   const route = useRouter();
   const submitForm = async () => {
+    const elapsedTime = Date.now() - startTime;
+      const remainingTime = MIN_DURATION - elapsedTime;
     setShowLoader(true);
     try {
       if (diet !== "") {
@@ -85,7 +91,13 @@ const SetupAccount = () => {
         Cookies.set("possibleDiseases", possibleDiseases);
         Cookies.set("goal", userGoal);
         route.push("/dashboard");
-        setShowLoader(false);
+        if (remainingTime > 0) {
+          setTimeout(() => {
+            setShowLoader(false);
+          }, remainingTime);
+        } else {
+          setShowLoader(false);
+        }
       } else {
         setShowLoader(false)
         toast.error("Please select your diet");
@@ -99,7 +111,11 @@ const SetupAccount = () => {
   const totalSteps = 5;
   return (
     <div className=" m-auto 2xl:p-32 md:py-20  md:px-32 py-20 px-4 md:bg-base-white bg-[white] relative ">
-      {showLoader && <CreateProfileLoader />}
+      {showLoader && <CreateProfileLoader texts={["Creating your profile...",
+  "Analyzing your preferences...",
+  "Curating personalized meal plans just for you...",
+  "Finalizing your personalized profile experience..."
+]} />}
       <Image
         src="/bg.png"
         alt="bg"

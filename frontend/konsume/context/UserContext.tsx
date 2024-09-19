@@ -26,6 +26,8 @@ interface UserContextProps {
     setDOB?: React.Dispatch<React.SetStateAction<string>>;
     streakCount: number;
     profileID: number | undefined;
+    getProfileDetails: () => void;
+    getProfileID: () => void;
 }
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
@@ -74,13 +76,13 @@ export const UserProvider: React.FC<any> = ({ children }) => {
   const getProfileDetails = async () => {
     try {
       const { data } = await axiosKonsumeInstance.get(
-        `/api/Profile/${profileID}`,
+        `/api/Profile/${await getProfileID()}`,
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("ktn")}`,
           },
           params: {
-            id: profileID,
+            id: await getProfileID(),
           },
         }
       );
@@ -103,9 +105,9 @@ export const UserProvider: React.FC<any> = ({ children }) => {
   };
   const getStreakCount = async () => {
     try {
-      const { data } = await axiosKonsumeInstance.get(`/api/Streak/GetStreakCount/${profileID}`, {
+      const { data } = await axiosKonsumeInstance.get(`/api/Streak/GetStreakCount/${await getProfileID()}`, {
         params: { 
-          profileId: profileID
+          profileId: await getProfileID()
          },
       });
       setStreakCount(data.streakCount)
@@ -130,6 +132,7 @@ export const UserProvider: React.FC<any> = ({ children }) => {
       });
       setProfileID(data?.value);
       console.log(data?.value);
+      return data?.value;
     } catch (error) {
       console.log(error);
       
@@ -137,11 +140,11 @@ export const UserProvider: React.FC<any> = ({ children }) => {
   }
 
   useEffect(() => {
-    Promise.all([getUserDetails(), getProfileID()]).then(() => Promise.all([getProfileDetails(), getStreakCount()]))
+    if (router.pathname !== "/auth/login" ) {
+      Promise.all([getUserDetails(), getProfileID()]).then(() => Promise.all([getProfileDetails(), getStreakCount()]))
+    }
   }, [router.pathname]);
-  useEffect(() => {
-    getProfileDetails();
-  }, [updating])
+  
   return (
     <UserContext.Provider
       value={{
@@ -164,7 +167,9 @@ export const UserProvider: React.FC<any> = ({ children }) => {
         setUpdating,
         updating,
         streakCount,
-        profileID
+        profileID,
+        getProfileDetails,
+        getProfileID
       }}
     >
       {children}

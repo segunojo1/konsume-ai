@@ -16,6 +16,9 @@ const withAuth = <P extends { children: React.ReactNode }>(
       const token = Cookies.get("ktn");
       const isLoggedIn = isAuthenticated(token as string);
       if (!isLoggedIn) {
+        if (typeof window !== 'undefined') {
+          localStorage.clear();
+      }
         router.push("/auth/login");
         Cookies.remove("ktn");
       }

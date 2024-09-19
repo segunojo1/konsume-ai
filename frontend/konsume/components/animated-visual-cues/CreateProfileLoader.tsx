@@ -3,18 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-const loadingTexts = [
-  'Creating your profile...',
-  'Setting up preferences...',
-  'Saving your data...',
-  'Almost done...'
-];
-const CreateProfileLoader = () => {
+
+const CreateProfileLoader = ({texts}:any) => {
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
       const interval = setInterval(() => {
-        setIndex((prevIndex) => (prevIndex === loadingTexts.length - 1 ? 0 : prevIndex + 1));
+        setIndex((prevIndex) => (prevIndex === texts.length - 1 ? 0 : prevIndex + 1));
       }, 2000); // Change text every 3 seconds
       return () => clearInterval(interval);
     }, []);
@@ -44,7 +39,7 @@ const CreateProfileLoader = () => {
             fontSize: '24px',
           }}
         >
-          <h1 className='font-bold text-desktop-hero '>{loadingTexts[index]}</h1>
+          <h1 className='font-bold text-desktop-hero '>{texts[index]}</h1>
         </motion.div>
       </AnimatePresence>
       </div>

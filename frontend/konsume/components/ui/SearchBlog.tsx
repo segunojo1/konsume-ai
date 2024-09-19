@@ -10,6 +10,9 @@ const SearchBlog = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [generatingBlog, setGeneratingBlog] = useState(false);
     const router = useRouter();
+    // Ensure loader stays visible for at least 5 seconds
+    const MIN_DURATION = 5000; // 5 seconds
+    const startTime = Date.now();
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(event.target.value);
@@ -18,6 +21,9 @@ const SearchBlog = () => {
     const generateBlog = async (event: React.MouseEvent<HTMLButtonElement>) => {
         // Navigate to the search result page
         setGeneratingBlog(true);
+        // Calculate remaining time to ensure the loader stays visible
+      const elapsedTime = Date.now() - startTime;
+      const remainingTime = MIN_DURATION - elapsedTime;
         try {
             const { data } = await axiosKonsumeInstance.get('api/Blog/GenerateBlog', {
                 params: {
@@ -31,11 +37,21 @@ const SearchBlog = () => {
             localStorage.setItem('blogs', JSON.stringify(updatedBlogs));
 
             // Navigate to the blog page
+            if (remainingTime > 0) {
+                setTimeout(() => {
+                    setGeneratingBlog(false);
+                    router.push(`/blogs/${searchQuery.trim()}`);
+                }, remainingTime);
+              } else {
+                setGeneratingBlog(false);
+                router.push(`/blogs/${searchQuery.trim()}`);
+              }
             router.push(`/blogs/${searchQuery.trim()}`);
         } catch (error) {
             console.error('Error fetching blog:', error);
+            setGeneratingBlog(false)
         } finally {
-            setGeneratingBlog(false);
+            
         }
     };
     return (
@@ -55,7 +71,13 @@ const SearchBlog = () => {
                 Generate
             </Button>
             <div className={`z-50 fixed backdrop-blur-md bg-base-white ${generatingBlog ? 'flex' : 'hidden'}  justify-center items-center top-0 left-0 bottom-0 right-0`}>
-                <CreateProfileLoader />
+                <CreateProfileLoader texts={[
+  "Analyzing your blog topic...",
+  "Processing relevant ideas...",
+  "Generating unique content just for you...",
+  "Refining the blog structure and flow...",
+  "Finalizing your AI-generated blog post..."
+]} />
             </div>
         </div>
     )

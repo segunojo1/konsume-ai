@@ -97,7 +97,7 @@ useEffect(() => {
         width: open ? "100%" : "50px"
       }}
       > */}
-          <Button className='bg-primarygtext self-end flex px-3 py-2 gap-3 font-satoshi'>
+          <Link href='/timetable' className='bg-primarygtext self-end flex px-3 py-2 gap-3 font-satoshi'>
             <Image alt='logo' width={27.6} height={27.6} src="/time-table.svg" />
             <motion.aside
               className=" overflow-hidden "
@@ -108,7 +108,7 @@ useEffect(() => {
             >
               <p className={`text-primary-bg text-desktop-content font-bold `}>Set up My Timetable</p>
             </motion.aside>
-          </Button>
+          </Link>
           {/* </motion.aside> */}
           {open ? (
 

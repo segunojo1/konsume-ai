@@ -1,3 +1,4 @@
+import withoutAuth from '@/helpers/withoutAuth';
 import { SignupForm } from '@/modules/auth/signup/SignupForm';
 import React from 'react';
 
@@ -14,4 +15,4 @@ const Signup = () => {
   );
 }
 
-export default Signup;
+export default withoutAuth(Signup);

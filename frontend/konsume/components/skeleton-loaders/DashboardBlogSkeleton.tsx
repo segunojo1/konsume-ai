@@ -2,9 +2,9 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export function DashboardBlogSkeleton() {
     return (
-        <div className=" flex flex-col items-start gap-4 py-6 px-3 shadow-md rounded-[34px] hover:shadow-lg lg:w-full w-fit mx-auto md:min-w-fit min-w-full">
-            <Skeleton className="mx-auto w-[300px] h-[18px]" />
-            <Skeleton className="justify-between flex flex-col w-[300px] min-h-[130px] animate-pulse px-3 pt-3 relative -z-10 rounded-lg  " />
+        <div className=" flex flex-col items-start gap-4 py-6 px-3 rounded-[34px] border  lg:w-full w-fit mx-auto md:min-w-fit min-w-full">
+            <Skeleton className="mx-auto w-[230px] h-[18px]" />
+            <Skeleton className="justify-between flex flex-col w-[240px] min-h-[130px] animate-pulse px-3 pt-3 relative -z-10 rounded-lg  " />
                 {/* <div className="flex justify-between">
                     <Skeleton className="h-[14px] w-[38px] " />
                 </div>

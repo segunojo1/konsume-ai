@@ -13,8 +13,7 @@ const FilterMeal = ({ text, src, isActive, onChangeMeal }: any) => {
     if (text === 'All') {
       filteredMeals = recommendedMeals;
     } else {
-      filteredMeals = recommendedMeals.filter((meal:any) => meal.course === text);
-    }
+filteredMeals = recommendedMeals.filter((meal:any) => meal.course.toLowerCase().includes(text.toLowerCase()));    }
 
     // Update the recommended meals with the filtered list
     setTempMeals(filteredMeals);

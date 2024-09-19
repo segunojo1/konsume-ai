@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { useUserContext } from "@/context/UserContext";
 
 interface Blog {
   text: string | undefined;
@@ -14,6 +15,7 @@ interface Blog {
 const MainBlogText = ({ text, category, titlee }: Blog) => {
   const router = useRouter();
   const [bookmarked, setBookmarked] = useState(false);
+  const {getProfileID} = useUserContext();
 
   //function to format blog text to headers
   const formatText = (etxt: string) => {
@@ -68,7 +70,7 @@ const MainBlogText = ({ text, category, titlee }: Blog) => {
       } else {
         const { data } = await toast.promise(
           axiosKonsumeInstance.post("/api/Bookmark", {
-            profileId: Cookies.get("userid"),
+            profileId: await getProfileID(),
             message: text,
             title: titlee,
             category: category,
