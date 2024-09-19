@@ -34,7 +34,7 @@ const SpotlightedMealCard: React.FC<SpotlightedMealCardProps> = ({ meal, loading
           ) : (
             <p>Loading...</p>
           )}
-          <p className="text-color8-700 font-medium text-[11.2px] mb-14">
+          <p className="text-color8-700 font-medium text-[11.2px] mb-10">
             Nutritious bean cake high in protein and fiber.
           </p>
           <Link href={`/meals/${meal}`} className="bg-base-white text-[#8C77EC] font-bold text-[12px] rounded-[8.8px] py-[11px] px-[32.5px] flex items-center justify-center">
