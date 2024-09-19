@@ -3,7 +3,10 @@ import { Html, Head, Main, NextScript } from "next/document";
 export default function Document() {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+      <link rel="icon" href="/konsume_purple_logo.svg" />
+
+        </Head>
       <body>
         <Main />
         <NextScript />
