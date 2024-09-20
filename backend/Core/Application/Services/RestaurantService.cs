@@ -20,17 +20,17 @@ namespace KONSUME.Core.Application.Services
         private readonly IHttpContextAccessor _httpContext;
         private readonly IRoleRepository _roleRepository;
         private readonly IRestaurantRepository _restaurantRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IVerificationCodeRepository _verificationCodeRepository;
         private readonly IEmailService _emailService;
         public RestaurantService(IRoleRepository roleRepository, IUnitOfWork unitOfWork,
-            IHttpContextAccessor httpContext, IVerificationCodeRepository verificationCodeRepository, IEmailService emailService,
-            IRestaurantRepository restaurantRepository)
+            IHttpContextAccessor httpContext, IEmailService emailService,IRestaurantRepository restaurantRepository,
+             IUserRepository userRepository)
         {
             _roleRepository = roleRepository;
             _unitOfWork = unitOfWork;
             _httpContext = httpContext;
-            _verificationCodeRepository = verificationCodeRepository;
+            _userRepository = userRepository;
             _emailService = emailService;
             _restaurantRepository = restaurantRepository;
         }
@@ -158,9 +158,8 @@ namespace KONSUME.Core.Application.Services
         {
             try
             {
-                int randomCode = new Random().Next(10000, 99999);
                 // Check if a restaurant with the same email already exists
-                if (await _restaurantRepository.ExistsAsync(request.Email))
+                if (await _restaurantRepository.ExistsAsync(request.Email) && await _userRepository.ExistsAsync(request.Email))
                 {
                     return new BaseResponse<RestaurantResponse>
                     {
@@ -195,36 +194,18 @@ namespace KONSUME.Core.Application.Services
                     IsDeleted = false,
                 };
 
-                var code = new VerificationCode
-                {
-                    Code = randomCode,
-                    RestaurantId = newRestaurant.Id,
-                    DateCreated = DateTime.UtcNow,
-                    IsDeleted = false,
-                    Restaurant = newRestaurant,
-                    CreatedOn = DateTime.UtcNow,
-                };
-                await _verificationCodeRepository.Create(code);
-
                 // Send email with the confirmation code
                 try
                 {
-                    var mailRequest = new MailRequests
-                    {
-                        Subject = "Confirmation Code",
-                        ToEmail = newRestaurant.Email,
-                        Title = "Your Confirmation Code",
-                        HtmlContent = $"<html><body><h1>Hello {newRestaurant.Name}, Welcome to KONSUME.</h1><h4>Your confirmation code is {code.Code} to continue with the registration you've been added to wait-list</h4></body></html>"
-                    };
 
-                    await _emailService.SendEmailAsync(new MailRecieverDto { Name = newRestaurant.Name, Email = newRestaurant.Email }, mailRequest);
+                    await _emailService.SendNotificationToRestaurantAsync(newRestaurant);
 
                     await _restaurantRepository.AddAsync(newRestaurant);
                     await _unitOfWork.SaveAsync();
 
                     return new BaseResponse<RestaurantResponse>
                     {
-                        Message = "Restaurant created successfully.Check your mail for the verification code",
+                        Message = "Restaurant created successfully.",
                         IsSuccessful = true,
                         Value = new RestaurantResponse
                         {

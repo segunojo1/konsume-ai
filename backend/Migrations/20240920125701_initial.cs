@@ -176,6 +176,7 @@ namespace DaticianProj.Migrations
                     LastName = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: true),
+                    Token = table.Column<string>(type: "text", nullable: true),
                     RoleId = table.Column<int>(type: "integer", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
@@ -260,7 +261,8 @@ namespace DaticianProj.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Code = table.Column<int>(type: "integer", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    RestaurantId = table.Column<int>(type: "integer", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
                     ModifiedBy = table.Column<string>(type: "text", nullable: true),
@@ -270,6 +272,11 @@ namespace DaticianProj.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_VerificationCodes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VerificationCodes_Restaurants_RestaurantId",
+                        column: x => x.RestaurantId,
+                        principalTable: "Restaurants",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_VerificationCodes_Users_UserId",
                         column: x => x.UserId,
@@ -311,20 +318,20 @@ namespace DaticianProj.Migrations
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateModified", "Description", "IsDeleted", "ModifiedBy", "Name" },
                 values: new object[,]
                 {
-                    { 1, "1", new DateTime(2024, 9, 18, 7, 39, 34, 381, DateTimeKind.Utc).AddTicks(2074), null, null, false, null, "Admin" },
-                    { 2, "1", new DateTime(2024, 9, 18, 7, 39, 34, 381, DateTimeKind.Utc).AddTicks(2085), null, null, false, null, "Patient" },
-                    { 3, "1", new DateTime(2024, 9, 18, 7, 39, 34, 381, DateTimeKind.Utc).AddTicks(2087), null, null, false, null, "restaurant" }
+                    { 1, "1", new DateTime(2024, 9, 20, 12, 57, 0, 56, DateTimeKind.Utc).AddTicks(6968), null, null, false, null, "Admin" },
+                    { 2, "1", new DateTime(2024, 9, 20, 12, 57, 0, 56, DateTimeKind.Utc).AddTicks(6981), null, null, false, null, "Patient" },
+                    { 3, "1", new DateTime(2024, 9, 20, 12, 57, 0, 56, DateTimeKind.Utc).AddTicks(6985), null, null, false, null, "restaurant" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateModified", "Email", "FirstName", "IsDeleted", "LastName", "ModifiedBy", "Password", "RoleId" },
-                values: new object[] { 1, "1", new DateTime(2024, 9, 18, 7, 39, 34, 381, DateTimeKind.Utc).AddTicks(2320), null, "oyebohm@gmail.com", "Hasbiy", false, "Oyebo", null, "$2a$10$1lXlfQmHMEkBAXHpDclQrulKhBpVoJxKGW2PyhWT9I.anMHvdydWi", 1 });
+                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateModified", "Email", "FirstName", "IsDeleted", "LastName", "ModifiedBy", "Password", "RoleId", "Token" },
+                values: new object[] { 1, "1", new DateTime(2024, 9, 20, 12, 57, 0, 56, DateTimeKind.Utc).AddTicks(7266), null, "oyebohm@gmail.com", "Hasbiy", false, "Oyebo", null, "$2a$10$lDqQKMhGu0sQIe8hN7c5iOsPUNIQpYyuDHa93OuEHjn8OpyV1QTlC", 1, null });
 
             migrationBuilder.InsertData(
                 table: "Profiles",
                 columns: new[] { "Id", "AllergiesSerialized", "CreatedBy", "DateCreated", "DateModified", "DateOfBirth", "DietType", "Gender", "GoalsSerialized", "Height", "IsDeleted", "ModifiedBy", "Nationality", "UserId", "Weight" },
-                values: new object[] { 1, "[]", "1", new DateTime(2024, 9, 18, 7, 39, 34, 465, DateTimeKind.Utc).AddTicks(6811), null, new DateTime(2008, 3, 19, 0, 0, 0, 0, DateTimeKind.Utc), null, 2, "[]", 90, false, null, "Nigerian", 1, 45 });
+                values: new object[] { 1, "[]", "1", new DateTime(2024, 9, 20, 12, 57, 0, 207, DateTimeKind.Utc).AddTicks(4275), null, new DateTime(2008, 3, 19, 0, 0, 0, 0, DateTimeKind.Utc), null, 2, "[]", 90, false, null, "Nigerian", 1, 45 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bookmarks_ProfileId",
@@ -363,6 +370,11 @@ namespace DaticianProj.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_VerificationCodes_RestaurantId",
+                table: "VerificationCodes",
+                column: "RestaurantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_VerificationCodes_UserId",
                 table: "VerificationCodes",
                 column: "UserId");
@@ -384,9 +396,6 @@ namespace DaticianProj.Migrations
                 name: "NutritionalInfo");
 
             migrationBuilder.DropTable(
-                name: "Restaurants");
-
-            migrationBuilder.DropTable(
                 name: "Streaks");
 
             migrationBuilder.DropTable(
@@ -400,6 +409,9 @@ namespace DaticianProj.Migrations
 
             migrationBuilder.DropTable(
                 name: "MealPlan");
+
+            migrationBuilder.DropTable(
+                name: "Restaurants");
 
             migrationBuilder.DropTable(
                 name: "Users");

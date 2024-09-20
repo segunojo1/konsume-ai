@@ -20,14 +20,14 @@ namespace KONSUME.WebApi.Controllers
         }
 
         [HttpGet("GenMeal")]
-        public async Task<IActionResult> GenerateMealPlan([FromQuery] int userId)
+        public async Task<IActionResult> GenerateMealPlan([FromQuery] int profileId)
         {
-            if (userId <= 0)
+            if (profileId <= 0)
             {
                 return BadRequest("Invalid user ID.");
             }
 
-            var response = await _mealPlanService.Generate30DayMealPlanAsync(userId);
+            var response = await _mealPlanService.Generate30DayMealPlanAsync(profileId);
 
             if (response.IsSuccessful)
             {
@@ -41,9 +41,9 @@ namespace KONSUME.WebApi.Controllers
 
 
         [HttpPut("{profileId}/{mealId}")]
-        public async Task<IActionResult> UpdateMealPlans([FromBody] MealPlans mealPlan, [FromRoute] int profileId, [FromRoute] int mealId)
+        public async Task<IActionResult> UpdateMealPlans([FromBody] MealPlans mealPlan, [FromRoute] int profileId)
         {
-            var response = await _mealPlanService.UpdateMealPlans(mealPlan, profileId, mealId);
+            var response = await _mealPlanService.UpdateMealPlans(mealPlan, profileId);
 
             if (response.IsSuccessful)
             {

@@ -50,7 +50,7 @@ namespace KONSUME.Infrastructure.Repositories
         {
             var answer = await _context.Set<Profile>()
                         .Where(a => !a.IsDeleted && a.Id == id)
-                        .Include(a =>  a.User)
+                        .Include(a => a.User)
                         .SingleOrDefaultAsync();
             return answer;
         }
@@ -59,6 +59,16 @@ namespace KONSUME.Infrastructure.Repositories
             return await _context.Set<Profile>()
                         .AnyAsync(a => !a.IsDeleted && a.UserId == id);
         }
+
+        public async Task<int> GetProfileDetailsByUserIdAsync(int id)
+        {
+            var profileId = await _context.Set<Profile>()
+                         .Where(a => !a.IsDeleted && a.UserId == id)
+                         .Select(a => a.Id) // Select only the ProfileId
+                         .SingleOrDefaultAsync();
+            return profileId;
+        }
+
         public async Task<Profile> GetAsync(Expression<Func<Profile, bool>> exp)
         {
             var answer = await _context.Set<Profile>()

@@ -23,8 +23,8 @@ builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwaggerGen();
 //builder.Services.AddDbContext<KonsumeContext>(options =>
-  //  options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+//  options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddHttpClient();
 builder.Services.AddDbContext<KonsumeContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"),
     npgsqlOptions => npgsqlOptions.EnableRetryOnFailure(
@@ -110,6 +110,8 @@ builder.Services.AddScoped<IMealPlanService, MealPlanService>();
 builder.Services.AddScoped<ITimetableRepository, TimetableRepository>();
 builder.Services.AddScoped<IStreakRepository, StreakRepository>();
 builder.Services.AddScoped<IStreakService, StreakService>();
+builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
+builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 
 builder.Services.AddAuthentication(options =>
 {

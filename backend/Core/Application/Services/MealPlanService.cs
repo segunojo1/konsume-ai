@@ -51,7 +51,7 @@ public class MealPlanService : IMealPlanService
             var prompt = GeneratePrompt(userProfile);
             var aiResponse = await GetAIResponse(apiKey, prompt);
 
-            var formattedResponse = await ParseMealPlan(aiResponse, id);
+            var formattedResponse = ParseMealPlan(aiResponse, id);
 
             // Save the generated meal plans to the database
             await SaveMealPlans(formattedResponse, id);
@@ -110,6 +110,13 @@ public class MealPlanService : IMealPlanService
 
     private async Task SaveMealPlans(ICollection<MealPlanResponse> mealPlans, int profileId)
     {
+        // Check if the mealPlans count is sufficient before proceeding
+        if (mealPlans.Count <= 10)
+        {
+            Console.WriteLine("Not enough meal plans to save. Ensure meal generation logic provides a full 30-day meal plan.");
+            await Generate30DayMealPlanAsync(profileId); 
+        }
+
         foreach (var mealPlanResponse in mealPlans)
         {
             foreach (var meal in mealPlanResponse.meal)
@@ -134,7 +141,8 @@ public class MealPlanService : IMealPlanService
         }
     }
 
-    private async Task<ICollection<MealPlanResponse>> ParseMealPlan(string data, int id)
+
+    private ICollection<MealPlanResponse> ParseMealPlan(string data, int id)
     {
         var days = data.Split(new[] { '?' }, StringSplitOptions.RemoveEmptyEntries);
         var mealPlanResponses = new List<MealPlanResponse>();
@@ -178,7 +186,6 @@ public class MealPlanService : IMealPlanService
 
         return mealPlanResponses;
     }
-
     // Helper method to parse CookTime with logging
     private int ParseCookTime(string cookTimeData)
     {
@@ -335,7 +342,7 @@ public class MealPlanService : IMealPlanService
 
 
 
-    public async Task<BaseResponse<ICollection<MealPlanResponse>>> UpdateMealPlans(MealPlans mealPlan, int profileId, int mealId)
+    public async Task<BaseResponse<ICollection<MealPlanResponse>>> UpdateMealPlans(MealPlans mealPlan, int profileId)
     {
         try
         {
@@ -355,7 +362,7 @@ public class MealPlanService : IMealPlanService
             // Assuming 'mealPlan.MealPlan' holds the meal to be updated.
             var mealToUpdate = mealPlansForDate.MealPlan;
 
-            if (mealToUpdate == null || mealToUpdate.Id != mealId)
+            if (mealToUpdate == null || mealToUpdate.Id != mealPlan.Id)
             {
                 return new BaseResponse<ICollection<MealPlanResponse>>
                 {

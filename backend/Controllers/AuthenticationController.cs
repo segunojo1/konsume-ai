@@ -36,19 +36,53 @@ namespace KonsumeTestRun.Controllers
             }
         }
 
-        [HttpPost("LoginWithGoogle")]
-        public async Task<IActionResult> LoginWithGoogle([FromForm] GoogleRequestModel model)
+        [HttpPost("LoginWithGoogle/Token")]
+        public async Task<IActionResult> LoginWithGoogle()
         {
-            var user = await _userService.LoginWithGoogle(model);
-
-            if (user.IsSuccessful == true)
+            // Extract the ID Token from the Authorization header
+            if (!Request.Headers.TryGetValue("Authorization", out var token) || string.IsNullOrEmpty(token))
             {
-                var token = _identityService.GenerateToken(_config["Jwt:Key"], _config["Jwt:Issuer"], user.Value);
-                return Ok(new { token, user.Value, user.Message });
+                return Unauthorized(new { Message = "Authorization token is required." });
+            }
+
+            // Call the service to handle the login
+            var user = await _userService.LoginWithGoogle(token.ToString().Replace("Bearer ", ""));
+
+            if (user.IsSuccessful)
+            {
+                var accessToken = _identityService.GenerateToken(_config["Jwt:Key"], _config["Jwt:Issuer"], user.Value);
+                return Ok(new { accessToken, user.Value, user.Message });
             }
             else
             {
-                return StatusCode(400, user.Message);
+                return BadRequest(user.Message);
+            }
+        }
+
+
+        [HttpPost("LoginWithGoogle")]
+        public async Task<IActionResult> LoginWithGoogle([FromBody] GoogleUserInfo model)
+        {
+            if (model == null || string.IsNullOrEmpty(model.Token))
+            {
+                return BadRequest("Invalid request.");
+            }
+
+            var userResponse = await _userService.LoginWithGoogle(model);
+
+            if (userResponse.IsSuccessful)
+            {
+                var token = _identityService.GenerateToken(_config["Jwt:Key"], _config["Jwt:Issuer"], userResponse.Value);
+                return Ok(new
+                {
+                    token,
+                    userResponse.Value,
+                    userResponse.Message
+                });
+            }
+            else
+            {
+                return StatusCode(400, userResponse.Message);
             }
         }
 

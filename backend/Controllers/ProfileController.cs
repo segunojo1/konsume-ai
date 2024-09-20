@@ -55,10 +55,24 @@ namespace KONSUME.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("profileByUserId")]
-        public async Task<IActionResult> GetProfileByUserId(int id)
+        [HttpGet("profileByIdUserId")]
+        public async Task<IActionResult> GetProfileIdByUserId(int Userid)
         {
-            var response = await _profileService.GetProfileByUserId(id);
+            var response = await _profileService.GetProfileDetailsByUserId(Userid); // Assuming _profileService is where your method is
+
+            if (response.IsSuccessful)
+            {
+                return Ok(response); // 200 OK with the successful response data
+            }
+
+            return NotFound(response); // 404 Not Found with the error response data
+        }
+
+
+        [HttpGet("profileByUserId")]
+        public async Task<IActionResult> GetProfileByUserId(int Userid)
+        {
+            var response = await _profileService.GetProfileByUserId(Userid);
             if (!response.IsSuccessful || response == null)
             {
                 return NotFound(response.Message);

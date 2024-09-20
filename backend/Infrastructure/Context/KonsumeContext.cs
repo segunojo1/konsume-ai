@@ -92,10 +92,10 @@ namespace KONSUME.Infrastructure.Context
                 LastName = "Oyebo",
                 IsDeleted = false,
                 Email = "oyebohm@gmail.com",
-                Password = BCrypt.Net.BCrypt.HashPassword("admin"),
+                Password = BCrypt.Net.BCrypt.HashPassword("hasbiyallah"),
                 RoleId = 1,
-                CreatedBy = "1"
-            });
+                CreatedBy = "1",
+             });
 
             modelBuilder.Entity<Profile>().HasData(
             new Profile

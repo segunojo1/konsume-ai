@@ -12,5 +12,6 @@ namespace KONSUME.Core.Application.Interfaces.Services
         Task<BaseResponse<bool>> GetProfileByUserId(int id);
         Task<BaseResponse<ProfileResponse>> CreateProfile(int Userid, ProfileRequest request);
         Task<BaseResponse> UpdateProfile(int id, ProfileRequest request);
+        Task<BaseResponse<int>> GetProfileDetailsByUserId(int id);
     }
 }

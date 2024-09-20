@@ -29,21 +29,21 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "FirstName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "LastName",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "model",
+        "Type": "KONSUME.Models.UserModel.GoogleUserInfo",
+        "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KonsumeTestRun.Controllers.AuthenticationController",
+    "Method": "LoginWithGoogle",
+    "RelativePath": "api/auth/LoginWithGoogle/Token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -200,22 +200,6 @@
   },
   {
     "ContainingType": "DaticianProj.Controllers.ChatBotController",
-    "Method": "GenerateMeals",
-    "RelativePath": "api/ChatBot/GenerateMeals",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "profileId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "DaticianProj.Controllers.ChatBotController",
     "Method": "GetPreviousInteractions",
     "RelativePath": "api/ChatBot/PreviousInteractions",
     "HttpMethod": "GET",
@@ -250,7 +234,7 @@
       },
       {
         "Name": "mealId",
-        "Type": "System.Int32",
+        "Type": "",
         "IsRequired": true
       }
     ],
@@ -265,7 +249,23 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userId",
+        "Name": "profileId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DaticianProj.Controllers.MealRecommendation",
+    "Method": "GenerateMeals",
+    "RelativePath": "api/MealRecommendation/GenerateMeals",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "profileId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -358,6 +358,22 @@
   },
   {
     "ContainingType": "KONSUME.API.Controllers.ProfileController",
+    "Method": "GetProfileIdByUserId",
+    "RelativePath": "api/Profile/profileByIdUserId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Userid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KONSUME.API.Controllers.ProfileController",
     "Method": "GetProfileByUserId",
     "RelativePath": "api/Profile/profileByUserId",
     "HttpMethod": "GET",
@@ -365,7 +381,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "Userid",
         "Type": "System.Int32",
         "IsRequired": false
       }

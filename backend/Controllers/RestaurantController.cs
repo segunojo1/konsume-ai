@@ -1,7 +1,8 @@
 ﻿using KONSUME.Core.Application.Interfaces.Services;
 using KONSUME.Models.ProfileModel;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Authorization;
+using System.Net;
 
 namespace KONSUME.WebAPI.Controllers
 {
@@ -10,10 +11,12 @@ namespace KONSUME.WebAPI.Controllers
     public class RestaurantController : ControllerBase
     {
         private readonly IRestaurantService _restaurantService;
+        private ILogger<RestaurantController> _logger;
 
-        public RestaurantController(IRestaurantService restaurantService)
+        public RestaurantController(IRestaurantService restaurantService, ILogger<RestaurantController> logger)
         {
             _restaurantService = restaurantService;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -31,23 +34,34 @@ namespace KONSUME.WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRestaurant(int id)
         {
+
             var response = await _restaurantService.GetRestaurant(id);
-            if (response.IsSuccessful)
+            if (!response.IsSuccessful || response == null)
             {
-                return Ok(response);
+                _logger.LogError("User not found: {UserId}", id);
+                return NotFound(new { Message = response.Message });
             }
-            return NotFound(response);
+            var result = new JsonResult(response.Value)
+            {
+                StatusCode = (int?)HttpStatusCode.OK
+            };
+            return result;
         }
 
         [HttpGet("user/{userId}")]
         public async Task<IActionResult> GetRestaurantByUserId(int userId)
         {
             var response = await _restaurantService.GetRestaurantByUserId(userId);
-            if (response.IsSuccessful)
+            if (!response.IsSuccessful || response == null)
             {
-                return Ok(response);
+                _logger.LogError("User not found: {UserId}", userId);
+                return NotFound(new { Message = response.Message });
             }
-            return NotFound(response);
+            var result = new JsonResult(response.Value)
+            {
+                StatusCode = (int?)HttpStatusCode.OK
+            };
+            return result;
         }
 
         [HttpPost]
@@ -78,9 +92,11 @@ namespace KONSUME.WebAPI.Controllers
             var response = await _restaurantService.RemoveRestaurant(id);
             if (response.IsSuccessful)
             {
-                return NoContent();
+                _logger.LogInformation("User deleted successfully: {UserId}", id);
+                return Ok(new { Message = response.Message });
             }
-            return NotFound(response);
+            _logger.LogError("User deletion failed: {UserMessage}", response.Message);
+            return BadRequest(new { Message = response.Message });
         }
     }
 }

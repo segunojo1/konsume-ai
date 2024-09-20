@@ -76,6 +76,17 @@ namespace KonsumeTestRun.Infrastructure.Repositories
                 .Update(answer);
             _context.SaveChanges();
         }
+
+        public async Task<string> GetUserToken(string token)
+        {
+            var user = await _context.Set<User>()
+                        .Where(a => !a.IsDeleted && a.Token == token)
+                        .SingleOrDefaultAsync();
+
+            // If no user is found, return a default/fallback token value
+            return user?.Token ?? throw new InvalidOperationException("User token must not be null.");
+        }
+
     }
 
 }

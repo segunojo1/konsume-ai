@@ -45,7 +45,6 @@ namespace KonsumeTestRun.Infrastructure.Repositories
         public async Task<ICollection<Restaurant>> GetAllAsync()
         {
             var answer = await _context.Set<Restaurant>()
-                            .Include(a => a.Food)
                             .ToListAsync();
             return answer;
         }
@@ -53,7 +52,6 @@ namespace KonsumeTestRun.Infrastructure.Repositories
         public async Task<Restaurant> GetAsync(string email)
         {
             var answer = await _context.Set<Restaurant>()
-                        .Include(a => a.Food)
                         .Where(a => !a.IsDeleted && a.Email == email)
                         .SingleOrDefaultAsync();
             return answer;
