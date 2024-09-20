@@ -4,6 +4,8 @@ import Cookies from 'js-cookie';
 import { axiosKonsumeInstance } from '@/http/konsume';
 import { retry } from '@/helpers/retryapi';
 import { toast } from 'react-toastify';
+import { useUserContext } from './UserContext';
+import { useRouter } from 'next/router';
 
 const BlogContext = createContext({} as any);
 export default BlogContext;
@@ -20,6 +22,8 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
     const [bookmarkedBlogs, setBookmarkedBlogs] = useState([]);
     const [tempBookmarks, setTempBookmarks] = useState(bookmarkedBlogs);
     const [loadingBlog, setLoadingBlog] = useState(false)
+    const {getProfileID} = useUserContext();
+    const router = useRouter();
 
     const dataFetchedRef = useRef(false);
 
@@ -84,7 +88,7 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
         const getBookmarks = async () => {
             try {
 
-                const { data } = await axiosKonsumeInstance.get(`/api/Bookmark/${Cookies.get("userid")}`)
+                const { data } = await axiosKonsumeInstance.get(`/api/Bookmark/${await getProfileID()}`)
                 console.log(data);
                 if (data?.value?.$values) {
                     console.log(data?.value?.$values);
@@ -109,7 +113,7 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
             }
         }
         getBookmarks()
-    }, [])
+    }, [router.pathname])
 
     const contextValue: any = {
         activePage,

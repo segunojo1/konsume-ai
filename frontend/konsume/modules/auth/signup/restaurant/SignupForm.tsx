@@ -11,7 +11,7 @@ import { SignupActions } from "./SignupActions";
 import { SignupFields } from "./SignupFields";
 
 const formSchema = z.object({
-  Datee: z.date(),
+  Datee: z.string().min(1, { message: "Date of establishemnt is required" }),
   Location: z.string().min(1, { message: "Loation is required" }),
   Name: z.string().min(1, { message: "Restaurant name is required" }),
   Email: z.string().min(6, { message: "Email is required" }),
@@ -24,7 +24,7 @@ export const SignupForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      Datee: new Date(),
+      Datee: "",
       Location: "",
       Name: "",
       Email: "",

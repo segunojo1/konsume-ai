@@ -105,7 +105,7 @@ const MainBlogText = ({ text, category, titlee }: Blog) => {
             />
             <p className="text-[18px]/[120%] font-bold">By Foodie</p>
           </div>
-          <p className="text-desktop-content">3rd, Aug. 2024</p>
+          <p className="text-desktop-content">{Date.now()}</p>
         </div>
         <div className="flex items-center gap-4">
           <Image

@@ -61,10 +61,10 @@ const BioData = () => {
     setWeight(values.weight);
     setNationality(values.nationality);
     setGender(values.gender);
-    sessionStorage.setItem("age", values.age);
-    sessionStorage.setItem("weight", values.weight);
-    sessionStorage.setItem("nationality", values.nationality);
-    sessionStorage.setItem("gender", values.gender);
+    // sessionStorage.setItem("age", values.age);
+    // sessionStorage.setItem("weight", values.weight);
+    // sessionStorage.setItem("nationality", values.nationality);
+    // sessionStorage.setItem("gender", values.gender);
     
     nextPage();
     console.log(age);
