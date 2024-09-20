@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Org.BouncyCastle.Asn1.Ocsp;
 using KONSUME.Models.Entities;
 using System.Text.Json;
+using DaticianProj.Core.Domain.Entities;
 
 namespace KONSUME.Infrastructure.Context
 {
@@ -20,7 +21,10 @@ namespace KONSUME.Infrastructure.Context
         public DbSet<UserInteraction> UserInteractions => Set<UserInteraction>();
         public DbSet<VerificationCode> VerificationCodes => Set<VerificationCode>();
         public DbSet<MealRecommendation> MealRecommendations => Set<MealRecommendation>();
-
+        public DbSet<Bookmark> Bookmarks => Set<Bookmark>();
+        public DbSet<MealPlans> MealPlans => Set<MealPlans>();
+        public DbSet<Streak> Streaks => Set<Streak>();
+        public DbSet<Restaurant> Restaurants => Set<Restaurant>();
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
@@ -75,7 +79,8 @@ namespace KONSUME.Infrastructure.Context
 
             modelBuilder.Entity<Role>().HasData(
             new Role { Id = 1, DateCreated = DateTime.UtcNow, Name = "Admin", CreatedBy = "1" },
-            new Role { Id = 2, DateCreated = DateTime.UtcNow, Name = "Patient", CreatedBy = "1" }
+            new Role { Id = 2, DateCreated = DateTime.UtcNow, Name = "Patient", CreatedBy = "1" },
+             new Role { Id = 3, DateCreated = DateTime.UtcNow, Name = "restaurant", CreatedBy = "1" }
             );
 
             modelBuilder.Entity<User>().HasData(
@@ -87,10 +92,10 @@ namespace KONSUME.Infrastructure.Context
                 LastName = "Oyebo",
                 IsDeleted = false,
                 Email = "oyebohm@gmail.com",
-                Password = BCrypt.Net.BCrypt.HashPassword("admin"),
+                Password = BCrypt.Net.BCrypt.HashPassword("hasbiyallah"),
                 RoleId = 1,
-                CreatedBy = "1"
-            });
+                CreatedBy = "1",
+             });
 
             modelBuilder.Entity<Profile>().HasData(
             new Profile

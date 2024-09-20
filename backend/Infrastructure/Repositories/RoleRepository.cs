@@ -40,6 +40,8 @@ namespace KonsumeTestRun.Infrastructure.Repositories
             return answer;
         }
 
+        
+
         public async Task<Role> GetAsync(int id)
         {
             var answer = await _context.Set<Role>()

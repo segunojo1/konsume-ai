@@ -32,5 +32,8 @@ namespace KONSUME.Core.Domain.Entities
         public string GoalsSerialized { get; set; }
         public int UserId { get; set; }
         public virtual User User { get; set; } = default!;
+        public ICollection<Bookmark> Bookmark { get; set; } = default!;
     }
+
+
 }

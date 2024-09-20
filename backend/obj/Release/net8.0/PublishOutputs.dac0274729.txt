@@ -1,11 +1,15 @@
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\DaticianProj.exe
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\appsettings.json
+C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\xunit.runner.reporters.netcoreapp10.dll
+C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\xunit.runner.utility.netcoreapp10.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\DaticianProj.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\DaticianProj.runtimeconfig.json
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\DaticianProj.pdb
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\BCrypt.Net.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\BouncyCastle.Cryptography.dll
+C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Castle.Core.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Google.Apis.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Google.Apis.Auth.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Google.Apis.Core.dll
@@ -14,6 +18,7 @@ C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\K4os.Compressi
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\K4os.Compression.LZ4.Streams.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\K4os.Hash.xxHash.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\MailKit.dll
+C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Markdig.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.Google.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
@@ -29,6 +34,7 @@ C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Microsoft.Iden
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Microsoft.OpenApi.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\MimeKit.dll
+C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\Moq.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\MySql.Data.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\MySql.EntityFrameworkCore.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\NCrontab.Signed.dll
@@ -47,6 +53,10 @@ C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\System.Managem
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\System.Security.Permissions.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\System.Windows.Extensions.dll
+C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\xunit.abstractions.dll
+C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\xunit.assert.dll
+C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\xunit.core.dll
+C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\xunit.execution.dotnet.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\ZstdSharp.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\HomePC\konsume-web\backend\obj\Release\net8.0\PubTmp\Out\runtimes\win-x64\native\comerr64.dll

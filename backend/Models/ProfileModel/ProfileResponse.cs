@@ -17,4 +17,16 @@ namespace KONSUME.Models.ProfileModel
         public ICollection<string> Allergies { get; set; } = new HashSet<string>();
         public ICollection<string> UserGoals { get; set; } = new HashSet<string>();
     }
+
+
+    public class RestaurantResponse
+    {
+        public int Id { get; set; }
+        public DateTime DateOfEstablishment { get; set; }
+        public string Location { get; set; }
+        public List<string> Food { get; set; }
+        public string CAC { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+    }
 }

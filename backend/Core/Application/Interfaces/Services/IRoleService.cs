@@ -1,5 +1,4 @@
-﻿
-using KONSUME.Models;
+﻿using KONSUME.Models;
 using KONSUME.Models.RoleModel;
 
 namespace KONSUME.Core.Application.Interfaces.Services
@@ -12,4 +11,5 @@ namespace KONSUME.Core.Application.Interfaces.Services
         Task<BaseResponse> RemoveRole(int id);
         Task<BaseResponse> UpdateRole(int id, RoleRequest request);
     }
+
 }

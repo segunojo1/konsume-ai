@@ -1,0 +1,3 @@
+# .gitignore
+appsettings.json
+appsettings.Development.json
