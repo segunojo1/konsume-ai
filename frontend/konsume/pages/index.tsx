@@ -8,7 +8,7 @@ function Home() {
   
   return (
     <>
-      <div className="font-jakarta md:bg-white bg-[#FFFFFF59] md:p-10 flex flex-col gap-10">
+      <div className="font-jakarta md:bg-white bg-[#D6FBC4]  flex flex-col gap-10">
         <HomeNav />
         <HomeBody />
       </div>
