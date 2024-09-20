@@ -35,7 +35,7 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
             try {
                 setLoadingBlog(true);
                 const { data } = await axiosKonsumeInstance.get('/api/Blog/GenerateAllBlogs');
-                console.log(data);
+                // console.log(data);
 
                 setBlogs(data.content);
                 setTempBlogs(data.content)
@@ -89,7 +89,7 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
             try {
 
                 const { data } = await axiosKonsumeInstance.get(`/api/Bookmark/${await getProfileID()}`)
-                console.log(data);
+                // console.log(data);
                 if (data?.value?.$values) {
                     console.log(data?.value?.$values);
                     // Store the array in localStorage
@@ -103,7 +103,7 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
 
                 }
             } catch (error) {
-                console.log(error);
+                // console.log(error);
             } finally {
                 if (typeof window !== 'undefined') {
                     const cachedBlogs = JSON.parse(localStorage.getItem('bookmarks') || '[]');

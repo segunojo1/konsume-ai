@@ -111,8 +111,8 @@ export const UserProvider: React.FC<any> = ({ children }) => {
          },
       });
       setStreakCount(data.streakCount)
-      console.log(data);
-      console.log(streakCount);
+      // console.log(data);
+      // console.log(streakCount);
       
     } catch (error) {
       console.log(error);
@@ -131,10 +131,10 @@ export const UserProvider: React.FC<any> = ({ children }) => {
          },
       });
       setProfileID(data?.value);
-      console.log(data?.value);
+      // console.log(data?.value);
       return data?.value;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       
     }
   }
