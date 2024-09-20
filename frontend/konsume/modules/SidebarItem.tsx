@@ -23,6 +23,7 @@ const SidebarItem: React.FC<SidebarProps> = ({ icon, text, href }) => {
       Cookies.remove("ktn");
       Cookies.remove("userid");
       localStorage.clear();
+      Cookies.remove("visited");
     }
   };
   const isActive = router.pathname === `/${href}`;
