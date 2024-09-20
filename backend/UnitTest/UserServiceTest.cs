@@ -32,7 +32,6 @@ public class UserServiceTests
         _verificationCodeRepositoryMock = new Mock<IVerificationCodeRepository>();
         _emailServiceMock = new Mock<IEmailService>();
         _restaurantRepositoryMock = new Mock<IRestaurantRepository>();
-        _httpClientFactoryMock = new Mock<IHttpClientFactory>();
 
         _userService = new UserService(
             _userRepositoryMock.Object,
@@ -41,8 +40,7 @@ public class UserServiceTests
             _unitOfWorkMock.Object,
             _httpContextMock.Object,
             _verificationCodeRepositoryMock.Object,
-            _emailServiceMock.Object,
-            _httpClientFactoryMock.Object);
+            _emailServiceMock.Object);
     }
 
     [Fact]
@@ -67,41 +65,6 @@ public class UserServiceTests
         // Assert
         Assert.True(result.IsSuccessful);
         Assert.Equal("Check your email and complete your registration", result.Message);
-    }
-
-    [Fact]
-    public async Task LoginWithGoogle_ShouldReturnSuccess_WhenUserExists()
-    {
-        // Arrange
-        var googleUserInfo = new GoogleUserInfo { Email = "test@example.com", Token = "sampleToken" };
-        var existingUser = new User { Id = 1, FirstName = "John", LastName = "Doe", Email = "test@example.com", RoleId = 1 };
-
-        _userRepositoryMock.Setup(x => x.GetAsync(googleUserInfo.Email)).ReturnsAsync(existingUser);
-        _roleRepositoryMock.Setup(x => x.GetAsync(existingUser.RoleId)).ReturnsAsync(new Role { Id = 1, Name = "patient" });
-
-        // Act
-        var result = await _userService.LoginWithGoogle(googleUserInfo);
-
-        // Assert
-        Assert.True(result.IsSuccessful);
-        Assert.Equal("Login Successfull", result.Message);
-    }
-
-    [Fact]
-    public async Task LoginWithGoogle_ShouldCreateUser_WhenUserDoesNotExist()
-    {
-        // Arrange
-        var googleUserInfo = new GoogleUserInfo { Email = "newuser@example.com", Token = "sampleToken", FullName = "New User" };
-        var role = new Role { Id = 1, Name = "patient" };
-
-        _userRepositoryMock.Setup(x => x.GetAsync(googleUserInfo.Email)).ReturnsAsync((User)null);
-
-        // Act
-        var result = await _userService.LoginWithGoogle(googleUserInfo);
-
-        // Assert
-        Assert.True(result.IsSuccessful);
-        Assert.Equal("User created successfully.", result.Message);
     }
 
     // Additional tests can be added here for other methods

@@ -21,10 +21,9 @@ namespace KONSUME.Core.Application.Services
         private readonly IVerificationCodeRepository _verificationCodeRepository;
         private readonly IEmailService _emailService;
         private readonly IRestaurantRepository _restaurantRepository;
-        private readonly IHttpClientFactory _httpClientFactory;
         public UserService(IUserRepository userRepository, IRoleRepository roleRepository,
         IRestaurantRepository restaurantRepository, IUnitOfWork unitOfWork, IHttpContextAccessor httpContext,
-         IVerificationCodeRepository verificationCodeRepository, IEmailService emailService, IHttpClientFactory httpClientFactory)
+         IVerificationCodeRepository verificationCodeRepository, IEmailService emailService)
         {
             _userRepository = userRepository;
             _roleRepository = roleRepository;
@@ -33,7 +32,6 @@ namespace KONSUME.Core.Application.Services
             _verificationCodeRepository = verificationCodeRepository;
             _emailService = emailService;
             _restaurantRepository = restaurantRepository;
-            _httpClientFactory = httpClientFactory;
     }
         private static readonly Random random = new Random();
 
@@ -41,7 +39,7 @@ namespace KONSUME.Core.Application.Services
         {
             int randomCode = new Random().Next(10000, 99999);
 
-            if (await _restaurantRepository.ExistsAsync(request.Email) && await _userRepository.ExistsAsync(request.Email))
+            if (await _restaurantRepository.ExistsAsync(request.Email) || await _userRepository.ExistsAsync(request.Email))
             {
                 return new BaseResponse<UserResponse>
                 {
@@ -83,7 +81,6 @@ namespace KONSUME.Core.Application.Services
                     RoleId = role.Id,
                     Role = role,
                     CreatedBy = "1",
-                    Token = null,
                 };
 
                 // Add user to the role and update the role
@@ -150,236 +147,6 @@ namespace KONSUME.Core.Application.Services
             
         }
 
-
-        public async Task<BaseResponse<UserResponse>> LoginWithGoogle(GoogleUserInfo model)
-        {
-            var getUser = await _userRepository.GetAsync(model.Email);
-            var token = await _userRepository.GetUserToken(model.Token);
-            var role = await _roleRepository.GetAsync(r => r.Name.ToLower() == "patient");
-            if (getUser != null && token != null && role != null)
-            {
-                return new BaseResponse<UserResponse>
-                {
-                    Message = "Login Successfull",
-                    IsSuccessful = true,
-                    Value = new UserResponse
-                    {
-                        Id = getUser.Id,
-                        FullName = getUser.FirstName + " " + getUser.LastName,
-                        Email = getUser.Email,
-                        RoleId = role.Id,
-                        RoleName = role.Name,
-                    }
-                };
-            }
-            if (role == null)
-            {
-                return new BaseResponse<UserResponse>
-                {
-                    Message = "Role does not exist",
-                    IsSuccessful = false
-                };
-            }
-            var nameParts = model.FullName?.Split(' ') ?? new string[] { "" };
-            // Create the user entity
-            var user = new User
-            {
-                Email = model.Email,
-                Password = null,
-                FirstName = nameParts[0],
-                LastName = nameParts.Length > 1 ? string.Join(" ", nameParts.Skip(1)) : string.Empty,
-                DateCreated = DateTime.UtcNow,
-                Token = model.Token,
-                IsDeleted = false,
-                RoleId = role.Id,
-                Role = role,
-                CreatedBy = "1",
-            };
-
-            // Add user to the role and update the role
-            role.Users.Add(user);
-            _roleRepository.Update(role);
-
-            // Add the user to the repository
-            var newUser = await _userRepository.AddAsync(user);
-            try
-            {
-                var mailRequest = new MailRequests
-                {
-                    Subject = "Welcome To Konsume",
-                    ToEmail = user.Email,
-                    Title = "Welcome",
-                    HtmlContent = $@"
-                            <html>
-                            <body>
-                                <h1>Hello {user.FirstName},</h1>
-                                <p>Welcome to KONSUME!</p>
-                                <p>We are thrilled to have you on board. At Konsume, our goal is to help you discover delicious meal options tailored to your preferences and dietary needs.</p>
-                                <p>Here are a few things you can do to get started:</p>
-                                <ul>
-                                    <li>Explore our meal plans and recipes.</li>
-                                    <li>Customize your preferences in your profile.</li>
-                                    <li>Connect with our community for tips and support.</li>
-                                </ul>
-                                <p>If you have any questions, feel free to reach out to our support team.</p>
-                                <p>Happy eating!</p>
-                                <p>Best regards,<br>Hasbiy from Konsume</p>
-                            </body>
-                            </html>"
-                };
-
-                await _emailService.SendEmailAsync(new MailRecieverDto { Name = user.FirstName, Email = user.Email }, mailRequest);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error occurred while sending email: {ex.Message}");
-                return new BaseResponse<UserResponse>
-                {
-                    Message = $"An error occurred while sending email: {ex.Message}",
-                    IsSuccessful = false
-                };
-            }
-
-            await _unitOfWork.SaveAsync();
-            return new BaseResponse<UserResponse>
-            {
-                Message = "Login Successfull",
-                IsSuccessful = true,
-                Value = new UserResponse
-                {
-                    Id = user.Id,
-                    FullName = user.FirstName + " " + user.LastName,
-                    Email = user.Email,
-                    RoleId = role.Id,
-                    RoleName = role.Name,
-                }
-            };
-        }
-
-        public async Task<BaseResponse<UserResponse>> LoginWithGoogle(string idToken)
-        {
-            // Verify the ID token with Google
-            var userInfo = await VerifyGoogleToken(idToken);
-            if (userInfo == null)
-            {
-                return new BaseResponse<UserResponse>
-                {
-                    IsSuccessful = false,
-                    Message = "Invalid Google token."
-                };
-            }
-
-            // Check if the user already exists
-            var existingUser = await _userRepository.GetAsync(userInfo.Email);
-            if (existingUser != null)
-            {
-                return new BaseResponse<UserResponse>
-                {
-                    IsSuccessful = true,
-                    Message = "Login successful.",
-                    Value = new UserResponse
-                    {
-                        Id = existingUser.Id,
-                        FullName = $"{existingUser.FirstName} {existingUser.LastName}",
-                        Email = existingUser.Email,
-                        RoleId = existingUser.RoleId,
-                        RoleName = (await _roleRepository.GetAsync(existingUser.RoleId)).Name,
-                    }
-                };
-            }
-
-            // Create a new user if they don't exist
-            var role = await _roleRepository.GetAsync(r => r.Name.ToLower() == "patient");
-            if (role == null)
-            {
-                return new BaseResponse<UserResponse>
-                {
-                    IsSuccessful = false,
-                    Message = "Role does not exist."
-                };
-            }
-            var nameParts = userInfo.FullName?.Split(' ') ?? new string[] { "" };
-            var newUser = new User
-            {
-                Email = userInfo.Email,
-                FirstName = nameParts[0],
-                LastName = nameParts.Length > 1 ? string.Join(" ", nameParts.Skip(1)) : string.Empty,
-                DateCreated = DateTime.UtcNow,
-                IsDeleted = false,
-                RoleId = role.Id,
-                Password = null,
-                Token = idToken
-            };
-
-            await _userRepository.AddAsync(newUser);
-            try
-            {
-                var mailRequest = new MailRequests
-                {
-                    Subject = "Welcome To Konsume",
-                    ToEmail = newUser.Email,
-                    Title = "Welcome",
-                    HtmlContent = $@"
-                                    <html>
-                                    <body>
-                                        <h1>Hello {newUser.FirstName},</h1>
-                                        <p>Welcome to KONSUME!</p>
-                                        <p>We are thrilled to have you on board. At Konsume, our goal is to help you discover delicious meal options tailored to your preferences and dietary needs.</p>
-                                        <p>Here are a few things you can do to get started:</p>
-                                        <ul>
-                                            <li>Explore our meal plans and recipes.</li>
-                                            <li>Customize your preferences in your profile.</li>
-                                            <li>Connect with our community for tips and support.</li>
-                                        </ul>
-                                        <p>If you have any questions, feel free to reach out to our support team.</p>
-                                        <p>Happy eating!</p>
-                                        <p>Best regards,<br>Hasbiy from Konsume</p>
-                                    </body>
-                                    </html>"
-                };
-
-                await _emailService.SendEmailAsync(new MailRecieverDto { Name = newUser.FirstName, Email = newUser.Email }, mailRequest);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error occurred while sending email: {ex.Message}");
-                return new BaseResponse<UserResponse>
-                {
-                    Message = $"An error occurred while sending email: {ex.Message}",
-                    IsSuccessful = false
-                };
-            }
-            await _unitOfWork.SaveAsync();
-
-            return new BaseResponse<UserResponse>
-            {
-                IsSuccessful = true,
-                Message = "User created successfully.",
-                Value = new UserResponse
-                {
-                    Id = newUser.Id,
-                    FullName = $"{newUser.FirstName} {newUser.LastName}",
-                    Email = newUser.Email,
-                    RoleId = role.Id,
-                    RoleName = role.Name,
-                }
-            };
-        }
-
-        public async Task<GoogleUserInfo> VerifyGoogleToken(string idToken)
-        {
-            // You would typically call Google’s API to verify the token
-            var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync($"https://oauth2.googleapis.com/tokeninfo?id_token={idToken}");
-
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<GoogleUserInfo>(content);
-            }
-
-            return null;
-        }
 
         
 

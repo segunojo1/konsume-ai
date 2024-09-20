@@ -5,22 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|c:\\users\\homepc\\konsume-web\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|c:\\users\\homepc\\konsume-web\\backend\\unittest\\verificationcodeservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|solutionrelative:unittest\\verificationcodeservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|c:\\users\\homepc\\konsume-web\\backend\\unittest\\profileservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|solutionrelative:unittest\\profileservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|c:\\users\\homepc\\konsume-web\\backend\\unittest\\userservicetest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|solutionrelative:unittest\\userservicetest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|c:\\users\\homepc\\konsume-web\\backend\\unittest\\restaurantservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD44C513-B386-4654-9EE6-09B3E781ED80}|DaticianProj.csproj|solutionrelative:unittest\\restaurantservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,59 +26,7 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-09-20T13:19:50.036Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "VerificationCodeServiceTests.cs",
-              "DocumentMoniker": "C:\\Users\\HomePC\\konsume-web\\backend\\UnitTest\\VerificationCodeServiceTests.cs",
-              "RelativeDocumentMoniker": "UnitTest\\VerificationCodeServiceTests.cs",
-              "ToolTip": "C:\\Users\\HomePC\\konsume-web\\backend\\UnitTest\\VerificationCodeServiceTests.cs",
-              "RelativeToolTip": "UnitTest\\VerificationCodeServiceTests.cs",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAswHcAAABUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T13:18:52.441Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserServiceTest.cs",
-              "DocumentMoniker": "C:\\Users\\HomePC\\konsume-web\\backend\\UnitTest\\UserServiceTest.cs",
-              "RelativeDocumentMoniker": "UnitTest\\UserServiceTest.cs",
-              "ToolTip": "C:\\Users\\HomePC\\konsume-web\\backend\\UnitTest\\UserServiceTest.cs",
-              "RelativeToolTip": "UnitTest\\UserServiceTest.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAwwD0AAABdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T13:18:37.662Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ProfileServiceTests.cs",
-              "DocumentMoniker": "C:\\Users\\HomePC\\konsume-web\\backend\\UnitTest\\ProfileServiceTests.cs",
-              "RelativeDocumentMoniker": "UnitTest\\ProfileServiceTests.cs",
-              "ToolTip": "C:\\Users\\HomePC\\konsume-web\\backend\\UnitTest\\ProfileServiceTests.cs",
-              "RelativeToolTip": "UnitTest\\ProfileServiceTests.cs",
-              "ViewState": "AgIAAGsAAAAAAAAAAAAswHkAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T13:18:11.959Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "RestaurantServiceTests.cs",
-              "DocumentMoniker": "C:\\Users\\HomePC\\konsume-web\\backend\\UnitTest\\RestaurantServiceTests.cs",
-              "RelativeDocumentMoniker": "UnitTest\\RestaurantServiceTests.cs",
-              "ToolTip": "C:\\Users\\HomePC\\konsume-web\\backend\\UnitTest\\RestaurantServiceTests.cs",
-              "RelativeToolTip": "UnitTest\\RestaurantServiceTests.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAAArwEIAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T13:18:05.423Z",
+              "WhenOpened": "2024-09-20T19:18:31.144Z",
               "EditorCaption": ""
             }
           ]

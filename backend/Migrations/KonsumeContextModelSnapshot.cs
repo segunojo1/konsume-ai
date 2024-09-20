@@ -323,7 +323,7 @@ namespace DaticianProj.Migrations
                             Id = 1,
                             AllergiesSerialized = "[]",
                             CreatedBy = "1",
-                            DateCreated = new DateTime(2024, 9, 20, 12, 57, 0, 207, DateTimeKind.Utc).AddTicks(4275),
+                            DateCreated = new DateTime(2024, 9, 20, 19, 8, 19, 122, DateTimeKind.Utc).AddTicks(2178),
                             DateOfBirth = new DateTime(2008, 3, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Gender = 2,
                             GoalsSerialized = "[]",
@@ -374,7 +374,7 @@ namespace DaticianProj.Migrations
                         {
                             Id = 1,
                             CreatedBy = "1",
-                            DateCreated = new DateTime(2024, 9, 20, 12, 57, 0, 56, DateTimeKind.Utc).AddTicks(6968),
+                            DateCreated = new DateTime(2024, 9, 20, 19, 8, 18, 971, DateTimeKind.Utc).AddTicks(9831),
                             IsDeleted = false,
                             Name = "Admin"
                         },
@@ -382,7 +382,7 @@ namespace DaticianProj.Migrations
                         {
                             Id = 2,
                             CreatedBy = "1",
-                            DateCreated = new DateTime(2024, 9, 20, 12, 57, 0, 56, DateTimeKind.Utc).AddTicks(6981),
+                            DateCreated = new DateTime(2024, 9, 20, 19, 8, 18, 971, DateTimeKind.Utc).AddTicks(9848),
                             IsDeleted = false,
                             Name = "Patient"
                         },
@@ -390,7 +390,7 @@ namespace DaticianProj.Migrations
                         {
                             Id = 3,
                             CreatedBy = "1",
-                            DateCreated = new DateTime(2024, 9, 20, 12, 57, 0, 56, DateTimeKind.Utc).AddTicks(6985),
+                            DateCreated = new DateTime(2024, 9, 20, 19, 8, 18, 971, DateTimeKind.Utc).AddTicks(9852),
                             IsDeleted = false,
                             Name = "restaurant"
                         });
@@ -478,9 +478,6 @@ namespace DaticianProj.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Token")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
@@ -492,12 +489,12 @@ namespace DaticianProj.Migrations
                         {
                             Id = 1,
                             CreatedBy = "1",
-                            DateCreated = new DateTime(2024, 9, 20, 12, 57, 0, 56, DateTimeKind.Utc).AddTicks(7266),
+                            DateCreated = new DateTime(2024, 9, 20, 19, 8, 18, 972, DateTimeKind.Utc).AddTicks(132),
                             Email = "oyebohm@gmail.com",
                             FirstName = "Hasbiy",
                             IsDeleted = false,
                             LastName = "Oyebo",
-                            Password = "$2a$10$lDqQKMhGu0sQIe8hN7c5iOsPUNIQpYyuDHa93OuEHjn8OpyV1QTlC",
+                            Password = "$2a$10$lIUKYZnm5rx2.FkaXSg.kOrx.s3jtsa1g92hMHhuIIg.Lzpy17H2K",
                             RoleId = 1
                         });
                 });

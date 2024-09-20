@@ -159,7 +159,7 @@ namespace KONSUME.Core.Application.Services
             try
             {
                 // Check if a restaurant with the same email already exists
-                if (await _restaurantRepository.ExistsAsync(request.Email) && await _userRepository.ExistsAsync(request.Email))
+                if (await _restaurantRepository.ExistsAsync(request.Email) || await _userRepository.ExistsAsync(request.Email))
                 {
                     return new BaseResponse<RestaurantResponse>
                     {

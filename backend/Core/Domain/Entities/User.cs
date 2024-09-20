@@ -14,8 +14,6 @@ namespace KONSUME.Core.Domain.Entities
         [JsonInclude]
         public string? Password { get; set; }
         [JsonInclude]
-        public string? Token { get; set; }
-        [JsonInclude]
         public Profile Profile { get; set; }
         public int RoleId { get; set; }
         [JsonInclude]
