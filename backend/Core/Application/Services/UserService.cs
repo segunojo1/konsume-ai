@@ -8,6 +8,7 @@ using KonsumeTestRun.Core.Application.Interfaces.Repositories;
 using KONSUME.Models.Entities;
 using System.Security.Claims;
 using static Google.Apis.Auth.GoogleJsonWebSignature;
+using Newtonsoft.Json;
 
 namespace KONSUME.Core.Application.Services
 {
@@ -19,7 +20,10 @@ namespace KONSUME.Core.Application.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IVerificationCodeRepository _verificationCodeRepository;
         private readonly IEmailService _emailService;
-        public UserService(IUserRepository userRepository, IRoleRepository roleRepository, IUnitOfWork unitOfWork, IHttpContextAccessor httpContext, IVerificationCodeRepository verificationCodeRepository, IEmailService emailService)
+        private readonly IRestaurantRepository _restaurantRepository;
+        public UserService(IUserRepository userRepository, IRoleRepository roleRepository,
+        IRestaurantRepository restaurantRepository, IUnitOfWork unitOfWork, IHttpContextAccessor httpContext,
+         IVerificationCodeRepository verificationCodeRepository, IEmailService emailService)
         {
             _userRepository = userRepository;
             _roleRepository = roleRepository;
@@ -27,16 +31,15 @@ namespace KONSUME.Core.Application.Services
             _httpContext = httpContext;
             _verificationCodeRepository = verificationCodeRepository;
             _emailService = emailService;
-        }
+            _restaurantRepository = restaurantRepository;
+    }
         private static readonly Random random = new Random();
 
         public async Task<BaseResponse<UserResponse>> CreateUser(UserRequest request)
         {
             int randomCode = new Random().Next(10000, 99999);
 
-            // Check if the email already exists
-            var exists = await _userRepository.ExistsAsync(request.Email);
-            if (exists)
+            if (await _restaurantRepository.ExistsAsync(request.Email) || await _userRepository.ExistsAsync(request.Email))
             {
                 return new BaseResponse<UserResponse>
                 {
@@ -44,106 +47,108 @@ namespace KONSUME.Core.Application.Services
                     IsSuccessful = false
                 };
             }
-
-            // Check if the password and confirm password match
-            if (request.Password != request.ConfirmPassword)
+            else
             {
-                return new BaseResponse<UserResponse>
+                if (request.Password != request.ConfirmPassword)
                 {
-                    Message = "Password does not match",
-                    IsSuccessful = false
-                };
-            }
-
-            // Get the role for the user
-            var role = await _roleRepository.GetAsync(r => r.Name.ToLower() == "patient");
-            if (role == null)
-            {
-                return new BaseResponse<UserResponse>
-                {
-                    Message = "Role does not exist",
-                    IsSuccessful = false
-                };
-            }
-
-            // Create the user entity
-            var user = new User
-            {
-                Email = request.Email,
-                Password = BCrypt.Net.BCrypt.HashPassword(request.Password),
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                DateCreated = DateTime.UtcNow,
-                IsDeleted = false,
-                RoleId = role.Id,
-                Role = role,
-                CreatedBy = "1"
-            };
-
-            // Add user to the role and update the role
-            role.Users.Add(user);
-            _roleRepository.Update(role);
-
-            // Add the user to the repository
-            var newUser = await _userRepository.AddAsync(user);
-
-            // Create verification code
-            var code = new VerificationCode
-            {
-                Code = randomCode,
-                UserId = newUser.Id,
-                DateCreated = DateTime.UtcNow,
-                IsDeleted = false,
-                User = newUser,
-                CreatedOn = DateTime.UtcNow,
-            };
-            await _verificationCodeRepository.Create(code);
-
-            // Send email with the confirmation code
-            try
-            {
-                var mailRequest = new MailRequests
-                {
-                    Subject = "Confirmation Code",
-                    ToEmail = user.Email,
-                    Title = "Your Confirmation Code",
-                    HtmlContent = $"<html><body><h1>Hello {user.FirstName}, Welcome to KONSUME.</h1><h4>Your confirmation code is {code.Code} to continue with the registration</h4></body></html>"
-                };
-
-                await _emailService.SendEmailAsync(new MailRecieverDto { Name = user.FirstName, Email = user.Email }, mailRequest);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error occurred while sending email: {ex.Message}");
-                return new BaseResponse<UserResponse>
-                {
-                    Message = $"An error occurred while sending email: {ex.Message}",
-                    IsSuccessful = false
-                };
-            }
-
-            // Save all changes to the database
-            await _unitOfWork.SaveAsync();
-
-            // Return the response
-            return new BaseResponse<UserResponse>
-            {
-                Message = "Check your email and complete your registration",
-                IsSuccessful = true,
-                Value = new UserResponse
-                {
-                    Id = user.Id,
-                    FullName = user.FirstName + " " + user.LastName,
-                    Email = user.Email,
-                    RoleId = user.RoleId,
-                    RoleName = user.Role.Name,
+                    return new BaseResponse<UserResponse>
+                    {
+                        Message = "Password does not match",
+                        IsSuccessful = false
+                    };
                 }
-            };
+
+                // Get the role for the user
+                var role = await _roleRepository.GetAsync(r => r.Name.ToLower() == "patient");
+                if (role == null)
+                {
+                    return new BaseResponse<UserResponse>
+                    {
+                        Message = "Role does not exist",
+                        IsSuccessful = false
+                    };
+                }
+
+                // Create the user entity
+                var user = new User
+                {
+                    Email = request.Email,
+                    Password = BCrypt.Net.BCrypt.HashPassword(request.Password),
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    DateCreated = DateTime.UtcNow,
+                    IsDeleted = false,
+                    RoleId = role.Id,
+                    Role = role,
+                    CreatedBy = "1",
+                };
+
+                // Add user to the role and update the role
+                role.Users.Add(user);
+                _roleRepository.Update(role);
+
+                // Add the user to the repository
+                var newUser = await _userRepository.AddAsync(user);
+
+                // Create verification code
+                var code = new VerificationCode
+                {
+                    Code = randomCode,
+                    UserId = newUser.Id,
+                    DateCreated = DateTime.UtcNow,
+                    IsDeleted = false,
+                    User = newUser,
+                    CreatedOn = DateTime.UtcNow,
+                };
+                await _verificationCodeRepository.Create(code);
+
+                // Send email with the confirmation code
+                try
+                {
+                    var mailRequest = new MailRequests
+                    {
+                        Subject = "Confirmation Code",
+                        ToEmail = user.Email,
+                        Title = "Your Confirmation Code",
+                        HtmlContent = $"<html><body><h1>Hello {user.FirstName}, Welcome to KONSUME.</h1><h4>Your confirmation code is {code.Code} to continue with the registration</h4></body></html>"
+                    };
+
+                    await _emailService.SendEmailAsync(new MailRecieverDto { Name = user.FirstName, Email = user.Email }, mailRequest);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error occurred while sending email: {ex.Message}");
+                    return new BaseResponse<UserResponse>
+                    {
+                        Message = $"An error occurred while sending email: {ex.Message}",
+                        IsSuccessful = false
+                    };
+                }
+
+                // Save all changes to the database
+                await _unitOfWork.SaveAsync();
+
+                // Return the response
+                return new BaseResponse<UserResponse>
+                {
+                    Message = "Check your email and complete your registration",
+                    IsSuccessful = true,
+                    Value = new UserResponse
+                    {
+                        Id = user.Id,
+                        FullName = user.FirstName + " " + user.LastName,
+                        Email = user.Email,
+                        RoleId = user.RoleId,
+                        RoleName = user.Role.Name,
+                    }
+                };
+            }
+            // Check if the password and confirm password match
+            
         }
 
 
-
-
+        
 
         public async Task<BaseResponse<ICollection<UserResponse>>> GetAllUsers()
         {
@@ -288,7 +293,7 @@ namespace KONSUME.Core.Application.Services
             if (user.Email == model.Email && BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
             {
 
-                var role = await _roleRepository.GetAsync(r => r.Name.ToLower() == "patient");
+                var role = await _roleRepository.GetAsync(user.RoleId);
                 return new BaseResponse<UserResponse>
                 {
                     Message = "Login Successfull",

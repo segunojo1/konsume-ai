@@ -21,9 +21,8 @@ namespace KONSUME.Core.Application.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IVerificationCodeRepository _verificationCodeRepository;
         private readonly IEmailService _emailService;
-        public ProfileService(IUserRepository userRepository, IRoleRepository roleRepository, IUnitOfWork unitOfWork,
-            IHttpContextAccessor httpContext, IVerificationCodeRepository verificationCodeRepository, IEmailService emailService,
-            IProfileRepository profileRepository)
+        public ProfileService(IUserRepository userRepository, IRoleRepository roleRepository, IUnitOfWork unitOfWork,IHttpContextAccessor httpContext,
+            IVerificationCodeRepository verificationCodeRepository, IEmailService emailService,IProfileRepository profileRepository)
         {
             _userRepository = userRepository;
             _roleRepository = roleRepository;
@@ -102,6 +101,28 @@ namespace KONSUME.Core.Application.Services
                 Value = exist
             };
         }
+
+        public async Task<BaseResponse<int>> GetProfileDetailsByUserId(int id)
+        {
+            var profile = await _profileRepository.GetProfileDetailsByUserIdAsync(id);
+            if (profile > 0)
+            {
+                return new BaseResponse<int>
+                {
+                    IsSuccessful = true,
+                    Message = "Profile successfully found",
+                    Value = profile, // Get the integer value from the nullable
+                };
+            }
+
+            return new BaseResponse<int>
+            {
+                IsSuccessful = false, // Set to false since the profile was not found
+                Message = "Profile not found",
+                Value = 0 // Or any appropriate default value
+            };
+        }
+
 
         public async Task<BaseResponse<ProfileResponse>> GetProfile(int id)
         {

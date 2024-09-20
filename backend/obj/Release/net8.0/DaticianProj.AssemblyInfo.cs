@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DaticianProj")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eebb291d44a89b68a76c0edaafb786585982596e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b655035faf03f6e1a4a889bbc44f01cd5a11fb0b")]
 [assembly: System.Reflection.AssemblyProductAttribute("DaticianProj")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DaticianProj")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

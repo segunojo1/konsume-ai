@@ -28,4 +28,20 @@ namespace KONSUME.Models.ProfileModel
         public ICollection<string> Allergies { get; set; } = new HashSet<string>();
         public ICollection<string> UserGoals { get; set; } = new HashSet<string>();
     }
+    public class RestaurantRequest
+    {
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime DateOfEstablishment { get; set; }
+        [Required]
+        public string Location { get; set; }
+        [Required]
+        public List<string> Food { get; set; }
+        [Required]
+        public string CAC { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }    
+    }
 }

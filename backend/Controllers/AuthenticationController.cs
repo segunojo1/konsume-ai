@@ -11,7 +11,6 @@ namespace KonsumeTestRun.Controllers
         private readonly IUserService _userService;
         private readonly IIdentityService _identityService;
         private readonly IConfiguration _config;
-        private readonly IIdentityService _authentication;
 
 
         public AuthenticationController(IUserService userService, IIdentityService identityService, IConfiguration config)
@@ -53,4 +52,6 @@ namespace KonsumeTestRun.Controllers
         }
     }
 }
+
+
 

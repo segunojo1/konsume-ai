@@ -8,6 +8,7 @@ using MailKit.Net.Smtp;
 using KONSUME.Core.Domain.Entities;
 using System.Text;
 using Google;
+using DaticianProj.Core.Domain.Entities;
 
 namespace KONSUME.Core.Application.Services
 {
@@ -55,6 +56,42 @@ namespace KONSUME.Core.Application.Services
             };
         }
 
+        public async Task<BaseResponse> SendNotificationToRestaurantAsync(Restaurant restaurant)
+        {
+            var mailRecieverRequestDto = new MailRecieverDto
+            {
+                Email = restaurant.Email,
+                Name = restaurant.Name
+            };
+
+            string emailBody = $"<p>Hello {restaurant.Name},</p>\r\n" +
+                            $"<p>Welcome to Konsume! We’re thrilled to have you on board as part of our network.</p>\r\n" +
+                            $"<p>We're excited to let you know that your restaurant has been added to our waitlist. We appreciate your patience as we finalize the details, and we’ll notify you as soon as your restaurant is live on our platform.</p>\r\n" +
+                            $"<p>As a Konsume partner, you'll have access to our cutting-edge platform that connects your dishes with the right customers. Our smart technology" +
+                            $"<p>At Konsume, we’re all about connecting great food with the people who love it. As a valued restaurant partner, you’ll" +
+                            $" have access to a platform that helps showcase your dishes to the right audience. Our smart technology" +
+                            $" makes it easy to manage your menu, attract new customers, and grow your brand.</p>\r\n" +
+                            $"<p>In the meantime, get ready to revolutionize your restaurant’s outreach with personalized meal recommendations, AI-powered food analysis, and more.</p>\r\n" +
+                            $"<p>We’ll be in touch soon! <a href='https://konsume-web-yzto.vercel.app/restaurant-dashboard'>Log in to your dashboard</a> to explore what’s ahead for your restaurant.</p>\r\n" +
+                            $"<p>Best regards,<br/>Hasbiy from Konsume</p>\r\n" +
+                            $"<img src=\"https://drive.google.com/uc?export=view&id=1KH6x4h7J0PCGE7yDiJj4YUBDYPHPBd3B\" alt=\"Konsume Logo\" " +
+                            $"style=\"display: block; margin: 0 auto;\">\r\n";
+
+            var mailRequest = new MailRequests
+            {
+                Body = emailBody,
+                Title = "WELCOME TO KONSUME",
+                HtmlContent = emailBody
+            };
+
+            await SendEmailAsync(mailRecieverRequestDto, mailRequest);
+
+            return new BaseResponse
+            {
+                Message = "Notification sent successfully",
+                IsSuccessful = true,
+            };
+        }
 
 
         public async Task<BaseResponse> SendNotificationToUserAsync(Profile profile)

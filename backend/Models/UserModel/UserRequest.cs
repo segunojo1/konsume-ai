@@ -41,5 +41,10 @@ namespace KONSUME.Models.UserModel
         public string ConfirmPassword { get; set; } = default!;
     }
 
-
+    public class GoogleUserInfo
+    {
+        public string Email { get; set; } = default!;
+        public string FullName { get; set; } = default!;
+        public string Token { get; set; } = default!;   
+    }
 }
