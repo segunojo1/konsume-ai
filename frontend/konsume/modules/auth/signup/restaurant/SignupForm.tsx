@@ -14,19 +14,20 @@ const formSchema = z.object({
   Datee: z.string().min(1, { message: "Date of establishemnt is required" }),
   Location: z.string().min(1, { message: "Loation is required" }),
   Name: z.string().min(1, { message: "Restaurant name is required" }),
+  Food: z.string(),
   Email: z.string().min(6, { message: "Email is required" }),
   Password: z.string().min(6, { message: "Passwordis required" }),
 });
 
 export const SignupForm = () => {
   const [showOtp, setShowOtp] = useState(false);
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       Datee: "",
       Location: "",
       Name: "",
+      Food: "",
       Email: "",
       Password: "",
     },
@@ -42,11 +43,12 @@ export const SignupForm = () => {
             Location: values.Location,
             Name: values.Name,
             cac: "cac",
+            Food: [values.Food],
             Email: values.Email,
             Password: values.Password,
           },
           {
-            headers: { "Content-Type": "multipart/form-data" },
+            headers: {"Content-Type": "multipart/form-data" },
           }
         ),
         {
