@@ -8,6 +8,7 @@ import ChatQuestions from "@/modules/chat/ChatQuestions";
 import ChatInput from "@/modules/chat/ChatInput";
 import ChatMessages from "@/modules/chat/ChatMessages";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 const Chat = () => {
   const {
@@ -34,6 +35,10 @@ const Chat = () => {
       }
     }
   };
+
+  useEffect(() => {
+    Cookies.set('visited', 'true');
+  }, [])
 
   return (
     <div>

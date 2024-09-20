@@ -41,7 +41,9 @@ useEffect(() => {
           <Image src='/multi-line.svg' alt='multi line' height={141} width={98} className='absolute bottom-0 top-0 my-auto right-0 -z-10' />
           <h1 className="md:text-desktop-heading4 text-[28px]/[40px] font-bold z-50">Hello, {firstName ? firstName : '..'}</h1>
         </div>
+        <div className="search-meal">
         <SearchBar />
+        </div>
       </div>
         
     </div>

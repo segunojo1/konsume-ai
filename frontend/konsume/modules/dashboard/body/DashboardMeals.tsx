@@ -62,7 +62,7 @@ const DashboardMeals: React.FC<DashboardMealsProps> = ({ breakfast, lunch, dinne
         <p className="font-bold md:text-desktop-caption  text-white">Today&apos;s Spotlighted Meal</p>
         <Image src="/breakfast.svg" alt="food" width={33} height={33} />
       </div>
-      <Link href="/timetable" className="bg-primarygtext text-primary-bg-100 font-medium text-[12px] rounded-lg py-[11px] px-[32.5px] flex items-center justify-center max-w-[242px]">
+      <Link href="/timetable" className="bg-primarygtext text-primary-bg-100 font-medium text-[12px] rounded-lg py-[11px] px-[32.5px] flex items-center justify-center max-w-[242px] open-timetable">
         Open Timetable
       </Link>
       {renderMealCard(breakfast, "Breakfast")}

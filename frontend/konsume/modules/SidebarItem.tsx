@@ -34,7 +34,7 @@ const SidebarItem: React.FC<SidebarProps> = ({ icon, text, href }) => {
             <div
               className={`flex gap-5 ${
                 isActive ? "bg-[#0c250353] sideitem" : ""
-              } relative font-medium text-xl leading-[53px] rounded-lg cursor-pointer items-center p-2`}
+              } relative font-medium text-xl leading-[53px] rounded-lg cursor-pointer items-center p-2 ${href}`}
               onClick={handleClick}
             >
               <Image

@@ -3,6 +3,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import 'intro.js/introjs.css';
 import type { AppProps } from "next/app";
 import { ToastContainer } from "react-toastify";
 import { SetupProvider } from "../context/SetupContext";
@@ -19,6 +20,8 @@ import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 import { BlogContextProvider } from "@/context/BlogContext";
 import { UserProvider } from "@/context/UserContext";
+import { SessProvider } from "@/context/SessProvider";
+import { SessionProvider } from "next-auth/react";
 
 Router.events.on("routeChangeStart", nProgress.start);
 Router.events.on("routeChangeError", nProgress.done);
@@ -37,7 +40,9 @@ export default function App({ Component, pageProps }: AppProps) {
                 <ScannerContextProvider>
                   <ChatBotContextProvider>
                     <MainLayoutContextProvider>
+        <SessionProvider session={pageProps.session}>
                       <AnyComponent {...pageProps} />
+        </SessionProvider>
                     </MainLayoutContextProvider>
                   </ChatBotContextProvider>
                 </ScannerContextProvider>

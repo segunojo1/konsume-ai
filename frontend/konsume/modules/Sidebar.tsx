@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SidebarItem from "./SidebarItem";
 import home from "../public/home.svg";
 import logo from "../public/konsume_logo.svg";
@@ -13,15 +13,36 @@ import blogs from "../public/book-02.svg"
 import meals from "../public/recommendedmeals.svg"
 import Image from "next/image";
 import { DashboardNavProps } from "../@types";
+import { Steps, Hints } from 'intro.js-react';
 
 const Sidebar: React.FC<DashboardNavProps> = ({ toggled }) => {
+  
+  
+  const hints = [
+    {
+      element: '.selector1',
+      hint: 'test 1',
+      hintPosition: 'middle-middle',
+    },
+    {
+      element: '.selector2',
+      hint: 'test 2',
+    },
+  ];
+ 
   return (
     <div
-      className={`min-h-screen p-4 bg-primary-bg md:fixed left-0 min-w-[82px] top-0  ${
+      className={`min-h-screen p-4 bg-primary-bg md:fixed left-0 min-w-[82px] top-0 side1  ${
         toggled ? "left-0" : "md:left-0 left-[-300px]"
       } fixed  z-[6000] transition-all`}
     >
-      <div className="min-h-[90vh] relative mx-auto w-fit flex flex-col gap-1 items-center">
+      
+{/* <Hints
+  enabled={true}
+  hints={hints}
+  ref={hints => (this.hints = hints)}
+/> */}
+      <div className="min-h-[90vh] relative mx-auto w-fit flex flex-col gap-1 items-center sidee"  data-intro='Hello step one!'>
         <Image
           src={logo}
           alt="logo"
