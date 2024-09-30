@@ -184,7 +184,7 @@ namespace KONSUME.Core.Application.Services
                     Name = request.Name,
                     Email = request.Email,
                     Password = request.Password,
-                    DateOfEstablishment = DateTime.SpecifyKind(request.DateOfEstablishment, DateTimeKind.Utc),
+                    DateOfEstablishment = request.DateOfEstablishment,
                     Location = request.Location,
                     Food = request.Food,
                     CAC = request.CAC,
