@@ -45,7 +45,7 @@ builder.Services.AddCors(cors =>
     cors.AddPolicy("konsume", pol =>
     {
         pol.WithOrigins("https://konsume-v2.vercel.app", "https://konsume-web-yzto.vercel.app/",
-            "https://localhost:3000", "http://localhost:3000", "https://4rcrtt-3000.csb.app")
+            "https://localhost:3000", "http://localhost:3000", "https://4rcrtt-3000.csb.app", "https://konsume-v1.vercel.app")
            .AllowAnyHeader()
            .AllowAnyMethod()
            .AllowCredentials();
