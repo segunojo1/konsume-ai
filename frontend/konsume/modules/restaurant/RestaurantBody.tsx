@@ -6,7 +6,7 @@ import React from "react";
 const RestaurantBody = () => {
   return (
     <div>
-      <div className="mx-auto flex items-center justify-center px-5 flex-col gap-[55px]">
+      <div className="font-satoshi mx-auto flex items-center justify-center px-5 flex-col gap-[55px]">
         <Image
           src="/restaurantimage.png"
           alt="restaurant"

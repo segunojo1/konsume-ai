@@ -26,7 +26,7 @@ const HomeNav = () => {
     route.push("/restaurant");
   };
   return (
-    <div className="flex items-center justify-between mb-[232px] 2xl:px-[90px] md:px-[30px] px-[19px] pt-[51px] z-[99999]">
+    <div className="font-satoshi flex items-center justify-between mb-[232px] 2xl:px-[90px] md:px-[30px] px-[19px] pt-[51px] z-[99999]">
       <div className="flex items-center gap-[13px] mr-14 font-bold text-[25px]/[120%]">
         <Image src={kons} alt="logo" className=" z-[1] " />
         <p className="text-primarygtext">Home</p>
