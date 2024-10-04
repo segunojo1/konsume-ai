@@ -24,7 +24,7 @@ const Dashboard = () => {
     setAge, 
     setNationality 
   } = useSetupContext();
-  const {profileID} = useUserContext()
+  const {profileID}:any = useUserContext()
 
   const router = useRouter();
 
@@ -82,40 +82,61 @@ const Dashboard = () => {
       intro: 'Click to open your timetable',
     },
   ];
-  const [isTourEnabled, setIsTourEnabled] = useState(false);
+  // const [isTourEnabled, setIsTourEnabled] = useState(false);
 
   useEffect(() => {
-    const visited = Cookies.get('visited');
-    if (!visited) {
-      setIsTourEnabled(true); // Show the tour if the user hasn't visited yet
-    }
+    // const visited = Cookies.get('visited');
+    // if (!visited) {
+    //   setIsTourEnabled(true); // Show the tour if the user hasn't visited yet
+    // }
   }, []);
 
-  const handleExit = () => {
-    console.log('Tour finished');
-    // Cookies.set('visited', 'true');
-    // setIsTourEnabled(false); // Disable the tour after it's done
-  };
+  // const handleExit = () => {
+  //   console.log('Tour finished');
+  //   // Cookies.set('visited', 'true');
+  //   // setIsTourEnabled(false); // Disable the tour after it's done
+  // };
   // useEffect(() => {
   //   getUserDetails();
   // }, [setPossibleDiseases, setUserGoal, setWeight, setDiet, setAge, router]);
   useEffect(() => {
-    
-  }, [router.pathname])
+    // setTimeout(() => {
+    //   Cookies.set('visited', 'true');
+    // }, 2000);
+  }, [])
+  const [tourEnabled, setTourEnabled] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const savedState = localStorage.getItem("tourEnabled");
+      return savedState === null ? true : JSON.parse(savedState);
+    }
+    return true; // Default state if `window` is not defined
+  });
+
+  // Save to localStorage if we're in the browser
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem("tourEnabled", JSON.stringify(tourEnabled));
+    }
+  }, [tourEnabled]);
+
+  const handleExit = () => {
+    setTourEnabled(false); // Disable the tour after it finishes
+  };
+
   return (
     <div className='bg-base-white'>
       <MainLayout fixedTopbar={true} topBarText='Dashboard' topBarIcon='dashborad'>
         <div className="font-satoshi pb-10">
           <DashboardHead />
           <DashboardBody />
-          {!Cookies.get('visited') && (
+          
         <Steps
-          enabled={true}
+          enabled={tourEnabled}
           steps={steps}
           initialStep={0}
           onExit={handleExit} // This will now only fire when the user exits the tour
         />
-      )}
+     
           {/* <CreateProfileLoader /> */}
         </div>
       </MainLayout>

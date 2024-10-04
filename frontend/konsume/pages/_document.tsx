@@ -4,9 +4,8 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-      <link rel="icon" href="/konsume_purple_logo.svg" />
-
-        </Head>
+        <link rel="icon" href="/konsume_purple_logo.svg" />
+      </Head>
       <body>
         <Main />
         <NextScript />

@@ -1,9 +1,9 @@
 import "@/styles/globals.css";
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import 'intro.js/introjs.css';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import "intro.js/introjs.css";
 import type { AppProps } from "next/app";
 import { ToastContainer } from "react-toastify";
 import { SetupProvider } from "../context/SetupContext";
@@ -33,23 +33,23 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Provider store={store}>
         <UserProvider>
-        <BlogContextProvider>
-          <SetupProvider>
-            <DashboardContextProvider>
-              <MealsContextProvider>
-                <ScannerContextProvider>
-                  <ChatBotContextProvider>
-                    <MainLayoutContextProvider>
-        <SessionProvider session={pageProps.session}>
-                      <AnyComponent {...pageProps} />
-        </SessionProvider>
-                    </MainLayoutContextProvider>
-                  </ChatBotContextProvider>
-                </ScannerContextProvider>
-              </MealsContextProvider>
-            </DashboardContextProvider>
-          </SetupProvider>
-        </BlogContextProvider>
+          <BlogContextProvider>
+            <SetupProvider>
+              <DashboardContextProvider>
+                <MealsContextProvider>
+                  <ScannerContextProvider>
+                    <ChatBotContextProvider>
+                      <MainLayoutContextProvider>
+                        <SessionProvider session={pageProps.session}>
+                          <AnyComponent {...pageProps} />
+                        </SessionProvider>
+                      </MainLayoutContextProvider>
+                    </ChatBotContextProvider>
+                  </ScannerContextProvider>
+                </MealsContextProvider>
+              </DashboardContextProvider>
+            </SetupProvider>
+          </BlogContextProvider>
         </UserProvider>
         <ToastContainer />
       </Provider>

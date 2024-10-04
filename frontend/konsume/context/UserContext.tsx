@@ -99,6 +99,8 @@ export const UserProvider: React.FC<any> = ({ children }) => {
       setUserGoals(data.value.userGoals.$values);
       setAllergies(data.value.allergies.$values);
       setDOB(formattedDate);
+      console.log(userGoals);
+      
     } catch (error) {
       console.log(error);
     }
