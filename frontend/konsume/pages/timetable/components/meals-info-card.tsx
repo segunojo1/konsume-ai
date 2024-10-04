@@ -8,6 +8,7 @@ import type { MealDatatype } from "@/@types/timetable";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import NutritionalInfoBox from "./nutritional-info-box";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 type Props = {
   data: MealDatatype;
@@ -144,7 +145,9 @@ const MealBriefDetail = ({
       translateY="10"
       className="h-9 rounded-md px-3 bg-base-white text-secondary absolute right-0 bottom-0 text-[12px] p-[10px]"
     >
+      <Link href={`/meals/${foodName}`}>
       View Recipe and Details
+      </Link>
     </CardItem>
   </CardItem>
 );
