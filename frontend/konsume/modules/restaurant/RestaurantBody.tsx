@@ -1,3 +1,4 @@
+import Reveal from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,17 +8,22 @@ const RestaurantBody = () => {
   return (
     <div>
       <div className="font-satoshi mx-auto flex items-center justify-center px-5 flex-col gap-[55px]">
+        <Reveal >
+
         <Image
           src="/restaurantimage.png"
           alt="restaurant"
           width={900}
           height={256}
         />
+        </Reveal>
+        <Reveal>
         <p className="text-[25px]/[30px] font-satoshi text-center">
           We&apos;re currently perfecting our restaurant feature to help you
           integrate your menu, and reach customers effortlessly. Get ready for a
           seamless experience once this feature goes live!
         </p>
+        </Reveal>
         <Button className="px-10 py-[15px] mb-4 bg-primarygtext text-primary-bg rounded-[42px]">
             <Link href="/auth/restaurant">
             Join the waitlist
