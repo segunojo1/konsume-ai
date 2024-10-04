@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/satoshi');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -671,28 +672,27 @@ body {
   width: 22px;
 }
 
-/* .custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: #888 #f1f1f1;
-} */
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 0px;
+  width: 12px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #0C2503;
   border-radius: 5px;
+  padding: 2px; /* Adds padding to the track */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #888;
+  background-color: #FFC60C;
   border-radius: 5px;
+  margin: 5px; /* Adds margin to separate the thumb from the track edges */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background-color: #FFC60C;
 }
+
 @media screen and (max-width: 768px) {
   
   .daily-tea{
