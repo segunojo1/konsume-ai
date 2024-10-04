@@ -9,21 +9,20 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 import { useRouter } from "next/router";
 
-const HomeNav = () => {
+const RestaurantNav = () => {
   const [toggled, setToggled] = useState(false);
   const route = useRouter();
   const navClick = () => {
     console.log(toggled);
-
     setToggled((prev) => !prev);
   };
-  const goRestaurant = () => {
-    console.log("restaurant");
+  const goHome = () => {
+    console.log("home");
 
-    route.push("/restaurant");
+    route.push("/");
   };
   return (
     <div className="flex items-center justify-between mb-[232px] 2xl:px-[90px] md:px-[30px] px-[19px] pt-[51px] z-[99999]">
@@ -66,28 +65,21 @@ const HomeNav = () => {
         </div>
       </div>
       <div className="hidden md:flex items-center gap-[6px]">
-        <Select value="Personal"  onValueChange={goRestaurant}>
-          <SelectTrigger className=" text-[17px]/[120%] font-medium bg-color8-100 text-primarygtext py-[12px] pl-[25px] pr-[12px] flex gap-3 rounded-[42px]">
-            <SelectValue placeholder="Personal" />
-            {/* <Image src={down} alt="down" width={25} height={25} /> */}
-          </SelectTrigger>
-          <SelectContent className="bg-[transparent] gap-2 flex flex-col shadow-none">
-            <SelectItem
-              value="Personal"
-              className="rounded-3xl bg-[white] w-fit pr-8 mb-1"
-            >
-              <Link href="/">Personal</Link>
+      <Select value="Restaurant" onValueChange={goHome}>
+      <SelectTrigger className=" text-[17px]/[120%] font-medium bg-color8-100 text-primarygtext py-[12px] pl-[25px] pr-[12px] flex gap-3 rounded-[42px]">
+      
+        <SelectValue placeholder="Restaurant" />
+          {/* <Image src={down} alt="down" width={25} height={25} /> */}
+      </SelectTrigger>
+      <SelectContent className="bg-[transparent] gap-2 flex flex-col shadow-none">
+          <SelectItem value="Personal" className="rounded-3xl bg-[white] w-fit pr-8 mb-1">
+            <Link href="/">Personal</Link> 
             </SelectItem>
-            <SelectItem
-              value="restaurant"
-              className="rounded-3xl bg-[white] w-fit pr-8"
-            >
-              <Link href="/restaurant" >
-                Restaurant
-              </Link>
+          <SelectItem value="Restaurant" className="rounded-3xl bg-[white] w-fit pr-8">
+            <Link href="/restaurant"> Restaurant</Link>
             </SelectItem>
-          </SelectContent>
-        </Select>
+      </SelectContent>
+    </Select>
         <Link href="/auth/signup">
           <button className="cursor-pointer text-[17px]/[120%] font-bold bg-color8-100 text-primarygtext w-[123px] py-[10px] rounded-[49px] md:m-0 mb-[30px]">
             Join Us
@@ -104,4 +96,4 @@ const HomeNav = () => {
   );
 };
 
-export default HomeNav;
+export default RestaurantNav;

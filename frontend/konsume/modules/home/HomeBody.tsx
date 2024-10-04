@@ -14,7 +14,7 @@ import Footer from "./Footer";
 
 const HomeBody = () => {
   return (
-    <div className="  flex flex-col font-satoshi">
+    <div className="flex flex-col font-satoshi">
       <Hero />
       <SectionOne />
       <SectionTwo />
