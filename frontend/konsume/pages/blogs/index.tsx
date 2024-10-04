@@ -40,10 +40,13 @@ const Blogs = () => {
                         ))}
                     </div>
                     <div className='flex  justify-between mt-3'>
+                            <Link href='/dashboard'>
                         <Button className='bg-primarygtext self-end flex px-3 py-2 gap-3'>
+                            
                             <Image alt='logo' width={27.6} height={27.6} src='/icon6.svg' />
                             <p className='text-primary-bg text-desktop-content font-bold'>View Reading Streak</p>
                         </Button>
+                            </Link>
                         <Link href='/blogs/bookmarks'>
                             <Button className='border-2 border-[#0C2503] self-end hidden px-3 py-2 gap-3 rounded-lg md:flex'>
                                 <Image alt='logo' width={27.6} height={27.6} src='/timetablelogo.svg' />

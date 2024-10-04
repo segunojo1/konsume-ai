@@ -57,10 +57,12 @@ useEffect(() => {
         </div>
       </motion.aside>
       <div className='md:flex justify-between mt-10 hidden font-satoshi'>
+          <Link href='/timetable'>
         <Button className='bg-primarygtext flex px-3 py-2 gap-3'>
           <Image alt='logo' width={27.6} height={27.6} src='/time-table.svg' />
           <p className='text-primary-bg text-desktop-content font-bold xl:block hidden'>Set up My Timetable</p>
         </Button>
+          </Link>
         <div className='flex items-center gap-3'>
           {['All', 'Breakfast', 'Lunch', 'Dinner', 'Snacks'].map((meal) => (
             <FilterMeal
