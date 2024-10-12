@@ -40,13 +40,13 @@ const SearchBlog = () => {
             if (remainingTime > 0) {
                 setTimeout(() => {
                     setGeneratingBlog(false);
-                    router.push(`/blogs/${searchQuery.trim()}`);
+                    router.push(`/blogs/search/${searchQuery.trim()}`);
                 }, remainingTime);
               } else {
                 setGeneratingBlog(false);
-                router.push(`/blogs/${searchQuery.trim()}`);
+                router.push(`/blogs/search/${searchQuery.trim()}`);
               }
-            router.push(`/blogs/${searchQuery.trim()}`);
+            router.push(`/blogs/search/${searchQuery.trim()}`);
         } catch (error) {
             console.error('Error fetching blog:', error);
             setGeneratingBlog(false)

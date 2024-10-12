@@ -3,14 +3,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const BlogCard = ({title, category, showHeading }: BlogProps) => {
+const BlogCard = ({title, category, showHeading, id }: BlogProps) => {
     const capitalizeFirstLetter = (str: string | undefined): string | undefined => {
         if (!str) return str; // Return the string as is if it's empty or undefined
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     };
     
     return (
-            <Link href={`/blogs/${encodeURIComponent(title as string)}`} passHref>
+            <Link href={`/blogs/${id}`} passHref>
         <div className={`md:mx-auto  h-[221px]  flex flex-col items-start gap-3 py-6 px-3  rounded-[25px] hover:shadow-lg font-satoshi lg:w-full w-fit ${showHeading ? "shadow-md max-w-[300px]" : "shadow-sm md:max-w-[267px]"}`}>
             
             <div

@@ -69,7 +69,7 @@ const Blogs = () => {
                     <div className='grid lg:grid-cols-4 grid-cols-1 gap-4 mt-6 mx-auto lg:mx-0 w-fit lg:w-full'>
                         {
                             tempBlogs?.map((blog: BlogProps) => (
-                                <BlogCard key={blog.id} title={blog.title} text={blog.text} category={blog.category} />
+                                <BlogCard id={blog.id} key={blog.id} title={blog.title} text={blog.text} category={blog.category} />
                             ))
                         }
                     </div>

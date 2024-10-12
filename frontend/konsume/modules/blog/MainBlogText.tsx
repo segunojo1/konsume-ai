@@ -6,16 +6,39 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useUserContext } from "@/context/UserContext";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { CopyIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface Blog {
   text: string | undefined;
   category: string | undefined;
   titlee: string | undefined;
+  id: number | undefined;
 }
-const MainBlogText = ({ text, category, titlee }: Blog) => {
+const MainBlogText = ({ id, text, category, titlee }: Blog) => {
   const router = useRouter();
   const [bookmarked, setBookmarked] = useState(false);
   const {getProfileID} = useUserContext();
+  const [copied, setCopied] = useState(false);
+
+  // Function to handle copying
+  const handleCopy = () => {
+    const link = `https://konsume-web-yzto.vercel.app/sharedblog/${id}`;
+    
+    navigator.clipboard.writeText(link).then(() => {
+      setCopied(true);
+
+      // Reset the "Copied" message after 2 seconds
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    }).catch((error) => {
+      console.error('Failed to copy text: ', error);
+    });
+  };
 
   //function to format blog text to headers
   const formatText = (etxt: string) => {
@@ -105,7 +128,7 @@ const MainBlogText = ({ text, category, titlee }: Blog) => {
             />
             <p className="text-[18px]/[120%] font-bold">By Foodie</p>
           </div>
-          <p className="text-desktop-content">{Date.now()}</p>
+          <p className="text-desktop-content">.</p>
         </div>
         <div className="flex items-center gap-4">
           <Image
@@ -116,13 +139,55 @@ const MainBlogText = ({ text, category, titlee }: Blog) => {
             className="cursor-pointer"
             onClick={bookMarkBlog}
           />
-          <Image
+          <Dialog>
+      <DialogTrigger asChild>
+      <Image
             src="/share.svg"
             alt="share"
             height={25}
             width={22}
-            className=""
+            className="cursor-pointer"
           />
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Share link</DialogTitle>
+          <DialogDescription>
+            Anyone who has this link will be able to view this.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="flex items-center space-x-2">
+          <div className="grid flex-1 gap-2">
+            <Label htmlFor="link" className="sr-only">
+              Link
+            </Label>
+            <Input
+              id="link"
+              defaultValue={`https://konsume-web-yzto.vercel.app/sharedblog/${id}`}
+              readOnly
+            />
+          </div>
+          <Button type="submit" size="sm" className="px-3" onClick={handleCopy}>
+          {copied ? (
+          <span className="text-green-600">Copied!</span> // Show "Copied" message
+        ) : (
+          <>
+            <span className="sr-only">Copy</span>
+            <CopyIcon className="h-4 w-4" />
+          </>
+        )}
+          </Button>
+        </div>
+        <DialogFooter className="sm:justify-start">
+          <DialogClose asChild>
+            <Button type="button" variant="secondary">
+              Close
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+          
         </div>
       </div>
       <div>
