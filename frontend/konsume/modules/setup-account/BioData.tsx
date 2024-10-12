@@ -1,6 +1,6 @@
 import Image from "next/image";
 import line from "../../public/assets/line.png";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SetupContext, { useSetupContext } from "../../context/SetupContext";
 import {
   Form,
@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import MultiStepProgressBar from "../MultiStepProgressBar";
+import axios from "axios";
 
 const formSchema = z.object({
   age: z.string().min(1, { message: "Dob is required" }),
@@ -43,6 +44,27 @@ const BioData = () => {
     currentPage,
     setGender,
   } = useSetupContext();
+  const [countries, setCountries] = useState<string[]>([]);
+
+  // Fetch countries from API
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get('https://restcountries.com/v3.1/all');
+        const countryNames = response.data.map((country: any) => country.name.common); // Extract country names
+
+        // Sort countries alphabetically
+        const sortedCountries = countryNames.sort((a: string, b: string) => a.localeCompare(b));
+
+        setCountries(sortedCountries);
+      } catch (error) {
+        console.error('Error fetching countries:', error);
+      }
+    };
+
+    fetchCountries();
+  }, []);
+
   const checkForm = () => {};
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -65,7 +87,7 @@ const BioData = () => {
     // sessionStorage.setItem("weight", values.weight);
     // sessionStorage.setItem("nationality", values.nationality);
     // sessionStorage.setItem("gender", values.gender);
-    
+
     nextPage();
     console.log(age);
   }
@@ -135,10 +157,7 @@ const BioData = () => {
                           <SelectValue placeholder="Select your gender" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent
-                        ref={field.ref}
-                        className=" "
-                      >
+                      <SelectContent ref={field.ref} className=" ">
                         <SelectItem value="Male" className="">
                           Male
                         </SelectItem>
@@ -156,18 +175,29 @@ const BioData = () => {
                     <FormLabel className="text-[18px]/[21.6px] md:text-desktop-content font-medium">
                       Nationality
                     </FormLabel>
-                    <FormControl className="">
-                      <Input
-                        placeholder="Input your nationality"
-                        {...field}
-                        className="h-[48px] pt-[11px] pb-[14px] px-[14px] md:p-6 "
-                      />
-                    </FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl className="h-[37px] pt-[5px] pb-[9px] px-[9px] md:p-3 bg-primary-bg">
+                        <SelectTrigger className="h-[48px] pt-[11px] pb-[14px] px-[14px] md:p-6 bg-primary-bg">
+                          <SelectValue placeholder="Select your country" />
+                        </SelectTrigger>
+                      </FormControl>
+
+                      <SelectContent ref={field.ref} className=" ">
+                        {countries.map((country) => (
+                          <SelectItem key={country} value={country}>
+                            {country}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              
+
               <Button
                 type="submit"
                 className="mt-16 flex items-center justify-center mx-auto p-2 w-full h-[2.9rem] text-primary-bg-100 bg-primarygtext"
