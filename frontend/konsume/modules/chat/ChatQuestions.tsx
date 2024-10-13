@@ -14,8 +14,8 @@ const ChatQuestions: React.FC<ChatQuestionsProps> = ({
   sendMessage,
 }) => {
   return (
-    <div className=" gap-4 max-w-[1000px] flex-wrap items-center mx-auto justify-center">
-      <Marquee className="overflow-visible">
+    <div className=" gap-4 mt-3 flex-wrap items-center  justify-center">
+      <Marquee className=" max-w-screen-2xl">
         <ChatQuestion
           isContentReplaced={isContentReplaced}
           setIsContentReplaced={setIsContentReplaced}
@@ -45,7 +45,7 @@ const ChatQuestions: React.FC<ChatQuestionsProps> = ({
           text="What are some healthy dessert options?"
         />
       </Marquee>
-      <Marquee className="ml-9 overflow-visible">
+      <Marquee className="">
         <ChatQuestion
           isContentReplaced={isContentReplaced}
           setIsContentReplaced={setIsContentReplaced}
@@ -89,7 +89,7 @@ const ChatQuestions: React.FC<ChatQuestionsProps> = ({
           text="Can I drink alcohol if I&apos;m on a diet?"
         />
       </Marquee>
-      <Marquee className="overflow-visible">
+      <Marquee className="">
         <ChatQuestion
           isContentReplaced={isContentReplaced}
           setIsContentReplaced={setIsContentReplaced}
