@@ -6,6 +6,7 @@ import { LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ScannerContext from "@/context/ScannerContext";
 import { renderTextWithBold } from "@/helpers/renderTextWithBold";
+import Markdown from "react-markdown";
 
 const ScannerBody = () => {
 
@@ -59,7 +60,7 @@ const ScannerBody = () => {
               alt="img"
               className="w-[150px] rounded-md flex-[.5]"
             />
-        <p>Result: {loading ? <LoaderCircle className=" animate-spin" /> : renderTextWithBold(result)}</p>
+        <p>Result: {loading ? <LoaderCircle className=" animate-spin" /> : <Markdown>{result}</Markdown>}</p>
       </div>
             )}
       </div>
