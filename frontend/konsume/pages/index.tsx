@@ -11,6 +11,7 @@ function Home() {
         <HomeNav />
         <HomeBody />
         <Analytics />
+        
       </div>
     </>
   );

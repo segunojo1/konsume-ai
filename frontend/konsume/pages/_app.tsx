@@ -22,6 +22,7 @@ import { BlogContextProvider } from "@/context/BlogContext";
 import { UserProvider } from "@/context/UserContext";
 import { SessProvider } from "@/context/SessProvider";
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "@/components/ui/sonner";
 
 Router.events.on("routeChangeStart", nProgress.start);
 Router.events.on("routeChangeError", nProgress.done);
@@ -52,6 +53,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </BlogContextProvider>
         </UserProvider>
         <ToastContainer />
+        <Toaster />
       </Provider>
     </>
   );

@@ -15,7 +15,7 @@ const ChatQuestions: React.FC<ChatQuestionsProps> = ({
 }) => {
   return (
     <div className=" gap-4 mt-3 flex-wrap items-center  justify-center">
-      <Marquee className=" max-w-screen-2xl">
+      <Marquee className="">
         <ChatQuestion
           isContentReplaced={isContentReplaced}
           setIsContentReplaced={setIsContentReplaced}

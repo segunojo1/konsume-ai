@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { renderTextWithBold } from "@/helpers/renderTextWithBold";
+import Markdown from 'react-markdown'
 
 interface ChatMessagesProps {
   chatLog: any[];
@@ -29,7 +30,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
           return (
             <div className="flex items-start justify-start gap-4" key={chat.message}>
               <p className="px-5 py-[10px] w-fit bg-color8-200 text-primarytext rounded-[40px]">
-                {renderTextWithBold(chat.message)}
+                <Markdown>{chat.message}</Markdown>
               </p>
             </div>
           );

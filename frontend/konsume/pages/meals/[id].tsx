@@ -18,6 +18,8 @@ import "swiper/css";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
 import withAuth from "@/helpers/withAuth";
 import CreateProfileLoader from "@/components/animated-visual-cues/CreateProfileLoader";
+import Markdown from "react-markdown";
+import { toast } from "sonner";
 
 const Meal = () => {
   const router = useRouter();
@@ -26,9 +28,12 @@ const Meal = () => {
 
   const mealPrompt = `Generate a very short description of the meal ${id}. Strictly not more than 20 words`;
   const caloriePrompt = `What is the range of number of calories per serving of the meal ${id}. it doesnt have to be exact just give a range, your response should strictly just be the number of kcal e.g 350-400`;
-  const proteinIntakeRange = `What is the range of percent of protein contained in the meal ${id}. it doesnt have to be exact just give a range, your response should strictly just be the percentage of protein e.g 30-40 `;
-  const carbIntakeRange = `What is the range of percent of carbohydrates contained in the meal ${id}, your response should strictly just be the percentage of carbohydrates e.g 30-40 it doesnt have to be exact just give a range`;
-  const fatIntakeRange = `What is the range of percent of fats contained in the meal ${id}, your response should strictly just be the percentage of fats e.g 30-40 it doesnt have to be exact just give a range`;
+  const proteinIntakeRange = `What is the range of percent of protein contained in the meal ${id}? It doesn't have to be exact, just give a range. Your response should strictly be the percentage of protein in the format 'X-Y'. If the range cannot be determined, respond with 'undetermined'.`;
+
+const carbIntakeRange = `What is the range of percent of carbohydrates contained in the meal ${id}? Your response should strictly be the percentage of carbohydrates in the format 'X-Y'. It doesn't have to be exact, just give a range. If the range cannot be determined, respond with 'undetermined'.`;
+
+const fatIntakeRange = `What is the range of percent of fats contained in the meal ${id}? Your response should strictly be the percentage of fats in the format 'X-Y'. It doesn't have to be exact, just give a range. If the range cannot be determined, respond with 'undetermined'.`;
+
   const nutritionalInfoPrompt = `provide a general nutritional info of the meal ${id} it doesnt have to be exact`;
   const recipePrompt = `What is the recipe of the meal ${id}`;
   const healthImpactPrompt = `What is the impact of the meal ${id} on me if i have ${Cookies.get("possibleDiseases")} I know you are not a medical professional just provide an answer`;
@@ -123,6 +128,7 @@ const Meal = () => {
       } catch (error) {
         console.error(error);
         router.back();
+        toast("Please give the AI some seconds to buffer before checking details of another meal")
       } finally {
         
         if (remainingTime > 0) {
@@ -267,15 +273,15 @@ const Meal = () => {
         <div className="grid md:grid-cols-3  gap-4">
           <MealInfo
             title="Nutritional Information"
-            text={nutritionalInfo ? renderTextWithBold(nutritionalInfo) : ""}
+            text={nutritionalInfo ? <Markdown>{nutritionalInfo}</Markdown> : ""}
           />
           <MealInfo
             title="Recipe"
-            text={recipe ? renderTextWithBold(recipe) : ""}
+            text={recipe ? <Markdown>{recipe}</Markdown> : ""}
           />
           <MealInfo
             title="Health Impact"
-            text={healthImpact ? renderTextWithBold(healthImpact) : ""}
+            text={healthImpact ? <Markdown>{healthImpact}</Markdown> : ""}
           />
         </div>
         <div
@@ -292,6 +298,7 @@ const Meal = () => {
           />
         </div>
       </MainLayout>
+
     </div>
   );
 };
