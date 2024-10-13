@@ -1,5 +1,13 @@
 {
     "rewrites": [
-        {"source": "/(.*)", "destination": "/"}
+      {
+        "source": "/blogs/:id",
+        "destination": "/blogs/:id"
+      },
+      {
+        "source": "/(.*)",
+        "destination": "/"
+      }
     ]
-}
+  }
+  
