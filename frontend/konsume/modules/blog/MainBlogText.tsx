@@ -26,7 +26,7 @@ const MainBlogText = ({ id, text, category, titlee }: Blog) => {
 
   // Function to handle copying
   const handleCopy = () => {
-    const link = `https://konsume-web-yzto.vercel.app/sharedblog/${id}`;
+    const link = `https://konsume-web-yzto.vercel.app/blogs/${id}`;
     
     navigator.clipboard.writeText(link).then(() => {
       setCopied(true);
@@ -163,7 +163,7 @@ const MainBlogText = ({ id, text, category, titlee }: Blog) => {
             </Label>
             <Input
               id="link"
-              defaultValue={`https://konsume-web-yzto.vercel.app/sharedblog/${id}`}
+              defaultValue={`https://konsume-web-yzto.vercel.app/blogs/${id}`}
               readOnly
             />
           </div>

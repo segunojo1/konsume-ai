@@ -24,6 +24,7 @@ import {
 import { Button } from "@/components/ui/button";
 import MultiStepProgressBar from "../MultiStepProgressBar";
 import axios from "axios";
+import { allCountries } from "@/helpers/countries";
 
 const formSchema = z.object({
   age: z.string().min(1, { message: "Dob is required" }),
@@ -50,12 +51,13 @@ const BioData = () => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await axios.get('https://restcountries.com/v3.1/all');
-        const countryNames = response.data.map((country: any) => country.name.common); // Extract country names
+        // const response = await axios.get('https://restcountries.com/v3.1/all');
+        // const countryNames = response.data.map((country: any) => country.name.common); 
 
         // Sort countries alphabetically
-        const sortedCountries = countryNames.sort((a: string, b: string) => a.localeCompare(b));
-
+        const sortedCountries = allCountries;
+        console.log(sortedCountries);
+        
         setCountries(sortedCountries);
       } catch (error) {
         console.error('Error fetching countries:', error);
