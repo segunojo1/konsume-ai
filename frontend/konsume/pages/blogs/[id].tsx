@@ -35,7 +35,7 @@ const BlogDetail = () => {
         } else {
           // Blog not found, fetch from API
           const { data } = await axiosKonsumeInstance.get(
-            `/api/Blog/GetBlogById/${id}`
+            `/api/Blog/GetBlogByGuid/${id}`
           );
 
           if (data) {

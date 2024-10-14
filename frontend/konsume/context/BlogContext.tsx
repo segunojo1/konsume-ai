@@ -77,12 +77,10 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
             }
 
         };
-
-        if (!dataFetchedRef.current) {
+        if (router.pathname === "/dashboard" || router.pathname === "/") {
             checkAndFetchBlogs();
-            dataFetchedRef.current = true;
         }
-    }, []);
+    }, [router.pathname]);
 
     useEffect(() => {
         const getBookmarks = async () => {
