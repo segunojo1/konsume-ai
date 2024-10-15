@@ -83,7 +83,7 @@ const DashboardBody = () => {
       <div className="md:flex-[.5] md:hidden md:min-w-fit min-w-full mt-4">
         {loadingBlog ? (
           <DashboardBlogSkeleton />
-        ) : (<BlogCard key={randomBlog?.id} title={randomBlog?.title} text={randomBlog?.text} category={randomBlog?.category} showHeading />)
+        ) : (<BlogCard id={randomBlog?.id} key={randomBlog?.id} title={randomBlog?.title} text={randomBlog?.text} category={randomBlog?.category} showHeading />)
         }
 
       </div>
