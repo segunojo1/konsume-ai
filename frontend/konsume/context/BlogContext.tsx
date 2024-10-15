@@ -77,7 +77,7 @@ export function BlogContextProvider({ children }: { children: React.ReactNode })
             }
 
         };
-        if (router.pathname === "/dashboard" || router.pathname === "/") {
+        if (router.pathname === "/dashboard" || router.pathname === "/" || router.pathname === "/auth/login") {
             checkAndFetchBlogs();
         }
     }, [router.pathname]);
