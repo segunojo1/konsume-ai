@@ -1,13 +1,17 @@
 import { BlogProps } from '@/@types'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const BlogCard = ({title, category, showHeading, id }: BlogProps) => {
     const capitalizeFirstLetter = (str: string | undefined): string | undefined => {
         if (!str) return str; // Return the string as is if it's empty or undefined
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     };
+    useEffect(() => {
+        console.log(id);
+    }, [])
+    
     
     return (
             <Link href={`/blogs/${id}`} passHref>

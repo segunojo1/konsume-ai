@@ -31,83 +31,84 @@ const SectionThree = () => {
           help you eat better, smarter, and easier.
         </p>
       </div>
-      <div id="features" className="relative min-h-[897px] flex mt-[46px] md:mt-0">
+      <div id="features" className="relative h-screen flex mt-[46px] md:mt-0">
+  <Image
+    height={897}
+    width={2026}
+    alt="mascot"
+    src={paper}
+    className="h-screen absolute"
+  />
+  
+  <div className="z-50 relative my-auto flex w-full items-center justify-between h-screen">
+    <Marquee pauseOnHover className="w-fit items-center h-fit flex gap-0">
+    <div className="h-[90vh] flex items-center">
         <Image
-          height={897}
-          width={1326}
-          alt="mascot"
-          src={paper}
-          className=" h-[897px] absolute"
+          alt="card"
+          src={spotlightmealscard}
+          className="h-full w-auto object-contain"
         />
-        <div className="z-50 relative my-auto flex  w-full items-center justify-between ">
-          <Marquee pauseOnHover >
-            <Image
-              height={760}
-              width={330}
-              alt="card"
-              src={spotlightmealscard}
-              className=""
-            />
-            <Image
-              height={760}
-              width={330}
-              alt="card"
-              src={timetablecard}
-              className=""
-            />
-
-            <Image
-              height={760}
-              width={330}
-              alt="card"
-              src={blogscard}
-              className=""
-            />
-            <Image
-              height={760}
-              width={330}
-              alt="card"
-              src={dailymealscard}
-              className=""
-            />
-            <Image
-              height={760}
-              width={330}
-              alt="card"
-              src={streakscard}
-              className=""
-            />
-            <Image
-              height={760}
-              width={330}
-              alt="card"
-              src={multilanguage}
-              className=""
-            />
-            <Image
-              height={760}
-              width={330}
-              alt="card"
-              src={chatbotcard}
-              className=""
-            />
-            <Image
-              height={760}
-              width={330}
-              alt="card"
-              src={readwithai}
-              className=""
-            />
-            <Image
-              height={760}
-              width={330}
-              alt="card"
-              src={onemeal}
-              className=""
-            />
-          </Marquee>
-        </div>
       </div>
+      <div className="h-[90vh] flex items-center">
+        <Image
+          alt="card"
+          src={timetablecard}
+          className="h-full w-auto object-contain"
+        />
+      </div>
+      <div className="h-[90vh] flex items-center">
+        <Image
+          alt="card"
+          src={blogscard}
+          className="h-full w-auto object-contain"
+        />
+      </div>
+      <div className="h-[90vh] flex items-center">
+        <Image
+          alt="card"
+          src={dailymealscard}
+          className="h-full w-auto object-contain"
+        />
+      </div>
+      <div className="h-[90vh] flex items-center">
+        <Image
+          alt="card"
+          src={streakscard}
+          className="h-full w-auto object-contain"
+        />
+      </div>
+      <div className="h-[90vh] flex items-center">
+        <Image
+          alt="card"
+          src={multilanguage}
+          className="h-full w-auto object-contain"
+        />
+      </div>
+      <div className="h-[90vh] flex items-center">
+        <Image
+          alt="card"
+          src={chatbotcard}
+          className="h-full w-auto object-contain"
+        />
+      </div>
+      <div className="h-[90vh] flex items-center">
+        <Image
+          alt="card"
+          src={readwithai}
+          className="h-full w-auto object-contain"
+        />
+      </div>
+      <div className="h-[90vh] flex items-center">
+        <Image
+          alt="card"
+          src={onemeal}
+          className="h-full w-auto object-contain"
+        />
+      </div>
+    </Marquee>
+  </div>
+</div>
+
     </div>
   );
 };

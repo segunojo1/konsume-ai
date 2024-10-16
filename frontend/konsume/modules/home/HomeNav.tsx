@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import kons from "../../public/konsume_purple_logo.svg";
 import ham from "../../public/assets/hamburger.png";
 import Image from "next/image";
@@ -14,6 +14,8 @@ import { useRouter } from "next/router";
 
 const HomeNav = () => {
   const [toggled, setToggled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const route = useRouter();
   const navClick = () => {
     console.log(toggled);
@@ -25,8 +27,43 @@ const HomeNav = () => {
 
     route.push("/restaurant");
   };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    // Add event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  const selectTriggerRef = useRef<any>(null);
+
+  const [open, setOpen] = useState(false);
+  let hoverTimeout: any;
+  const handleMouseEnter = () => {
+    clearTimeout(hoverTimeout); // Clear any pending timeouts
+    setOpen(true);  // Open the dropdown on hover
+  };
+
+  const handleMouseLeave = () => {
+    hoverTimeout = setTimeout(() => {
+      setOpen(false);
+    }, 200);
+  };
   return (
-    <div className="font-satoshi flex items-center justify-between mb-[232px] 2xl:px-[90px] md:px-[30px] px-[19px] pt-[51px] z-[99999]">
+    <div
+      className={`font-satoshi fixed w-full flex items-center justify-between mb-[232px] 2xl:px-[90px] md:px-[30px] px-[19px] z-[99999] transition-all duration-300 ${
+        isScrolled ? "pt-[20px] " : "pt-[51px]"
+      }`}
+    >
       <div className="flex items-center gap-[13px] mr-14 font-bold text-[25px]/[120%]">
         <Image src={kons} alt="logo" className=" z-[1] " />
         <p className="text-primarygtext">Home</p>
@@ -38,7 +75,7 @@ const HomeNav = () => {
       <div
         className={`flex  items-center md:justify-between gap-6  w-fit h-full md:relative md:flex-row flex-col ${
           toggled ? "left-0" : "left-[-200px]"
-        } md:left-0 transition-all bottom-0 absolute  md:rounded-[42px] md:p-0 py-9 md:bg-transparent z-[99] md:bg-[white] bg-primarygtext `}
+        } ${isScrolled ? "shadow-md" : "" } md:left-0 transition-all bottom-0 absolute  md:rounded-[42px] md:p-0 py-9 md:bg-transparent z-[99] md:bg-[white] bg-primarygtext` }
       >
         <ul className="flex items-center text-[20px]/[120%] font-medium gap-6 py-[15px] px-[25px] w-full md:flex-row md:text-base-black text-[white] flex-col h-1/3">
           <li className=" font-medium text-lg hover:animate-pulse  hover:border-2 border-[#8C77EC] border-dashed">
@@ -65,9 +102,10 @@ const HomeNav = () => {
           </Link>
         </div>
       </div>
-      <div className="hidden md:flex items-center gap-[6px]">
-        <Select value="Personal"  onValueChange={goRestaurant}>
-          <SelectTrigger className=" text-[17px]/[120%] font-medium bg-color8-100 text-primarygtext py-[12px] pl-[25px] pr-[12px] flex gap-3 rounded-[42px]">
+      <div className={`hidden md:flex items-center gap-[6px]`}>
+      <div onMouseEnter={handleMouseEnter}>
+        <Select value="Personal" onOpenChange={setOpen} open={open} onValueChange={goRestaurant} >
+          <SelectTrigger  className={`${isScrolled ? "shadow-md" : "" }  text-[17px]/[120%] font-medium bg-color8-100 text-primarygtext py-[12px] pl-[25px] pr-[12px] flex gap-3 rounded-[42px]`}>
             <SelectValue placeholder="Personal" />
             {/* <Image src={down} alt="down" width={25} height={25} /> */}
           </SelectTrigger>
@@ -88,8 +126,9 @@ const HomeNav = () => {
             </SelectItem>
           </SelectContent>
         </Select>
+        </div>
         <Link href="/auth/signup">
-          <button className="cursor-pointer text-[17px]/[120%] font-bold bg-color8-100 text-primarygtext w-[123px] py-[10px] rounded-[49px] md:m-0 mb-[30px]">
+          <button className={`${isScrolled ? "shadow-md" : "" } cursor-pointer text-[17px]/[120%] font-bold bg-color8-100 text-primarygtext w-[123px] py-[10px] rounded-[49px] md:m-0 mb-[30px]`}>
             Join Us
           </button>
         </Link>

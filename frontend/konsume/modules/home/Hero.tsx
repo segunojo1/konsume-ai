@@ -22,10 +22,10 @@ const Hero = () => {
         </h1>
         </Reveal>
         <div className="cursor-pointer flex gap-[17px] ">
-          <Link href="/auth/login" className="text-[19px] font-bold rounded-[40px] text-primarygtext bg-primary-bg px-[25px] py-[10px]">
+          <Link href="/auth/login" className="text-[19px] font-bold rounded-[40px] text-primarygtext bg-primary-bg hover:text-primary-bg hover:bg-primarygtext px-[25px] py-[10px]">
             Log in
           </Link>
-          <Link href="/auth/signup" className="z-[1000] text-[19px] font-bold rounded-[40px] bg-primarygtext text-primary-bg px-[25px] py-[10px]">
+          <Link href="/auth/signup" className="z-[1000] text-[19px] font-bold rounded-[40px] bg-primarygtext text-primary-bg hover:text-primarygtext hover:bg-primary-bg px-[25px] py-[10px]">
             Join Us
           </Link>
         </div>
